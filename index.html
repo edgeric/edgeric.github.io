@@ -1,1 +1,261 @@
-Hello World
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EdgeRIC: A Real Time Radio Intelligent Controller &mdash; Edge_RIC 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            Edge_RIC
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">EdgeRIC: A Real Time Radio Intelligent Controller</a></li>
+<li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li><a class="reference internal" href="#edgeric-architecture">EdgeRIC architecture</a></li>
+<li><a class="reference internal" href="#edgeric-codebase">EdgeRIC codebase</a></li>
+<li><a class="reference internal" href="#research-papers">Research papers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#edgeric-features">EdgeRIC Features</a><ul>
+<li><a class="reference internal" href="#cellular-stack">Cellular Stack</a></li>
+<li><a class="reference internal" href="#edgeric-api">EdgeRIC API</a></li>
+<li><a class="reference internal" href="#edgeric-emulator-modulator">EdgeRIC emulator modulator</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation-procedures">Installation Procedures:</a><ul>
+<li><a class="reference internal" href="#edgeric-repository">EdgeRIC repository</a><ul>
+<li><a class="reference internal" href="#link-to-github-repository">Link to github repository:</a></li>
+<li><a class="reference internal" href="#installation-steps">Installation  steps:</a><ul>
+<li><a class="reference internal" href="#terminal-1">Terminal #1</a></li>
+<li><a class="reference internal" href="#terminal-2">Terminal #2</a></li>
+<li><a class="reference internal" href="#terminal-3">Terminal #3</a></li>
+<li><a class="reference internal" href="#terminal-4">Terminal #4</a></li>
+<li><a class="reference internal" href="#terminal-5">Terminal #5</a></li>
+<li><a class="reference internal" href="#terminal-6">Terminal #6</a></li>
+<li><a class="reference internal" href="#terminal-7">Terminal #7</a></li>
+<li><a class="reference internal" href="#terminal-8">Terminal #8</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Edge_RIC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">EdgeRIC: A Real Time Radio Intelligent Controller</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="edgeric-a-real-time-radio-intelligent-controller">
+<h1>EdgeRIC: A Real Time Radio Intelligent Controller<a class="headerlink" href="#edgeric-a-real-time-radio-intelligent-controller" title="Permalink to this heading"></a></h1>
+<p>Radio Access Networks (RANs) are increasingly softwarized and accessible via data-collection and control interfaces.
+RAN intelligent control (RIC) is an approach to manage these interfaces at different timescales. We introduce EdgeRIC, a real-time RIC co-located with the
+Distributed Unit (DU). It is decoupled from the RAN stack, and operates at the RAN timescale. EdgeRIC
+serves as the seat of real-time AI-in-the-loop for decision and control. It can access RAN and application-level information to execute AI-optimized and other policies in real-time (sub-millisecond).</p>
+</section>
+<section id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
+<p>This is a collaboration between University of California, San Diego and the Texas A&amp;M University, College Station</p>
+<section id="edgeric-architecture">
+<h2>EdgeRIC architecture<a class="headerlink" href="#edgeric-architecture" title="Permalink to this heading"></a></h2>
+<a class="reference internal image-reference" href="_images/edgeric_architecture.png"><img alt="sample text" src="_images/edgeric_architecture.png" style="width: 400px;" /></a>
+</section>
+<section id="edgeric-codebase">
+<h2>EdgeRIC codebase<a class="headerlink" href="#edgeric-codebase" title="Permalink to this heading"></a></h2>
+</section>
+<section id="research-papers">
+<h2>Research papers<a class="headerlink" href="#research-papers" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="edgeric-features">
+<h1>EdgeRIC Features<a class="headerlink" href="#edgeric-features" title="Permalink to this heading"></a></h1>
+<section id="cellular-stack">
+<h2>Cellular Stack<a class="headerlink" href="#cellular-stack" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Based on Software Radio Systems RAN (srsRAN)</p></li>
+<li><p>Support for 5G NSA</p></li>
+<li><p>ZeroMQ and GNU Radio based Multiple UE Support</p></li>
+<li><p>Support for Ettus USRPs</p></li>
+</ul>
+</section>
+<section id="edgeric-api">
+<h2>EdgeRIC API<a class="headerlink" href="#edgeric-api" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Low Overhead Messaging</p></li>
+<li><p>Interface with Open AI Gym:</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/EdgeRIC_API.png"><img alt="sample text" src="_images/EdgeRIC_API.png" style="width: 400px;" /></a>
+<ul class="simple">
+<li><p>Realtime Sync between RAN and RIC</p></li>
+<li><p>EdgeRIC message formats</p></li>
+</ul>
+</section>
+<section id="edgeric-emulator-modulator">
+<h2>EdgeRIC emulator modulator<a class="headerlink" href="#edgeric-emulator-modulator" title="Permalink to this heading"></a></h2>
+<p>This module is for offline training where we can connect a number of UEs</p>
+<a class="reference internal image-reference" href="_images/emulator_modulator.png"><img alt="sample text" src="_images/emulator_modulator.png" style="width: 600px;" /></a>
+</section>
+</section>
+<section id="installation-procedures">
+<h1>Installation Procedures:<a class="headerlink" href="#installation-procedures" title="Permalink to this heading"></a></h1>
+<section id="edgeric-repository">
+<h2>EdgeRIC repository<a class="headerlink" href="#edgeric-repository" title="Permalink to this heading"></a></h2>
+<p>Some sample information</p>
+<section id="link-to-github-repository">
+<h3>Link to github repository:<a class="headerlink" href="#link-to-github-repository" title="Permalink to this heading"></a></h3>
+<p><a class="reference external" href="https://github.com/ushasigh/EdgeRIC">https://github.com/ushasigh/EdgeRIC</a></p>
+</section>
+<section id="installation-steps">
+<h3>Installation  steps:<a class="headerlink" href="#installation-steps" title="Permalink to this heading"></a></h3>
+<section id="terminal-1">
+<h4>Terminal #1<a class="headerlink" href="#terminal-1" title="Permalink to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./dockerbuild_uhd.sh
+$<span class="w"> </span>./dockerbuild_edgeric.sh
+$<span class="w"> </span>./dockerrun_edgeric.sh<span class="w"> </span>host<span class="w"> </span><span class="m">0</span>
+<span class="o">(</span>Inside<span class="w"> </span>container<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>./run_gnuradio.sh
+</pre></div>
+</div>
+</section>
+<section id="terminal-2">
+<h4>Terminal #2<a class="headerlink" href="#terminal-2" title="Permalink to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>$<span class="w"> </span>./dockerexec_edgeric.sh<span class="w"> </span><span class="m">0</span>
+<span class="o">(</span>Inside<span class="w"> </span>container<span class="o">)</span><span class="w"> </span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>srsran
+<span class="o">(</span>Inside<span class="w"> </span>container<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>./run_srsran.sh<span class="w"> </span>--&gt;<span class="w"> </span>It<span class="w"> </span>runs<span class="w"> </span>EPC,<span class="w"> </span>ENB,<span class="w"> </span>UE1<span class="w"> </span>and<span class="w"> </span>UE2.
+</pre></div>
+</div>
+</section>
+<section id="terminal-3">
+<h4>Terminal #3<a class="headerlink" href="#terminal-3" title="Permalink to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>$<span class="w"> </span>./dockerexec_edgeric.sh<span class="w"> </span><span class="m">0</span>
+<span class="o">(</span>Inside<span class="w"> </span>container<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>./iperf_server_ue1.sh
+</pre></div>
+</div>
+</section>
+<section id="terminal-4">
+<h4>Terminal #4<a class="headerlink" href="#terminal-4" title="Permalink to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>$<span class="w"> </span>./dockerexec_edgeric.sh<span class="w"> </span><span class="m">0</span>
+<span class="o">(</span>Inside<span class="w"> </span>container<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>./iperf_client_ue1.sh
+</pre></div>
+</div>
+</section>
+<section id="terminal-5">
+<h4>Terminal #5<a class="headerlink" href="#terminal-5" title="Permalink to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>$<span class="w"> </span>./dockerexec_edgeric.sh<span class="w"> </span><span class="m">0</span>
+<span class="o">(</span>Inside<span class="w"> </span>container<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>./iperf_server_ue2.sh
+</pre></div>
+</div>
+</section>
+<section id="terminal-6">
+<h4>Terminal #6<a class="headerlink" href="#terminal-6" title="Permalink to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>$<span class="w"> </span>./dockerexec_edgeric.sh<span class="w"> </span><span class="m">0</span>
+<span class="o">(</span>Inside<span class="w"> </span>container<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>./iperf_client_ue2.sh
+</pre></div>
+</div>
+</section>
+<section id="terminal-7">
+<h4>Terminal #7<a class="headerlink" href="#terminal-7" title="Permalink to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>$<span class="w"> </span>./dockerexec_edgeric.sh<span class="w"> </span><span class="m">0</span>
+<span class="o">(</span>Inside<span class="w"> </span>container<span class="o">)</span><span class="w"> </span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>PyTorch-RL-Custom-demo
+<span class="o">(</span>Inside<span class="w"> </span>container<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>./run_logging.sh
+</pre></div>
+</div>
+</section>
+<section id="terminal-8">
+<h4>Terminal #8<a class="headerlink" href="#terminal-8" title="Permalink to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>$<span class="w"> </span>./dockerexec_edgeric.sh<span class="w"> </span><span class="m">0</span>
+<span class="o">(</span>Inside<span class="w"> </span>container<span class="o">)</span><span class="w"> </span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>PyTorch-RL-Custom-demo
+<span class="o">(</span>Inside<span class="w"> </span>container<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>nano<span class="w"> </span>examples/params_edgeric.txt<span class="w">  </span>--&gt;<span class="w"> </span>You<span class="w"> </span>should<span class="w"> </span><span class="k">select</span><span class="w"> </span>algorithm<span class="w"> </span><span class="k">in</span><span class="w"> </span>line<span class="w"> </span><span class="m">1</span><span class="w"> </span>and<span class="w"> </span><span class="k">then</span><span class="w"> </span>close<span class="w"> </span>the<span class="w"> </span>file
+<span class="o">(</span>Inside<span class="w"> </span>container<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>./run_rl.sh<span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Prathik Vijaykumar.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
