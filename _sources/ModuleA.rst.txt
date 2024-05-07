@@ -1,0 +1,16 @@
+ModuleA package
+===============
+
+Module contents
+---------------
+
+.. automodule:: src.ModuleA
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+EdgeRIC architecture
+------------------------
+.. image:: edgeric_architecture.png
+  :width: 400
+  :alt: sample text   

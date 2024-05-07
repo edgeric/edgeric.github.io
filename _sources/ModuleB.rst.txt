@@ -1,0 +1,10 @@
+ModuleB package
+===============
+
+Module contents
+---------------
+
+.. automodule:: src.ModuleB
+   :members:
+   :undoc-members:
+   :show-inheritance:
