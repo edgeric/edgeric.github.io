@@ -11,153 +11,47 @@ RAN intelligent control (RIC) is an approach to manage these interfaces at diffe
 Distributed Unit (DU). It is decoupled from the RAN stack, and operates at the RAN timescale. EdgeRIC
 serves as the seat of real-time AI-in-the-loop for decision and control. It can access RAN and application-level information to execute AI-optimized and other policies in real-time (sub-millisecond).
 
-
-Getting Started
-====================================
-This is a collaboration between University of California, San Diego and the Texas A&M University, College Station
-
-EdgeRIC architecture
-------------------------
-.. image:: edgeric_architecture.png
+.. image:: intro.pdf
   :width: 400
   :alt: sample text
 
-EdgeRIC codebase
+Our current status
 ------------------------
-
-Research papers
-------------------------
-
-EdgeRIC Features
-====================================
-
-Cellular Stack 
-------------------------
-- Based on Software Radio Systems RAN (srsRAN)
-- Support for 5G NSA
-- ZeroMQ and GNU Radio based Multiple UE Support
-- Support for Ettus USRPs
-
-EdgeRIC API
-------------
-- Low Overhead Messaging
-- Interface with Open AI Gym:
-.. image:: EdgeRIC_API.png
-  :width: 400
-  :alt: sample text
-
-- Realtime Sync between RAN and RIC
-- EdgeRIC message formats
-
-
-EdgeRIC emulator modulator
---------------------------
-
-This module is for offline training where we can connect a number of UEs
-
-.. image:: emulator_modulator.png
-  :width: 600
-  :alt: sample text
-
-Installation Procedures:
-====================================
-
-EdgeRIC repository
-------------------
-
-Some sample information
-
-Link to github repository:
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-https://github.com/ushasigh/EdgeRIC
-
-Installation  steps:
-^^^^^^^^^^^^^^^^^^^^^
-
-Terminal #1
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    $ ./dockerbuild_uhd.sh
-    $ ./dockerbuild_edgeric.sh
-    $ ./dockerrun_edgeric.sh host 0
-    (Inside container) $ ./run_gnuradio.sh
-
-Terminal #2
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    $ ./dockerexec_edgeric.sh 0
-   (Inside container) $ cd srsran
-   (Inside container) $ ./run_srsran.sh --> It runs EPC, ENB, UE1 and UE2.
-
-Terminal #3
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    $ ./dockerexec_edgeric.sh 0
-   (Inside container) $ ./iperf_server_ue1.sh
-
-Terminal #4
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    $ ./dockerexec_edgeric.sh 0
-   (Inside container) $ ./iperf_client_ue1.sh
-
-Terminal #5
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    $ ./dockerexec_edgeric.sh 0
-   (Inside container) $ ./iperf_server_ue2.sh
-
-Terminal #6
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    $ ./dockerexec_edgeric.sh 0
-   (Inside container) $ ./iperf_client_ue2.sh
-
-Terminal #7
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    $ ./dockerexec_edgeric.sh 0
-   (Inside container) $ cd PyTorch-RL-Custom-demo
-   (Inside container) $ ./run_logging.sh
-
-Terminal #8
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    $ ./dockerexec_edgeric.sh 0
-   (Inside container) $ cd PyTorch-RL-Custom-demo
-   (Inside container) $ nano examples/params_edgeric.txt  --> You should select algorithm in line 1 and then close the file
-   (Inside container) $ ./run_rl.sh 1000 1
-
-
-
-
-.. include ModuleA.rst (::)
-.. include ModuleB.rst (::)
+This release is based on srsRAN 4G, we will shortly release our 5G version. We suport:
+   - Realtime KPI monitoring: we support the UL/ DL channel conditions and the respective pending buffers for transmission
+   - Realtime Control actions: MAC scheduling on the downlink, both AI training and inference capability 
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Getting Started
 
+   gettingstarted.rst
+
+.. toctree::
+   :maxdepth: 2
+   :caption: EdgeRIC Architecture
+
+   ModuleA.rst
+
+.. .. toctree::
+..    :maxdepth: 2
+..    :caption: EdgeRIC Message Formats
+
+..    ModuleB.rst
+
+.. toctree::
+   :maxdepth: 2
+   :caption: EdgeRIC MicroApps
+
+   ModuleC.rst   
+.. toctree::
+   :maxdepth: 2
+   :caption: Demos and Dataset
+
+   ModuleD.rst 
 .. Indices and tables
 .. ==================
 
-.. * :ref:`genindex`
-.. * :ref:`modindex`
-.. * :ref:`search`
+.. .. * :ref:`genindex`
+.. .. * :ref:`modindex`
+.. .. * :ref:`search`

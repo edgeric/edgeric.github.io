@@ -1,0 +1,8 @@
+Demos
+===============
+
+.. raw:: html
+
+   <video width="320" height="240" controls>
+     <source src="_static/EdgeRIC_demo_full_video_throughput_max_ota.mp4" type="video/mp4">
+   </video>   

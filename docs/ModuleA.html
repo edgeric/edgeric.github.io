@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ModuleA package &mdash; Edge_RIC 0.0.1 documentation</title>
+  <title>RT-E2 agent (Real time E2 agent) &mdash; Edge_RIC 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -20,7 +20,9 @@
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="μApp1_metrics_perUE" href="ModuleC.html" />
+    <link rel="prev" title="Cellular Stack" href="gettingstarted.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,22 +44,40 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">ModuleA package</a><ul>
-<li><a class="reference internal" href="#module-src.ModuleA">Module contents</a><ul>
-<li><a class="reference internal" href="#module-a">Module A</a></li>
-<li><a class="reference internal" href="#src.ModuleA.DatabaseA"><code class="docutils literal notranslate"><span class="pre">DatabaseA</span></code></a><ul>
-<li><a class="reference internal" href="#src.ModuleA.DatabaseA.connectA"><code class="docutils literal notranslate"><span class="pre">DatabaseA.connectA()</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Cellular Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#modules-supported">Modules supported</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RT-E2 agent (Real time E2 agent)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#rt-e2-report-message">RT-E2 Report Message</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#src.edgeric_agent.get_metrics"><code class="docutils literal notranslate"><span class="pre">get_metrics()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#rt-e2-policy-message">RT-E2 Policy Message</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#src.edgeric_agent.send_control"><code class="docutils literal notranslate"><span class="pre">send_control()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#redis-database">REDIS database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#apps-edgeric-microservices">μApps - EdgeRIC microservices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#src.edgeric_agent.send_control_App_i"><code class="docutils literal notranslate"><span class="pre">send_control_μApp_i()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-write-apps">how to write μApps?</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li><a class="reference internal" href="#edgeric-architecture">EdgeRIC architecture</a></li>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC MicroApps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html">μApp1_metrics_perUE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app2-downlink-scheduling">μApp2_Downlink_scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app3-training-rl">μApp3_training_RL</a></li>
 </ul>
-</li>
+<p class="caption" role="heading"><span class="caption-text">Demos and Dataset</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ModuleD.html">Demos</a></li>
 </ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -72,7 +92,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">ModuleA package</li>
+      <li class="breadcrumb-item active">RT-E2 agent (Real time E2 agent)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/ModuleA.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -82,41 +102,194 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="modulea-package">
-<h1>ModuleA package<a class="headerlink" href="#modulea-package" title="Link to this heading"></a></h1>
-<section id="module-src.ModuleA">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.ModuleA" title="Link to this heading"></a></h2>
-<section id="module-a">
-<h3>Module A<a class="headerlink" href="#module-a" title="Link to this heading"></a></h3>
-<p>This is a sample module which has class for Sample things</p>
+  <section id="rt-e2-agent-real-time-e2-agent">
+<h1>RT-E2 agent (Real time E2 agent)<a class="headerlink" href="#rt-e2-agent-real-time-e2-agent" title="Link to this heading"></a></h1>
+<a class="reference internal image-reference" href="_images/rt-e2-agent-2.png"><img alt="sample text" src="_images/rt-e2-agent-2.png" style="width: 600px;" /></a>
+<ul class="simple">
+<li><dl class="simple">
+<dt>EdgeRIC adopts a low overhead messaging framework [RT-E2]</dt><dd><ul>
+<li><p>It is built on top of the ZMQ message passing library</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>EdgeRIC maintains a TTI level synchronization with the RAN stack.</dt><dd><ul>
+<li><p>Our system is synchronized to the TTI-level clock tick from the RAN stack. The RAN stack uses a TTI counter, referred to as RAN index. It is included in all RT-E2 messages to EdgeRIC. EdgeRIC too maintains its own counter, called RIC index which increments by 1 every time it sends out its action. Our system is equipped with a default mechanism to ensure that EdgeRIC is slaved to the current RAN index or TTI by ensuring that the RIC index is always equal to the RAN index.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </section>
-<dl class="py class">
-<dt class="sig sig-object py" id="src.ModuleA.DatabaseA">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.ModuleA.</span></span><span class="sig-name descname"><span class="pre">DatabaseA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/ModuleA.html#DatabaseA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.ModuleA.DatabaseA" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Sample class which is something</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="src.ModuleA.DatabaseA.connectA">
-<span class="sig-name descname"><span class="pre">connectA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="k"><span class="pre">True</span></span></span></span><a class="reference internal" href="_modules/src/ModuleA.html#DatabaseA.connectA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.ModuleA.DatabaseA.connectA" title="Link to this definition"></a></dt>
-<dd><p>_summary_
-This some connection method
-:returns: _description_
-:rtype: True</p>
+<section id="rt-e2-report-message">
+<h1>RT-E2 Report Message<a class="headerlink" href="#rt-e2-report-message" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>The RT-E2 agent subscribes to the current RAN TTI to receive the realtime metrics</p></li>
+</ul>
+<dl class="py function" id="module-src.edgeric_agent">
+<dt class="sig sig-object py" id="src.edgeric_agent.get_metrics">
+<span class="sig-prename descclassname"><span class="pre">src.edgeric_agent.</span></span><span class="sig-name descname"><span class="pre">get_metrics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/edgeric_agent.html#get_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.edgeric_agent.get_metrics" title="Link to this definition"></a></dt>
+<dd><p>Fetches and parses metrics data from RAN. It decodes the received messages
+and stores the data in a structured dictionary format per UE (User Equipment).</p>
+<p>The function blocks until data is received, processes the data to calculate
+the number of UEs, and parses each UE’s data into a dictionary including
+parameters like CQI, SNR, backlog, pending data, and transmitted bytes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>A dictionary where each key is an RNTI (Radio Network Temporary Identifier)</dt><dd><p>and each value is another dictionary containing metrics for that UE.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zmq.ZMQError</strong> – An error occurred due to ZeroMQ issues, like no data being available.</p></li>
+<li><p><strong>Exception</strong> – A general exception if something else goes wrong (e.g., decoding errors).</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
+<p>The RT-E2 report message includes per-UE key performance indicators (KPIs) received from the RAN. Each UE is identified by its unique RNTI (Radio Network Temporary Identifier) along with its corresponding KPIs.</p>
+<p>Structure of the message:
+<code class="docutils literal notranslate"><span class="pre">ue_data</span></code> followed by <code class="docutils literal notranslate"><span class="pre">RIC</span> <span class="pre">ID</span></code> and <code class="docutils literal notranslate"><span class="pre">RAN</span> <span class="pre">ID</span></code>.</p>
+<p><strong>Message Details</strong>:</p>
+<ul class="simple">
+<li><p><strong>ue_data</strong>: Dictionary containing per-UE metrics. Each entry is keyed by the RNTI of the UE and contains the following KPIs:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">CQI</span></code>: Channel Quality Indicator, reflecting the downlink channel quality.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BL</span></code>: Amount of backlog data waiting to be sent to the UE in the downlink.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SNR</span></code>: Signal-to-Noise Ratio in the uplink, indicating the quality of the uplink signal.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Pending_Data</span></code>: Data that is waiting to be sent in the uplink.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Tx</span></code>: The current downlinnk bitrate for the UE.</p></li>
+</ul>
+</li>
+<li><p><strong>RIC ID</strong>: This is the RIC index</p></li>
+<li><p><strong>RAN ID</strong>: This is the RAN index or the TTI counter</p></li>
+</ul>
+<p><strong>Example Data Structure</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ue_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">1001</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># Example RNTI</span>
+        <span class="s1">&#39;CQI&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="c1"># Downlink Channel Quality Indicator</span>
+        <span class="s1">&#39;BL&#39;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>  <span class="c1"># Downlink Backlog Buffer in Bytes</span>
+        <span class="s1">&#39;SNR&#39;</span><span class="p">:</span> <span class="mf">20.5</span><span class="p">,</span>  <span class="c1"># Uplink SNR in dB</span>
+        <span class="s1">&#39;pending_data&#39;</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>  <span class="c1"># Uplink Pending Data in Bytes</span>
+        <span class="s1">&#39;Tx&#39;</span><span class="p">:</span> <span class="mi">100</span>  <span class="c1"># Downlink bitrate in Mbps</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">RIC_ID</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">RAN_ID</span> <span class="o">=</span> <span class="mi">101</span>
+</pre></div>
+</div>
+<p>This structured message is critical for performance management and optimization of network resources in real-time applications.</p>
+</section>
+<section id="rt-e2-policy-message">
+<h1>RT-E2 Policy Message<a class="headerlink" href="#rt-e2-policy-message" title="Link to this heading"></a></h1>
+<p>Structure of the message:
+<code class="docutils literal notranslate"><span class="pre">μApp1-control-message</span></code>, <code class="docutils literal notranslate"><span class="pre">μApp2-control-message</span></code>, <code class="docutils literal notranslate"><span class="pre">RIC</span> <span class="pre">ID</span></code>, <code class="docutils literal notranslate"><span class="pre">RAN</span> <span class="pre">ID</span></code>.</p>
+<dl class="simple">
+<dt>Example message format:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">μApp1-control-message</span></code>—&gt; <code class="docutils literal notranslate"><span class="pre">UE1</span> <span class="pre">RNTI</span></code>, <code class="docutils literal notranslate"><span class="pre">Action</span> <span class="pre">for</span> <span class="pre">UE1</span></code>, <code class="docutils literal notranslate"><span class="pre">UE2</span> <span class="pre">RNTI</span></code>, <code class="docutils literal notranslate"><span class="pre">Action</span> <span class="pre">for</span> <span class="pre">UE2</span></code>, …</p>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>EdgeRIC’s RT-E2 agent publishes the control actions to the RAN</p></li>
+</ul>
+<dl class="py function" id="module-0">
+<dt class="sig sig-object py" id="src.edgeric_agent.send_control">
+<span class="sig-prename descclassname"><span class="pre">src.edgeric_agent.</span></span><span class="sig-name descname"><span class="pre">send_control</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/edgeric_agent.html#send_control"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.edgeric_agent.send_control" title="Link to this definition"></a></dt>
+<dd><p>Composes and sends a control message to the RAN. This message contains
+data for the actions to be taken for each UE, identified by their RNTIs for all μApps.</p>
+<p>The function is activated once all μApps finish execution, that is, the μApp counter <code class="docutils literal notranslate"><span class="pre">t</span></code> reaches the expected count [number of currently operational
+microservices]</p>
+<p>The function constructs a string that incorporates the RT-E2 Policy Report, then sends this string over a ZeroMQ socket.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>zmq.ZMQError</strong> – Handles ZeroMQ errors such as a failed send operation, including retries if necessary.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
-<section id="edgeric-architecture">
-<h2>EdgeRIC architecture<a class="headerlink" href="#edgeric-architecture" title="Link to this heading"></a></h2>
-<a class="reference internal image-reference" href="_images/edgeric_architecture.png"><img alt="sample text" src="_images/edgeric_architecture.png" style="width: 400px;" /></a>
+<section id="redis-database">
+<h1>REDIS database<a class="headerlink" href="#redis-database" title="Link to this heading"></a></h1>
+<ul>
+<li><p>EdgeRIC maintains a Redis database to receive learned models/ policy updates from cloud-based systems.</p></li>
+<li><p>The database is also used to manage the lifecycle of microApps, which includes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Tracking the number of microApps running: This allows EdgeRIC to allocate resources efficiently and ensure optimal operation of all active microApps.</p></li>
+<li><p>Configuration based on user input: EdgeRIC configures microApps according to user-defined parameters. This flexibility allows users to tailor app behavior to specific needs.</p></li>
+<li><p>Dynamic updating: EdgeRIC can update microApps on-the-fly based on new user inputs or changes in the operating environment. This feature ensures that microApps can adapt to evolving requirements without needing a system restart.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="apps-edgeric-microservices">
+<h1>μApps - EdgeRIC microservices<a class="headerlink" href="#apps-edgeric-microservices" title="Link to this heading"></a></h1>
+<a class="reference internal image-reference" href="_images/edgeric.png"><img alt="sample text" src="_images/edgeric.png" style="width: 600px;" /></a>
+<p>Each μApp{i} receives metrics by subscribing to the edgeric agent’s <code class="docutils literal notranslate"><span class="pre">get_metrics()</span></code> function. Based on these metrics, it computes a policy for the specific network function and sends the decisions to edgerics agent’s <code class="docutils literal notranslate"><span class="pre">send_control_μApp_i()</span></code> function.</p>
+<dl class="py function" id="module-1">
+<dt class="sig sig-object py" id="src.edgeric_agent.send_control_App_i">
+<span class="sig-prename descclassname"><span class="pre">src.edgeric_agent.</span></span><span class="sig-name descname"><span class="pre">send_control_μApp_i</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/edgeric_agent.html#send_control_μApp_i"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.edgeric_agent.send_control_App_i" title="Link to this definition"></a></dt>
+<dd><p>This function mainatins the message pertaining to a specific μApp. This message contains
+data for the actions to be taken for each UE, identified by their RNTIs. Once this function
+recieves the message from the corresponding μApp, it tells the edgeric agent about completion of
+the μApp execution for that TTI by incrementing a counter  <code class="docutils literal notranslate"><span class="pre">t</span></code> by 1.</p>
+</dd></dl>
+
+<section id="how-to-write-apps">
+<h2>how to write μApps?<a class="headerlink" href="#how-to-write-apps" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#### This is an example of a Downlink RBG scheduling μApp</span>
+<span class="kn">import</span> <span class="nn">gym</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">)))</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">redis</span>
+<span class="kn">from</span> <span class="nn">edgeric_agent</span> <span class="kn">import</span> <span class="o">*</span>           <span class="c1">#import edgeric agent</span>
+
+<span class="k">def</span> <span class="nf">compute_policy</span><span class="p">():</span>
+   <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># to be deleted</span>
+   <span class="n">ue_data</span> <span class="o">=</span> <span class="n">get_metrics</span><span class="p">()</span>            <span class="c1">#### subscribe to RAN via the RT-E2 agent to receive metrics</span>
+   <span class="n">numues</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ue_data</span><span class="p">)</span>
+   <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">numues</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+   <span class="n">RNTIs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ue_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numues</span><span class="p">):</span>
+      <span class="c1"># Store RNTI and corresponding weight</span>
+      <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">RNTIs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+      <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">numues</span>
+
+   <span class="n">send_control_μApp_1</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="n">flag</span><span class="p">)</span>   <span class="c1">#### send the scheduling control action to the RT-E2 agent</span>
+   <span class="n">value_algo</span> <span class="o">=</span> <span class="s2">&quot;Fixed Weights&quot;</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+   <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+      <span class="n">compute_policy</span><span class="p">()</span>
+</pre></div>
+</div>
 </section>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gettingstarted.html" class="btn btn-neutral float-left" title="Cellular Stack" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ModuleC.html" class="btn btn-neutral float-right" title="μApp1_metrics_perUE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

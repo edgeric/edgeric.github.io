@@ -41,8 +41,30 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Cellular Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#modules-supported">Modules supported</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html">RT-E2 agent (Real time E2 agent)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#rt-e2-report-message">RT-E2 Report Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#rt-e2-policy-message">RT-E2 Policy Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#redis-database">REDIS database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC MicroApps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html">μApp1_metrics_perUE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app2-downlink-scheduling">μApp2_Downlink_scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app3-training-rl">μApp3_training_RL</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Demos and Dataset</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ModuleD.html">Demos</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -70,32 +92,15 @@
 <h1 id="index">Index</h1>
 
 <div class="genindex-jumpbox">
- <a href="#C"><strong>C</strong></a>
- | <a href="#D"><strong>D</strong></a>
+ <a href="#G"><strong>G</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#S"><strong>S</strong></a>
  
 </div>
-<h2 id="C">C</h2>
+<h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ModuleA.html#src.ModuleA.DatabaseA.connectA">connectA() (src.ModuleA.DatabaseA method)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ModuleB.html#src.ModuleB.DatabaseB.connectB">connectB() (src.ModuleB.DatabaseB method)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="D">D</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ModuleA.html#src.ModuleA.DatabaseA">DatabaseA (class in src.ModuleA)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="ModuleB.html#src.ModuleB.DatabaseB">DatabaseB (class in src.ModuleB)</a>
+      <li><a href="ModuleA.html#src.edgeric_agent.get_metrics">get_metrics() (in module src.edgeric_agent)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -107,9 +112,7 @@
     module
 
       <ul>
-        <li><a href="ModuleA.html#module-src.ModuleA">src.ModuleA</a>
-</li>
-        <li><a href="ModuleB.html#module-src.ModuleB">src.ModuleB</a>
+        <li><a href="ModuleA.html#module-0">src.edgeric_agent</a>, <a href="ModuleA.html#module-1">[1]</a>, <a href="ModuleA.html#module-src.edgeric_agent">[2]</a>
 </li>
       </ul></li>
   </ul></td>
@@ -118,20 +121,17 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    src.ModuleA
-
-      <ul>
-        <li><a href="ModuleA.html#module-src.ModuleA">module</a>
+      <li><a href="ModuleA.html#src.edgeric_agent.send_control">send_control() (in module src.edgeric_agent)</a>
 </li>
-      </ul></li>
+      <li><a href="ModuleA.html#src.edgeric_agent.send_control_App_i">send_control_μApp_i() (in module src.edgeric_agent)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li>
-    src.ModuleB
+    src.edgeric_agent
 
       <ul>
-        <li><a href="ModuleB.html#module-src.ModuleB">module</a>
+        <li><a href="ModuleA.html#module-0">module</a>, <a href="ModuleA.html#module-1">[1]</a>, <a href="ModuleA.html#module-src.edgeric_agent">[2]</a>
 </li>
       </ul></li>
   </ul></td>

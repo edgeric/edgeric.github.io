@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.edgeric_agent &mdash; Edge_RIC 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Edge_RIC
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../gettingstarted.html">Cellular Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gettingstarted.html#modules-supported">Modules supported</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ModuleA.html">RT-E2 agent (Real time E2 agent)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ModuleA.html#rt-e2-report-message">RT-E2 Report Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ModuleA.html#rt-e2-policy-message">RT-E2 Policy Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ModuleA.html#redis-database">REDIS database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ModuleA.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC MicroApps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ModuleC.html">μApp1_metrics_perUE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ModuleC.html#app2-downlink-scheduling">μApp2_Downlink_scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ModuleC.html#app3-training-rl">μApp3_training_RL</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Demos and Dataset</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ModuleD.html">Demos</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Edge_RIC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">src.edgeric_agent</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for src.edgeric_agent</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="send_control">
+<a class="viewcode-back" href="../../ModuleA.html#src.edgeric_agent.send_control">[docs]</a>
+<span></span><span class="k">def</span> <span class="nf">send_control</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Composes and sends a control message to the RAN. This message contains</span>
+<span class="sd">    data for the actions to be taken for each UE, identified by their RNTIs for all μApps. </span>
+<span class="sd">    </span>
+<span class="sd">    The function is activated once all μApps finish execution, that is, the μApp counter ``t`` reaches the expected count [number of currently operational </span>
+<span class="sd">    microservices] </span>
+
+<span class="sd">    The function constructs a string that incorporates the RT-E2 Policy Report, then sends this string over a ZeroMQ socket.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        zmq.ZMQError: Handles ZeroMQ errors such as a failed send operation, including retries if necessary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">ran_index</span><span class="p">,</span> <span class="n">curricid</span><span class="p">,</span> <span class="n">string_to_send_weight</span><span class="p">,</span> <span class="n">string_to_send_ul_blanking</span><span class="p">,</span> <span class="n">t</span></div>
+
+    <span class="c1"># function implementation...</span>
+
+
+<div class="viewcode-block" id="get_metrics">
+<a class="viewcode-back" href="../../ModuleA.html#src.edgeric_agent.get_metrics">[docs]</a>
+<span class="k">def</span> <span class="nf">get_metrics</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fetches and parses metrics data from RAN. It decodes the received messages</span>
+<span class="sd">    and stores the data in a structured dictionary format per UE (User Equipment).</span>
+
+<span class="sd">    The function blocks until data is received, processes the data to calculate</span>
+<span class="sd">    the number of UEs, and parses each UE&#39;s data into a dictionary including</span>
+<span class="sd">    parameters like CQI, SNR, backlog, pending data, and transmitted bytes.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: A dictionary where each key is an RNTI (Radio Network Temporary Identifier)</span>
+<span class="sd">              and each value is another dictionary containing metrics for that UE.</span>
+<span class="sd">              </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        zmq.ZMQError: An error occurred due to ZeroMQ issues, like no data being available.</span>
+<span class="sd">        Exception: A general exception if something else goes wrong (e.g., decoding errors).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">ran_index</span><span class="p">,</span> <span class="n">curricid</span><span class="p">,</span> <span class="n">string_to_send_ul_blanking</span><span class="p">,</span> <span class="n">string_to_send_weight</span></div>
+
+    <span class="c1"># function implementation...</span>
+
+
+<div class="viewcode-block" id="send_control_μApp_i">
+<a class="viewcode-back" href="../../ModuleA.html#src.edgeric_agent.send_control_μApp_i">[docs]</a>
+<span class="k">def</span> <span class="nf">send_control_μApp_i</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function mainatins the message pertaining to a specific μApp. This message contains</span>
+<span class="sd">    data for the actions to be taken for each UE, identified by their RNTIs. Once this function</span>
+<span class="sd">    recieves the message from the corresponding μApp, it tells the edgeric agent about completion of</span>
+<span class="sd">    the μApp execution for that TTI by incrementing a counter  ``t`` by 1.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">ran_index</span><span class="p">,</span> <span class="n">curricid</span><span class="p">,</span> <span class="n">string_to_send_ul_blanking</span><span class="p">,</span> <span class="n">string_to_send_weight</span></div>
+
+    <span class="c1"># function implementation...</span>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Prathik Vijaykumar.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
