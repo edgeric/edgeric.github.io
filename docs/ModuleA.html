@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RT-E2 agent (Real time E2 agent) &mdash; EdgeRIC 0.0.1 documentation</title>
+  <title>RT-E2 agent (Real time E2 agent) &mdash; EdgeRIC v0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=bc3b0663" />
@@ -16,7 +16,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/documentation_options.js?v=34cd777e"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -100,7 +100,7 @@
            <div itemprop="articleBody">
              
   <section id="rt-e2-agent-real-time-e2-agent">
-<h1>RT-E2 agent (Real time E2 agent)<a class="headerlink" href="#rt-e2-agent-real-time-e2-agent" title="Link to this heading"></a></h1>
+<h1>RT-E2 agent (Real time E2 agent)</h1>
 <a class="reference internal image-reference" href="_images/er-messenger.png"><img alt="sample text" src="_images/er-messenger.png" style="width: 600px;" /></a>
 <ul class="simple">
 <li><dl class="simple">
@@ -120,7 +120,7 @@
 </ul>
 </section>
 <section id="rt-e2-report-message">
-<h1>RT-E2 Report Message<a class="headerlink" href="#rt-e2-report-message" title="Link to this heading"></a></h1>
+<h1>RT-E2 Report Message</h1>
 <ul class="simple">
 <li><p>The RT-E2 agent subscribes to the current RAN TTI to receive the realtime metrics</p></li>
 </ul>
@@ -160,7 +160,7 @@
 <p>This structured message is critical for performance management and optimization of network resources in real-time applications.</p>
 </section>
 <section id="rt-e2-policy-message">
-<h1>RT-E2 Policy Message<a class="headerlink" href="#rt-e2-policy-message" title="Link to this heading"></a></h1>
+<h1>RT-E2 Policy Message</h1>
 <p>Structure of the message:
 <code class="docutils literal notranslate"><span class="pre">μApp1-control-message</span></code>, <code class="docutils literal notranslate"><span class="pre">μApp2-control-message</span></code>, <code class="docutils literal notranslate"><span class="pre">RIC</span> <span class="pre">ID</span></code>, <code class="docutils literal notranslate"><span class="pre">RAN</span> <span class="pre">ID</span></code>.</p>
 <dl class="simple">
@@ -172,7 +172,7 @@
 </ul>
 </section>
 <section id="redis-database">
-<h1>REDIS database<a class="headerlink" href="#redis-database" title="Link to this heading"></a></h1>
+<h1>REDIS database</h1>
 <ul>
 <li><p>EdgeRIC maintains a Redis database to receive learned models/ policy updates from cloud-based systems.</p></li>
 <li><p>The database is also used to manage the lifecycle of microApps, which includes:</p>
@@ -187,11 +187,11 @@
 </ul>
 </section>
 <section id="apps-edgeric-microservices">
-<h1>μApps - EdgeRIC microservices<a class="headerlink" href="#apps-edgeric-microservices" title="Link to this heading"></a></h1>
+<h1>μApps - EdgeRIC microservices</h1>
 <a class="reference internal image-reference" href="_images/er-messenger-extended.png"><img alt="sample text" src="_images/er-messenger-extended.png" style="width: 600px;" /></a>
 <p>Each μApp{i} receives metrics by subscribing to the edgeric agent’s <code class="docutils literal notranslate"><span class="pre">get_metrics_multi()</span></code> function. Based on these metrics, it computes a policy for the specific network function and sends the decisions to edgerics agent’s <code class="docutils literal notranslate"><span class="pre">send_control_μApp_i()</span></code> function.</p>
 <section id="how-to-write-apps">
-<h2>how to write μApps?<a class="headerlink" href="#how-to-write-apps" title="Link to this heading"></a></h2>
+<h2>how to write μApps?</h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#### This is an example of a Downlink RBG scheduling μApp</span>
 <span class="kn">import</span> <span class="nn">gym</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>

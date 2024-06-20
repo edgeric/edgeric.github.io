@@ -17,30 +17,37 @@ serves as the seat of real-time AI-in-the-loop for decision and control. It can 
 
 
 
-.. raw:: html
-
-   <div class="side-by-side">
-     <div class="video">
-       <video width="500" height="380" controls>
-         <source src="_static/beamarmor_demo.mp4" type="video/mp4" controls autoplay>
-         Your browser does not support the video tag.
-       </video>
-     </div>
-      <div class="video">
-       <video width="500" height="380" controls>
-         <source src="_static/demo-2.mp4" type="video/mp4" controls autoplay>
-         Your browser does not support the video tag.
-       </video>
-     </div>
-   </div>
-
-
 .. .. raw:: html
 
-..    <video width="520" height="440" controls>
-..      <source src="_static/demo-2.mp4" type="video/mp4">
-..      Your browser does not support the video tag.
-..    </video>
+..    <div class="side-by-side">
+..      <div class="video">
+..        <video width="500" height="380" controls>
+..          <source src="_static/beamarmor_demo.mp4" type="video/mp4" controls autoplay>
+..          Your browser does not support the video tag.
+..        </video>
+..      </div>
+..       <div class="video">
+..        <video width="500" height="380" controls>
+..          <source src="_static/demo-2.mp4" type="video/mp4" controls autoplay>
+..          Your browser does not support the video tag.
+..        </video>
+..      </div>
+..    </div>
+
+
+.. raw:: html
+
+   <video width="520" height="440" controls>
+     <source src="_static/beamarmor_demo.mp4" type="video/mp4">
+     Your browser does not support the video tag.
+   </video>
+
+.. raw:: html
+
+   <video width="520" height="440" controls>
+     <source src="_static/demo-2.mp4" type="video/mp4">
+     Your browser does not support the video tag.
+   </video>   
 
 
 
@@ -56,7 +63,7 @@ This release is based on srsRAN 4G, we will shortly release our 5G version. We s
 .. image:: edgeric-full-status.png
   :width: 600
   :alt: sample text
-  
+
 .. toctree::
    :maxdepth: 2
    :caption: Getting Started
