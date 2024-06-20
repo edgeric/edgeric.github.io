@@ -15,12 +15,48 @@ serves as the seat of real-time AI-in-the-loop for decision and control. It can 
   :width: 400
   :alt: sample text
 
+
+
+.. raw:: html
+
+   <div class="side-by-side">
+     <div class="video">
+       <video width="500" height="380" controls>
+         <source src="_static/beamarmor_demo.mp4" type="video/mp4" controls autoplay>
+         Your browser does not support the video tag.
+       </video>
+     </div>
+      <div class="video">
+       <video width="500" height="380" controls>
+         <source src="_static/demo-2.mp4" type="video/mp4" controls autoplay>
+         Your browser does not support the video tag.
+       </video>
+     </div>
+   </div>
+
+
+.. .. raw:: html
+
+..    <video width="520" height="440" controls>
+..      <source src="_static/demo-2.mp4" type="video/mp4">
+..      Your browser does not support the video tag.
+..    </video>
+
+
+
 Our current status
 ------------------------
+
+
+
 This release is based on srsRAN 4G, we will shortly release our 5G version. We suport:
    - Realtime KPI monitoring: we support the UL/ DL channel conditions and the respective pending buffers for transmission
    - Realtime Control actions: MAC scheduling on the downlink, both AI training and inference capability 
 
+.. image:: edgeric-full-status.png
+  :width: 600
+  :alt: sample text
+  
 .. toctree::
    :maxdepth: 2
    :caption: Getting Started
@@ -41,14 +77,22 @@ This release is based on srsRAN 4G, we will shortly release our 5G version. We s
 
 .. toctree::
    :maxdepth: 2
-   :caption: EdgeRIC MicroApps
+   :caption: EdgeRIC microApps
 
    ModuleC.rst   
 .. toctree::
    :maxdepth: 2
-   :caption: Demos and Dataset
+   :caption: Dataset
 
    ModuleD.rst 
+
+Research Papers
+------------------------
+- EdgeRIC main paper: https://www.usenix.org/conference/nsdi24/presentation/ko
+- BeamArmor: https://dl.acm.org/doi/10.1145/3638550.3641138
+- Windex: https://arxiv.org/abs/2406.01888
+- Tiny-twin: https://dl.acm.org/doi/abs/10.1145/3638550.3643625
+
 .. Indices and tables
 .. ==================
 

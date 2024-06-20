@@ -1,11 +1,16 @@
-μApp1_metrics_perUE
+Realtime Dashboard
+===============
+
+
+
+μApp1_PPO_sched
 ===============
 
 Per UE live metrics
 Aggregate Metrics
 
 
-μApp2_Downlink_scheduling
+μApp2_Windex
 ===============
 
 .. automodule:: src.dl_scheduler
@@ -13,7 +18,13 @@ Aggregate Metrics
     :undoc-members:
     :show-inheritance:
 
-μApp3_training_RL
+μApp3_BeamArmor
+===============
+
+Per UE live metrics
+Aggregate Metrics
+
+μApp4_SPARC
 ===============
 
 Per UE live metrics

@@ -3,7 +3,7 @@
 
 RT-E2 agent (Real time E2 agent)
 ---------------
-.. image:: rt-e2-agent-2.png
+.. image:: er-messenger.png
   :width: 600
   :alt: sample text
 
@@ -36,7 +36,8 @@ Structure of the message:
   - ``BL``: Amount of backlog data waiting to be sent to the UE in the downlink.
   - ``SNR``: Signal-to-Noise Ratio in the uplink, indicating the quality of the uplink signal.
   - ``Pending_Data``: Data that is waiting to be sent in the uplink.
-  - ``Tx``: The current downlinnk bitrate for the UE.
+  - ``Tx``: The current downlink bitrate for the UE.
+  - ``Rx``: The current uplink bitrate for the UE.
 
 - **RIC ID**: This is the RIC index
 - **RAN ID**: This is the RAN index or the TTI counter
@@ -52,6 +53,7 @@ Structure of the message:
             'SNR': 20.5,  # Uplink SNR in dB
             'pending_data': 250,  # Uplink Pending Data in Bytes
             'Tx': 100  # Downlink bitrate in Mbps
+            'Rx': 100 # Uplink bitrate in Mbps
         }
     }
     RIC_ID = 1
@@ -93,11 +95,11 @@ REDIS database
 
 μApps - EdgeRIC microservices
 ------------------------
-.. image:: edgeric.png
+.. image:: er-messenger-extended.png
   :width: 600
   :alt: sample text  
 
-Each μApp{i} receives metrics by subscribing to the edgeric agent's ``get_metrics()`` function. Based on these metrics, it computes a policy for the specific network function and sends the decisions to edgerics agent's ``send_control_μApp_i()`` function.
+Each μApp{i} receives metrics by subscribing to the edgeric agent's ``get_metrics_multi()`` function. Based on these metrics, it computes a policy for the specific network function and sends the decisions to edgerics agent's ``send_control_μApp_i()`` function.
 
 .. automodule:: src.edgeric_agent
    :members: send_control_μApp_i
@@ -125,7 +127,7 @@ how to write μApps?
 
    def compute_policy():
       flag = False # to be deleted
-      ue_data = get_metrics()            #### subscribe to RAN via the RT-E2 agent to receive metrics
+      ue_data = get_metrics_multi()            #### subscribe to RAN's RT-E2 agent via EdgeRIC messenger to receive metrics
       numues = len(ue_data)
       weights = np.zeros(numues * 2)
       RNTIs = list(ue_data.keys())
@@ -135,7 +137,7 @@ how to write μApps?
          weights[i*2+0] = RNTIs[i]
          weights[i*2+1] = 1/numues
       
-      send_control_μApp_1(weights,flag)   #### send the scheduling control action to the RT-E2 agent 
+      send_control_μApp_1(weights,flag)   #### send the scheduling control action to the EdgeRIC messenger
       value_algo = "Fixed Weights" 
 
 

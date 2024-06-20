@@ -4,9 +4,10 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src &mdash; Edge_RIC 0.0.1 documentation</title>
+  <title>src &mdash; EdgeRIC 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=bc3b0663" />
 
   
   <!--[if lt IE 9]>
@@ -32,7 +33,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            Edge_RIC
+            EdgeRIC
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -45,7 +46,8 @@
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Cellular Stack</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#modules-supported">Modules supported</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#tiny-twin-emulation-module">Tiny-twin: Emulation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#over-the-air-execution-module">Over The Air execution module</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
 <ul>
@@ -55,15 +57,17 @@
 <li class="toctree-l1"><a class="reference internal" href="ModuleA.html#redis-database">REDIS database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ModuleA.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">EdgeRIC MicroApps</span></p>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC microApps</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html">μApp1_metrics_perUE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app2-downlink-scheduling">μApp2_Downlink_scheduling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app3-training-rl">μApp3_training_RL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html">Realtime Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app1-ppo-sched">μApp1_PPO_sched</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app2-windex">μApp2_Windex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app3-beamarmor">μApp3_BeamArmor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app4-sparc">μApp4_SPARC</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Demos and Dataset</span></p>
+<p class="caption" role="heading"><span class="caption-text">Dataset</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ModuleD.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleD.html">Channel Traces</a></li>
 </ul>
 
         </div>
@@ -72,7 +76,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Edge_RIC</a>
+          <a href="index.html">EdgeRIC</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -95,17 +99,10 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="ModuleA.html">RT-E2 agent (Real time E2 agent)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#rt-e2-report-message">RT-E2 Report Message</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ModuleA.html#src.edgeric_agent.get_metrics"><code class="docutils literal notranslate"><span class="pre">get_metrics()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#rt-e2-policy-message">RT-E2 Policy Message</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ModuleA.html#src.edgeric_agent.send_control"><code class="docutils literal notranslate"><span class="pre">send_control()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#rt-e2-report-message">RT-E2 Report Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#rt-e2-policy-message">RT-E2 Policy Message</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ModuleA.html#redis-database">REDIS database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ModuleA.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ModuleA.html#src.edgeric_agent.send_control_App_i"><code class="docutils literal notranslate"><span class="pre">send_control_μApp_i()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ModuleA.html#how-to-write-apps">how to write μApps?</a></li>
 </ul>
 </li>
@@ -123,7 +120,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Prathik Vijaykumar.</p>
+    <p>&#169; Copyright 2024, Ushasi Ghosh.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

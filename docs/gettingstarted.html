@@ -4,9 +4,10 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cellular Stack &mdash; Edge_RIC 0.0.1 documentation</title>
+  <title>Cellular Stack &mdash; EdgeRIC 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=bc3b0663" />
 
   
   <!--[if lt IE 9]>
@@ -34,7 +35,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            Edge_RIC
+            EdgeRIC
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -47,11 +48,8 @@
               <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Cellular Stack</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#modules-supported">Modules supported</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#emulation-module">Emulation module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#over-the-air-execution-module">Over The Air execution module</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="#tiny-twin-emulation-module">Tiny-twin: Emulation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#over-the-air-execution-module">Over The Air execution module</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
 <ul>
@@ -61,15 +59,17 @@
 <li class="toctree-l1"><a class="reference internal" href="ModuleA.html#redis-database">REDIS database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ModuleA.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">EdgeRIC MicroApps</span></p>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC microApps</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html">μApp1_metrics_perUE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app2-downlink-scheduling">μApp2_Downlink_scheduling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app3-training-rl">μApp3_training_RL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html">Realtime Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app1-ppo-sched">μApp1_PPO_sched</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app2-windex">μApp2_Windex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app3-beamarmor">μApp3_BeamArmor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app3-sparc">μApp3_SPARC</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Demos and Dataset</span></p>
+<p class="caption" role="heading"><span class="caption-text">Dataset</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ModuleD.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleD.html">Dataset</a></li>
 </ul>
 
         </div>
@@ -78,7 +78,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Edge_RIC</a>
+          <a href="index.html">EdgeRIC</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -105,27 +105,26 @@
 <li><p>Support for Ettus USRPs</p></li>
 </ul>
 </section>
-<section id="modules-supported">
-<h1>Modules supported<a class="headerlink" href="#modules-supported" title="Link to this heading"></a></h1>
-<section id="emulation-module">
-<h2>Emulation module<a class="headerlink" href="#emulation-module" title="Link to this heading"></a></h2>
-<p>This module is for offline training where we can connect a number of UEs</p>
-<a class="reference internal image-reference" href="_images/emulator_modulator.png"><img alt="sample text" src="_images/emulator_modulator.png" style="width: 600px;" /></a>
-<p>Github repository: <a class="reference external" href="https://github.com/ushasigh/EdgeRIC">https://github.com/ushasigh/EdgeRIC</a>, branch: main</p>
+<section id="tiny-twin-emulation-module">
+<h1>Tiny-twin: Emulation module<a class="headerlink" href="#tiny-twin-emulation-module" title="Link to this heading"></a></h1>
+<p>This module is for offline training where we can connect a number of UEs, each UE running a separate channel trace.
+Channel Traces are colledted from the over the air mobility experiments.</p>
+<a class="reference internal image-reference" href="_images/tiny-twin.png"><img alt="sample text" src="_images/tiny-twin.png" style="width: 600px;" /></a>
 <dl class="simple">
 <dt>Features:</dt><dd><ul class="simple">
 <li><p>Plug and play with various channel traces</p></li>
 <li><p>Good for offline training where we can connect a number of UEs</p></li>
 <li><p>offers repeatability for experimental runs</p></li>
+<li><p>offers end to end application testing by running each UE application under separate namespace</p></li>
 </ul>
 </dd>
 </dl>
 <p>[TODO]: how to change channel traces?</p>
-</section>
-<section id="over-the-air-execution-module">
-<h2>Over The Air execution module<a class="headerlink" href="#over-the-air-execution-module" title="Link to this heading"></a></h2>
 <p>Github repository: <a class="reference external" href="https://github.com/ushasigh/EdgeRIC">https://github.com/ushasigh/EdgeRIC</a>, branch: main</p>
 </section>
+<section id="over-the-air-execution-module">
+<h1>Over The Air execution module<a class="headerlink" href="#over-the-air-execution-module" title="Link to this heading"></a></h1>
+<p>Github repository: <a class="reference external" href="https://github.com/ushasigh/EdgeRIC">https://github.com/ushasigh/EdgeRIC</a>, branch: main</p>
 </section>
 
 
@@ -139,7 +138,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Prathik Vijaykumar.</p>
+    <p>&#169; Copyright 2024, Ushasi Ghosh.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,4 +1,4 @@
-Demos
+Channel Traces
 ===============
 
 .. raw:: html

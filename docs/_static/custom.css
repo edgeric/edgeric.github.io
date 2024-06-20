@@ -1,0 +1,26 @@
+.wy-nav-content {
+    max-width: 100%; /* Increase the maximum width of the content area */
+}
+
+.rst-content {
+    max-width: 100%; /* Increase the width of the content area */
+}
+
+.side-by-side {
+    display: flex;
+    align-items: flex-start;
+}
+
+.side-by-side .video {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.side-by-side .text {
+    flex: 1;
+}
+
+.centered-image {
+    display: flex;
+    justify-content: center;
+}

@@ -16,28 +16,30 @@ Cellular Stack
 .. - Realtime Sync between RAN and RIC
 .. - EdgeRIC message formats
 
-Modules supported
+
+Tiny-twin: Emulation module
 --------------------------
 
-Emulation module
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+This module is for offline training where we can connect a number of UEs, each UE running a separate channel trace.
+Channel Traces are colledted from the over the air mobility experiments.
 
-This module is for offline training where we can connect a number of UEs
-
-.. image:: emulator_modulator.png
+.. image:: tiny-twin.png
   :width: 600
   :alt: sample text
 
-Github repository: https://github.com/ushasigh/EdgeRIC, branch: main
+
 
 Features:
     - Plug and play with various channel traces
     - Good for offline training where we can connect a number of UEs
     - offers repeatability for experimental runs
+    - offers end to end application testing by running each UE application under separate namespace
 
 [TODO]: how to change channel traces?
 
+Github repository: https://github.com/ushasigh/EdgeRIC, branch: main
+
 Over The Air execution module
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 Github repository: https://github.com/ushasigh/EdgeRIC, branch: main
