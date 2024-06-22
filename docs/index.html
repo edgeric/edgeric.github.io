@@ -7,15 +7,16 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>EdgeRIC: A Real Time Radio Intelligent Controller | EdgeRIC v0.1 documentation</title>
-<meta content="EdgeRIC: A Real Time Radio Intelligent Controller | EdgeRIC v0.1 documentation" property="og:title"/>
-<meta content="EdgeRIC: A Real Time Radio Intelligent Controller | EdgeRIC v0.1 documentation" name="twitter:title"/>
+<title>EdgeRIC: A Real Time RAN Intelligent Controller | EdgeRIC v0.1 documentation</title>
+<meta content="EdgeRIC: A Real Time RAN Intelligent Controller | EdgeRIC v0.1 documentation" property="og:title"/>
+<meta content="EdgeRIC: A Real Time RAN Intelligent Controller | EdgeRIC v0.1 documentation" name="twitter:title"/>
 <link href="_static/pygments.css?v=8d216cef" rel="stylesheet" type="text/css"/>
 <link href="_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
 <link href="_static/custom.css?v=bc3b0663" rel="stylesheet" type="text/css"/>
+<link href="_static/tabs.css?v=a5c4661c" rel="stylesheet" type="text/css"/>
 <link href="search.html" rel="search" title="Search"/>
 <link href="genindex.html" rel="index" title="Index"/>
-<link href="gettingstarted.html" rel="next" title="Cellular Stack"/>
+<link href="gettingstarted.html" rel="next" title="Platform Overview"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -70,25 +71,20 @@
 <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
 <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Cellular Stack</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#tiny-twin-emulation-module">Tiny-twin: Emulation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#over-the-air-execution-module">Over The Air execution module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Platform Overview</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html">RT-E2 agent (Real time E2 agent)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#rt-e2-report-message">RT-E2 Report Message</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#rt-e2-policy-message">RT-E2 Policy Message</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#redis-database">REDIS database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html">RT-E2 interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#how-to-write-apps">how to write μApps?</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC microApps</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="ModuleC.html">Realtime Dashboard</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app1-ppo-sched">μApp1_PPO_sched</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app2-windex">μApp2_Windex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app1-ppo-sched">μApp1: PPO_sched</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app2-windex">μApp2: Windex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app3-beamarmor">μApp3_BeamArmor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app4-sparc">μApp4_SPARC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app4-sparc">μApp4: SPARC</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Dataset</span></p>
 <ul>
@@ -106,60 +102,121 @@
 <main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
 <div class="w-full min-w-0 mx-auto">
 <div id="content" role="main">
-<section id="edgeric-a-real-time-radio-intelligent-controller">
-<h1>EdgeRIC: A Real Time Radio Intelligent Controller</h1>
-<p>Radio Access Networks (RANs) are increasingly softwarized and accessible via data-collection and control interfaces.
-RAN intelligent control (RIC) is an approach to manage these interfaces at different timescales. We introduce EdgeRIC, a real-time RIC co-located with the
-Distributed Unit (DU). It is decoupled from the RAN stack, and operates at the RAN timescale. EdgeRIC
-serves as the seat of real-time AI-in-the-loop for decision and control. It can access RAN and application-level information to execute AI-optimized and other policies in real-time (sub-millisecond).</p>
+<section id="edgeric-a-real-time-ran-intelligent-controller">
+<h1>EdgeRIC: A Real Time RAN Intelligent Controller</h1>
 <a class="reference internal image-reference" href="_images/intro.pdf"><img alt="sample text" src="_images/intro.pdf" style="width: 400px;"/>
 </a>
+<p>NextG cellular networks must support a wide variety of applications that require radio access with latency,
+throughput and reliability guarantees hitherto unavailable. Simultaneously, the environment is becoming in-
+creasingly dynamic over diverse spectrum bands, user mobility patterns and variable traffic patterns. Com-
+plex cross layer interactions imply that problems without crisp models are emerging where a data-driven
+machine learning approach to optimal resource utilization has value. We introduce EdgeRIC, a real-time RIC
+co-located with the Distributed Unit (DU). It is decoupled from the RAN stack, and operates at the RAN timescale.
+EdgeRIC serves as the seat of real-time AI-in-the-loop for decision and control. It can access RAN and
+application-level information to execute AI-optimized and other policies in real-time (sub-millisecond).</p>
+<section id="edgeric-focus-areas">
+<h2>EdgeRIC Focus Areas</h2>
+<a class="reference internal image-reference" href="_images/edgeric-focus.png"><img alt="sample text" src="_images/edgeric-focus.png" style="width: 600px;"/>
+</a>
+</section>
+<section id="demo-videos">
+<h2>Demo Videos</h2>
+<section id="anti-jamming-with-beamarmor">
+<h3>Anti Jamming with BeamArmor</h3>
 <video controls="" height="440" width="520">
 <source src="_static/beamarmor_demo.mp4" type="video/mp4"/>
   Your browser does not support the video tag.
-</video><video controls="" height="440" width="520">
+</video></section>
+<section id="system-performance-optimization-with-ai-based-scheduling">
+<h3>System Performance Optimization with AI based scheduling</h3>
+<video controls="" height="440" width="520">
 <source src="_static/demo-2.mp4" type="video/mp4"/>
   Your browser does not support the video tag.
-</video><section id="our-current-status">
-<h2>Our current status</h2>
+</video></section>
+</section>
+<section id="current-status">
+<h2>Current Status</h2>
+<a class="reference internal image-reference" href="_images/edgeric-full-status.png"><img alt="sample text" src="_images/edgeric-full-status.png" style="width: 600px;"/>
+</a>
 <dl class="simple">
-<dt>This release is based on srsRAN 4G, we will shortly release our 5G version. We suport:</dt><dd><ul class="simple">
-<li><p>Realtime KPI monitoring: we support the UL/ DL channel conditions and the respective pending buffers for transmission</p></li>
-<li><p>Realtime Control actions: MAC scheduling on the downlink, both AI training and inference capability</p></li>
+<dt>This release is based on srsRAN 4G, <strong>we will shortly release our 5G version</strong>. We suport:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Realtime KPI monitoring:</dt><dd><ul>
+<li><p>UL/ DL channel conditions</p></li>
+<li><p>UL/ DL pending buffers for transmission</p></li>
+<li><p>Per UE throughput</p></li>
 </ul>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/edgeric-full-status.png"><img alt="sample text" src="_images/edgeric-full-status.png" style="width: 600px;"/>
-</a>
+</li>
+<li><dl class="simple">
+<dt>Realtime Control actions:</dt><dd><ul>
+<li><p>MAC scheduling on the downlink, both AI training and inference capability</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="current-publications">
+<h2>Current Publications</h2>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">EdgeRIC</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">BeamArmor</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Tiny-twin</button><button aria-controls="panel-0-0-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">Windex</button><button aria-controls="panel-0-0-4" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-4" name="0-4" role="tab" tabindex="-1">SPARC</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p><strong>Paper</strong>: <a class="reference external" href="https://www.usenix.org/conference/nsdi24/presentation/ko">EdgeRIC</a></p>
+<p><strong>Code</strong>: <a class="reference external" href="https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git">Github Respository</a></p>
+<p><strong>Website</strong>: <a class="reference external" href="https://wcsng.ucsd.edu/edgeric/">https://wcsng.ucsd.edu/edgeric/</a></p>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Seamless Anti-Jamming in 5G Cellular Networks with MIMO Null-steering</p>
+<p><strong>Paper</strong> <a class="reference external" href="https://dl.acm.org/doi/10.1145/3638550.3641138">BamArmor</a></p>
+<p><strong>Code</strong>: <a class="reference external" href="https://github.com/ucsdwcsng/beamarmor.git">Github Respository</a></p>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><p>A Lightweight and Verifiable Digital Twin for NextG Cellular Networks</p>
+<p><strong>Paper</strong>: <a class="reference external" href="https://dl.acm.org/doi/abs/10.1145/3638550.3643625">Tiny-twin</a></p>
+</div><div aria-labelledby="tab-0-0-3" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-3" name="0-3" role="tabpanel" tabindex="0"><p>Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks</p>
+<p><strong>Paper</strong>: <a class="reference external" href="https://arxiv.org/abs/2406.01888">Windex</a></p>
+<p><strong>Code</strong>: <a class="reference external" href="https://github.com/ucsdwcsng/EdgeRIC_whittleIndex.git">Github Repository</a></p>
+</div><div aria-labelledby="tab-0-0-4" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-4" name="0-4" role="tabpanel" tabindex="0"><p><strong>Code</strong>: <a class="reference external" href="https://github.com/ushasigh/SPARC-multi-siteManagent.git">Github Respository</a></p>
+</div></div>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Cellular Stack</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#tiny-twin-emulation-module">Tiny-twin: Emulation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#over-the-air-execution-module">Over The Air execution module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Platform Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#cellular-stack">Cellular Stack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#tiny-twin-emulation-module">Tiny-twin: Emulation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#over-the-air-execution-module">Over The Air execution module</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html">RT-E2 agent (Real time E2 agent)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#rt-e2-report-message">RT-E2 Report Message</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#rt-e2-policy-message">RT-E2 Policy Message</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#redis-database">REDIS database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ModuleA.html#how-to-write-apps">how to write μApps?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html">RT-E2 interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ModuleA.html#rt-e2-agent-real-time-e2-agent">RT-E2 agent (Real time E2 agent)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ModuleA.html#rt-e2-report-message">RT-E2 Report Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ModuleA.html#rt-e2-policy-message">RT-E2 Policy Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ModuleA.html#redis-database">REDIS database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ModuleA.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#how-to-write-apps">how to write μApps?</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC microApps</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="ModuleC.html">Realtime Dashboard</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app1-ppo-sched">μApp1_PPO_sched</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app2-windex">μApp2_Windex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app1-ppo-sched">μApp1: PPO_sched</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ModuleC.html#mac-scheduling">MAC scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ModuleC.html#training-the-reinforcement-learning-policy">Training the Reinforcement Learning Policy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app2-windex">μApp2: Windex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app3-beamarmor">μApp3_BeamArmor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app4-sparc">μApp4_SPARC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app4-sparc">μApp4: SPARC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ModuleC.html#interference-detection">Interference Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ModuleC.html#resource-blanking">Resource Blanking</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
@@ -169,23 +226,20 @@ serves as the seat of real-time AI-in-the-loop for decision and control. It can 
 </ul>
 </div>
 </section>
-<section id="research-papers">
-<h2>Research Papers</h2>
-<ul class="simple">
-<li><p>EdgeRIC main paper: <a class="reference external" href="https://www.usenix.org/conference/nsdi24/presentation/ko">https://www.usenix.org/conference/nsdi24/presentation/ko</a></p></li>
-<li><p>BeamArmor: <a class="reference external" href="https://dl.acm.org/doi/10.1145/3638550.3641138">https://dl.acm.org/doi/10.1145/3638550.3641138</a></p></li>
-<li><p>Windex: <a class="reference external" href="https://arxiv.org/abs/2406.01888">https://arxiv.org/abs/2406.01888</a></p></li>
-<li><p>Tiny-twin: <a class="reference external" href="https://dl.acm.org/doi/abs/10.1145/3638550.3643625">https://dl.acm.org/doi/abs/10.1145/3638550.3643625</a></p></li>
-</ul>
-</section>
 </section>
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
-<li><a :data-current="activeSection === '#our-current-status'" class="reference internal" href="#our-current-status">Our current status</a><ul>
+<li><a :data-current="activeSection === '#edgeric-focus-areas'" class="reference internal" href="#edgeric-focus-areas">EdgeRIC Focus Areas</a></li>
+<li><a :data-current="activeSection === '#demo-videos'" class="reference internal" href="#demo-videos">Demo Videos</a><ul>
+<li><a :data-current="activeSection === '#anti-jamming-with-beamarmor'" class="reference internal" href="#anti-jamming-with-beamarmor">Anti Jamming with BeamArmor</a></li>
+<li><a :data-current="activeSection === '#system-performance-optimization-with-ai-based-scheduling'" class="reference internal" href="#system-performance-optimization-with-ai-based-scheduling">System Performance Optimization with AI based scheduling</a></li>
 </ul>
 </li>
-<li><a :data-current="activeSection === '#research-papers'" class="reference internal" href="#research-papers">Research Papers</a></li>
+<li><a :data-current="activeSection === '#current-status'" class="reference internal" href="#current-status">Current Status</a></li>
+<li><a :data-current="activeSection === '#current-publications'" class="reference internal" href="#current-publications">Current Publications</a><ul>
+</ul>
+</li>
 </ul>
 </div>
 </aside>
@@ -202,6 +256,7 @@ serves as the seat of real-time AI-in-the-loop for decision and control. It can 
 <script src="_static/documentation_options.js?v=34cd777e"></script>
 <script src="_static/doctools.js?v=9a2dae69"></script>
 <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+<script src="_static/tabs.js?v=3030b3cb"></script>
 <script defer="defer" src="_static/theme.js?v=e82a16a3"></script>
 </body>
 </html>

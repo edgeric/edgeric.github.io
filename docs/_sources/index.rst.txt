@@ -3,18 +3,21 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-EdgeRIC: A Real Time Radio Intelligent Controller
+EdgeRIC: A Real Time RAN Intelligent Controller
 ========================================================================
-
-Radio Access Networks (RANs) are increasingly softwarized and accessible via data-collection and control interfaces. 
-RAN intelligent control (RIC) is an approach to manage these interfaces at different timescales. We introduce EdgeRIC, a real-time RIC co-located with the
-Distributed Unit (DU). It is decoupled from the RAN stack, and operates at the RAN timescale. EdgeRIC
-serves as the seat of real-time AI-in-the-loop for decision and control. It can access RAN and application-level information to execute AI-optimized and other policies in real-time (sub-millisecond).
 
 .. image:: intro.pdf
   :width: 400
   :alt: sample text
 
+NextG cellular networks must support a wide variety of applications that require radio access with latency, 
+throughput and reliability guarantees hitherto unavailable. Simultaneously, the environment is becoming in-
+creasingly dynamic over diverse spectrum bands, user mobility patterns and variable traffic patterns. Com-
+plex cross layer interactions imply that problems without crisp models are emerging where a data-driven 
+machine learning approach to optimal resource utilization has value. We introduce EdgeRIC, a real-time RIC 
+co-located with the Distributed Unit (DU). It is decoupled from the RAN stack, and operates at the RAN timescale. 
+EdgeRIC serves as the seat of real-time AI-in-the-loop for decision and control. It can access RAN and 
+application-level information to execute AI-optimized and other policies in real-time (sub-millisecond).
 
 
 .. .. raw:: html
@@ -34,7 +37,18 @@ serves as the seat of real-time AI-in-the-loop for decision and control. It can 
 ..      </div>
 ..    </div>
 
+EdgeRIC Focus Areas
+------------------------
 
+.. image:: edgeric-focus.png
+  :width: 600
+  :alt: sample text
+
+Demo Videos
+------------------------
+
+Anti Jamming with BeamArmor
+^^^^^^^^^^^^^^
 .. raw:: html
 
    <video width="520" height="440" controls>
@@ -42,6 +56,8 @@ serves as the seat of real-time AI-in-the-loop for decision and control. It can 
      Your browser does not support the video tag.
    </video>
 
+System Performance Optimization with AI based scheduling
+^^^^^^^^^^^^^^
 .. raw:: html
 
    <video width="520" height="440" controls>
@@ -51,18 +67,56 @@ serves as the seat of real-time AI-in-the-loop for decision and control. It can 
 
 
 
-Our current status
+Current Status
 ------------------------
-
-
-
-This release is based on srsRAN 4G, we will shortly release our 5G version. We suport:
-   - Realtime KPI monitoring: we support the UL/ DL channel conditions and the respective pending buffers for transmission
-   - Realtime Control actions: MAC scheduling on the downlink, both AI training and inference capability 
 
 .. image:: edgeric-full-status.png
   :width: 600
   :alt: sample text
+
+This release is based on srsRAN 4G, **we will shortly release our 5G version**. We suport:
+   - Realtime KPI monitoring:
+      - UL/ DL channel conditions
+      - UL/ DL pending buffers for transmission
+      - Per UE throughput
+   - Realtime Control actions: 
+      - MAC scheduling on the downlink, both AI training and inference capability 
+
+
+Current Publications
+------------------------
+
+.. tabs::
+
+    .. tab:: EdgeRIC 
+        **Paper**: `EdgeRIC <https://www.usenix.org/conference/nsdi24/presentation/ko>`_  
+        
+        **Code**: `Github Respository <https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git>`_ 
+        
+        **Website**: https://wcsng.ucsd.edu/edgeric/ 
+
+    .. tab:: BeamArmor
+        Seamless Anti-Jamming in 5G Cellular Networks with MIMO Null-steering
+
+        **Paper** `BamArmor <https://dl.acm.org/doi/10.1145/3638550.3641138>`_
+
+        **Code**: `Github Respository <https://github.com/ucsdwcsng/beamarmor.git>`_
+
+    .. tab:: Tiny-twin
+        A Lightweight and Verifiable Digital Twin for NextG Cellular Networks
+
+        **Paper**: `Tiny-twin <https://dl.acm.org/doi/abs/10.1145/3638550.3643625>`_
+
+    .. tab:: Windex
+        Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks
+
+        **Paper**: `Windex <https://arxiv.org/abs/2406.01888>`_
+
+        **Code**: `Github Repository <https://github.com/ucsdwcsng/EdgeRIC_whittleIndex.git>`_
+
+    .. tab:: SPARC
+        **Code**: `Github Respository <https://github.com/ushasigh/SPARC-multi-siteManagent.git>`_
+
 
 .. toctree::
    :maxdepth: 2
@@ -93,12 +147,13 @@ This release is based on srsRAN 4G, we will shortly release our 5G version. We s
 
    ModuleD.rst 
 
-Research Papers
-------------------------
-- EdgeRIC main paper: https://www.usenix.org/conference/nsdi24/presentation/ko
-- BeamArmor: https://dl.acm.org/doi/10.1145/3638550.3641138
-- Windex: https://arxiv.org/abs/2406.01888
-- Tiny-twin: https://dl.acm.org/doi/abs/10.1145/3638550.3643625
+.. Research Papers
+.. ------------------------
+.. - EdgeRIC main paper: https://www.usenix.org/conference/nsdi24/presentation/ko
+.. - BeamArmor: https://dl.acm.org/doi/10.1145/3638550.3641138
+.. - Windex: https://arxiv.org/abs/2406.01888
+.. - Tiny-twin: https://dl.acm.org/doi/abs/10.1145/3638550.3643625
+
 
 .. Indices and tables
 .. ==================

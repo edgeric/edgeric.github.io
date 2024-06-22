@@ -1,5 +1,10 @@
+
+Platform Overview
+^^^^^^^^^^^^^^^^^
+
+
 Cellular Stack 
-------------------------
+--------------------------
 - Based on Software Radio Systems RAN (srsRAN)
 - Support for 5G NSA
 - ZeroMQ and GNU Radio based Multiple UE Support
@@ -35,6 +40,9 @@ Features:
     - offers repeatability for experimental runs
     - offers end to end application testing by running each UE application under separate namespace
 
+
+Updating channel traces
+""""""""""""""""""""""""""
 [TODO]: how to change channel traces?
 
 Github repository: https://github.com/ushasigh/EdgeRIC, branch: main
@@ -43,3 +51,4 @@ Over The Air execution module
 --------------------------
 
 Github repository: https://github.com/ushasigh/EdgeRIC, branch: main
+
