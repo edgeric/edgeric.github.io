@@ -67,7 +67,6 @@ This step is not needed in over the air mode
 **Terminal 2**: Run the EPC 
 update the hss section in the ./config/epc.conf to your file directory  
 ```bash
-cd srsRAN_4G
 ./run_epc.sh
 ```
 
@@ -77,7 +76,6 @@ the [rf] section for zmq/ uhd configurations
 the [enb_files] section: upadte the file directories    
 
 ```bash
-cd srsRAN_4G
 ./run_enb.sh
 ```
 #### Run the UEs 
@@ -110,6 +108,11 @@ Press ``t`` to view the UE metrics on console
 
 
 #### Stream Traffic:
+
+```bash
+cd traffic-generator
+```
+
 ##### Running Downlink iperf traffic
 
 Terminal 1:  

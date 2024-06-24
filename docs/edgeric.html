@@ -176,16 +176,14 @@ state of the system. We list the metrics used by this μApp below:</p>
 
 <p><strong>Terminal 2</strong>: Run the EPC
 update the hss section in the ./config/epc.conf to your file directory</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>srsRAN_4G
-</span><span id="line-2">./run_epc.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./run_epc.sh
 </span></code></pre></div>
 </div>
 <p><strong>Terminal 3</strong>: Run the enb<br/>
 update ./config/enb.conf:<br/>
 the [rf] section for zmq/ uhd configurations<br/>
 the [enb_files] section: upadte the file directories</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>srsRAN_4G
-</span><span id="line-2">./run_enb.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./run_enb.sh
 </span></code></pre></div>
 </div>
 </section>
@@ -217,6 +215,9 @@ the [enb_files] section: upadte the file directories</p>
 </section>
 <section id="stream-traffic">
 <h3>Stream Traffic:</h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>traffic-generator
+</span></code></pre></div>
+</div>
 <section id="running-downlink-iperf-traffic">
 <h4>Running Downlink iperf traffic</h4>
 <p>Terminal 1:</p>
