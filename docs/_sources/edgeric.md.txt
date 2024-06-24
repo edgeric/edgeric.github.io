@@ -166,10 +166,11 @@ edgeric_messenger
 ├── get_metrics_multi()  # get_metrics(): receive metrics from RAN, called by all μApps
 │   ├── returns ue_data dictionary
 ├── send_scheduling_weight() # send the RT-E2 scheduling policy message to RAN 
-    ├── send_ul_prb() #prepares the control message for the uplikn scheduling action
+    
 ```
 <!-- # ├── send_control() # send the RT-E2 policy message to RAN once all μApps complete execution
 #     ├── send_scheduling_weight() #prepares the control message for the downlink scheduling action
+      ├── send_ul_prb() #prepares the control message for the uplikn scheduling action
 #  -->
 
 #### μApps supported in this codebase
