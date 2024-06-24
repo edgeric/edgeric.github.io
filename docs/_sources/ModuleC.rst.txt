@@ -1,87 +1,77 @@
-Realtime Dashboard
+.. Realtime Dashboard
+.. ===============
+
+
+Documentation of our Research Papers
 ===============
+This page contains all the repository documentations of our work.
+
+.. EdgeRIC main paper
+.. ===============
+
+.. toctree::
+
+   edgeric.md
 
 
 
-μApp1: PPO_sched
-===============
-This is a real-time MAC scheduler that assigns scheduling decisions per UE for each TTI. We implement multiple 
-scheduling algorithms with this μApp. The scheduling algorithms considered in this work to demonstrate system 
-behavior are:
-    - Max Weight
-    - Max CQI
-    - Proportional Fairness
-    - A custom AI based scheduler using an off-the-shelf reinforcement learning policy
+.. Steps for Training the policy can be found at: `Repository <https://github.com/ushasigh/EdgeRIC-A-real-time-RIC/tree/main/real_time_RIC/muApp2>`_
 
-MAC scheduling
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-This μApp offers scheduling decisions to the RAN at the granularity of one TTI (~1ms). It adopts a weight based 
-approach for its decision. The weight of an UE corresponds to its relative priority to be scheduled given the current
-state of the system. We list the metrics used by this μApp below:
-
-Metrics: ``ue_data[rnti]['Tx'], ue_data[rnti]['CQI'], ue_data[rnti]['BL']`` for each UE.
-
-Actions Sent:  ``weight_{i}`` which corresponds to the weight of each UE ``i``
-
-RT-E2 Policy Format for this μApp: ``RNTI_{i}, weight{i}`` where ``i`` corresponds to each UE.
-
-Training the Reinforcement Learning Policy
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-Here, we train an RL agent with the objective of **total system throughput maximization**. Listed below are the specifications for our training:
-
-    - *Algorithm used*: Proximal Policy Optimization
-
-    - *State_space* : ``[BL1,CQI1,BL2,CQI2.....]`` 
-
-    - *Action_space* : ``[Weight1,Weight2.....]``
-
-    - *Reward*: ``Total system throughput`` 
-
-Steps for Training the policy can be found at: `Repository <https://github.com/ushasigh/EdgeRIC-A-real-time-RIC/tree/main/real_time_RIC/muApp2>`_
-
-Steps for Running the μApp with a trained model can be found at: `Repository <https://github.com/ushasigh/EdgeRIC-A-real-time-RIC/tree/main/real_time_RIC/muApp1>`_
+.. Steps for Running the μApp with a trained model can be found at: `Repository <https://github.com/ushasigh/EdgeRIC-A-real-time-RIC/tree/main/real_time_RIC/muApp1>`_
 
 
 
 
 
-μApp2: Windex
-===============
+.. Windex
+.. ---------------------
 
-.. automodule:: src.dl_scheduler
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. .. automodule:: src.dl_scheduler
+..     :members:
+..     :undoc-members:
+..     :show-inheritance:
 
-μApp3_BeamArmor
-===============
+.. toctree::
 
-Per UE live metrics
-Aggregate Metrics
+   windex.md
 
-μApp4: SPARC
-===============
-.. image:: intro-v5.pdf
-  :width: 700
-  :alt: sample text
+.. BeamArmor
+.. ---------------------
 
-SPARC (Spatio-Temporal Adaptive Resource Control) offers a novel approach for multi-site spectrum management 
-in NextG cellular networks. SPARC addresses the challenge of limited licensed spectrum in dynamic environments. 
-We leverage the O-RAN architecture to develop a multi-timescale RAN Intelligent Controller (RIC) framework, 
-featuring an xApp for near-real-time interference detection and localization, and a μApp for real-time 
-intelligent resource allocation. By utilizing base stations as spectrum sensors, SPARC enables efficient and 
-fine-grained dynamic resource allocation across multiple sites, enhancing signal-to-noise ratio (SNR), spectral efficiency, 
-and overall system throughput. 
+.. This is a wireless system build on top of srsRAN's 4G software RAN stack.
+.. It contains an O-RAN driven RIC named MIMO-RIC that is specifically geared towards hosting MIMO-related xApps/μApps.
+.. One of these Apps is BeamArmor, which is included in this repo. BeamArmor is a null-steering enabled anti-jamming application that can mitigate the interference effect of jamming signals in UL traffic.
 
-System Overview
-----------------------------
+.. toctree::
 
-Interference Detection
-^^^^^^^^^^^^^^^^^^^
-
-Resource Blanking
-^^^^^^^^^^^^^^^^^^^
+   beamarmor.md
 
 
-Resource Distribution μApp
-----------------------------
+
+.. SPARC
+.. ===============
+
+  
+
+.. .. image:: intro-v5.pdf
+..   :width: 700
+..   :alt: sample text
+
+
+
+.. toctree::
+
+   sparc.md
+
+.. System Overview
+.. ----------------------------
+
+.. Interference Detection
+.. ^^^^^^^^^^^^^^^^^^^
+
+.. Resource Blanking
+.. ^^^^^^^^^^^^^^^^^^^
+
+
+.. Resource Distribution μApp
+.. ----------------------------

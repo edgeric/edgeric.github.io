@@ -12,11 +12,11 @@
 <meta content="RT-E2 interface | EdgeRIC v0.1 documentation" name="twitter:title"/>
 <link href="_static/pygments.css?v=8d216cef" rel="stylesheet" type="text/css"/>
 <link href="_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
-<link href="_static/custom.css?v=bc3b0663" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css?v=162f35ca" rel="stylesheet" type="text/css"/>
 <link href="_static/tabs.css?v=a5c4661c" rel="stylesheet" type="text/css"/>
 <link href="search.html" rel="search" title="Search"/>
 <link href="genindex.html" rel="index" title="Index"/>
-<link href="ModuleC.html" rel="next" title="Realtime Dashboard"/>
+<link href="ModuleC.html" rel="next" title="Documentation of our Research Papers"/>
 <link href="gettingstarted.html" rel="prev" title="Platform Overview"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
@@ -79,13 +79,15 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">RT-E2 interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#how-to-write-apps">how to write μApps?</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">EdgeRIC microApps</span></p>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html">Realtime Dashboard</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app1-ppo-sched">μApp1: PPO_sched</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app2-windex">μApp2: Windex</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app3-beamarmor">μApp3_BeamArmor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app4-sparc">μApp4: SPARC</a></li>
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="ModuleC.html">Documentation of our Research Papers<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="edgeric.html">EdgeRIC main paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windex.html">Windex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sparc.html">SPARC</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Dataset</span></p>
 <ul>
@@ -116,8 +118,7 @@
 <h1>RT-E2 interface</h1>
 <section id="rt-e2-agent-real-time-e2-agent">
 <h2>RT-E2 agent (Real time E2 agent)</h2>
-<a class="reference internal image-reference" href="_images/er-messenger.png"><img alt="sample text" src="_images/er-messenger.png" style="width: 600px;"/>
-</a>
+<a class="reference internal image-reference" href="_images/er-messenger.png"><img alt="sample text" src="_images/er-messenger.png" style="width: 600px;"/></a>
 <ul class="simple">
 <li><dl class="simple">
 <dt>EdgeRIC adopts a low overhead messaging framework [RT-E2]</dt><dd><ul>
@@ -204,8 +205,7 @@
 </section>
 <section id="apps-edgeric-microservices">
 <h2>μApps - EdgeRIC microservices</h2>
-<a class="reference internal image-reference" href="_images/er-messenger-extended.png"><img alt="sample text" src="_images/er-messenger-extended.png" style="width: 600px;"/>
-</a>
+<a class="reference internal image-reference" href="_images/er-messenger-extended.png"><img alt="sample text" src="_images/er-messenger-extended.png" style="width: 600px;"/></a>
 <p>Each μApp{i} receives metrics by subscribing to the edgeric agent’s <code class="docutils literal notranslate"><span class="pre">get_metrics_multi()</span></code> function. Based on these metrics, it computes a policy for the specific network function and sends the decisions to edgerics agent’s <code class="docutils literal notranslate"><span class="pre">send_control_μApp_i()</span></code> function.</p>
 </section>
 </section>

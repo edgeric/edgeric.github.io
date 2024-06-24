@@ -3,21 +3,21 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-EdgeRIC: A Real Time RAN Intelligent Controller
+EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks
 ========================================================================
 
-.. image:: intro.pdf
-  :width: 400
+.. image:: intro-pic.png
+  :width: 700
   :alt: sample text
 
-NextG cellular networks must support a wide variety of applications that require radio access with latency, 
-throughput and reliability guarantees hitherto unavailable. Simultaneously, the environment is becoming in-
-creasingly dynamic over diverse spectrum bands, user mobility patterns and variable traffic patterns. Com-
-plex cross layer interactions imply that problems without crisp models are emerging where a data-driven 
-machine learning approach to optimal resource utilization has value. We introduce EdgeRIC, a real-time RIC 
-co-located with the Distributed Unit (DU). It is decoupled from the RAN stack, and operates at the RAN timescale. 
-EdgeRIC serves as the seat of real-time AI-in-the-loop for decision and control. It can access RAN and 
-application-level information to execute AI-optimized and other policies in real-time (sub-millisecond).
+.. NextG cellular networks must support a wide variety of applications that require radio access with latency, 
+.. throughput and reliability guarantees hitherto unavailable. Simultaneously, the environment is becoming in-
+.. creasingly dynamic over diverse spectrum bands, user mobility patterns and variable traffic patterns. Com-
+.. plex cross layer interactions imply that problems without crisp models are emerging where a data-driven 
+.. machine learning approach to optimal resource utilization has value. We introduce EdgeRIC, a real-time RIC 
+.. co-located with the Distributed Unit (DU). It is decoupled from the RAN stack, and operates at the RAN timescale.
+
+- EdgeRIC is a platform for **real-time AI-in-the-loop** for decision and control in cellular networks. It is designed to access network and application-level information to execute AI-optimized and other policies in real-time (sub-millisecond) .
 
 
 .. .. raw:: html
@@ -79,8 +79,10 @@ This release is based on srsRAN 4G, **we will shortly release our 5G version**. 
       - UL/ DL channel conditions
       - UL/ DL pending buffers for transmission
       - Per UE throughput
+      - Baseband I/Q sample monitoring
    - Realtime Control actions: 
-      - MAC scheduling on the downlink, both AI training and inference capability 
+      - MAC scheduling on the downlink, both AI training and inference capability
+      - Control for MIMO weights 
 
 
 Current Publications
@@ -89,6 +91,7 @@ Current Publications
 .. tabs::
 
     .. tab:: EdgeRIC 
+        Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks
         **Paper**: `EdgeRIC <https://www.usenix.org/conference/nsdi24/presentation/ko>`_  
         
         **Code**: `Github Respository <https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git>`_ 
@@ -138,7 +141,9 @@ Current Publications
 
 .. toctree::
    :maxdepth: 2
-   :caption: EdgeRIC microApps
+   :caption: EdgeRIC tutorials
+
+
 
    ModuleC.rst   
 .. toctree::
@@ -146,6 +151,8 @@ Current Publications
    :caption: Dataset
 
    ModuleD.rst 
+
+ 
 
 .. Research Papers
 .. ------------------------

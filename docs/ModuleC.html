@@ -7,16 +7,16 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Realtime Dashboard | EdgeRIC v0.1 documentation</title>
-<meta content="Realtime Dashboard | EdgeRIC v0.1 documentation" property="og:title"/>
-<meta content="Realtime Dashboard | EdgeRIC v0.1 documentation" name="twitter:title"/>
+<title>Documentation of our Research Papers | EdgeRIC v0.1 documentation</title>
+<meta content="Documentation of our Research Papers | EdgeRIC v0.1 documentation" property="og:title"/>
+<meta content="Documentation of our Research Papers | EdgeRIC v0.1 documentation" name="twitter:title"/>
 <link href="_static/pygments.css?v=8d216cef" rel="stylesheet" type="text/css"/>
 <link href="_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
-<link href="_static/custom.css?v=bc3b0663" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css?v=162f35ca" rel="stylesheet" type="text/css"/>
 <link href="_static/tabs.css?v=a5c4661c" rel="stylesheet" type="text/css"/>
 <link href="search.html" rel="search" title="Search"/>
 <link href="genindex.html" rel="index" title="Index"/>
-<link href="ModuleD.html" rel="next" title="Channel Traces"/>
+<link href="edgeric.html" rel="next" title="EdgeRIC main paper"/>
 <link href="ModuleA.html" rel="prev" title="RT-E2 interface"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
@@ -79,13 +79,15 @@
 <li class="toctree-l1"><a class="reference internal" href="ModuleA.html">RT-E2 interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ModuleA.html#how-to-write-apps">how to write μApps?</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">EdgeRIC microApps</span></p>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC tutorials</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Realtime Dashboard</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#app1-ppo-sched">μApp1: PPO_sched</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#app2-windex">μApp2: Windex</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#app3-beamarmor">μApp3_BeamArmor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#app4-sparc">μApp4: SPARC</a></li>
+<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="current reference internal expandable" href="#">Documentation of our Research Papers<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="edgeric.html">EdgeRIC main paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windex.html">Windex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sparc.html">SPARC</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Dataset</span></p>
 <ul>
@@ -109,100 +111,137 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Realtime Dashboard</span>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Documentation of our Research Papers</span>
 </nav>
 <div id="content" role="main">
-<section id="realtime-dashboard">
-<h1>Realtime Dashboard</h1>
-</section>
-<section id="app1-ppo-sched">
-<h1>μApp1: PPO_sched</h1>
-<p>This is a real-time MAC scheduler that assigns scheduling decisions per UE for each TTI. We implement multiple
-scheduling algorithms with this μApp. The scheduling algorithms considered in this work to demonstrate system
-behavior are:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Max Weight</p></li>
-<li><p>Max CQI</p></li>
-<li><p>Proportional Fairness</p></li>
-<li><p>A custom AI based scheduler using an off-the-shelf reinforcement learning policy</p></li>
-</ul>
-</div></blockquote>
-<section id="mac-scheduling">
-<h2>MAC scheduling</h2>
-<p>This μApp offers scheduling decisions to the RAN at the granularity of one TTI (~1ms). It adopts a weight based
-approach for its decision. The weight of an UE corresponds to its relative priority to be scheduled given the current
-state of the system. We list the metrics used by this μApp below:</p>
-<p>Metrics: <code class="docutils literal notranslate"><span class="pre">ue_data[rnti]['Tx'],</span> <span class="pre">ue_data[rnti]['CQI'],</span> <span class="pre">ue_data[rnti]['BL']</span></code> for each UE.</p>
-<p>Actions Sent:  <code class="docutils literal notranslate"><span class="pre">weight_{i}</span></code> which corresponds to the weight of each UE <code class="docutils literal notranslate"><span class="pre">i</span></code></p>
-<p>RT-E2 Policy Format for this μApp: <code class="docutils literal notranslate"><span class="pre">RNTI_{i},</span> <span class="pre">weight{i}</span></code> where <code class="docutils literal notranslate"><span class="pre">i</span></code> corresponds to each UE.</p>
-</section>
-<section id="training-the-reinforcement-learning-policy">
-<h2>Training the Reinforcement Learning Policy</h2>
-<p>Here, we train an RL agent with the objective of <strong>total system throughput maximization</strong>. Listed below are the specifications for our training:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><em>Algorithm used</em>: Proximal Policy Optimization</p></li>
-<li><p><em>State_space</em> : <code class="docutils literal notranslate"><span class="pre">[BL1,CQI1,BL2,CQI2.....]</span></code></p></li>
-<li><p><em>Action_space</em> : <code class="docutils literal notranslate"><span class="pre">[Weight1,Weight2.....]</span></code></p></li>
-<li><p><em>Reward</em>: <code class="docutils literal notranslate"><span class="pre">Total</span> <span class="pre">system</span> <span class="pre">throughput</span></code></p></li>
-</ul>
-</div></blockquote>
-<p>Steps for Training the policy can be found at: <a class="reference external" href="https://github.com/ushasigh/EdgeRIC-A-real-time-RIC/tree/main/real_time_RIC/muApp2">Repository</a></p>
-<p>Steps for Running the μApp with a trained model can be found at: <a class="reference external" href="https://github.com/ushasigh/EdgeRIC-A-real-time-RIC/tree/main/real_time_RIC/muApp1">Repository</a></p>
-</section>
-</section>
-<section id="app2-windex">
-<h1>μApp2: Windex</h1>
-</section>
-<section id="app3-beamarmor">
-<h1>μApp3_BeamArmor</h1>
-<p>Per UE live metrics
-Aggregate Metrics</p>
-</section>
-<section id="app4-sparc">
-<h1>μApp4: SPARC</h1>
-<a class="reference internal image-reference" href="_images/intro-v5.pdf"><img alt="sample text" src="_images/intro-v5.pdf" style="width: 700px;"/>
-</a>
-<p>SPARC (Spatio-Temporal Adaptive Resource Control) offers a novel approach for multi-site spectrum management
-in NextG cellular networks. SPARC addresses the challenge of limited licensed spectrum in dynamic environments.
-We leverage the O-RAN architecture to develop a multi-timescale RAN Intelligent Controller (RIC) framework,
-featuring an xApp for near-real-time interference detection and localization, and a μApp for real-time
-intelligent resource allocation. By utilizing base stations as spectrum sensors, SPARC enables efficient and
-fine-grained dynamic resource allocation across multiple sites, enhancing signal-to-noise ratio (SNR), spectral efficiency,
-and overall system throughput.</p>
-<section id="interference-detection">
-<h2>Interference Detection</h2>
-</section>
-<section id="resource-blanking">
-<h2>Resource Blanking</h2>
-<section id="resource-distribution-app">
-<h3>Resource Distribution μApp</h3>
-</section>
-</section>
-</section>
-</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
-<div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
+<section id="documentation-of-our-research-papers">
+<h1>Documentation of our Research Papers</h1>
+<p>This page contains all the repository documentations of our work.</p>
+<div class="toctree-wrapper compound">
 <ul>
-<li></li>
-<li><a :data-current="activeSection === '#app1-ppo-sched'" class="reference internal" href="#app1-ppo-sched">μApp1: PPO_sched</a><ul>
-<li><a :data-current="activeSection === '#mac-scheduling'" class="reference internal" href="#mac-scheduling">MAC scheduling</a></li>
-<li><a :data-current="activeSection === '#training-the-reinforcement-learning-policy'" class="reference internal" href="#training-the-reinforcement-learning-policy">Training the Reinforcement Learning Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric.html">EdgeRIC main paper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="edgeric.html#mac-scheduling">MAC scheduling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="edgeric.html#training-reinforcement-learning-policy">Training Reinforcement Learning Policy</a></li>
 </ul>
 </li>
-<li><a :data-current="activeSection === '#app2-windex'" class="reference internal" href="#app2-windex">μApp2: Windex</a></li>
-<li><a :data-current="activeSection === '#app3-beamarmor'" class="reference internal" href="#app3-beamarmor">μApp3_BeamArmor</a></li>
-<li><a :data-current="activeSection === '#app4-sparc'" class="reference internal" href="#app4-sparc">μApp4: SPARC</a><ul>
-<li><a :data-current="activeSection === '#interference-detection'" class="reference internal" href="#interference-detection">Interference Detection</a></li>
-<li><a :data-current="activeSection === '#resource-blanking'" class="reference internal" href="#resource-blanking">Resource Blanking</a><ul>
-<li><a :data-current="activeSection === '#resource-distribution-app'" class="reference internal" href="#resource-distribution-app">Resource Distribution μApp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edgeric.html#installing-the-repo">Installing the repo</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="edgeric.html#dependencies-and-cloning-the-repository">Dependencies and cloning the repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric.html#build-the-repository">Build the repository</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="edgeric.html#how-to-run-the-network">How to run the network</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="edgeric.html#setup-the-core-and-srsenb">Setup the core and srsenb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric.html#run-the-ues">Run the UEs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="edgeric.html#running-ues-with-cqi-trace-files">Running UEs with CQI trace files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric.html#stream-traffic">Stream Traffic:</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="edgeric.html#running-downlink-iperf-traffic">Running Downlink iperf traffic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="edgeric.html#running-uplink-iperf-traffic">Running Uplink iperf traffic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="edgeric.html#running-various-other-kinds-of-downlink-traffic-profiles">Running various other kinds of Downlink Traffic profiles</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="edgeric.html#running-edgeric-for-downlink-scheduling-control">Running EdgeRIC for downlink scheduling control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="edgeric.html#edgeric-messenger">EdgeRIC messenger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric.html#apps-supported-in-this-codebase">μApps supported in this codebase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric.html#running-muapp1-downlink-scheduler">Running muApp1 - downlink scheduler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="edgeric.html#setting-the-scheduler-algorithm-manually">Setting the scheduler algorithm manually</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric.html#running-muapp2-training-an-rl-policy-for-scheduling">Running muApp2 - Training an RL policy for scheduling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="edgeric.html#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="edgeric.html#muapp2-train-rl-dl-scheduling-py">muApp2_train_RL_DL_scheduling.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="edgeric.html#repo-structure">Repo Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="edgeric.html#edgeric-env-edge-ric-py">EdgeRIC Env (edge_ric.py)</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </div>
-</aside>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="beamarmor.html">BeamArmor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="beamarmor.html#sections">Sections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beamarmor.html#installing-the-repo">Installing the repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beamarmor.html#preparing-beamarmor-and-mimo-ric">Preparing BeamArmor and MIMO-RIC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beamarmor.html#files-under-concern">Files under concern</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beamarmor.html#parameters-of-mimo-ric">Parameters of MIMO-RIC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beamarmor.html#beamarmor-demo-automatic-beamarmor-turn-on">BeamArmor Demo: Automatic BeamArmor turn ON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beamarmor.html#setup">Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="beamarmor.html#basestation-enb-setup">Basestation/eNB setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="beamarmor.html#user-ue-setup">User/UE setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="beamarmor.html#jammer">Jammer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="beamarmor.html#phases-of-demo">Phases of Demo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="beamarmor.html#demo-procedure">Demo procedure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="beamarmor.html#timer-1">Timer 1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="beamarmor.html#timer-2">Timer 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="beamarmor.html#example">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="beamarmor.html#beamarmor-demo-manual-beamarmor-turn-on-off">BeamArmor Demo: Manual BeamArmor turn ON/OFF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beamarmor.html#id1">Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="beamarmor.html#id2">Basestation/eNB setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="beamarmor.html#id3">User/UE setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="beamarmor.html#id4">Jammer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="beamarmor.html#id5">Phases of Demo</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="beamarmor.html#id6">Demo procedure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="beamarmor.html#id7">Timer 1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="beamarmor.html#id8">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sparc.html">SPARC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sparc.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sparc.html#network-setup">Network Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sparc.html#core-network">Core Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sparc.html#radio-access-network">Radio Access Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sparc.html#running-the-network">Running the network:</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sparc.html#run-the-grc-broker">Run the GRC broker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sparc.html#run-enb1">Run enb1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sparc.html#run-enb2">Run enb2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sparc.html#run-the-ues">Run the UEs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sparc.html#running-traffic">Running Traffic</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sparc.html#running-downlink-iperf-traffic">Running Downlink iperf traffic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sparc.html#running-uplink-iperf-traffic">Running Uplink iperf traffic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sparc.html#running-various-other-kinds-of-downlink-traffic-profiles">Running various other kinds of Downlink Traffic profiles</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sparc.html#hierarchical-ric-deployment">Hierarchical RIC deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sparc.html#near-rt-ric-spectrum-monitoring">Near RT RIC: Spectrum Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sparc.html#edgeric-resource-distribution">EdgeRIC: Resource Distribution</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</div></div>
 </main>
 </div>
 </div><footer class="py-6 border-t border-border md:py-0">

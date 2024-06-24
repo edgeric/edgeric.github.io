@@ -7,12 +7,12 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>EdgeRIC: A Real Time RAN Intelligent Controller | EdgeRIC v0.1 documentation</title>
-<meta content="EdgeRIC: A Real Time RAN Intelligent Controller | EdgeRIC v0.1 documentation" property="og:title"/>
-<meta content="EdgeRIC: A Real Time RAN Intelligent Controller | EdgeRIC v0.1 documentation" name="twitter:title"/>
+<title>EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks | EdgeRIC v0.1 documentation</title>
+<meta content="EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks | EdgeRIC v0.1 documentation" property="og:title"/>
+<meta content="EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks | EdgeRIC v0.1 documentation" name="twitter:title"/>
 <link href="_static/pygments.css?v=8d216cef" rel="stylesheet" type="text/css"/>
 <link href="_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
-<link href="_static/custom.css?v=bc3b0663" rel="stylesheet" type="text/css"/>
+<link href="_static/custom.css?v=162f35ca" rel="stylesheet" type="text/css"/>
 <link href="_static/tabs.css?v=a5c4661c" rel="stylesheet" type="text/css"/>
 <link href="search.html" rel="search" title="Search"/>
 <link href="genindex.html" rel="index" title="Index"/>
@@ -78,13 +78,15 @@
 <li class="toctree-l1"><a class="reference internal" href="ModuleA.html">RT-E2 interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ModuleA.html#how-to-write-apps">how to write μApps?</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">EdgeRIC microApps</span></p>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html">Realtime Dashboard</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app1-ppo-sched">μApp1: PPO_sched</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app2-windex">μApp2: Windex</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app3-beamarmor">μApp3_BeamArmor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app4-sparc">μApp4: SPARC</a></li>
+<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="ModuleC.html">Documentation of our Research Papers<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<li class="toctree-l2"><a class="reference internal" href="edgeric.html">EdgeRIC main paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windex.html">Windex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sparc.html">SPARC</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Dataset</span></p>
 <ul>
@@ -102,22 +104,15 @@
 <main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
 <div class="w-full min-w-0 mx-auto">
 <div id="content" role="main">
-<section id="edgeric-a-real-time-ran-intelligent-controller">
-<h1>EdgeRIC: A Real Time RAN Intelligent Controller</h1>
-<a class="reference internal image-reference" href="_images/intro.pdf"><img alt="sample text" src="_images/intro.pdf" style="width: 400px;"/>
-</a>
-<p>NextG cellular networks must support a wide variety of applications that require radio access with latency,
-throughput and reliability guarantees hitherto unavailable. Simultaneously, the environment is becoming in-
-creasingly dynamic over diverse spectrum bands, user mobility patterns and variable traffic patterns. Com-
-plex cross layer interactions imply that problems without crisp models are emerging where a data-driven
-machine learning approach to optimal resource utilization has value. We introduce EdgeRIC, a real-time RIC
-co-located with the Distributed Unit (DU). It is decoupled from the RAN stack, and operates at the RAN timescale.
-EdgeRIC serves as the seat of real-time AI-in-the-loop for decision and control. It can access RAN and
-application-level information to execute AI-optimized and other policies in real-time (sub-millisecond).</p>
+<section id="edgeric-delivering-real-time-intelligence-to-radio-access-networks">
+<h1>EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks</h1>
+<a class="reference internal image-reference" href="_images/intro-pic.png"><img alt="sample text" src="_images/intro-pic.png" style="width: 700px;"/></a>
+<ul class="simple">
+<li><p>EdgeRIC is a platform for <strong>real-time AI-in-the-loop</strong> for decision and control in cellular networks. It is designed to access network and application-level information to execute AI-optimized and other policies in real-time (sub-millisecond) .</p></li>
+</ul>
 <section id="edgeric-focus-areas">
 <h2>EdgeRIC Focus Areas</h2>
-<a class="reference internal image-reference" href="_images/edgeric-focus.png"><img alt="sample text" src="_images/edgeric-focus.png" style="width: 600px;"/>
-</a>
+<a class="reference internal image-reference" href="_images/edgeric-focus.png"><img alt="sample text" src="_images/edgeric-focus.png" style="width: 600px;"/></a>
 </section>
 <section id="demo-videos">
 <h2>Demo Videos</h2>
@@ -136,8 +131,7 @@ application-level information to execute AI-optimized and other policies in real
 </section>
 <section id="current-status">
 <h2>Current Status</h2>
-<a class="reference internal image-reference" href="_images/edgeric-full-status.png"><img alt="sample text" src="_images/edgeric-full-status.png" style="width: 600px;"/>
-</a>
+<a class="reference internal image-reference" href="_images/edgeric-full-status.png"><img alt="sample text" src="_images/edgeric-full-status.png" style="width: 600px;"/></a>
 <dl class="simple">
 <dt>This release is based on srsRAN 4G, <strong>we will shortly release our 5G version</strong>. We suport:</dt><dd><ul class="simple">
 <li><dl class="simple">
@@ -145,6 +139,7 @@ application-level information to execute AI-optimized and other policies in real
 <li><p>UL/ DL channel conditions</p></li>
 <li><p>UL/ DL pending buffers for transmission</p></li>
 <li><p>Per UE throughput</p></li>
+<li><p>Baseband I/Q sample monitoring</p></li>
 </ul>
 </dd>
 </dl>
@@ -152,6 +147,7 @@ application-level information to execute AI-optimized and other policies in real
 <li><dl class="simple">
 <dt>Realtime Control actions:</dt><dd><ul>
 <li><p>MAC scheduling on the downlink, both AI training and inference capability</p></li>
+<li><p>Control for MIMO weights</p></li>
 </ul>
 </dd>
 </dl>
@@ -163,7 +159,8 @@ application-level information to execute AI-optimized and other policies in real
 <section id="current-publications">
 <h2>Current Publications</h2>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">EdgeRIC</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">BeamArmor</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Tiny-twin</button><button aria-controls="panel-0-0-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">Windex</button><button aria-controls="panel-0-0-4" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-4" name="0-4" role="tab" tabindex="-1">SPARC</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p><strong>Paper</strong>: <a class="reference external" href="https://www.usenix.org/conference/nsdi24/presentation/ko">EdgeRIC</a></p>
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">EdgeRIC</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">BeamArmor</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Tiny-twin</button><button aria-controls="panel-0-0-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">Windex</button><button aria-controls="panel-0-0-4" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-4" name="0-4" role="tab" tabindex="-1">SPARC</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks
+<strong>Paper</strong>: <a class="reference external" href="https://www.usenix.org/conference/nsdi24/presentation/ko">EdgeRIC</a></p>
 <p><strong>Code</strong>: <a class="reference external" href="https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git">Github Respository</a></p>
 <p><strong>Website</strong>: <a class="reference external" href="https://wcsng.ucsd.edu/edgeric/">https://wcsng.ucsd.edu/edgeric/</a></p>
 </div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Seamless Anti-Jamming in 5G Cellular Networks with MIMO Null-steering</p>
@@ -202,19 +199,13 @@ application-level information to execute AI-optimized and other policies in real
 </ul>
 </div>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">EdgeRIC microApps</span></p>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC tutorials</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html">Realtime Dashboard</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app1-ppo-sched">μApp1: PPO_sched</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ModuleC.html#mac-scheduling">MAC scheduling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ModuleC.html#training-the-reinforcement-learning-policy">Training the Reinforcement Learning Policy</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app2-windex">μApp2: Windex</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app3-beamarmor">μApp3_BeamArmor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleC.html#app4-sparc">μApp4: SPARC</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ModuleC.html#interference-detection">Interference Detection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ModuleC.html#resource-blanking">Resource Blanking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleC.html">Documentation of our Research Papers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="edgeric.html">EdgeRIC main paper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windex.html">Windex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sparc.html">SPARC</a></li>
 </ul>
 </li>
 </ul>
