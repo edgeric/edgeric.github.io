@@ -72,22 +72,28 @@
 <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
 <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Platform Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Cellular Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#tiny-twin-emulation-module">Tiny-twin: Emulation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#over-the-air-execution-module">Over The Air execution module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Events</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ModuleE.html">OAIC-EdgeRIC Workshop ‘24</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html">RT-E2 interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#how-to-write-apps">how to write μApps?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html">RT-E2 interface (Real time E2 interface)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#rt-e2-report-message">RT-E2 Report Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#rt-e2-policy-message">RT-E2 Policy Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#redis-database">REDIS database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC tutorials</span></p>
 <ul class="current">
-<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="ModuleC.html">Documentation of our Research Papers<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="edgeric.html">EdgeRIC main paper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="windex.html">Windex</a></li>
-<li class="toctree-l2"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">SPARC</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric.html">EdgeRIC main paper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SPARC</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Dataset</span></p>
 <ul>
@@ -111,7 +117,7 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="ModuleC.html">Documentation of our Research Papers</a>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="ModuleC.html">&lt;no title&gt;</a>
 <div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">SPARC</span>
 </nav>
 <div id="content" role="main">
@@ -124,17 +130,42 @@ We leverage the O-RAN architecture to develop a multi-timescale RAN Intelligent 
 featuring an xApp for near-real-time interference detection and localization, and a μApp for real-time
 intelligent resource allocation. By utilizing base stations as spectrum sensors, SPARC enables efficient and
 fine-grained dynamic resource allocation across multiple sites, enhancing signal-to-noise ratio (SNR), spectral efficiency,  and overall system throughput.</p>
-<section id="installation">
-<h2>Installation</h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ushasigh/SPARC-multi-siteManagent.git
+<section id="install-srsran-supporting-e2-and-edgeric-messages-and-control">
+<h2>Install srsRAN supporting E2 and EdgeRIC messages and control</h2>
+<section id="install-zmq">
+<h3>Install zmq</h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zeromq/libzmq.git<span class="w">  </span>
+</span><span id="line-2"><span class="nb">cd</span><span class="w"> </span>libzmq<span class="w">  </span>
+</span><span id="line-3">./autogen.sh<span class="w">  </span>
+</span><span id="line-4">./configure<span class="w">  </span>
+</span><span id="line-5">make<span class="w">  </span>
+</span><span id="line-6">sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w">  </span>
+</span><span id="line-7">sudo<span class="w"> </span>ldconfig
 </span></code></pre></div>
 </div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zeromq/czmq.git<span class="w">  </span>
+</span><span id="line-2"><span class="nb">cd</span><span class="w"> </span>czmq<span class="w">  </span>
+</span><span id="line-3">./autogen.sh<span class="w">  </span>
+</span><span id="line-4">./configure<span class="w">  </span>
+</span><span id="line-5">make<span class="w">  </span>
+</span><span id="line-6">sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w">  </span>
+</span><span id="line-7">sudo<span class="w"> </span>ldconfig<span class="w">  </span>
+</span></code></pre></div>
+</div>
+</section>
+<section id="other-dependencies-and-cloning-the-repository">
+<h3>Other Dependencies and cloning the repository</h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>cmake<span class="w"> </span>make<span class="w"> </span>gcc<span class="w"> </span>g++<span class="w"> </span>pkg-config<span class="w"> </span>libfftw3-dev<span class="w"> </span>libmbedtls-dev<span class="w"> </span>libsctp-dev<span class="w"> </span>libyaml-cpp-dev<span class="w"> </span>libgtest-dev<span class="w"> </span><span class="c1"># install dependencies</span>
+</span><span id="line-2">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ushasigh/SPARC-multi-siteManagent.git
+</span></code></pre></div>
+</div>
+</section>
 </section>
 <section id="network-setup">
 <h2>Network Setup</h2>
 <section id="core-network">
 <h3>Core Network</h3>
-<p>open5gs:https://open5gs.org/open5gs/docs/guide/01-quickstart/<br/>
+<p>open5gs: https://open5gs.org/open5gs/docs/guide/01-quickstart/<br/>
 open5gs runs as a linux daemon, config files can be found in your system at location <code class="docutils literal notranslate"><span class="pre">~/etc/open5gs</span></code><br/>
 The configs used in this project are available under folder <code class="docutils literal notranslate"><span class="pre">/open5gs-configs</span></code></p>
 </section>
@@ -143,10 +174,10 @@ The configs used in this project are available under folder <code class="docutil
 <p>srsRAN-4g: we provide the builds used for the two sites in this repo<br/>
 Site 1: <code class="docutils literal notranslate"><span class="pre">/srsRAN_site1</span></code><br/>
 Site 2: <code class="docutils literal notranslate"><span class="pre">/srsRAN_site2</span></code><br/>
-<br/>
-How to build?</p>
+<br/></p>
+<p><strong>How to build?</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>srsRAN_site1
-</span><span id="line-2">sudo<span class="w"> </span>./make-ran.sh<span class="w"> </span><span class="c1"># this script will build both sites</span>
+</span><span id="line-2">sudo<span class="w"> </span>./make-rans.sh<span class="w"> </span><span class="c1"># this script will build both sites</span>
 </span></code></pre></div>
 </div>
 </section>
@@ -168,17 +199,23 @@ How to build?</p>
 </section>
 <section id="run-enb1">
 <h4>Run enb1</h4>
-<p>Update the directory in [enb_files] section in <code class="docutils literal notranslate"><span class="pre">/srsRAN_site1/.config/enb1.conf</span></code><br/>
-Update ‘device_name’ as UHD (over the air) or zmq (virtual radios) in the [rf] section in <code class="docutils literal notranslate"><span class="pre">/srsRAN_site1/.config/enb1.conf</span></code></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>srsRAN_site2
+<p><strong>[enb_files]</strong> section: Update the directory in <code class="docutils literal notranslate"><span class="pre">/srsRAN_site1/.config/enb1.conf</span></code><br/>
+<strong>[rf]</strong> section: Update ‘device_name’ as UHD (over the air) or zmq (virtual radios) in <code class="docutils literal notranslate"><span class="pre">/srsRAN_site1/.config/enb1.conf</span></code>
+<strong>[ric.agent]</strong> section: update the local_port –&gt; 38071<br/>
+<strong>[enb]</strong> section: update enb_id –&gt; 0x19B<br/>
+<strong>[enb]</strong> section: mmed_addr –&gt; 127.0.0.2 for open5gs in this setting</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>srsRAN_site1
 </span><span id="line-2">./run_enb.sh
 </span></code></pre></div>
 </div>
 </section>
 <section id="run-enb2">
 <h4>Run enb2</h4>
-<p>Update the directory in [enb_files] section in <code class="docutils literal notranslate"><span class="pre">/srsRAN_site2/.config/enb2.conf</span></code><br/>
-Update ‘device_name’ as UHD (over the air) or zmq (virtual radios) in the [rf] section in <code class="docutils literal notranslate"><span class="pre">/srsRAN_site2/.config/enb2.conf</span></code></p>
+<p><strong>[enb_files]</strong> section: Update the directory in <code class="docutils literal notranslate"><span class="pre">/srsRAN_site2/.config/enb2.conf</span></code><br/>
+<strong>[rf]</strong> section: Update ‘device_name’ as UHD (over the air) or zmq (virtual radios) in <code class="docutils literal notranslate"><span class="pre">/srsRAN_site2/.config/enb2.conf</span></code><br/>
+<strong>[ric.agent]</strong> section: update the local_port –&gt; 38072<br/>
+<strong>[enb]</strong> section: update enb_id –&gt; 0x19C<br/>
+<strong>[enb]</strong> section: mmed_addr –&gt; 127.0.0.2 for open5gs in this setting</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>srsRAN_site2
 </span><span id="line-2">./run_enb.sh
 </span></code></pre></div>
@@ -206,6 +243,9 @@ Update ‘device_name’ as UHD (over the air) or zmq (virtual radios) in the [r
 </section>
 <section id="running-traffic">
 <h3>Running Traffic</h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>traffic-generator
+</span></code></pre></div>
+</div>
 <section id="running-downlink-iperf-traffic">
 <h4>Running Downlink iperf traffic</h4>
 <p>Terminal 1:</p>
@@ -249,23 +289,52 @@ Update ‘device_name’ as UHD (over the air) or zmq (virtual radios) in the [r
 </section>
 <section id="hierarchical-ric-deployment">
 <h2>Hierarchical RIC deployment</h2>
+<section id="internal-messaging-infrastructure">
+<h3>Internal Messaging Infrastructure</h3>
+<p>IMI: refer to <code class="docutils literal notranslate"><span class="pre">/IMI</span></code></p>
+<section id="start-the-redis-database">
+<h4>Start the Redis database</h4>
+<p>Start the Redis database: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker-compose</span> <span class="pre">up</span> <span class="pre">db</span></code></p>
+</section>
+</section>
 <section id="near-rt-ric-spectrum-monitoring">
 <h3>Near RT RIC: Spectrum Monitoring</h3>
 <p>This component is used for interefrence detection and localization in the spectrogram.<br/>
-IMI: refer to <code class="docutils literal notranslate"><span class="pre">/IMI</span></code><br/>
 icxApp: refer to <code class="docutils literal notranslate"><span class="pre">icxApp</span></code></p>
-<p>Start the Redis database: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker-compose</span> <span class="pre">up</span> <span class="pre">db</span></code></p>
 </section>
 <section id="edgeric-resource-distribution">
 <h3>EdgeRIC: Resource Distribution</h3>
-<p>Refer to <code class="docutils literal notranslate"><span class="pre">/edgeric</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>edgeric
+</span></code></pre></div>
+</div>
+<section id="running-edgeric-for-1-site">
+<h4>Running edgeric for 1 site</h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">sudo<span class="w"> </span>python3<span class="w"> </span>edgeric_1_site.py
+</span></code></pre></div>
+</div>
+<p>This will run edgeric for 1 site deployment, it will run 5000 TTIs for evaluation and out the mean total bitrate, SNR and packet errors observed over the duration of the run.<br/>
+For no blanking, set a and b to 0 - line 35 and 36</p>
+</section>
+<section id="running-edgeric-for-2-sites">
+<h4>Running edgeric for 2 sites</h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">sudo<span class="w"> </span>python3<span class="w"> </span>edgeric_2_sites.py
+</span></code></pre></div>
+</div>
+<p><strong>Blanking:</strong> :Blanking variables are a and b, play with it (line 50, 51) to experiment with the blanking feature, blanking is applied to prbs between a and b<br/>
+<strong>Algorithm selection:</strong> Select the algorithm for resource distribution by uncommenting the appropriate lines: 297,298,299<br/>
+<strong>Updating filenames:</strong> Update the filenames in lines 482, 491 to correctly save experimental runs</p>
+</section>
 </section>
 </section>
 </section>
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
-<li><a :data-current="activeSection === '#installation'" class="reference internal" href="#installation">Installation</a></li>
+<li><a :data-current="activeSection === '#install-srsran-supporting-e2-and-edgeric-messages-and-control'" class="reference internal" href="#install-srsran-supporting-e2-and-edgeric-messages-and-control">Install srsRAN supporting E2 and EdgeRIC messages and control</a><ul>
+<li><a :data-current="activeSection === '#install-zmq'" class="reference internal" href="#install-zmq">Install zmq</a></li>
+<li><a :data-current="activeSection === '#other-dependencies-and-cloning-the-repository'" class="reference internal" href="#other-dependencies-and-cloning-the-repository">Other Dependencies and cloning the repository</a></li>
+</ul>
+</li>
 <li><a :data-current="activeSection === '#network-setup'" class="reference internal" href="#network-setup">Network Setup</a><ul>
 <li><a :data-current="activeSection === '#core-network'" class="reference internal" href="#core-network">Core Network</a></li>
 <li><a :data-current="activeSection === '#radio-access-network'" class="reference internal" href="#radio-access-network">Radio Access Network</a></li>
@@ -285,8 +354,16 @@ icxApp: refer to <code class="docutils literal notranslate"><span class="pre">ic
 </ul>
 </li>
 <li><a :data-current="activeSection === '#hierarchical-ric-deployment'" class="reference internal" href="#hierarchical-ric-deployment">Hierarchical RIC deployment</a><ul>
+<li><a :data-current="activeSection === '#internal-messaging-infrastructure'" class="reference internal" href="#internal-messaging-infrastructure">Internal Messaging Infrastructure</a><ul>
+<li><a :data-current="activeSection === '#start-the-redis-database'" class="reference internal" href="#start-the-redis-database">Start the Redis database</a></li>
+</ul>
+</li>
 <li><a :data-current="activeSection === '#near-rt-ric-spectrum-monitoring'" class="reference internal" href="#near-rt-ric-spectrum-monitoring">Near RT RIC: Spectrum Monitoring</a></li>
-<li><a :data-current="activeSection === '#edgeric-resource-distribution'" class="reference internal" href="#edgeric-resource-distribution">EdgeRIC: Resource Distribution</a></li>
+<li><a :data-current="activeSection === '#edgeric-resource-distribution'" class="reference internal" href="#edgeric-resource-distribution">EdgeRIC: Resource Distribution</a><ul>
+<li><a :data-current="activeSection === '#running-edgeric-for-1-site'" class="reference internal" href="#running-edgeric-for-1-site">Running edgeric for 1 site</a></li>
+<li><a :data-current="activeSection === '#running-edgeric-for-2-sites'" class="reference internal" href="#running-edgeric-for-2-sites">Running edgeric for 2 sites</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

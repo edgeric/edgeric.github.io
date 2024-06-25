@@ -17,7 +17,7 @@
 <link href="search.html" rel="search" title="Search"/>
 <link href="genindex.html" rel="index" title="Index"/>
 <link href="windex.html" rel="next" title="Windex"/>
-<link href="ModuleC.html" rel="prev" title="Documentation of our Research Papers"/>
+<link href="ModuleC.html" rel="prev" title="&lt;no title&gt;"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -72,22 +72,28 @@
 <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
 <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Platform Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Cellular Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#tiny-twin-emulation-module">Tiny-twin: Emulation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#over-the-air-execution-module">Over The Air execution module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Events</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ModuleE.html">OAIC-EdgeRIC Workshop ‘24</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html">RT-E2 interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#how-to-write-apps">how to write μApps?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html">RT-E2 interface (Real time E2 interface)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#rt-e2-report-message">RT-E2 Report Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#rt-e2-policy-message">RT-E2 Policy Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#redis-database">REDIS database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleA.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC tutorials</span></p>
 <ul class="current">
-<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="ModuleC.html">Documentation of our Research Papers<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">EdgeRIC main paper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="windex.html">Windex</a></li>
-<li class="toctree-l2"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sparc.html">SPARC</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">EdgeRIC main paper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparc.html">SPARC</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Dataset</span></p>
 <ul>
@@ -111,7 +117,7 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="ModuleC.html">Documentation of our Research Papers</a>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="ModuleC.html">&lt;no title&gt;</a>
 <div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">EdgeRIC main paper</span>
 </nav>
 <div id="content" role="main">
@@ -144,8 +150,29 @@ state of the system. We list the metrics used by this μApp below:</p>
 
 </section>
 </section>
-<section id="installing-the-repo">
-<h2>Installing the repo</h2>
+<section id="install-srsran-supporting-edgeric-messages-and-control">
+<h2>Install srsRAN supporting EdgeRIC messages and control</h2>
+<section id="install-zmq">
+<h3>Install zmq</h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zeromq/libzmq.git<span class="w">  </span>
+</span><span id="line-2"><span class="nb">cd</span><span class="w"> </span>libzmq<span class="w">  </span>
+</span><span id="line-3">./autogen.sh<span class="w">  </span>
+</span><span id="line-4">./configure<span class="w">  </span>
+</span><span id="line-5">make<span class="w">  </span>
+</span><span id="line-6">sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w">  </span>
+</span><span id="line-7">sudo<span class="w"> </span>ldconfig
+</span></code></pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zeromq/czmq.git<span class="w">  </span>
+</span><span id="line-2"><span class="nb">cd</span><span class="w"> </span>czmq<span class="w">  </span>
+</span><span id="line-3">./autogen.sh<span class="w">  </span>
+</span><span id="line-4">./configure<span class="w">  </span>
+</span><span id="line-5">make<span class="w">  </span>
+</span><span id="line-6">sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w">  </span>
+</span><span id="line-7">sudo<span class="w"> </span>ldconfig<span class="w">  </span>
+</span></code></pre></div>
+</div>
+</section>
 <section id="dependencies-and-cloning-the-repository">
 <h3>Dependencies and cloning the repository</h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>cmake<span class="w"> </span>make<span class="w"> </span>gcc<span class="w"> </span>g++<span class="w"> </span>pkg-config<span class="w"> </span>libfftw3-dev<span class="w"> </span>libmbedtls-dev<span class="w"> </span>libsctp-dev<span class="w"> </span>libyaml-cpp-dev<span class="w"> </span>libgtest-dev<span class="w"> </span><span class="c1"># install dependencies</span>
@@ -420,7 +447,8 @@ the [enb_files] section: upadte the file directories</p>
 <li><a :data-current="activeSection === '#training-reinforcement-learning-policy'" class="reference internal" href="#training-reinforcement-learning-policy">Training Reinforcement Learning Policy</a></li>
 </ul>
 </li>
-<li><a :data-current="activeSection === '#installing-the-repo'" class="reference internal" href="#installing-the-repo">Installing the repo</a><ul>
+<li><a :data-current="activeSection === '#install-srsran-supporting-edgeric-messages-and-control'" class="reference internal" href="#install-srsran-supporting-edgeric-messages-and-control">Install srsRAN supporting EdgeRIC messages and control</a><ul>
+<li><a :data-current="activeSection === '#install-zmq'" class="reference internal" href="#install-zmq">Install zmq</a></li>
 <li><a :data-current="activeSection === '#dependencies-and-cloning-the-repository'" class="reference internal" href="#dependencies-and-cloning-the-repository">Dependencies and cloning the repository</a></li>
 <li><a :data-current="activeSection === '#build-the-repository'" class="reference internal" href="#build-the-repository">Build the repository</a></li>
 </ul>

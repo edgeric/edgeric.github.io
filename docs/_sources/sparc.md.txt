@@ -6,13 +6,37 @@ We leverage the O-RAN architecture to develop a multi-timescale RAN Intelligent 
 featuring an xApp for near-real-time interference detection and localization, and a μApp for real-time 
 intelligent resource allocation. By utilizing base stations as spectrum sensors, SPARC enables efficient and 
 fine-grained dynamic resource allocation across multiple sites, enhancing signal-to-noise ratio (SNR), spectral efficiency,  and overall system throughput. 
-### Installation
+### Install srsRAN supporting E2 and EdgeRIC messages and control
+
+##### Install zmq
+```bash  
+git clone https://github.com/zeromq/libzmq.git  
+cd libzmq  
+./autogen.sh  
+./configure  
+make  
+sudo make install  
+sudo ldconfig
+```
+
+```bash  
+git clone https://github.com/zeromq/czmq.git  
+cd czmq  
+./autogen.sh  
+./configure  
+make  
+sudo make install  
+sudo ldconfig  
+```
+
+##### Other Dependencies and cloning the repository
 ```bash
+sudo apt-get install cmake make gcc g++ pkg-config libfftw3-dev libmbedtls-dev libsctp-dev libyaml-cpp-dev libgtest-dev # install dependencies
 git clone https://github.com/ushasigh/SPARC-multi-siteManagent.git
 ```
 ### Network Setup
 #### Core Network
-open5gs:https://open5gs.org/open5gs/docs/guide/01-quickstart/    
+open5gs: https://open5gs.org/open5gs/docs/guide/01-quickstart/    
 open5gs runs as a linux daemon, config files can be found in your system at location ```~/etc/open5gs```  
 The configs used in this project are available under folder ```/open5gs-configs``` 
 
@@ -21,10 +45,11 @@ srsRAN-4g: we provide the builds used for the two sites in this repo
 Site 1: ```/srsRAN_site1```  
 Site 2: ```/srsRAN_site2```   
 <br/>
-How to build?
+
+**How to build?**
 ```bash
 cd srsRAN_site1
-sudo ./make-ran.sh # this script will build both sites
+sudo ./make-rans.sh # this script will build both sites
 ```
 
 #### Running the network:
@@ -44,17 +69,23 @@ This is not needed for over the air experiments
 <br/> 
 
 ###### Run enb1        
-Update the directory in [enb_files] section in ```/srsRAN_site1/.config/enb1.conf```     
-Update 'device_name' as UHD (over the air) or zmq (virtual radios) in the [rf] section in ```/srsRAN_site1/.config/enb1.conf```       
+**[enb_files]** section: Update the directory in ```/srsRAN_site1/.config/enb1.conf```     
+**[rf]** section: Update 'device_name' as UHD (over the air) or zmq (virtual radios) in ```/srsRAN_site1/.config/enb1.conf``` 
+**[ric.agent]** section: update the local_port --> 38071    
+**[enb]** section: update enb_id --> 0x19B  
+**[enb]** section: mmed_addr --> 127.0.0.2 for open5gs in this setting    
 
 ```bash
-cd srsRAN_site2
+cd srsRAN_site1
 ./run_enb.sh
 ```
 
 ###### Run enb2   
-Update the directory in [enb_files] section in ```/srsRAN_site2/.config/enb2.conf```     
-Update 'device_name' as UHD (over the air) or zmq (virtual radios) in the [rf] section in ```/srsRAN_site2/.config/enb2.conf```    
+**[enb_files]** section: Update the directory in ```/srsRAN_site2/.config/enb2.conf```     
+**[rf]** section: Update 'device_name' as UHD (over the air) or zmq (virtual radios) in ```/srsRAN_site2/.config/enb2.conf```  
+**[ric.agent]** section: update the local_port --> 38072  
+**[enb]** section: update enb_id --> 0x19C  
+**[enb]** section: mmed_addr --> 127.0.0.2 for open5gs in this setting    
 ```bash
 cd srsRAN_site2
 ./run_enb.sh
@@ -78,6 +109,10 @@ cd srsRAN_site1/build
 sudo ./srsue/src/srsue ../.config/ue_4_site2.conf --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:2031,rx_port=tcp://localhost:2030,id=ue,base_srate=23.04e6" --gw.netns=ue4 
 ```
 #### Running Traffic
+
+```bash
+cd traffic-generator
+```
 ##### Running Downlink iperf traffic
 
 Terminal 1:  
@@ -119,19 +154,35 @@ sudo python3 client_mmtc.py --host 172.16.0.5 --port 12345
 
 ### Hierarchical RIC deployment 
 
-#### Near RT RIC: Spectrum Monitoring
-This component is used for interefrence detection and localization in the spectrogram.  
-IMI: refer to ```/IMI```   
-icxApp: refer to ```icxApp```   
+#### Internal Messaging Infrastructure
+IMI: refer to ```/IMI``` 
 
+##### Start the Redis database
 Start the Redis database: ```sudo docker-compose up db```
 
+#### Near RT RIC: Spectrum Monitoring
+This component is used for interefrence detection and localization in the spectrogram.  
+icxApp: refer to ```icxApp```   
+
 #### EdgeRIC: Resource Distribution
-Refer to ```/edgeric```
+```bash
+cd edgeric
+```
 
+##### Running edgeric for 1 site
+```bash
+sudo python3 edgeric_1_site.py
+```
+This will run edgeric for 1 site deployment, it will run 5000 TTIs for evaluation and out the mean total bitrate, SNR and packet errors observed over the duration of the run.   
+For no blanking, set a and b to 0 - line 35 and 36   
 
-
-
+##### Running edgeric for 2 sites
+```bash
+sudo python3 edgeric_2_sites.py
+```
+**Blanking:** :Blanking variables are a and b, play with it (line 50, 51) to experiment with the blanking feature, blanking is applied to prbs between a and b   
+**Algorithm selection:** Select the algorithm for resource distribution by uncommenting the appropriate lines: 297,298,299  
+**Updating filenames:** Update the filenames in lines 482, 491 to correctly save experimental runs
 
 
 

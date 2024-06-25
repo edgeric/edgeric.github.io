@@ -1,8 +1,8 @@
 
-RT-E2 interface
-^^^^^^^^^^^^^^^^^
+.. RT-E2 interface
+.. ^^^^^^^^^^^^^^^^^
 
-RT-E2 agent (Real time E2 agent)
+RT-E2 interface (Real time E2 interface)
 ---------------
 .. image:: er-messenger.png
   :width: 600
@@ -12,12 +12,13 @@ RT-E2 agent (Real time E2 agent)
    - It is built on top of the ZMQ message passing library
 - EdgeRIC maintains a TTI level synchronization with the RAN stack. 
    - Our system is synchronized to the TTI-level clock tick from the RAN stack. The RAN stack uses a TTI counter, referred to as RAN index. It is included in all RT-E2 messages to EdgeRIC. EdgeRIC too maintains its own counter, called RIC index which increments by 1 every time it sends out its action. Our system is equipped with a default mechanism to ensure that EdgeRIC is slaved to the current RAN index or TTI by ensuring that the RIC index is always equal to the RAN index.
- 
+- EdgeRIC messenger is responsible for subscribing to the RAN metrics and publishing the control actions. 
+
 
 RT-E2 Report Message
 --------------------
 
-- The RT-E2 agent subscribes to the current RAN TTI to receive the realtime metrics 
+- The EdgeRIC messenger agent subscribes to the current RAN TTI to receive the realtime metrics 
 
 .. automodule:: src.edgeric_agent
    :members: get_metrics
@@ -73,7 +74,7 @@ Example message format:
 
     
 
-- EdgeRIC's RT-E2 agent publishes the control actions to the RAN  
+- EdgeRIC messenger then publishes the control actions to the RAN  
 
 .. automodule:: src.edgeric_agent
    :members: send_control
@@ -86,7 +87,7 @@ REDIS database
 
 - EdgeRIC maintains a Redis database to receive learned models/ policy updates from cloud-based systems.
 
-- The database is also used to manage the lifecycle of microApps, which includes:
+- The database is also used to manage the lifecycle of μApps, which includes:
 
    - Tracking the number of microApps running: This allows EdgeRIC to allocate resources efficiently and ensure optimal operation of all active microApps.
 
@@ -124,7 +125,7 @@ how to write μApps?
    from utils import *
    import torch
    import redis
-   from edgeric_agent import *           #import edgeric agent
+   from edgeric_messenger import *           #import edgeric agent
 
    def compute_policy():
       flag = False # to be deleted

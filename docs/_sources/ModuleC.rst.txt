@@ -1,11 +1,6 @@
 .. Realtime Dashboard
 .. ===============
 
-
-Documentation of our Research Papers
-===============
-This page contains all the repository documentations of our work.
-
 .. EdgeRIC main paper
 .. ===============
 

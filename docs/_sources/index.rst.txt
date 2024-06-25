@@ -129,6 +129,11 @@ Current Publications
 
 .. toctree::
    :maxdepth: 2
+   :caption: Events
+
+   ModuleE.rst 
+.. toctree::
+   :maxdepth: 2
    :caption: EdgeRIC Architecture
 
    ModuleA.rst

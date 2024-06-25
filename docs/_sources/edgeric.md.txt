@@ -34,7 +34,28 @@ Here, we train an RL agent with the objective of **total system throughput maxim
 </br>
 
 
-### Installing the repo
+### Install srsRAN supporting EdgeRIC messages and control
+
+##### Install zmq
+```bash  
+git clone https://github.com/zeromq/libzmq.git  
+cd libzmq  
+./autogen.sh  
+./configure  
+make  
+sudo make install  
+sudo ldconfig
+```
+
+```bash  
+git clone https://github.com/zeromq/czmq.git  
+cd czmq  
+./autogen.sh  
+./configure  
+make  
+sudo make install  
+sudo ldconfig  
+```
 
 ##### Dependencies and cloning the repository
 ```bash

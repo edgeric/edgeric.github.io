@@ -7,17 +7,17 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>RT-E2 interface | EdgeRIC v0.1 documentation</title>
-<meta content="RT-E2 interface | EdgeRIC v0.1 documentation" property="og:title"/>
-<meta content="RT-E2 interface | EdgeRIC v0.1 documentation" name="twitter:title"/>
+<title>RT-E2 interface (Real time E2 interface) | EdgeRIC v0.1 documentation</title>
+<meta content="RT-E2 interface (Real time E2 interface) | EdgeRIC v0.1 documentation" property="og:title"/>
+<meta content="RT-E2 interface (Real time E2 interface) | EdgeRIC v0.1 documentation" name="twitter:title"/>
 <link href="_static/pygments.css?v=8d216cef" rel="stylesheet" type="text/css"/>
 <link href="_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
 <link href="_static/custom.css?v=162f35ca" rel="stylesheet" type="text/css"/>
 <link href="_static/tabs.css?v=a5c4661c" rel="stylesheet" type="text/css"/>
 <link href="search.html" rel="search" title="Search"/>
 <link href="genindex.html" rel="index" title="Index"/>
-<link href="ModuleC.html" rel="next" title="Documentation of our Research Papers"/>
-<link href="gettingstarted.html" rel="prev" title="Platform Overview"/>
+<link href="ModuleC.html" rel="next" title="&lt;no title&gt;"/>
+<link href="ModuleE.html" rel="prev" title="OAIC-EdgeRIC Workshop ‘24"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -72,22 +72,28 @@
 <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
 <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Platform Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Cellular Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#tiny-twin-emulation-module">Tiny-twin: Emulation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#over-the-air-execution-module">Over The Air execution module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Events</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ModuleE.html">OAIC-EdgeRIC Workshop ‘24</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">RT-E2 interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#how-to-write-apps">how to write μApps?</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RT-E2 interface (Real time E2 interface)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#rt-e2-report-message">RT-E2 Report Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#rt-e2-policy-message">RT-E2 Policy Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#redis-database">REDIS database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC tutorials</span></p>
 <ul>
-<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="ModuleC.html">Documentation of our Research Papers<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="edgeric.html">EdgeRIC main paper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="windex.html">Windex</a></li>
-<li class="toctree-l2"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sparc.html">SPARC</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric.html">EdgeRIC main paper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparc.html">SPARC</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Dataset</span></p>
 <ul>
@@ -111,13 +117,11 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">RT-E2 interface</span>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">RT-E2 interface (Real time E2 interface)</span>
 </nav>
 <div id="content" role="main">
-<section id="rt-e2-interface">
-<h1>RT-E2 interface</h1>
-<section id="rt-e2-agent-real-time-e2-agent">
-<h2>RT-E2 agent (Real time E2 agent)</h2>
+<section id="rt-e2-interface-real-time-e2-interface">
+<h1>RT-E2 interface (Real time E2 interface)</h1>
 <a class="reference internal image-reference" href="_images/er-messenger.png"><img alt="sample text" src="_images/er-messenger.png" style="width: 600px;"/></a>
 <ul class="simple">
 <li><dl class="simple">
@@ -134,12 +138,13 @@
 </dd>
 </dl>
 </li>
+<li><p>EdgeRIC messenger is responsible for subscribing to the RAN metrics and publishing the control actions.</p></li>
 </ul>
 </section>
 <section id="rt-e2-report-message">
-<h2>RT-E2 Report Message</h2>
+<h1>RT-E2 Report Message</h1>
 <ul class="simple">
-<li><p>The RT-E2 agent subscribes to the current RAN TTI to receive the realtime metrics</p></li>
+<li><p>The EdgeRIC messenger agent subscribes to the current RAN TTI to receive the realtime metrics</p></li>
 </ul>
 <p>The RT-E2 report message includes per-UE key performance indicators (KPIs) received from the RAN. Each UE is identified by its unique RNTI (Radio Network Temporary Identifier) along with its corresponding KPIs.</p>
 <p>Structure of the message:
@@ -177,7 +182,7 @@
 <p>This structured message is critical for performance management and optimization of network resources in real-time applications.</p>
 </section>
 <section id="rt-e2-policy-message">
-<h2>RT-E2 Policy Message</h2>
+<h1>RT-E2 Policy Message</h1>
 <p>Structure of the message:
 <code class="docutils literal notranslate"><span class="pre">μApp1-control-message</span></code>, <code class="docutils literal notranslate"><span class="pre">μApp2-control-message</span></code>, <code class="docutils literal notranslate"><span class="pre">RIC</span> <span class="pre">ID</span></code>, <code class="docutils literal notranslate"><span class="pre">RAN</span> <span class="pre">ID</span></code>.</p>
 <dl class="simple">
@@ -185,14 +190,14 @@
 </dd>
 </dl>
 <ul class="simple">
-<li><p>EdgeRIC’s RT-E2 agent publishes the control actions to the RAN</p></li>
+<li><p>EdgeRIC messenger then publishes the control actions to the RAN</p></li>
 </ul>
 </section>
 <section id="redis-database">
-<h2>REDIS database</h2>
+<h1>REDIS database</h1>
 <ul>
 <li><p>EdgeRIC maintains a Redis database to receive learned models/ policy updates from cloud-based systems.</p></li>
-<li><p>The database is also used to manage the lifecycle of microApps, which includes:</p>
+<li><p>The database is also used to manage the lifecycle of μApps, which includes:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Tracking the number of microApps running: This allows EdgeRIC to allocate resources efficiently and ensure optimal operation of all active microApps.</p></li>
@@ -204,13 +209,11 @@
 </ul>
 </section>
 <section id="apps-edgeric-microservices">
-<h2>μApps - EdgeRIC microservices</h2>
+<h1>μApps - EdgeRIC microservices</h1>
 <a class="reference internal image-reference" href="_images/er-messenger-extended.png"><img alt="sample text" src="_images/er-messenger-extended.png" style="width: 600px;"/></a>
 <p>Each μApp{i} receives metrics by subscribing to the edgeric agent’s <code class="docutils literal notranslate"><span class="pre">get_metrics_multi()</span></code> function. Based on these metrics, it computes a policy for the specific network function and sends the decisions to edgerics agent’s <code class="docutils literal notranslate"><span class="pre">send_control_μApp_i()</span></code> function.</p>
-</section>
-</section>
 <section id="how-to-write-apps">
-<h1>how to write μApps?</h1>
+<h2>how to write μApps?</h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">#### This is an example of a Downlink RBG scheduling μApp</span>
 </span><span id="line-2"><span class="kn">import</span> <span class="nn">gym</span>
 </span><span id="line-3"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -222,7 +225,7 @@
 </span><span id="line-9"><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="o">*</span>
 </span><span id="line-10"><span class="kn">import</span> <span class="nn">torch</span>
 </span><span id="line-11"><span class="kn">import</span> <span class="nn">redis</span>
-</span><span id="line-12"><span class="kn">from</span> <span class="nn">edgeric_agent</span> <span class="kn">import</span> <span class="o">*</span>           <span class="c1">#import edgeric agent</span>
+</span><span id="line-12"><span class="kn">from</span> <span class="nn">edgeric_messenger</span> <span class="kn">import</span> <span class="o">*</span>           <span class="c1">#import edgeric agent</span>
 </span><span id="line-13">
 </span><span id="line-14"><span class="k">def</span> <span class="nf">compute_policy</span><span class="p">():</span>
 </span><span id="line-15">   <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># to be deleted</span>
@@ -247,18 +250,18 @@
 </span></code></pre></div>
 </div>
 </section>
+</section>
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
-<li><ul>
-<li><a :data-current="activeSection === '#rt-e2-agent-real-time-e2-agent'" class="reference internal" href="#rt-e2-agent-real-time-e2-agent">RT-E2 agent (Real time E2 agent)</a></li>
+<li></li>
 <li><a :data-current="activeSection === '#rt-e2-report-message'" class="reference internal" href="#rt-e2-report-message">RT-E2 Report Message</a></li>
 <li><a :data-current="activeSection === '#rt-e2-policy-message'" class="reference internal" href="#rt-e2-policy-message">RT-E2 Policy Message</a></li>
 <li><a :data-current="activeSection === '#redis-database'" class="reference internal" href="#redis-database">REDIS database</a></li>
-<li><a :data-current="activeSection === '#apps-edgeric-microservices'" class="reference internal" href="#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
+<li><a :data-current="activeSection === '#apps-edgeric-microservices'" class="reference internal" href="#apps-edgeric-microservices">μApps - EdgeRIC microservices</a><ul>
+<li><a :data-current="activeSection === '#how-to-write-apps'" class="reference internal" href="#how-to-write-apps">how to write μApps?</a></li>
 </ul>
 </li>
-<li><a :data-current="activeSection === '#how-to-write-apps'" class="reference internal" href="#how-to-write-apps">how to write μApps?</a></li>
 </ul>
 </div>
 </aside>
