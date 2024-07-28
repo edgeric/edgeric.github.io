@@ -1,0 +1,322 @@
+
+## EdgeRIC tutorial
+In this tutorial, we will go over the EdgeRIC architecture and installation if the srsRAN network facilitated with EdgRIC hooks. We will discuss how to write μApps. As an example, we 
+will run a real-time MAC scheduler μApp that assigns scheduling decisions per UE for each TTI. We will look at  multiple scheduling algorithms with this μApp to demonstrate the system 
+behavior: ``Max Weight``, ``Max CQI``, ``Proportional Fairness``, ``Round Robin``, and ``an RL based scheduler``  
+
+</br>
+
+
+### MAC scheduling
+This μApp offers scheduling decisions to the RAN at the granularity of one TTI (~1ms). It adopts a weight based 
+approach for its decision. The weight of an UE corresponds to its relative priority to be scheduled given the current
+state of the system. We list the metrics used by this μApp below:  
+
+Metrics: ``ue_data[rnti]['Tx'], ue_data[rnti]['CQI'], ue_data[rnti]['BL']`` for each UE.  
+
+Actions Sent:  ``weight_{i}`` which corresponds to the weight of each UE ``i``  
+
+RT-E2 Policy Format for this μApp: ``RNTI_{i}, weight{i}`` where ``i`` corresponds to each UE.  
+
+###### Training Reinforcement Learning Policy
+
+Here, we train an RL agent with the objective of **total system throughput maximization**. Listed below are the specifications for our training:
+
+    - Algorithm used: Proximal Policy Optimization
+
+    - State_space: [BL1,CQI1,BL2,CQI2.....]
+
+    - Action_space: ``[Weight1,Weight2.....]
+
+    - Reward: Total system throughput 
+
+
+</br>
+
+
+### Install srsRAN supporting EdgeRIC hooks
+
+##### Install zmq
+```bash  
+git clone https://github.com/zeromq/libzmq.git  
+cd libzmq  
+./autogen.sh  
+./configure  
+make  
+sudo make install  
+sudo ldconfig
+```
+
+```bash  
+git clone https://github.com/zeromq/czmq.git  
+cd czmq  
+./autogen.sh  
+./configure  
+make  
+sudo make install  
+sudo ldconfig  
+```
+
+##### Dependencies and cloning the repository 
+```bash
+sudo apt-get install cmake make gcc g++ pkg-config libfftw3-dev libmbedtls-dev libsctp-dev libyaml-cpp-dev libgtest-dev # install dependencies
+
+git clone https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git
+git checkout oaic-workshop
+```  
+##### Compile the protobuf message schema
+The protobuf schemas are found in ``srsran-enb/srsenb/protobufs`` for RAN and in ``edgeric`` for EdgeRIC  
+**Compile the protobuf format for the RT-E2 agent**
+```bash
+cd srsran-enb/srsenb/protobufs
+protoc --cpp_out=../rtagent metrics.proto ## RT-E2 Report Message
+protoc --cpp_out=../rtagent control_actions.proto ## RT-E2 Policy message
+cd ../../..
+```
+The generated ``metrics.pb.cc`` and ``control_actions.pb.cc`` is included in this repository, so this step can be skipped  
+
+**Compile the protobuf format for EdgeRIC**
+```bash
+cd edgeric
+protoc --python_out=. metrics.proto ## RT-E2 Report Message
+protoc --python_out=. control_actions.proto ## RT-E2 Policy message
+cd ..
+```
+The generated ``metrics_pb2.py`` and ``control_actions_pb2.py`` is included in this repository, so this step can be skipped  
+
+##### Build the repository
+```bash
+./make-ran.sh
+```
+All config files used in this tutorial are provided in ``.config``
+
+<br/>
+
+
+### How to run the network 
+
+#### Setup the core and srsenb 
+**Terminal 1**: Run the GRC broker, we will run a 2UE scenario  
+```bash
+./top_block_2ue_23.04MHz.py
+```
+
+This step is not needed in over the air mode
+
+</br>
+
+**Terminal 2**: Run the EPC 
+ 
+```bash
+./run_epc.sh
+```
+
+**Terminal 3**: Run the enb    
+
+```bash
+./run_enb.sh
+```
+#### Run the UEs 
+In this repository, we will use the modified ``srsue`` codebase provided in ``srsran-ue`` which provides support 
+to run UE with a specified channel trace collected from real world experiments [in our case, the channel is represented by CQI]
+```bash
+cd srsran-ue/build
+``` 
+Run UE1:  
+```bash
+sudo ./srsue/src/srsue ../.config/ue1.conf --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6" --gw.netns=ue1 --params_filename="../params1.txt"
+```
+Run UE2: 
+```bash
+sudo ./srsue/src/srsue2 ../.config/ue2.conf --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:2011,rx_port=tcp://localhost:2010,id=ue,base_srate=23.04e6" --gw.netns=ue2 --params_filename="../params2.txt"
+```
+
+To run automated scripts for 2 UEs:  
+```bash
+./run_srsran_2ue.sh 
+```
+Press ``t`` to view the UE metrics on console  
+
+**Updating the CQI channel trace**: file under concern: ``srsran-ue/params{1}.txt`` for ue {i}, update line 5 with the desired CQI file which should be present in folder ``srsran-ue/cqis``. 
+
+
+#### Stream Traffic:
+
+```bash
+cd traffic-generator
+```
+
+##### Running Downlink iperf traffic
+
+Terminal 1:  
+```bash
+./iperf_server_2ues.sh
+```
+Terminal 2:  
+```bash
+./iperf_client_2ues.sh <rate_ue{i}> <duration>, eg: ./iperf_client_2ues.sh 10M 10M 1000
+```
+
+
+### Running EdgeRIC for downlink scheduling control
+
+```bash
+cd edgeric
+```
+
+#### EdgeRIC messenger
+```bash
+edgeric_messenger
+├── get_metrics_multi()  # get_metrics(): receive metrics from RAN, called by all μApps
+│   ├── returns ue_data dictionary
+├── send_scheduling_weight() # send the RT-E2 scheduling policy message to RAN 
+    
+```
+<!-- # ├── send_control() # send the RT-E2 policy message to RAN once all μApps complete execution
+#     ├── send_scheduling_weight() #prepares the control message for the downlink scheduling action
+      ├── send_ul_prb() #prepares the control message for the uplikn scheduling action
+#  -->
+
+#### μApps supported in this codebase
+```bash
+├── /muApp1           # weight based abstraction of downlink scheduling control
+│   ├── muApp1_run_DL_scheduling.py
+├── /muApp2           # training an RL agent to compute downlink scheduling policy
+    ├── muApp2_train_RL_DL_scheduling.py
+
+```
+
+<!-- ├── /muApp3           # training an RL agent to compute downlink scheduling policy
+    ├── metrics_monitor_aggregate.py # launch dashboard for aggregate statistics
+    ├── metrics_monitor_perUE.py     # launch dashboard for per UE metrics  -->
+
+#### Running muApp1 - downlink scheduler
+```bash
+cd muApp1
+sudo python3 muApp1_run_DL_scheduling.py
+```
+##### Setting the scheduler algorithm manually
+Set the scheduling algorithm you want to run:
+```bash
+# Line 259
+selected_algorithm = "Max CQI"   # selection can be: Max CQI, Max Weight,
+                                 # Proportional Fair (PF), Round Robin - to be implemneted
+                                 # RL - models are included for 2 UEs
+```
+If the algorithm selected is RL, set the directory for the RL model
+```bash
+# Line 270
+rl_model_name = "Fully Trained Model"  # selection can be Initial Model,
+                                       # Half Trained Model, Fully Trained Model - to see benefits, run UE1 with load 5Mbps, UE2 with 21Mbps
+```
+The respective models are saved in:
+```bash
+├── ../rl_model/           
+    ├── initial_model 
+      ├──model_demo.pt
+    ├── half_trained_model 
+      ├──model_demo.pt
+    ├── fully_trained_model 
+      ├──model_demo.pt
+```
+#### Running muApp2 - Training an RL policy for scheduling
+
+We are training a PPO agent with the objective of throughput maximization in this particular study.
+
+##### Usage
+
+```bash
+cd muApp2
+sudo python3 muApp2_train_RL_DL_scheduling.py --config-name=edge_ric
+```
+
+##### muApp2_train_RL_DL_scheduling.py
+
+* Trains PPO agent for ```num_iters``` number of iterations
+    * One iteration consists of training on 2048 samples and evaluating for 2048 timesteps
+    * The evaluation metric (avg reward per episode) is plotted as the training grap
+
+
+##### Repo Structure
+```bash
+
+├── conf
+│   ├── edge_ric.yaml   # Config file for edgeric RL training
+│   ├── example.yaml
+│   ├── simpler_streaming.yaml
+│   └── single_agent.yaml
+├── outputs # Output logs of each training sorted chronologically
+│   ├── 2022-10-07
+         ├── model_best.pt # Saved policy neural network weights
+│          .
+│          .
+│          .
+│          
+└── ../stream_rl # Name of the python package implementing the simulator mechanisms
+    ├── callbacks.py
+    ├── envs # All the envs
+    │   ├── cqi_traces
+    │   │   ├── data.csv # CQI trace to be used by simulation env
+    │   │   └── trace_generator.py # Code to generate synthetic CQI traces
+    │   ├── edge_ric.py # Our Env 
+    │   ├── simpler_streaming_env.py
+    │   ├── single_agent_env.py
+    │   └── streaming_env.py
+    │   └── __init__.py
+    ├── __init__.py
+    ├── plots.py # All plotting code
+    ├── policy_net # Custom policy net architectures (not currently used)
+    │   ├── conv_policy.py
+    │   ├── __init__.py
+    ├── registry # Registry system for registering envs and rewards (to keep things modular)
+    │   └── __init__.py
+    └── rewards.py # Definition of reward functions to be used in envs
+```
+Once the training completes: take the model_best.pt and save in the ../rl_model folder
+
+##### EdgeRIC Env (edge_ric.py)
+
+```
+                    CQI1          BL1
+                ┌────────────┬─┬─┬─┬─┐
+Bernoulli  ───► │            │ │ │ │ │ ──►   f(CQI1,allocated_RGB1)
+                │            │ │ │ │ │
+                └────────────┴─┴─┴─┴─┘
+                    CQI2          BL2
+                ┌────────────────┬─┬─┐
+Bernoulli  ───► │                │ │ │ ──►   f(CQI2,allocated_RGB2)
+                │                │ │ │
+                └────────────────┴─┴─┘
+                          .
+                          .
+                          .
+                          . num_UEs
+                          .
+                          .
+                          .
+                ┌────────────┬─┬─┬─┬─┐
+Bernoulli  ───► │            │ │ │ │ │ ──►   f(CQI_N,allocated_RBG_N)
+                │            │ │ │ │ │
+                └────────────┴─┴─┴─┴─┘
+```
+
+
+* State_space : ```[BL1,CQI1,BL2,CQI2.....]``` (if augmented_state_space=False)
+* Action_space : ```[Weight1,Weight2.....]```
+* Parameters of the env configurable in ```"./conf/edge_ric.yml"```, under ```env_config``` field
+
+
+
+<!-- 
+## Setting the scheduler algorithm with the controller gui - TODO
+
+```bash
+sudo python3 controller_gui.py
+```
+To launch the DL scheduling μApp:
+- **Start μApp1** 
+  - **Choose the algorithm you want to run**
+    - **If traditional:** Choose between Max CQI, Max Weight, PF, Round Robin
+    - **If RL:** Specify the directory for the saved RL model [Please Note: the RL scheduler is specific to number of UEs the system started with, refer to the paper] -->
+
+

@@ -131,12 +131,12 @@ Current Publications
    :maxdepth: 2
    :caption: Events
 
-   ModuleE.rst 
+   oaic-workshop-2024.rst 
 .. toctree::
    :maxdepth: 2
    :caption: EdgeRIC Architecture
 
-   ModuleA.rst
+   edgeric-architecture.rst
 
 .. .. toctree::
 ..    :maxdepth: 2
@@ -150,12 +150,12 @@ Current Publications
 
 
 
-   ModuleC.rst   
+   tutorials.rst   
 .. toctree::
    :maxdepth: 2
    :caption: Dataset
 
-   ModuleD.rst 
+   datasets.rst 
 
  
 

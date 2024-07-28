@@ -7,17 +7,17 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>EdgeRIC main paper | EdgeRIC v0.1 documentation</title>
-<meta content="EdgeRIC main paper | EdgeRIC v0.1 documentation" property="og:title"/>
-<meta content="EdgeRIC main paper | EdgeRIC v0.1 documentation" name="twitter:title"/>
+<title>EdgeRIC tutorial | EdgeRIC v0.1 documentation</title>
+<meta content="EdgeRIC tutorial | EdgeRIC v0.1 documentation" property="og:title"/>
+<meta content="EdgeRIC tutorial | EdgeRIC v0.1 documentation" name="twitter:title"/>
 <link href="_static/pygments.css?v=8d216cef" rel="stylesheet" type="text/css"/>
 <link href="_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
 <link href="_static/custom.css?v=162f35ca" rel="stylesheet" type="text/css"/>
 <link href="_static/tabs.css?v=a5c4661c" rel="stylesheet" type="text/css"/>
 <link href="search.html" rel="search" title="Search"/>
 <link href="genindex.html" rel="index" title="Index"/>
-<link href="windex.html" rel="next" title="Windex"/>
-<link href="tutorials.html" rel="prev" title="&lt;no title&gt;"/>
+<link href="edgeric-architecture.html" rel="next" title="RT-E2 interface (Real time E2 interface)"/>
+<link href="oaic-workshop-2024.html" rel="prev" title="OAIC-EdgeRIC Workshop ‘24"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -77,9 +77,9 @@
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#over-the-air-execution-module">Over The Air execution module</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Events</span></p>
-<ul>
-<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="oaic-workshop-2024.html">OAIC-EdgeRIC Workshop ‘24<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
-<li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html">EdgeRIC tutorial</a></li>
+<ul class="current">
+<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="oaic-workshop-2024.html">OAIC-EdgeRIC Workshop ‘24<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul class="current" x-show="expanded">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">EdgeRIC tutorial</a></li>
 </ul>
 </li>
 </ul>
@@ -92,8 +92,8 @@
 <li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC tutorials</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">EdgeRIC main paper</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="edgeric.html">EdgeRIC main paper</a></li>
 <li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sparc.html">SPARC</a></li>
@@ -120,15 +120,15 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="tutorials.html">&lt;no title&gt;</a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">EdgeRIC main paper</span>
+<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="oaic-workshop-2024.html">OAIC-EdgeRIC Workshop ‘24</a>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">EdgeRIC tutorial</span>
 </nav>
 <div id="content" role="main">
-<section id="edgeric-main-paper">
-<h1>EdgeRIC main paper</h1>
-<p>This paper provides real-time MAC scheduler that assigns scheduling decisions per UE for each TTI. We implement multiple
-scheduling algorithms with this μApp. The scheduling algorithms considered in this work to demonstrate system
-behavior are: <code class="docutils literal notranslate"><span class="pre">Max</span> <span class="pre">Weight</span></code>, <code class="docutils literal notranslate"><span class="pre">Max</span> <span class="pre">CQI</span></code>, <code class="docutils literal notranslate"><span class="pre">Proportional</span> <span class="pre">Fairness</span></code>, <code class="docutils literal notranslate"><span class="pre">Round</span> <span class="pre">Robin</span></code>, and <code class="docutils literal notranslate"> <span class="pre">A</span> <span class="pre">custom</span> <span class="pre">AI</span> <span class="pre">based</span> <span class="pre">scheduler</span> <span class="pre">using</span> <span class="pre">an</span> <span class="pre">off-the-shelf</span> <span class="pre">reinforcement</span> <span class="pre">learning</span> <span class="pre">policy</span></code></p>
+<section id="edgeric-tutorial">
+<h1>EdgeRIC tutorial</h1>
+<p>In this tutorial, we will go over the EdgeRIC architecture and installation if the srsRAN network facilitated with EdgRIC hooks. We will discuss how to write μApps. As an example, we
+will run a real-time MAC scheduler μApp that assigns scheduling decisions per UE for each TTI. We will look at  multiple scheduling algorithms with this μApp to demonstrate the system
+behavior: <code class="docutils literal notranslate"><span class="pre">Max</span> <span class="pre">Weight</span></code>, <code class="docutils literal notranslate"><span class="pre">Max</span> <span class="pre">CQI</span></code>, <code class="docutils literal notranslate"><span class="pre">Proportional</span> <span class="pre">Fairness</span></code>, <code class="docutils literal notranslate"><span class="pre">Round</span> <span class="pre">Robin</span></code>, and <code class="docutils literal notranslate"><span class="pre">an</span> <span class="pre">RL</span> <span class="pre">based</span> <span class="pre">scheduler</span></code></p>
 
 <section id="mac-scheduling">
 <h2>MAC scheduling</h2>
@@ -153,8 +153,8 @@ state of the system. We list the metrics used by this μApp below:</p>
 
 </section>
 </section>
-<section id="install-srsran-supporting-edgeric-messages-and-control">
-<h2>Install srsRAN supporting EdgeRIC messages and control</h2>
+<section id="install-srsran-supporting-edgeric-hooks">
+<h2>Install srsRAN supporting EdgeRIC hooks</h2>
 <section id="install-zmq">
 <h3>Install zmq</h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zeromq/libzmq.git<span class="w">  </span>
@@ -181,16 +181,36 @@ state of the system. We list the metrics used by this μApp below:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>cmake<span class="w"> </span>make<span class="w"> </span>gcc<span class="w"> </span>g++<span class="w"> </span>pkg-config<span class="w"> </span>libfftw3-dev<span class="w"> </span>libmbedtls-dev<span class="w"> </span>libsctp-dev<span class="w"> </span>libyaml-cpp-dev<span class="w"> </span>libgtest-dev<span class="w"> </span><span class="c1"># install dependencies</span>
 </span><span id="line-2">
 </span><span id="line-3">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git
-</span><span id="line-4"><span class="nb">cd</span><span class="w"> </span>srsRAN-4G-new-ER-design
+</span><span id="line-4">git<span class="w"> </span>checkout<span class="w"> </span>oaic-workshop
 </span></code></pre></div>
 </div>
+</section>
+<section id="compile-the-protobuf-message-schema">
+<h3>Compile the protobuf message schema</h3>
+<p>The protobuf schemas are found in <code class="docutils literal notranslate"><span class="pre">srsran-enb/srsenb/protobufs</span></code> for RAN and in <code class="docutils literal notranslate"><span class="pre">edgeric</span></code> for EdgeRIC<br/>
+<strong>Compile the protobuf format for the RT-E2 agent</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>srsran-enb/srsenb/protobufs
+</span><span id="line-2">protoc<span class="w"> </span>--cpp_out<span class="o">=</span>../rtagent<span class="w"> </span>metrics.proto<span class="w"> </span><span class="c1">## RT-E2 Report Message</span>
+</span><span id="line-3">protoc<span class="w"> </span>--cpp_out<span class="o">=</span>../rtagent<span class="w"> </span>control_actions.proto<span class="w"> </span><span class="c1">## RT-E2 Policy message</span>
+</span><span id="line-4"><span class="nb">cd</span><span class="w"> </span>../../..
+</span></code></pre></div>
+</div>
+<p>The generated <code class="docutils literal notranslate"><span class="pre">metrics.pb.cc</span></code> and <code class="docutils literal notranslate"><span class="pre">control_actions.pb.cc</span></code> is included in this repository, so this step can be skipped</p>
+<p><strong>Compile the protobuf format for EdgeRIC</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>edgeric
+</span><span id="line-2">protoc<span class="w"> </span>--python_out<span class="o">=</span>.<span class="w"> </span>metrics.proto<span class="w"> </span><span class="c1">## RT-E2 Report Message</span>
+</span><span id="line-3">protoc<span class="w"> </span>--python_out<span class="o">=</span>.<span class="w"> </span>control_actions.proto<span class="w"> </span><span class="c1">## RT-E2 Policy message</span>
+</span><span id="line-4"><span class="nb">cd</span><span class="w"> </span>..
+</span></code></pre></div>
+</div>
+<p>The generated <code class="docutils literal notranslate"><span class="pre">metrics_pb2.py</span></code> and <code class="docutils literal notranslate"><span class="pre">control_actions_pb2.py</span></code> is included in this repository, so this step can be skipped</p>
 </section>
 <section id="build-the-repository">
 <h3>Build the repository</h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./make-ran.sh
 </span></code></pre></div>
 </div>
-<p>All config files are provided in <code class="docutils literal notranslate"><span class="pre">srsRAN_4G-ER/.config</span></code></p>
+<p>All config files used in this tutorial are provided in <code class="docutils literal notranslate"><span class="pre">.config</span></code></p>
 <br/>
 </section>
 </section>
@@ -198,50 +218,42 @@ state of the system. We list the metrics used by this μApp below:</p>
 <h2>How to run the network</h2>
 <section id="setup-the-core-and-srsenb">
 <h3>Setup the core and srsenb</h3>
-<p><strong>Terminal 1</strong>: Run the GRC broker, depending on the number of UEs {i}</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./top_block_<span class="o">{</span>i<span class="o">}</span>ue_23.04MHz.py
+<p><strong>Terminal 1</strong>: Run the GRC broker, we will run a 2UE scenario</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./top_block_2ue_23.04MHz.py
 </span></code></pre></div>
 </div>
 <p>This step is not needed in over the air mode</p>
 
-<p><strong>Terminal 2</strong>: Run the EPC
-update the hss section in the ./config/epc.conf to your file directory</p>
+<p><strong>Terminal 2</strong>: Run the EPC</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./run_epc.sh
 </span></code></pre></div>
 </div>
-<p><strong>Terminal 3</strong>: Run the enb<br/>
-update ./config/enb.conf:<br/>
-the [rf] section for zmq/ uhd configurations<br/>
-the [enb_files] section: upadte the file directories</p>
+<p><strong>Terminal 3</strong>: Run the enb</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./run_enb.sh
 </span></code></pre></div>
 </div>
 </section>
 <section id="run-the-ues">
 <h3>Run the UEs</h3>
+<p>In this repository, we will use the modified <code class="docutils literal notranslate"><span class="pre">srsue</span></code> codebase provided in <code class="docutils literal notranslate"><span class="pre">srsran-ue</span></code> which provides support
+to run UE with a specified channel trace collected from real world experiments [in our case, the channel is represented by CQI]</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>srsran-ue/build
+</span></code></pre></div>
+</div>
 <p>Run UE1:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>srsRAN_4G-ER/build
-</span><span id="line-2">sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue1.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">"tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6"</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue1.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">"tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6"</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue1<span class="w"> </span>--params_filename<span class="o">=</span><span class="s2">"../params1.txt"</span>
 </span></code></pre></div>
 </div>
 <p>Run UE2:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>srsRAN_4G-ER/build
-</span><span id="line-2">sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue2.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">"tx_port=tcp://*:2011,rx_port=tcp://localhost:2010,id=ue,base_srate=23.04e6"</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue2
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">sudo<span class="w"> </span>./srsue/src/srsue2<span class="w"> </span>../.config/ue2.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">"tx_port=tcp://*:2011,rx_port=tcp://localhost:2010,id=ue,base_srate=23.04e6"</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue2<span class="w"> </span>--params_filename<span class="o">=</span><span class="s2">"../params2.txt"</span>
 </span></code></pre></div>
 </div>
-<p>To run automated scripts for {i} UEs:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./run_srsran_<span class="o">{</span>i<span class="o">}</span>ue.sh<span class="w"> </span><span class="c1"># script is included for 2/ 4 UEs </span>
+<p>To run automated scripts for 2 UEs:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./run_srsran_2ue.sh<span class="w"> </span>
 </span></code></pre></div>
 </div>
-<section id="running-ues-with-cqi-trace-files">
-<h4>Running UEs with CQI trace files</h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./run_<span class="o">{</span>i<span class="o">}</span>ue_cqi_emul.sh<span class="w"> </span><span class="c1"># script is included for 2 UEs</span>
-</span></code></pre></div>
-</div>
-<p>You can run the UEs in separate terminals, use the commands provided in the .sh script.</p>
 <p>Press <code class="docutils literal notranslate"><span class="pre">t</span></code> to view the UE metrics on console</p>
-<p><strong>Updating the CQI channel trace</strong>: file under concern: <code class="docutils literal notranslate"><span class="pre">srsRAN_4G-er-ue1/lib/src/phy/ue/ue_dl.c</span></code>, update line 155 with the desired CQI file which should be present in folder <code class="docutils literal notranslate"><span class="pre">srsRAN_4G-er-ue1/cqis</span></code>. Repeat the same for each UE codebase.</p>
-</section>
+<p><strong>Updating the CQI channel trace</strong>: file under concern: <code class="docutils literal notranslate"><span class="pre">srsran-ue/params{1}.txt</span></code> for ue {i}, update line 5 with the desired CQI file which should be present in folder <code class="docutils literal notranslate"><span class="pre">srsran-ue/cqis</span></code>.</p>
 </section>
 <section id="stream-traffic">
 <h3>Stream Traffic:</h3>
@@ -251,43 +263,13 @@ the [enb_files] section: upadte the file directories</p>
 <section id="running-downlink-iperf-traffic">
 <h4>Running Downlink iperf traffic</h4>
 <p>Terminal 1:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./iperf_server_<span class="o">{</span>i<span class="o">}</span>ues.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./iperf_server_2ues.sh
 </span></code></pre></div>
 </div>
 <p>Terminal 2:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./iperf_client_<span class="o">{</span>i<span class="o">}</span>ues.sh<span class="w"> </span>&lt;rate_ue<span class="o">{</span>i<span class="o">}</span>&gt;<span class="w"> </span>&lt;duration&gt;,<span class="w"> </span>eg:<span class="w"> </span>./iperf_client_2ues.sh<span class="w"> </span>10M<span class="w"> </span>10M<span class="w"> </span><span class="m">1000</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./iperf_client_2ues.sh<span class="w"> </span>&lt;rate_ue<span class="o">{</span>i<span class="o">}</span>&gt;<span class="w"> </span>&lt;duration&gt;,<span class="w"> </span>eg:<span class="w"> </span>./iperf_client_2ues.sh<span class="w"> </span>10M<span class="w"> </span>10M<span class="w"> </span><span class="m">1000</span>
 </span></code></pre></div>
 </div>
-</section>
-<section id="running-uplink-iperf-traffic">
-<h4>Running Uplink iperf traffic</h4>
-<p>Terminal 1:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./iperf_server_<span class="o">{</span>i<span class="o">}</span>ues_ul.sh
-</span></code></pre></div>
-</div>
-<p>Terminal 2:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./iperf_client_<span class="o">{</span>i<span class="o">}</span>ues_ul.sh<span class="w"> </span>&lt;rate_ue<span class="o">{</span>i<span class="o">}</span>&gt;<span class="w"> </span>&lt;duration&gt;,<span class="w"> </span>eg:<span class="w"> </span>./iperf_client_2ues.sh<span class="w"> </span>10M<span class="w"> </span>10M<span class="w"> </span><span class="m">1000</span>
-</span></code></pre></div>
-</div>
-</section>
-<section id="running-various-other-kinds-of-downlink-traffic-profiles">
-<h4>Running various other kinds of Downlink Traffic profiles</h4>
-<p>Start the servers</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">sudo<span class="w"> </span>ip<span class="w"> </span>netns<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ue1<span class="w"> </span>python3<span class="w"> </span>server.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.2<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span>
-</span><span id="line-2">sudo<span class="w"> </span>ip<span class="w"> </span>netns<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ue2<span class="w"> </span>python3<span class="w"> </span>server.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.3<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span>
-</span><span id="line-3">sudo<span class="w"> </span>ip<span class="w"> </span>netns<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ue3<span class="w"> </span>python3<span class="w"> </span>server.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.4<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span>
-</span><span id="line-4">sudo<span class="w"> </span>ip<span class="w"> </span>netns<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ue4<span class="w"> </span>python3<span class="w"> </span>server.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.5<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span>
-</span></code></pre></div>
-</div>
-<p>Start the clients</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">sudo<span class="w"> </span>python3<span class="w"> </span>client_embb.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.2<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span><span class="w">  </span><span class="c1">#--burst 250000 --min-interval 0.5 --max-interval 2.0</span>
-</span><span id="line-2">sudo<span class="w"> </span>python3<span class="w"> </span>client_urllc.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.3<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span>
-</span><span id="line-3">sudo<span class="w"> </span>python3<span class="w"> </span>client_xr.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.4<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span>
-</span><span id="line-4">sudo<span class="w"> </span>python3<span class="w"> </span>client_mmtc.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.5<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span>
-</span></code></pre></div>
-</div>
-<br/>
-<br/>
 </section>
 </section>
 </section>
@@ -450,22 +432,18 @@ the [enb_files] section: upadte the file directories</p>
 <li><a :data-current="activeSection === '#training-reinforcement-learning-policy'" class="reference internal" href="#training-reinforcement-learning-policy">Training Reinforcement Learning Policy</a></li>
 </ul>
 </li>
-<li><a :data-current="activeSection === '#install-srsran-supporting-edgeric-messages-and-control'" class="reference internal" href="#install-srsran-supporting-edgeric-messages-and-control">Install srsRAN supporting EdgeRIC messages and control</a><ul>
+<li><a :data-current="activeSection === '#install-srsran-supporting-edgeric-hooks'" class="reference internal" href="#install-srsran-supporting-edgeric-hooks">Install srsRAN supporting EdgeRIC hooks</a><ul>
 <li><a :data-current="activeSection === '#install-zmq'" class="reference internal" href="#install-zmq">Install zmq</a></li>
 <li><a :data-current="activeSection === '#dependencies-and-cloning-the-repository'" class="reference internal" href="#dependencies-and-cloning-the-repository">Dependencies and cloning the repository</a></li>
+<li><a :data-current="activeSection === '#compile-the-protobuf-message-schema'" class="reference internal" href="#compile-the-protobuf-message-schema">Compile the protobuf message schema</a></li>
 <li><a :data-current="activeSection === '#build-the-repository'" class="reference internal" href="#build-the-repository">Build the repository</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#how-to-run-the-network'" class="reference internal" href="#how-to-run-the-network">How to run the network</a><ul>
 <li><a :data-current="activeSection === '#setup-the-core-and-srsenb'" class="reference internal" href="#setup-the-core-and-srsenb">Setup the core and srsenb</a></li>
-<li><a :data-current="activeSection === '#run-the-ues'" class="reference internal" href="#run-the-ues">Run the UEs</a><ul>
-<li><a :data-current="activeSection === '#running-ues-with-cqi-trace-files'" class="reference internal" href="#running-ues-with-cqi-trace-files">Running UEs with CQI trace files</a></li>
-</ul>
-</li>
+<li><a :data-current="activeSection === '#run-the-ues'" class="reference internal" href="#run-the-ues">Run the UEs</a></li>
 <li><a :data-current="activeSection === '#stream-traffic'" class="reference internal" href="#stream-traffic">Stream Traffic:</a><ul>
 <li><a :data-current="activeSection === '#running-downlink-iperf-traffic'" class="reference internal" href="#running-downlink-iperf-traffic">Running Downlink iperf traffic</a></li>
-<li><a :data-current="activeSection === '#running-uplink-iperf-traffic'" class="reference internal" href="#running-uplink-iperf-traffic">Running Uplink iperf traffic</a></li>
-<li><a :data-current="activeSection === '#running-various-other-kinds-of-downlink-traffic-profiles'" class="reference internal" href="#running-various-other-kinds-of-downlink-traffic-profiles">Running various other kinds of Downlink Traffic profiles</a></li>
 </ul>
 </li>
 </ul>

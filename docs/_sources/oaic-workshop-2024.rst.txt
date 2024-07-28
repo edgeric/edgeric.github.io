@@ -2,6 +2,10 @@ OAIC-EdgeRIC Workshop '24
 ===============
 First EdgeRIC workshop will be held in association with the *NSF open AI Cellular (OAIC) Workshop at Mississippi State University.*
 
+.. image:: er-architecture.png
+  :width: 600
+  :alt: sample text
+
 **Dates:** August 6-8, 2024
 
 **Register here**: https://www.openaicellular.org/2024-oaic-workshop
@@ -41,3 +45,7 @@ First EdgeRIC workshop will be held in association with the *NSF open AI Cellula
     - EdgeRIC training on Tiny-twin
 
       - Train an RL scheduling policy with EdgeRIC
+
+.. toctree::
+
+   edgeric-workshop-tutorial.md

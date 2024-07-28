@@ -4,16 +4,25 @@
 
 RT-E2 interface (Real time E2 interface)
 ---------------
-.. image:: er-messenger.png
+.. image:: er-architecture.png
   :width: 600
   :alt: sample text
 
-- EdgeRIC adopts a low overhead messaging framework [RT-E2]
-   - It is built on top of the ZMQ message passing library
-- EdgeRIC maintains a TTI level synchronization with the RAN stack. 
+- RAN and EdgeRIC communication framework
+   - EdgeRIC adopts a low overhead messaging framework [RT-E2]
+   - It is built on top of the **ZMQ message passing library**
+- RT-E2 message format  
+   - The RT-E2 messaging framework utilizes **Protocol Buffers (protobuf)** for defining the message schemas. Protobuf provides a platform-neutral and language-neutral way to serialize structured data. The schema is compiled into a compact binary format, which allows for efficient transmission and parsing of messages.
+- RT-E2 RAN agent
+   - The ``rtagent`` class is responsible for gathering the KPIs produced every TTI and receiving the corresponding control actions  
+   - ``rtagent::send_to_er()`` function is called at the end of the TTI to pubish the collcted metrics to EdgeRIC
+   - ``rtagent::receive_from_er()`` function is called at the beginning of every TTI to receive the control actions from EdgeRIC and distribute it to the right network function to be utilized at that TTI
+- EdgeRIC messenger 
+   - This is responsible for subscribing to the RAN metrics, which is utilized by the various μApps, and publishing the control actions. 
+   - ``get_metrics_multi()`` subscribes to the RAN every TTI and receives the network metrics, schema defined in``metrics.proto``
+   - ``send_control()`` publishes the control action, schema defined in ``control_actions.pb
+- TTI level synchronization 
    - Our system is synchronized to the TTI-level clock tick from the RAN stack. The RAN stack uses a TTI counter, referred to as RAN index. It is included in all RT-E2 messages to EdgeRIC. EdgeRIC too maintains its own counter, called RIC index which increments by 1 every time it sends out its action. Our system is equipped with a default mechanism to ensure that EdgeRIC is slaved to the current RAN index or TTI by ensuring that the RIC index is always equal to the RAN index.
-- EdgeRIC messenger is responsible for subscribing to the RAN metrics and publishing the control actions. 
-
 
 RT-E2 Report Message
 --------------------
@@ -44,6 +53,7 @@ Structure of the message:
 - **RIC ID**: This is the RIC index
 - **RAN ID**: This is the RAN index or the TTI counter
 
+
 **Example Data Structure**:
 
 .. code-block:: python
@@ -63,6 +73,28 @@ Structure of the message:
 
 This structured message is critical for performance management and optimization of network resources in real-time applications.
 
+This schema is defined as a protobuf message ``metrics.proto``  
+
+.. code-block:: python
+
+   syntax = "proto3";
+
+   message UeMetrics {
+      uint32 rnti = 1;
+      uint32 cqi = 2;
+      uint32 backlog = 3;
+      float snr = 4;
+      uint32 pending_data = 5;
+      float tx_bytes = 6;
+      float rx_bytes = 7;
+   }
+
+   message Metrics {
+      uint32 tti_cnt = 1;
+      repeated UeMetrics ue_metrics = 2;
+      uint32 ric_cnt = 3;
+   }
+
 RT-E2 Policy Message
 ---------------
 
@@ -72,9 +104,25 @@ Structure of the message:
 Example message format:
     ``μApp1-control-message``---> ``UE1 RNTI``, ``Action for UE1``, ``UE2 RNTI``, ``Action for UE2``, ...
 
-    
-
 - EdgeRIC messenger then publishes the control actions to the RAN  
+
+This schema is defined as a protobuf message ``control_actions.proto``  
+
+.. code-block:: python
+
+   syntax = "proto3";
+
+   message SchedulingWeights {
+      uint32 ran_index = 1;
+      repeated float weights = 2;
+   } # schema for sending the scheduling decision
+
+   message Blanking {
+      uint32 ran_index = 1;
+      int32 a = 2;
+      int32 b = 3;
+   } # schema for modifying the available PRBs in UL
+
 
 .. automodule:: src.edgeric_agent
    :members: send_control

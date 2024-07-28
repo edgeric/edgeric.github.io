@@ -7,17 +7,17 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Windex | EdgeRIC v0.1 documentation</title>
-<meta content="Windex | EdgeRIC v0.1 documentation" property="og:title"/>
-<meta content="Windex | EdgeRIC v0.1 documentation" name="twitter:title"/>
+<title>OAIC-EdgeRIC Workshop ‘24 | EdgeRIC v0.1 documentation</title>
+<meta content="OAIC-EdgeRIC Workshop ‘24 | EdgeRIC v0.1 documentation" property="og:title"/>
+<meta content="OAIC-EdgeRIC Workshop ‘24 | EdgeRIC v0.1 documentation" name="twitter:title"/>
 <link href="_static/pygments.css?v=8d216cef" rel="stylesheet" type="text/css"/>
 <link href="_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
 <link href="_static/custom.css?v=162f35ca" rel="stylesheet" type="text/css"/>
 <link href="_static/tabs.css?v=a5c4661c" rel="stylesheet" type="text/css"/>
 <link href="search.html" rel="search" title="Search"/>
 <link href="genindex.html" rel="index" title="Index"/>
-<link href="beamarmor.html" rel="next" title="BeamArmor"/>
-<link href="edgeric.html" rel="prev" title="EdgeRIC main paper"/>
+<link href="edgeric-workshop-tutorial.html" rel="next" title="EdgeRIC tutorial"/>
+<link href="gettingstarted.html" rel="prev" title="Cellular Stack"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -77,8 +77,8 @@
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#over-the-air-execution-module">Over The Air execution module</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Events</span></p>
-<ul>
-<li class="toctree-l1" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="reference internal expandable" href="oaic-workshop-2024.html">OAIC-EdgeRIC Workshop ‘24<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
+<ul class="current">
+<li class="toctree-l1 current" x-data="{ expanded: $el.classList.contains('current') ? true : false }"><a :class="{ 'expanded' : expanded }" @click="expanded = !expanded" class="current reference internal expandable" href="#">OAIC-EdgeRIC Workshop ‘24<button @click.prevent.stop="expanded = !expanded" type="button"><span class="sr-only"></span><svg fill="currentColor" height="18px" stroke="none" viewbox="0 0 24 24" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></a><ul x-show="expanded">
 <li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html">EdgeRIC tutorial</a></li>
 </ul>
 </li>
@@ -92,9 +92,9 @@
 <li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC tutorials</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="edgeric.html">EdgeRIC main paper</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Windex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sparc.html">SPARC</a></li>
 </ul>
@@ -120,12 +120,103 @@
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
 </a>
-<div class="mr-1">/</div><a class="hover:text-foreground overflow-hidden text-ellipsis whitespace-nowrap" href="tutorials.html">&lt;no title&gt;</a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Windex</span>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">OAIC-EdgeRIC Workshop ‘24</span>
 </nav>
 <div id="content" role="main">
-<section id="windex">
-<h1>Windex</h1>
+<section id="oaic-edgeric-workshop-24">
+<h1>OAIC-EdgeRIC Workshop ‘24</h1>
+<p>First EdgeRIC workshop will be held in association with the <em>NSF open AI Cellular (OAIC) Workshop at Mississippi State University.</em></p>
+<a class="reference internal image-reference" href="_images/er-architecture.png"><img alt="sample text" src="_images/er-architecture.png" style="width: 600px;"/></a>
+<p><strong>Dates:</strong> August 6-8, 2024</p>
+<p><strong>Register here</strong>: <a class="reference external" href="https://www.openaicellular.org/2024-oaic-workshop">https://www.openaicellular.org/2024-oaic-workshop</a></p>
+<p><strong>Tutorial Date:</strong> August 7, 12-2PM</p>
+<dl>
+<dt><strong>Agenda:</strong></dt><dd><ul>
+<li><p>Part I: Introduction</p>
+<ul class="simple">
+<li><p>Introduction to the EdgeRIC Project</p></li>
+</ul>
+</li>
+<li><p>Part II: Our network setup</p>
+<ul class="simple">
+<li><p>Installation of our containerized srsRAN 4G with EdgeRIC support</p></li>
+<li><p>Running the E2E n/w with traffic</p></li>
+</ul>
+</li>
+<li><p>Part III: Hands on Tutorial</p>
+<ul>
+<li><p>Introduction to EdgeRIC python API</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>how to write muApps</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Deploy EdgeRIC</p>
+<ul class="simple">
+<li><p>Introduce CQI based abstraction of channel on Tiny-twin</p></li>
+<li><p>Run various kinds of traffic profiles</p></li>
+<li><p>Visualize real time metrics - throughput (UL/ DL), CQI, Buffer (UL/ DL) per UE on dashboard</p></li>
+</ul>
+</li>
+<li><p>Running an example muApp</p>
+<ul class="simple">
+<li><p>Perform downlink scheduling control for various algorithms</p></li>
+</ul>
+</li>
+<li><p>EdgeRIC training on Tiny-twin</p>
+<ul class="simple">
+<li><p>Train an RL scheduling policy with EdgeRIC</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-workshop-tutorial.html">EdgeRIC tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html#mac-scheduling">MAC scheduling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#training-reinforcement-learning-policy">Training Reinforcement Learning Policy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html#install-srsran-supporting-edgeric-hooks">Install srsRAN supporting EdgeRIC hooks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#install-zmq">Install zmq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#dependencies-and-cloning-the-repository">Dependencies and cloning the repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#compile-the-protobuf-message-schema">Compile the protobuf message schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#build-the-repository">Build the repository</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html#how-to-run-the-network">How to run the network</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#setup-the-core-and-srsenb">Setup the core and srsenb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#run-the-ues">Run the UEs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#stream-traffic">Stream Traffic:</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="edgeric-workshop-tutorial.html#running-downlink-iperf-traffic">Running Downlink iperf traffic</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html#running-edgeric-for-downlink-scheduling-control">Running EdgeRIC for downlink scheduling control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#edgeric-messenger">EdgeRIC messenger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#apps-supported-in-this-codebase">μApps supported in this codebase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#running-muapp1-downlink-scheduler">Running muApp1 - downlink scheduler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="edgeric-workshop-tutorial.html#setting-the-scheduler-algorithm-manually">Setting the scheduler algorithm manually</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#running-muapp2-training-an-rl-policy-for-scheduling">Running muApp2 - Training an RL policy for scheduling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="edgeric-workshop-tutorial.html#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="edgeric-workshop-tutorial.html#muapp2-train-rl-dl-scheduling-py">muApp2_train_RL_DL_scheduling.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="edgeric-workshop-tutorial.html#repo-structure">Repo Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="edgeric-workshop-tutorial.html#edgeric-env-edge-ric-py">EdgeRIC Env (edge_ric.py)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 </div></div>
 </main>
