@@ -156,6 +156,7 @@ state of the system. We list the metrics used by this μApp below:</p>
 <h2>Install srsRAN supporting EdgeRIC hooks</h2>
 <section id="option-1-install-on-your-system">
 <h3>Option 1: Install on your system</h3>
+<p>You would need Ubuntu 20 to run this repository, with option 2 you can run on any Linux environment</p>
 <section id="dependencies-and-cloning-the-repository">
 <h4>Dependencies and cloning the repository</h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">sudo<span class="w"> </span>apt-get<span class="w"> </span>update
@@ -216,14 +217,14 @@ state of the system. We list the metrics used by this μApp below:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git
 </span><span id="line-2">git<span class="w"> </span>checkout<span class="w"> </span>oaic-workshop
 </span><span id="line-3">sudo<span class="w"> </span>./dockerbuild_edgeric_oaic.sh
-</span><span id="line-4">sudo<span class="w"> </span>./dockerrun_edgeric_oaic.sh
+</span><span id="line-4">sudo<span class="w"> </span>./dockerrun_edgeric_oaic.sh<span class="w"> </span>host<span class="w"> </span><span class="m">0</span>
 </span></code></pre></div>
 </div>
 </section>
 </section>
 <section id="how-to-run-the-network">
 <h2>How to run the network</h2>
-<p><strong>Running inside Docker:</strong> Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">./dockerexec_edgeric_oaic.sh</span></code> on every terminal before running the following set of commands.</p>
+<p><strong>Running inside Docker:</strong> Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">./dockerexec_edgeric_oaic.sh</span> <span class="pre">0</span></code> on every terminal before running the following set of commands.</p>
 <section id="setup-the-core-and-srsenb">
 <h3>Setup the core and srsenb</h3>
 <p><strong>Terminal 1</strong>: Run the GRC broker, we will run a 2UE scenario</p>
@@ -243,6 +244,11 @@ state of the system. We list the metrics used by this μApp below:</p>
 </section>
 <section id="run-the-ues">
 <h3>Run the UEs</h3>
+<p>First add the UE namespaces</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">ip<span class="w"> </span>netns<span class="w"> </span>add<span class="w"> </span>ue1
+</span><span id="line-2">ip<span class="w"> </span>netns<span class="w"> </span>add<span class="w"> </span>ue2
+</span></code></pre></div>
+</div>
 <p>In this repository, we will use the modified <code class="docutils literal notranslate"><span class="pre">srsue</span></code> codebase provided in <code class="docutils literal notranslate"><span class="pre">srsran-ue</span></code> which provides support
 to run UE with a specified channel trace collected from real world experiments [in our case, the channel is represented by CQI]</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>srsran-ue/build
