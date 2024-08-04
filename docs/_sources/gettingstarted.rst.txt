@@ -50,8 +50,12 @@ Collecting channel traces - CQI based abstraction of channel
 
 We collect CQI traces for various mobility scenarios. Our dataset is elaborated in section 'Dataset'
 
-Over The Air execution module
+Over The Air Setup
 --------------------------
+
+.. image:: ota-setup-2.png
+  :width: 400
+  :alt: sample text
 
 .. Github repository: https://github.com/ushasigh/EdgeRIC, branch: main
 

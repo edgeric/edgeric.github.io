@@ -74,7 +74,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Cellular Stack</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#tiny-twin-emulation-module">Tiny-twin: Emulation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#over-the-air-execution-module">Over The Air execution module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#over-the-air-setup">Over The Air Setup</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Events</span></p>
 <ul class="current">
@@ -126,19 +126,19 @@
 <div id="content" role="main">
 <section id="edgeric-tutorial">
 <h1>EdgeRIC tutorial</h1>
-<p>In this tutorial, we will go over the EdgeRIC architecture and installation if the srsRAN network facilitated with EdgRIC hooks. We also provide a containerized version of our codebase. We will discuss how to write μApps. As an example, we will run a real-time MAC scheduler μApp that assigns scheduling decisions per UE for each TTI. We will look at  multiple scheduling algorithms with this μApp to demonstrate the system
+<p>In this tutorial, we will go over the EdgeRIC architecture and installation of the srsRAN network facilitated with EdgRIC hooks. We also provide a containerized version of our codebase. We will discuss how to write μApps. As an example, we will run a real-time MAC scheduler μApp that assigns scheduling decisions per UE for each TTI. We will look at  multiple scheduling algorithms with this μApp to demonstrate the system
 behavior: <code class="docutils literal notranslate"><span class="pre">Max</span> <span class="pre">Weight</span></code>, <code class="docutils literal notranslate"><span class="pre">Max</span> <span class="pre">CQI</span></code>, <code class="docutils literal notranslate"><span class="pre">Proportional</span> <span class="pre">Fairness</span></code>, <code class="docutils literal notranslate"><span class="pre">Round</span> <span class="pre">Robin</span></code>, and <code class="docutils literal notranslate"><span class="pre">an</span> <span class="pre">RL</span> <span class="pre">based</span> <span class="pre">scheduler</span></code></p>
 
-<section id="mac-scheduling">
-<h2>MAC scheduling</h2>
+<section id="app-demo-mac-scheduling">
+<h2>μApp demo: MAC scheduling</h2>
 <p>This μApp offers scheduling decisions to the RAN at the granularity of one TTI (~1ms). It adopts a weight based
 approach for its decision. The weight of an UE corresponds to its relative priority to be scheduled given the current
 state of the system. We list the metrics used by this μApp below:</p>
 <p>Metrics: <code class="docutils literal notranslate"><span class="pre">ue_data[rnti]['Tx'],</span> <span class="pre">ue_data[rnti]['CQI'],</span> <span class="pre">ue_data[rnti]['BL']</span></code> for each UE.</p>
 <p>Actions Sent:  <code class="docutils literal notranslate"><span class="pre">weight_{i}</span></code> which corresponds to the weight of each UE <code class="docutils literal notranslate"><span class="pre">i</span></code></p>
 <p>RT-E2 Policy Format for this μApp: <code class="docutils literal notranslate"><span class="pre">RNTI_{i},</span> <span class="pre">weight{i}</span></code> where <code class="docutils literal notranslate"><span class="pre">i</span></code> corresponds to each UE.</p>
-<section id="training-reinforcement-learning-policy">
-<h3>Training Reinforcement Learning Policy</h3>
+<section id="training-reinforcement-learning-scheduling-policy">
+<h3>Training Reinforcement Learning scheduling Policy</h3>
 <p>Here, we train an RL agent with the objective of <strong>total system throughput maximization</strong>. Listed below are the specifications for our training:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">- Algorithm used: Proximal Policy Optimization
 </span><span id="line-2">
@@ -154,6 +154,7 @@ state of the system. We list the metrics used by this μApp below:</p>
 </section>
 <section id="install-srsran-supporting-edgeric-hooks">
 <h2>Install srsRAN supporting EdgeRIC hooks</h2>
+<p>We will be using Option 2 in this tutorial!</p>
 <section id="option-1-install-on-your-system">
 <h3>Option 1: Install on your system</h3>
 <p>You would need Ubuntu 20 to run this repository, with option 2 you can run on any Linux environment</p>
@@ -214,31 +215,39 @@ state of the system. We list the metrics used by this μApp below:</p>
 <section id="option-2-install-the-containerized-version">
 <h3>Option 2: Install the containerized version</h3>
 <p>We provide the Dockerfile to run this repository inside a container, the bash scripts account for development mode by mounting the docker volume to local machine</p>
+<p><img alt="Image 1" src="_images/edgeric-docker.png"/></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git
 </span><span id="line-2">git<span class="w"> </span>checkout<span class="w"> </span>oaic-workshop
 </span><span id="line-3">sudo<span class="w"> </span>./dockerbuild_edgeric_oaic.sh
 </span><span id="line-4">sudo<span class="w"> </span>./dockerrun_edgeric_oaic.sh<span class="w"> </span>host<span class="w"> </span><span class="m">0</span>
 </span></code></pre></div>
 </div>
+<section id="note-on-channel-emulation">
+<h4>Note on Channel Emulation</h4>
+<p>We use a modified version of the <code class="docutils literal notranslate"><span class="pre">srsue</span></code> codebase to account for channel variation. Channel is abstracted by the CQI (Channel Quality Indicator) - a 5G MAC layer parameter defined to represent the wireless environment.</p>
+<p><img alt="Image 1" src="_images/tiny-twin%2B%2B.png"/></p>
+<p>Included in this repository are the CQI trace datasets obtained from an extensive measurement drive, the traces can be found in <code class="docutils literal notranslate"><span class="pre">srsran-ue/cqis</span></code></p>
+</section>
 </section>
 </section>
 <section id="how-to-run-the-network">
 <h2>How to run the network</h2>
-<p><strong>Running inside Docker:</strong> Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">./dockerexec_edgeric_oaic.sh</span> <span class="pre">0</span></code> on every terminal before running the following set of commands.</p>
+<p><strong>Running in Docker container:</strong> Run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">./dockerexec_edgeric_oaic.sh</span> <span class="pre">0</span></code> on every terminal before running the following set of commands<br/>
+<strong>Running natively:</strong> Use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> for running all the commands</p>
 <section id="setup-the-core-and-srsenb">
 <h3>Setup the core and srsenb</h3>
 <p><strong>Terminal 1</strong>: Run the GRC broker, we will run a 2UE scenario</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./top_block_2ue_23.04MHz.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">python3<span class="w"> </span>top_block_2ue_no_gui.py<span class="w"> </span><span class="c1"># OR ./top_block_2ue_23.04MHz.py if you have GUI support</span>
 </span></code></pre></div>
 </div>
 <p>This step is not needed in over the air mode</p>
 
 <p><strong>Terminal 2</strong>: Run the EPC</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">sudo<span class="w"> </span>./run_epc.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./run_epc.sh
 </span></code></pre></div>
 </div>
 <p><strong>Terminal 3</strong>: Run the enb</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="w"> </span>sudo<span class="w"> </span>./run_enb.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./run_enb.sh
 </span></code></pre></div>
 </div>
 </section>
@@ -250,7 +259,29 @@ state of the system. We list the metrics used by this μApp below:</p>
 </span></code></pre></div>
 </div>
 <p>In this repository, we will use the modified <code class="docutils literal notranslate"><span class="pre">srsue</span></code> codebase provided in <code class="docutils literal notranslate"><span class="pre">srsran-ue</span></code> which provides support
-to run UE with a specified channel trace collected from real world experiments [in our case, the channel is represented by CQI]</p>
+to run UE with a specified channel trace collected from real world experiments [in our case, the channel is represented by CQI]<br/>
+<strong>Updating the CQI channel trace</strong>: file under concern: <code class="docutils literal notranslate"><span class="pre">srsran-ue/params{1}.txt</span></code> for ue {i}, update line 5 with the desired CQI file which should be present in folder <code class="docutils literal notranslate"><span class="pre">srsran-ue/cqis</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">File:<span class="w"> </span>params1.txt
+</span><span id="line-2"><span class="m">2</span>
+</span><span id="line-3"><span class="m">1</span><span class="w"> </span><span class="m">7</span>
+</span><span id="line-4"><span class="m">1</span>
+</span><span id="line-5">../cqis/random_1.txt
+</span><span id="line-6"><span class="m">60000</span>
+</span><span id="line-7"><span class="c1"># in line 1 First: period of cqi emulation </span>
+</span><span id="line-8"><span class="c1"># in line 2 First: minimum of cqi emulation</span>
+</span><span id="line-9"><span class="c1"># in line 2 Second: of maximum cqi emulation</span>
+</span><span id="line-10"><span class="c1"># If in line 2 both values are zero, it reads a file to get realistic cqi data.</span>
+</span><span id="line-11"><span class="c1"># in line 3 First: initial value of cqi emulation</span>
+</span><span id="line-12"><span class="c1"># in line 4: filename of cqi trace </span>
+</span><span id="line-13"><span class="c1"># in line 5: number of data </span>
+</span></code></pre></div>
+</div>
+<p><strong>Option 1:</strong> Run automated scripts for 2 UEs:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./run_srsran_2ue.sh<span class="w"> </span>
+</span></code></pre></div>
+</div>
+<p>Press <code class="docutils literal notranslate"><span class="pre">t</span></code> to view the UE metrics on console</p>
+<p><strong>Option 2:</strong> Run the UEs on separate terminals</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>srsran-ue/build
 </span></code></pre></div>
 </div>
@@ -262,12 +293,14 @@ to run UE with a specified channel trace collected from real world experiments [
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">sudo<span class="w"> </span>./srsue/src/srsue2<span class="w"> </span>../.config/ue2.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">"tx_port=tcp://*:2011,rx_port=tcp://localhost:2010,id=ue,base_srate=23.04e6"</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue2<span class="w"> </span>--params_filename<span class="o">=</span><span class="s2">"../params2.txt"</span>
 </span></code></pre></div>
 </div>
-<p>To run automated scripts for 2 UEs:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">sudo<span class="w"> </span>./run_srsran_2ue.sh<span class="w"> </span>
+<p>Press <code class="docutils literal notranslate"><span class="pre">t</span></code> to view the UE metrics on console</p>
+<section id="known-issue">
+<h4>Known Issue</h4>
+<p>After every run, a clean build may be necessary, otherwise UEs may not attach. Run the following inside container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./make-ran.sh
 </span></code></pre></div>
 </div>
-<p>Press <code class="docutils literal notranslate"><span class="pre">t</span></code> to view the UE metrics on console</p>
-<p><strong>Updating the CQI channel trace</strong>: file under concern: <code class="docutils literal notranslate"><span class="pre">srsran-ue/params{1}.txt</span></code> for ue {i}, update line 5 with the desired CQI file which should be present in folder <code class="docutils literal notranslate"><span class="pre">srsran-ue/cqis</span></code>.</p>
+</section>
 </section>
 <section id="stream-traffic">
 <h3>Stream Traffic:</h3>
@@ -287,9 +320,10 @@ to run UE with a specified channel trace collected from real world experiments [
 </section>
 </section>
 </section>
-<section id="running-edgeric-for-downlink-scheduling-control">
-<h2>Running EdgeRIC for downlink scheduling control</h2>
+<section id="running-edgeric">
+<h2>Running EdgeRIC</h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>edgeric
+</span><span id="line-2">start<span class="w"> </span>redis-server
 </span></code></pre></div>
 </div>
 <section id="edgeric-messenger">
@@ -309,12 +343,25 @@ to run UE with a specified channel trace collected from real world experiments [
 </span><span id="line-2">│<span class="w">   </span>├──<span class="w"> </span>muApp1_run_DL_scheduling.py
 </span><span id="line-3">├──<span class="w"> </span>/muApp2<span class="w">           </span><span class="c1"># training an RL agent to compute downlink scheduling policy</span>
 </span><span id="line-4"><span class="w">    </span>├──<span class="w"> </span>muApp2_train_RL_DL_scheduling.py
+</span><span id="line-5">├──<span class="w"> </span>/muApp3<span class="w">           </span><span class="c1"># Monitoring the realtime metrics</span>
+</span><span id="line-6"><span class="w">    </span>├──<span class="w"> </span>muApp3_monitor.py<span class="w">    </span>
 </span></code></pre></div>
 </div>
 
 </section>
+<section id="running-muapp3-realtime-monitoring">
+<h3>Running muApp3 - Realtime Monitoring</h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>muApp3
+</span><span id="line-2">python3<span class="w"> </span>muApp3_monitor.py<span class="w"> </span><span class="c1"># sudo not required if you ae running in docker</span>
+</span></code></pre></div>
+</div>
+<p><strong>What to observe</strong><br/>
+[TODO] - what we see - ue_dict when flag = 1 and realtime throughput when flag = 2</p>
+</section>
 <section id="running-muapp1-downlink-scheduler">
 <h3>Running muApp1 - downlink scheduler</h3>
+<p><strong>Weight Based abstraction of control</strong> The scheduling logic in <code class="docutils literal notranslate"><span class="pre">srsenb</span></code> is updated to support a weight based abstraction to allocate the number of RBGs to allocate per UE. A weight based abstraction allows us to implement any kind of scheduling policy where we provide a weight <code class="docutils literal notranslate"><span class="pre">w_i</span></code> for each UE, the RAN then allocates <code class="docutils literal notranslate"><span class="pre">[w_i*available_rbgs]</span></code> RBGs to each UE.<br/>
+<strong>Run the μApp</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>muApp1
 </span><span id="line-2">sudo<span class="w"> </span>python3<span class="w"> </span>muApp1_run_DL_scheduling.py<span class="w"> </span><span class="c1"># sudo not required if you ae running in docker</span>
 </span></code></pre></div>
@@ -346,13 +393,20 @@ to run UE with a specified channel trace collected from real world experiments [
 </div>
 </section>
 </section>
+<section id="using-redis-to-update-the-scheduling-algorithm">
+<h3>Using redis to update the scheduling algorithm</h3>
+<p>[TODO]</p>
+<p><strong>What to observe</strong><br/>
+[TODO] - how does the scheduling of RBG look like - screenshot</p>
+</section>
 <section id="running-muapp2-training-an-rl-policy-for-scheduling">
 <h3>Running muApp2 - Training an RL policy for scheduling</h3>
+<p><img alt="Image 1" src="_images/training_rl.png"/></p>
 <p>We are training a PPO agent with the objective of throughput maximization in this particular study.</p>
 <section id="usage">
 <h4>Usage</h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>muApp2
-</span><span id="line-2">sudo<span class="w"> </span>python3<span class="w"> </span>muApp2_train_RL_DL_scheduling.py<span class="w"> </span>--config-name<span class="o">=</span>edge_ric<span class="w"> </span><span class="c1"># sudo not required if you ae running in docker</span>
+</span><span id="line-2">python3<span class="w"> </span>muApp2_train_RL_DL_scheduling.py<span class="w"> </span>--config-name<span class="o">=</span>edge_ric
 </span></code></pre></div>
 </div>
 </section>
@@ -409,12 +463,12 @@ to run UE with a specified channel trace collected from real world experiments [
 <h4>EdgeRIC Env (edge_ric.py)</h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">                    CQI1          BL1
 </span><span id="line-2">                ┌────────────┬─┬─┬─┬─┐
-</span><span id="line-3">Bernoulli  ───► │            │ │ │ │ │ ──►   f(CQI1,allocated_RGB1)
+</span><span id="line-3">Bernoulli  ───► │            │ │ │ │ │ ──►   f(CQI1, BL1) = allocated_RBG1/ Total
 </span><span id="line-4">                │            │ │ │ │ │
 </span><span id="line-5">                └────────────┴─┴─┴─┴─┘
 </span><span id="line-6">                    CQI2          BL2
 </span><span id="line-7">                ┌────────────────┬─┬─┐
-</span><span id="line-8">Bernoulli  ───► │                │ │ │ ──►   f(CQI2,allocated_RGB2)
+</span><span id="line-8">Bernoulli  ───► │                │ │ │ ──►   f(CQI2, BL2) = allocated_RBG2/ Total
 </span><span id="line-9">                │                │ │ │
 </span><span id="line-10">                └────────────────┴─┴─┘
 </span><span id="line-11">                          .
@@ -425,7 +479,7 @@ to run UE with a specified channel trace collected from real world experiments [
 </span><span id="line-16">                          .
 </span><span id="line-17">                          .
 </span><span id="line-18">                ┌────────────┬─┬─┬─┬─┐
-</span><span id="line-19">Bernoulli  ───► │            │ │ │ │ │ ──►   f(CQI_N,allocated_RBG_N)
+</span><span id="line-19">Bernoulli  ───► │            │ │ │ │ │ ──►   f(CQI_{N}, BL_{N}) = allocated_RBG_{N}/ Total
 </span><span id="line-20">                │            │ │ │ │ │
 </span><span id="line-21">                └────────────┴─┴─┴─┴─┘
 </span></code></pre></div>
@@ -443,8 +497,8 @@ to run UE with a specified channel trace collected from real world experiments [
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
-<li><a :data-current="activeSection === '#mac-scheduling'" class="reference internal" href="#mac-scheduling">MAC scheduling</a><ul>
-<li><a :data-current="activeSection === '#training-reinforcement-learning-policy'" class="reference internal" href="#training-reinforcement-learning-policy">Training Reinforcement Learning Policy</a></li>
+<li><a :data-current="activeSection === '#app-demo-mac-scheduling'" class="reference internal" href="#app-demo-mac-scheduling">μApp demo: MAC scheduling</a><ul>
+<li><a :data-current="activeSection === '#training-reinforcement-learning-scheduling-policy'" class="reference internal" href="#training-reinforcement-learning-scheduling-policy">Training Reinforcement Learning scheduling Policy</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#install-srsran-supporting-edgeric-hooks'" class="reference internal" href="#install-srsran-supporting-edgeric-hooks">Install srsRAN supporting EdgeRIC hooks</a><ul>
@@ -454,25 +508,33 @@ to run UE with a specified channel trace collected from real world experiments [
 <li><a :data-current="activeSection === '#build-the-repository'" class="reference internal" href="#build-the-repository">Build the repository</a></li>
 </ul>
 </li>
-<li><a :data-current="activeSection === '#option-2-install-the-containerized-version'" class="reference internal" href="#option-2-install-the-containerized-version">Option 2: Install the containerized version</a></li>
+<li><a :data-current="activeSection === '#option-2-install-the-containerized-version'" class="reference internal" href="#option-2-install-the-containerized-version">Option 2: Install the containerized version</a><ul>
+<li><a :data-current="activeSection === '#note-on-channel-emulation'" class="reference internal" href="#note-on-channel-emulation">Note on Channel Emulation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#how-to-run-the-network'" class="reference internal" href="#how-to-run-the-network">How to run the network</a><ul>
 <li><a :data-current="activeSection === '#setup-the-core-and-srsenb'" class="reference internal" href="#setup-the-core-and-srsenb">Setup the core and srsenb</a></li>
-<li><a :data-current="activeSection === '#run-the-ues'" class="reference internal" href="#run-the-ues">Run the UEs</a></li>
+<li><a :data-current="activeSection === '#run-the-ues'" class="reference internal" href="#run-the-ues">Run the UEs</a><ul>
+<li><a :data-current="activeSection === '#known-issue'" class="reference internal" href="#known-issue">Known Issue</a></li>
+</ul>
+</li>
 <li><a :data-current="activeSection === '#stream-traffic'" class="reference internal" href="#stream-traffic">Stream Traffic:</a><ul>
 <li><a :data-current="activeSection === '#running-downlink-iperf-traffic'" class="reference internal" href="#running-downlink-iperf-traffic">Running Downlink iperf traffic</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a :data-current="activeSection === '#running-edgeric-for-downlink-scheduling-control'" class="reference internal" href="#running-edgeric-for-downlink-scheduling-control">Running EdgeRIC for downlink scheduling control</a><ul>
+<li><a :data-current="activeSection === '#running-edgeric'" class="reference internal" href="#running-edgeric">Running EdgeRIC</a><ul>
 <li><a :data-current="activeSection === '#edgeric-messenger'" class="reference internal" href="#edgeric-messenger">EdgeRIC messenger</a></li>
 <li><a :data-current="activeSection === '#apps-supported-in-this-codebase'" class="reference internal" href="#apps-supported-in-this-codebase">μApps supported in this codebase</a></li>
+<li><a :data-current="activeSection === '#running-muapp3-realtime-monitoring'" class="reference internal" href="#running-muapp3-realtime-monitoring">Running muApp3 - Realtime Monitoring</a></li>
 <li><a :data-current="activeSection === '#running-muapp1-downlink-scheduler'" class="reference internal" href="#running-muapp1-downlink-scheduler">Running muApp1 - downlink scheduler</a><ul>
 <li><a :data-current="activeSection === '#setting-the-scheduler-algorithm-manually'" class="reference internal" href="#setting-the-scheduler-algorithm-manually">Setting the scheduler algorithm manually</a></li>
 </ul>
 </li>
+<li><a :data-current="activeSection === '#using-redis-to-update-the-scheduling-algorithm'" class="reference internal" href="#using-redis-to-update-the-scheduling-algorithm">Using redis to update the scheduling algorithm</a></li>
 <li><a :data-current="activeSection === '#running-muapp2-training-an-rl-policy-for-scheduling'" class="reference internal" href="#running-muapp2-training-an-rl-policy-for-scheduling">Running muApp2 - Training an RL policy for scheduling</a><ul>
 <li><a :data-current="activeSection === '#usage'" class="reference internal" href="#usage">Usage</a></li>
 <li><a :data-current="activeSection === '#muapp2-train-rl-dl-scheduling-py'" class="reference internal" href="#muapp2-train-rl-dl-scheduling-py">muApp2_train_RL_DL_scheduling.py</a></li>

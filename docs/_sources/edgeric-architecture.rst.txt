@@ -20,7 +20,7 @@ RT-E2 interface (Real time E2 interface)
 - EdgeRIC messenger 
    - This is responsible for subscribing to the RAN metrics, which is utilized by the various μApps, and publishing the control actions. 
    - ``get_metrics_multi()`` subscribes to the RAN every TTI and receives the network metrics, schema defined in``metrics.proto``
-   - ``send_control()`` publishes the control action, schema defined in ``control_actions.pb
+   - ``send_control()`` publishes the control action, schema defined in ``control_actions.pb``
 - TTI level synchronization 
    - Our system is synchronized to the TTI-level clock tick from the RAN stack. The RAN stack uses a TTI counter, referred to as RAN index. It is included in all RT-E2 messages to EdgeRIC. EdgeRIC too maintains its own counter, called RIC index which increments by 1 every time it sends out its action. Our system is equipped with a default mechanism to ensure that EdgeRIC is slaved to the current RAN index or TTI by ensuring that the RIC index is always equal to the RAN index.
 

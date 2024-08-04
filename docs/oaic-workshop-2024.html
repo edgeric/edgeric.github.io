@@ -74,7 +74,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Cellular Stack</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#tiny-twin-emulation-module">Tiny-twin: Emulation module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#over-the-air-execution-module">Over The Air execution module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#over-the-air-setup">Over The Air Setup</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Events</span></p>
 <ul class="current">
@@ -177,8 +177,8 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="edgeric-workshop-tutorial.html">EdgeRIC tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html#mac-scheduling">MAC scheduling</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#training-reinforcement-learning-policy">Training Reinforcement Learning Policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html#app-demo-mac-scheduling">μApp demo: MAC scheduling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#training-reinforcement-learning-scheduling-policy">Training Reinforcement Learning scheduling Policy</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html#install-srsran-supporting-edgeric-hooks">Install srsRAN supporting EdgeRIC hooks</a><ul>
@@ -188,25 +188,33 @@
 <li class="toctree-l4"><a class="reference internal" href="edgeric-workshop-tutorial.html#build-the-repository">Build the repository</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#option-2-install-the-containerized-version">Option 2: Install the containerized version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#option-2-install-the-containerized-version">Option 2: Install the containerized version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="edgeric-workshop-tutorial.html#note-on-channel-emulation">Note on Channel Emulation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html#how-to-run-the-network">How to run the network</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#setup-the-core-and-srsenb">Setup the core and srsenb</a></li>
-<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#run-the-ues">Run the UEs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#run-the-ues">Run the UEs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="edgeric-workshop-tutorial.html#known-issue">Known Issue</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#stream-traffic">Stream Traffic:</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="edgeric-workshop-tutorial.html#running-downlink-iperf-traffic">Running Downlink iperf traffic</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html#running-edgeric-for-downlink-scheduling-control">Running EdgeRIC for downlink scheduling control</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html#running-edgeric">Running EdgeRIC</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#edgeric-messenger">EdgeRIC messenger</a></li>
 <li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#apps-supported-in-this-codebase">μApps supported in this codebase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#running-muapp3-realtime-monitoring">Running muApp3 - Realtime Monitoring</a></li>
 <li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#running-muapp1-downlink-scheduler">Running muApp1 - downlink scheduler</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="edgeric-workshop-tutorial.html#setting-the-scheduler-algorithm-manually">Setting the scheduler algorithm manually</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#using-redis-to-update-the-scheduling-algorithm">Using redis to update the scheduling algorithm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="edgeric-workshop-tutorial.html#running-muapp2-training-an-rl-policy-for-scheduling">Running muApp2 - Training an RL policy for scheduling</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="edgeric-workshop-tutorial.html#usage">Usage</a></li>
 <li class="toctree-l4"><a class="reference internal" href="edgeric-workshop-tutorial.html#muapp2-train-rl-dl-scheduling-py">muApp2_train_RL_DL_scheduling.py</a></li>
