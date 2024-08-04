@@ -136,7 +136,8 @@ This step is not needed in over the air mode
 ./run_enb.sh
 ```
 #### Run the UEs 
-First add the UE namespaces
+First add the UE namespaces  
+**Terminal 4:**  
 ```bash
 ip netns add ue1
 ip netns add ue2
@@ -161,6 +162,7 @@ File: params1.txt
 ```
 
 **Option 1:** Run automated scripts for 2 UEs:  
+**Terminal 4:**  
 ```bash
 ./run_srsran_2ue.sh 
 ```
@@ -181,31 +183,33 @@ sudo ./srsue/src/srsue2 ../.config/ue2.conf --rf.device_name=zmq --rf.device_arg
 Press ``t`` to view the UE metrics on console  
 
 ##### Known Issue
+**Make sure you have an immediate UE attach, UEs should not try to reattach**   
 After every run, a clean build may be necessary, otherwise UEs may not attach. Run the following inside container:
 ```bash
+./stop-ran.sh
 ./make-ran.sh
 ```
 
 #### Stream Traffic:
-
-```bash
-cd traffic-generator
-```
+The traffic generators are located in folder ``/traffic-generator``
 
 ##### Running Downlink iperf traffic
 
-Terminal 1:  
+**Terminal 5:** 
 ```bash
-sudo ./iperf_server_2ues.sh
+cd traffic-generator
+./iperf_server_2ues.sh
 ```
-Terminal 2:  
+**Terminal 6:** 
 ```bash
-./iperf_client_2ues.sh <rate_ue{i}> <duration>, eg: ./iperf_client_2ues.sh 10M 10M 1000
+cd traffic-generator
+# ./iperf_client_2ues.sh <rate_ue{i}> <duration>, eg: below
+./iperf_client_2ues.sh 21M 5M 10000
 ```
 
 
 ### Running EdgeRIC 
-
+**Terminal 7:** 
 ```bash
 cd edgeric
 start redis-server
@@ -239,19 +243,13 @@ edgeric_messenger
     ├── metrics_monitor_aggregate.py # launch dashboard for aggregate statistics
     ├── metrics_monitor_perUE.py     # launch dashboard for per UE metrics  -->
 
-#### Running muApp3 - Realtime Monitoring
-```bash
-cd muApp3
-python3 muApp3_monitor.py # sudo not required if you ae running in docker
-```
-**What to observe**  
-[TODO] - what we see - ue_dict when flag = 1 and realtime throughput when flag = 2
 
 #### Running muApp1 - downlink scheduler
 
 **Weight Based abstraction of control** The scheduling logic in ``srsenb`` is updated to support a weight based abstraction to allocate the number of RBGs to allocate per UE. A weight based abstraction allows us to implement any kind of scheduling policy where we provide a weight ``w_i`` for each UE, the RAN then allocates ``[w_i*available_rbgs]`` RBGs to each UE.     
-**Run the μApp** 
+**Terminal 8:** 
 ```bash
+cd edgeric
 cd muApp1
 sudo python3 muApp1_run_DL_scheduling.py # sudo not required if you ae running in docker
 ```
@@ -260,7 +258,7 @@ Set the scheduling algorithm you want to run:
 ```bash
 # Line 259
 selected_algorithm = "Max CQI"   # selection can be: Max CQI, Max Weight,
-                                 # Proportional Fair (PF), Round Robin - to be implemneted
+                                 # Proportional Fair (PF), Round Robin 
                                  # RL - models are included for 2 UEs
 ```
 If the algorithm selected is RL, set the directory for the RL model
@@ -279,12 +277,94 @@ The respective models are saved in:
     ├── fully_trained_model 
       ├──model_demo.pt
 ```
-
+ 
 #### Using redis to update the scheduling algorithm
-[TODO]
+**Terminal 9:**
+```bash
+redis-cli set scheduling_algorithm "Max Weight" #selection can be: Max CQI, Max Weight,
+                                                # Proportional Fair (PF), Round Robin
+                                                # RL - models are included for 2 UEs
+```
 
 **What to observe**  
-[TODO] - how does the scheduling of RBG look like - screenshot
+**Terminal 3** - srsenb terminal will show the scheduling allocations
+```bash
+time: 1722802166592145 rnti: 70 alloc_mask: 1111111000000 # the 1s indicate the PRBs allocated to RNTI 70
+time: 1722802166592178 rnti: 71 alloc_mask: 0000000111111 # the 1s indicate the PRBs allocated to RNTI 71
+time: 1722802168789991 rnti: 71 alloc_mask: 1111110000000 
+time: 1722802168790027 rnti: 70 alloc_mask: 0000001111111 
+time: 1722802170990251 rnti: 70 alloc_mask: 1111111000000 
+time: 1722802170990285 rnti: 71 alloc_mask: 0000000111111 
+time: 1722802173211321 rnti: 70 alloc_mask: 1111111000000 
+time: 1722802173211351 rnti: 71 alloc_mask: 0000000111111 
+time: 1722802175402790 rnti: 71 alloc_mask: 1111110000000 
+time: 1722802175402823 rnti: 70 alloc_mask: 0000001111111 
+```
+
+**Terminal 8** - muApp1 terminal will show the algorithms selected and will print the total average system throughput observed
+```bash
+Algorithm index:  2  ,  Max Weight
+total system throughput: 8.781944 
+
+Algorithm index:  2  ,  Max Weight
+total system throughput: 8.063600000000001 
+
+Algorithm index:  2  ,  Max Weight
+total system throughput: 8.093352 
+
+Algorithm index:  2  ,  Max Weight
+total system throughput: 8.071168 
+```
+**Terminal 9** - To observe the throughput updates, let us update the scheduler with the following command 
+```bash
+redis-cli set scheduling_algorithm "RL" 
+```
+
+**Terminal 8** - Increased system throughput observed with our trained RL model
+```bash
+Algorithm index:  20  ,  RL
+Executing RL model at: ./rl_model/fully_trained_model
+total system throughput: 12.071200000000001 
+
+Algorithm index:  20  ,  RL
+Executing RL model at: ./rl_model/fully_trained_model
+total system throughput: 11.727624 
+
+Algorithm index:  20  ,  RL
+Executing RL model at: ./rl_model/fully_trained_model
+total system throughput: 11.714879999999999 
+
+Algorithm index:  20  ,  RL
+Executing RL model at: ./rl_model/fully_trained_model
+total system throughput: 11.710384 
+
+Algorithm index:  20  ,  RL
+Executing RL model at: ./rl_model/fully_trained_model
+total system throughput: 11.743776 
+```
+
+#### Running muApp3 - Monitoring
+This muApp will help us see the RT-E2 Report Message from the RAN and the RT-E2 Policy message sent to RAN  
+**Terminal 10:**
+```bash
+cd edgeric/muApp3
+python3 muApp3_monitor_terminal.py 
+```
+**What to observe**  
+```bash
+RT-E2 Report: 
+
+RAN Index: 791000, RIC index: 790998 
+
+UE Dictionary: {70: {'CQI': 7, 'SNR': 115.46858215332031, 'Backlog': 384977, 'Pending Data': 0, 'Tx_brate': 1980.0, 'Rx_brate': 0.0}, 71: {'CQI': 8, 'SNR': 116.41766357421875, 'Backlog': 1503, 'Pending Data': 0, 'Tx_brate': 0.0, 'Rx_brate': 0.0}} 
+
+RT-E2 Policy (Scheduling): 
+Sent to RAN: ran_index: 790999
+weights: 70.0
+weights: -0.15028022229671478
+weights: 71.0
+weights: 1.150280237197876
+```
 
 #### Running muApp2 - Training an RL policy for scheduling
 

@@ -60,7 +60,7 @@ Controlling the MIMO weights in realtime to steer the beam null in the direction
 
 System Performance Optimization with AI based scheduling
 ^^^^^^^^^^^^^^
-Controlling the scheduling decision with Reinforcement Learning based policy that was trained to maximize the overall system throughput observed
+Controlling the scheduling decision with a Reinforcement Learning based policy that was trained to maximize the overall system throughput observed
 
 .. raw:: html
 

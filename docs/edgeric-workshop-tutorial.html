@@ -253,7 +253,8 @@ state of the system. We list the metrics used by this μApp below:</p>
 </section>
 <section id="run-the-ues">
 <h3>Run the UEs</h3>
-<p>First add the UE namespaces</p>
+<p>First add the UE namespaces<br/>
+<strong>Terminal 4:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">ip<span class="w"> </span>netns<span class="w"> </span>add<span class="w"> </span>ue1
 </span><span id="line-2">ip<span class="w"> </span>netns<span class="w"> </span>add<span class="w"> </span>ue2
 </span></code></pre></div>
@@ -276,7 +277,8 @@ to run UE with a specified channel trace collected from real world experiments [
 </span><span id="line-13"><span class="c1"># in line 5: number of data </span>
 </span></code></pre></div>
 </div>
-<p><strong>Option 1:</strong> Run automated scripts for 2 UEs:</p>
+<p><strong>Option 1:</strong> Run automated scripts for 2 UEs:<br/>
+<strong>Terminal 4:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./run_srsran_2ue.sh<span class="w"> </span>
 </span></code></pre></div>
 </div>
@@ -296,25 +298,28 @@ to run UE with a specified channel trace collected from real world experiments [
 <p>Press <code class="docutils literal notranslate"><span class="pre">t</span></code> to view the UE metrics on console</p>
 <section id="known-issue">
 <h4>Known Issue</h4>
-<p>After every run, a clean build may be necessary, otherwise UEs may not attach. Run the following inside container:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./make-ran.sh
+<p><strong>Make sure you have an immediate UE attach, UEs should not try to reattach</strong><br/>
+After every run, a clean build may be necessary, otherwise UEs may not attach. Run the following inside container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./stop-ran.sh
+</span><span id="line-2">./make-ran.sh
 </span></code></pre></div>
 </div>
 </section>
 </section>
 <section id="stream-traffic">
 <h3>Stream Traffic:</h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>traffic-generator
-</span></code></pre></div>
-</div>
+<p>The traffic generators are located in folder <code class="docutils literal notranslate"><span class="pre">/traffic-generator</span></code></p>
 <section id="running-downlink-iperf-traffic">
 <h4>Running Downlink iperf traffic</h4>
-<p>Terminal 1:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">sudo<span class="w"> </span>./iperf_server_2ues.sh
+<p><strong>Terminal 5:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>traffic-generator
+</span><span id="line-2">./iperf_server_2ues.sh
 </span></code></pre></div>
 </div>
-<p>Terminal 2:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./iperf_client_2ues.sh<span class="w"> </span>&lt;rate_ue<span class="o">{</span>i<span class="o">}</span>&gt;<span class="w"> </span>&lt;duration&gt;,<span class="w"> </span>eg:<span class="w"> </span>./iperf_client_2ues.sh<span class="w"> </span>10M<span class="w"> </span>10M<span class="w"> </span><span class="m">1000</span>
+<p><strong>Terminal 6:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>traffic-generator
+</span><span id="line-2"><span class="c1"># ./iperf_client_2ues.sh &lt;rate_ue{i}&gt; &lt;duration&gt;, eg: below</span>
+</span><span id="line-3">./iperf_client_2ues.sh<span class="w"> </span>21M<span class="w"> </span>5M<span class="w"> </span><span class="m">10000</span>
 </span></code></pre></div>
 </div>
 </section>
@@ -322,6 +327,7 @@ to run UE with a specified channel trace collected from real world experiments [
 </section>
 <section id="running-edgeric">
 <h2>Running EdgeRIC</h2>
+<p><strong>Terminal 7:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>edgeric
 </span><span id="line-2">start<span class="w"> </span>redis-server
 </span></code></pre></div>
@@ -349,21 +355,13 @@ to run UE with a specified channel trace collected from real world experiments [
 </div>
 
 </section>
-<section id="running-muapp3-realtime-monitoring">
-<h3>Running muApp3 - Realtime Monitoring</h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>muApp3
-</span><span id="line-2">python3<span class="w"> </span>muApp3_monitor.py<span class="w"> </span><span class="c1"># sudo not required if you ae running in docker</span>
-</span></code></pre></div>
-</div>
-<p><strong>What to observe</strong><br/>
-[TODO] - what we see - ue_dict when flag = 1 and realtime throughput when flag = 2</p>
-</section>
 <section id="running-muapp1-downlink-scheduler">
 <h3>Running muApp1 - downlink scheduler</h3>
 <p><strong>Weight Based abstraction of control</strong> The scheduling logic in <code class="docutils literal notranslate"><span class="pre">srsenb</span></code> is updated to support a weight based abstraction to allocate the number of RBGs to allocate per UE. A weight based abstraction allows us to implement any kind of scheduling policy where we provide a weight <code class="docutils literal notranslate"><span class="pre">w_i</span></code> for each UE, the RAN then allocates <code class="docutils literal notranslate"><span class="pre">[w_i*available_rbgs]</span></code> RBGs to each UE.<br/>
-<strong>Run the μApp</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>muApp1
-</span><span id="line-2">sudo<span class="w"> </span>python3<span class="w"> </span>muApp1_run_DL_scheduling.py<span class="w"> </span><span class="c1"># sudo not required if you ae running in docker</span>
+<strong>Terminal 8:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>edgeric
+</span><span id="line-2"><span class="nb">cd</span><span class="w"> </span>muApp1
+</span><span id="line-3">sudo<span class="w"> </span>python3<span class="w"> </span>muApp1_run_DL_scheduling.py<span class="w"> </span><span class="c1"># sudo not required if you ae running in docker</span>
 </span></code></pre></div>
 </div>
 <section id="setting-the-scheduler-algorithm-manually">
@@ -371,7 +369,7 @@ to run UE with a specified channel trace collected from real world experiments [
 <p>Set the scheduling algorithm you want to run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1"># Line 259</span>
 </span><span id="line-2"><span class="nv">selected_algorithm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Max CQI"</span><span class="w">   </span><span class="c1"># selection can be: Max CQI, Max Weight,</span>
-</span><span id="line-3"><span class="w">                                 </span><span class="c1"># Proportional Fair (PF), Round Robin - to be implemneted</span>
+</span><span id="line-3"><span class="w">                                 </span><span class="c1"># Proportional Fair (PF), Round Robin </span>
 </span><span id="line-4"><span class="w">                                 </span><span class="c1"># RL - models are included for 2 UEs</span>
 </span></code></pre></div>
 </div>
@@ -395,9 +393,90 @@ to run UE with a specified channel trace collected from real world experiments [
 </section>
 <section id="using-redis-to-update-the-scheduling-algorithm">
 <h3>Using redis to update the scheduling algorithm</h3>
-<p>[TODO]</p>
+<p><strong>Terminal 9:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">redis-cli<span class="w"> </span><span class="nb">set</span><span class="w"> </span>scheduling_algorithm<span class="w"> </span><span class="s2">"Max Weight"</span><span class="w"> </span><span class="c1">#selection can be: Max CQI, Max Weight,</span>
+</span><span id="line-2"><span class="w">                                                </span><span class="c1"># Proportional Fair (PF), Round Robin</span>
+</span><span id="line-3"><span class="w">                                                </span><span class="c1"># RL - models are included for 2 UEs</span>
+</span></code></pre></div>
+</div>
 <p><strong>What to observe</strong><br/>
-[TODO] - how does the scheduling of RBG look like - screenshot</p>
+<strong>Terminal 3</strong> - srsenb terminal will show the scheduling allocations</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">time:<span class="w"> </span><span class="m">1722802166592145</span><span class="w"> </span>rnti:<span class="w"> </span><span class="m">70</span><span class="w"> </span>alloc_mask:<span class="w"> </span><span class="m">1111111000000</span><span class="w"> </span><span class="c1"># the 1s indicate the PRBs allocated to RNTI 70</span>
+</span><span id="line-2">time:<span class="w"> </span><span class="m">1722802166592178</span><span class="w"> </span>rnti:<span class="w"> </span><span class="m">71</span><span class="w"> </span>alloc_mask:<span class="w"> </span><span class="m">0000000111111</span><span class="w"> </span><span class="c1"># the 1s indicate the PRBs allocated to RNTI 71</span>
+</span><span id="line-3">time:<span class="w"> </span><span class="m">1722802168789991</span><span class="w"> </span>rnti:<span class="w"> </span><span class="m">71</span><span class="w"> </span>alloc_mask:<span class="w"> </span><span class="m">1111110000000</span><span class="w"> </span>
+</span><span id="line-4">time:<span class="w"> </span><span class="m">1722802168790027</span><span class="w"> </span>rnti:<span class="w"> </span><span class="m">70</span><span class="w"> </span>alloc_mask:<span class="w"> </span><span class="m">0000001111111</span><span class="w"> </span>
+</span><span id="line-5">time:<span class="w"> </span><span class="m">1722802170990251</span><span class="w"> </span>rnti:<span class="w"> </span><span class="m">70</span><span class="w"> </span>alloc_mask:<span class="w"> </span><span class="m">1111111000000</span><span class="w"> </span>
+</span><span id="line-6">time:<span class="w"> </span><span class="m">1722802170990285</span><span class="w"> </span>rnti:<span class="w"> </span><span class="m">71</span><span class="w"> </span>alloc_mask:<span class="w"> </span><span class="m">0000000111111</span><span class="w"> </span>
+</span><span id="line-7">time:<span class="w"> </span><span class="m">1722802173211321</span><span class="w"> </span>rnti:<span class="w"> </span><span class="m">70</span><span class="w"> </span>alloc_mask:<span class="w"> </span><span class="m">1111111000000</span><span class="w"> </span>
+</span><span id="line-8">time:<span class="w"> </span><span class="m">1722802173211351</span><span class="w"> </span>rnti:<span class="w"> </span><span class="m">71</span><span class="w"> </span>alloc_mask:<span class="w"> </span><span class="m">0000000111111</span><span class="w"> </span>
+</span><span id="line-9">time:<span class="w"> </span><span class="m">1722802175402790</span><span class="w"> </span>rnti:<span class="w"> </span><span class="m">71</span><span class="w"> </span>alloc_mask:<span class="w"> </span><span class="m">1111110000000</span><span class="w"> </span>
+</span><span id="line-10">time:<span class="w"> </span><span class="m">1722802175402823</span><span class="w"> </span>rnti:<span class="w"> </span><span class="m">70</span><span class="w"> </span>alloc_mask:<span class="w"> </span><span class="m">0000001111111</span><span class="w"> </span>
+</span></code></pre></div>
+</div>
+<p><strong>Terminal 8</strong> - muApp1 terminal will show the algorithms selected and will print the total average system throughput observed</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">Algorithm<span class="w"> </span>index:<span class="w">  </span><span class="m">2</span><span class="w">  </span>,<span class="w">  </span>Max<span class="w"> </span>Weight
+</span><span id="line-2">total<span class="w"> </span>system<span class="w"> </span>throughput:<span class="w"> </span><span class="m">8</span>.781944<span class="w"> </span>
+</span><span id="line-3">
+</span><span id="line-4">Algorithm<span class="w"> </span>index:<span class="w">  </span><span class="m">2</span><span class="w">  </span>,<span class="w">  </span>Max<span class="w"> </span>Weight
+</span><span id="line-5">total<span class="w"> </span>system<span class="w"> </span>throughput:<span class="w"> </span><span class="m">8</span>.063600000000001<span class="w"> </span>
+</span><span id="line-6">
+</span><span id="line-7">Algorithm<span class="w"> </span>index:<span class="w">  </span><span class="m">2</span><span class="w">  </span>,<span class="w">  </span>Max<span class="w"> </span>Weight
+</span><span id="line-8">total<span class="w"> </span>system<span class="w"> </span>throughput:<span class="w"> </span><span class="m">8</span>.093352<span class="w"> </span>
+</span><span id="line-9">
+</span><span id="line-10">Algorithm<span class="w"> </span>index:<span class="w">  </span><span class="m">2</span><span class="w">  </span>,<span class="w">  </span>Max<span class="w"> </span>Weight
+</span><span id="line-11">total<span class="w"> </span>system<span class="w"> </span>throughput:<span class="w"> </span><span class="m">8</span>.071168<span class="w"> </span>
+</span></code></pre></div>
+</div>
+<p><strong>Terminal 9</strong> - To observe the throughput updates, let us update the scheduler with the following command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">redis-cli<span class="w"> </span><span class="nb">set</span><span class="w"> </span>scheduling_algorithm<span class="w"> </span><span class="s2">"RL"</span><span class="w"> </span>
+</span></code></pre></div>
+</div>
+<p><strong>Terminal 8</strong> - Increased system throughput observed with our trained RL model</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">Algorithm<span class="w"> </span>index:<span class="w">  </span><span class="m">20</span><span class="w">  </span>,<span class="w">  </span>RL
+</span><span id="line-2">Executing<span class="w"> </span>RL<span class="w"> </span>model<span class="w"> </span>at:<span class="w"> </span>./rl_model/fully_trained_model
+</span><span id="line-3">total<span class="w"> </span>system<span class="w"> </span>throughput:<span class="w"> </span><span class="m">12</span>.071200000000001<span class="w"> </span>
+</span><span id="line-4">
+</span><span id="line-5">Algorithm<span class="w"> </span>index:<span class="w">  </span><span class="m">20</span><span class="w">  </span>,<span class="w">  </span>RL
+</span><span id="line-6">Executing<span class="w"> </span>RL<span class="w"> </span>model<span class="w"> </span>at:<span class="w"> </span>./rl_model/fully_trained_model
+</span><span id="line-7">total<span class="w"> </span>system<span class="w"> </span>throughput:<span class="w"> </span><span class="m">11</span>.727624<span class="w"> </span>
+</span><span id="line-8">
+</span><span id="line-9">Algorithm<span class="w"> </span>index:<span class="w">  </span><span class="m">20</span><span class="w">  </span>,<span class="w">  </span>RL
+</span><span id="line-10">Executing<span class="w"> </span>RL<span class="w"> </span>model<span class="w"> </span>at:<span class="w"> </span>./rl_model/fully_trained_model
+</span><span id="line-11">total<span class="w"> </span>system<span class="w"> </span>throughput:<span class="w"> </span><span class="m">11</span>.714879999999999<span class="w"> </span>
+</span><span id="line-12">
+</span><span id="line-13">Algorithm<span class="w"> </span>index:<span class="w">  </span><span class="m">20</span><span class="w">  </span>,<span class="w">  </span>RL
+</span><span id="line-14">Executing<span class="w"> </span>RL<span class="w"> </span>model<span class="w"> </span>at:<span class="w"> </span>./rl_model/fully_trained_model
+</span><span id="line-15">total<span class="w"> </span>system<span class="w"> </span>throughput:<span class="w"> </span><span class="m">11</span>.710384<span class="w"> </span>
+</span><span id="line-16">
+</span><span id="line-17">Algorithm<span class="w"> </span>index:<span class="w">  </span><span class="m">20</span><span class="w">  </span>,<span class="w">  </span>RL
+</span><span id="line-18">Executing<span class="w"> </span>RL<span class="w"> </span>model<span class="w"> </span>at:<span class="w"> </span>./rl_model/fully_trained_model
+</span><span id="line-19">total<span class="w"> </span>system<span class="w"> </span>throughput:<span class="w"> </span><span class="m">11</span>.743776<span class="w"> </span>
+</span></code></pre></div>
+</div>
+</section>
+<section id="running-muapp3-monitoring">
+<h3>Running muApp3 - Monitoring</h3>
+<p>This muApp will help us see the RT-E2 Report Message from the RAN and the RT-E2 Policy message sent to RAN<br/>
+<strong>Terminal 10:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>edgeric/muApp3
+</span><span id="line-2">python3<span class="w"> </span>muApp3_monitor_terminal.py<span class="w"> </span>
+</span></code></pre></div>
+</div>
+<p><strong>What to observe</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">RT-E2<span class="w"> </span>Report:<span class="w"> </span>
+</span><span id="line-2">
+</span><span id="line-3">RAN<span class="w"> </span>Index:<span class="w"> </span><span class="m">791000</span>,<span class="w"> </span>RIC<span class="w"> </span>index:<span class="w"> </span><span class="m">790998</span><span class="w"> </span>
+</span><span id="line-4">
+</span><span id="line-5">UE<span class="w"> </span>Dictionary:<span class="w"> </span><span class="o">{</span><span class="m">70</span>:<span class="w"> </span><span class="o">{</span><span class="s1">'CQI'</span>:<span class="w"> </span><span class="m">7</span>,<span class="w"> </span><span class="s1">'SNR'</span>:<span class="w"> </span><span class="m">115</span>.46858215332031,<span class="w"> </span><span class="s1">'Backlog'</span>:<span class="w"> </span><span class="m">384977</span>,<span class="w"> </span><span class="s1">'Pending Data'</span>:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="s1">'Tx_brate'</span>:<span class="w"> </span><span class="m">1980</span>.0,<span class="w"> </span><span class="s1">'Rx_brate'</span>:<span class="w"> </span><span class="m">0</span>.0<span class="o">}</span>,<span class="w"> </span><span class="m">71</span>:<span class="w"> </span><span class="o">{</span><span class="s1">'CQI'</span>:<span class="w"> </span><span class="m">8</span>,<span class="w"> </span><span class="s1">'SNR'</span>:<span class="w"> </span><span class="m">116</span>.41766357421875,<span class="w"> </span><span class="s1">'Backlog'</span>:<span class="w"> </span><span class="m">1503</span>,<span class="w"> </span><span class="s1">'Pending Data'</span>:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="s1">'Tx_brate'</span>:<span class="w"> </span><span class="m">0</span>.0,<span class="w"> </span><span class="s1">'Rx_brate'</span>:<span class="w"> </span><span class="m">0</span>.0<span class="o">}}</span><span class="w"> </span>
+</span><span id="line-6">
+</span><span id="line-7">RT-E2<span class="w"> </span>Policy<span class="w"> </span><span class="o">(</span>Scheduling<span class="o">)</span>:<span class="w"> </span>
+</span><span id="line-8">Sent<span class="w"> </span>to<span class="w"> </span>RAN:<span class="w"> </span>ran_index:<span class="w"> </span><span class="m">790999</span>
+</span><span id="line-9">weights:<span class="w"> </span><span class="m">70</span>.0
+</span><span id="line-10">weights:<span class="w"> </span>-0.15028022229671478
+</span><span id="line-11">weights:<span class="w"> </span><span class="m">71</span>.0
+</span><span id="line-12">weights:<span class="w"> </span><span class="m">1</span>.150280237197876
+</span></code></pre></div>
+</div>
 </section>
 <section id="running-muapp2-training-an-rl-policy-for-scheduling">
 <h3>Running muApp2 - Training an RL policy for scheduling</h3>
@@ -529,12 +608,12 @@ to run UE with a specified channel trace collected from real world experiments [
 <li><a :data-current="activeSection === '#running-edgeric'" class="reference internal" href="#running-edgeric">Running EdgeRIC</a><ul>
 <li><a :data-current="activeSection === '#edgeric-messenger'" class="reference internal" href="#edgeric-messenger">EdgeRIC messenger</a></li>
 <li><a :data-current="activeSection === '#apps-supported-in-this-codebase'" class="reference internal" href="#apps-supported-in-this-codebase">μApps supported in this codebase</a></li>
-<li><a :data-current="activeSection === '#running-muapp3-realtime-monitoring'" class="reference internal" href="#running-muapp3-realtime-monitoring">Running muApp3 - Realtime Monitoring</a></li>
 <li><a :data-current="activeSection === '#running-muapp1-downlink-scheduler'" class="reference internal" href="#running-muapp1-downlink-scheduler">Running muApp1 - downlink scheduler</a><ul>
 <li><a :data-current="activeSection === '#setting-the-scheduler-algorithm-manually'" class="reference internal" href="#setting-the-scheduler-algorithm-manually">Setting the scheduler algorithm manually</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#using-redis-to-update-the-scheduling-algorithm'" class="reference internal" href="#using-redis-to-update-the-scheduling-algorithm">Using redis to update the scheduling algorithm</a></li>
+<li><a :data-current="activeSection === '#running-muapp3-monitoring'" class="reference internal" href="#running-muapp3-monitoring">Running muApp3 - Monitoring</a></li>
 <li><a :data-current="activeSection === '#running-muapp2-training-an-rl-policy-for-scheduling'" class="reference internal" href="#running-muapp2-training-an-rl-policy-for-scheduling">Running muApp2 - Training an RL policy for scheduling</a><ul>
 <li><a :data-current="activeSection === '#usage'" class="reference internal" href="#usage">Usage</a></li>
 <li><a :data-current="activeSection === '#muapp2-train-rl-dl-scheduling-py'" class="reference internal" href="#muapp2-train-rl-dl-scheduling-py">muApp2_train_RL_DL_scheduling.py</a></li>
