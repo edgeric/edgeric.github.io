@@ -216,12 +216,20 @@ state of the system. We list the metrics used by this μApp below:</p>
 <h3>Option 2: Install the containerized version</h3>
 <p>We provide the Dockerfile to run this repository inside a container, the bash scripts account for development mode by mounting the docker volume to local machine</p>
 <p><img alt="Image 1" src="_images/edgeric-docker.png"/></p>
+<p>Let us first download and install the image of the compute environment</p>
+<p><strong>Terminal 0</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git
 </span><span id="line-2">git<span class="w"> </span>checkout<span class="w"> </span>oaic-workshop
 </span><span id="line-3">sudo<span class="w"> </span>./dockerbuild_edgeric_oaic.sh
 </span><span id="line-4">sudo<span class="w"> </span>./dockerrun_edgeric_oaic.sh<span class="w"> </span>host<span class="w"> </span><span class="m">0</span>
 </span></code></pre></div>
 </div>
+<section id="building-the-srsran-with-edgeric-support">
+<h4>Building the srsRAN with EdgeRIC support</h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./make_ran.sh
+</span></code></pre></div>
+</div>
+</section>
 <section id="note-on-channel-emulation">
 <h4>Note on Channel Emulation</h4>
 <p>We use a modified version of the <code class="docutils literal notranslate"><span class="pre">srsue</span></code> codebase to account for channel variation. Channel is abstracted by the CQI (Channel Quality Indicator) - a 5G MAC layer parameter defined to represent the wireless environment.</p>
@@ -299,11 +307,45 @@ to run UE with a specified channel trace collected from real world experiments [
 <section id="known-issue">
 <h4>Known Issue</h4>
 <p><strong>Make sure you have an immediate UE attach, UEs should not try to reattach</strong><br/>
-After every run, a clean build may be necessary, otherwise UEs may not attach. Run the following inside container:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./stop-ran.sh
-</span><span id="line-2">./make-ran.sh
+After every run, a clean build may be necessary, otherwise UEs may not attach. Run the following inside container:<br/>
+<strong>Terminal 0</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./stop_ran.sh
+</span><span id="line-2">./make_ran.sh
 </span></code></pre></div>
 </div>
+<p><strong>What does immediate attach look like</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">Attaching<span class="w"> </span>UE...
+</span><span id="line-2">Closing<span class="w"> </span>stdin<span class="w"> </span>thread.
+</span><span id="line-3">Current<span class="w"> </span>sample<span class="w"> </span>rate<span class="w"> </span>is<span class="w"> </span><span class="m">1</span>.92<span class="w"> </span>MHz<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>base<span class="w"> </span>rate<span class="w"> </span>of<span class="w"> </span><span class="m">23</span>.04<span class="w"> </span>MHz<span class="w"> </span><span class="o">(</span>x12<span class="w"> </span>decimation<span class="o">)</span>
+</span><span id="line-4">Current<span class="w"> </span>sample<span class="w"> </span>rate<span class="w"> </span>is<span class="w"> </span><span class="m">1</span>.92<span class="w"> </span>MHz<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>base<span class="w"> </span>rate<span class="w"> </span>of<span class="w"> </span><span class="m">23</span>.04<span class="w"> </span>MHz<span class="w"> </span><span class="o">(</span>x12<span class="w"> </span>decimation<span class="o">)</span>
+</span><span id="line-5">.<span class="w"> </span><span class="c1"># of cqis: 60000 done!</span>
+</span><span id="line-6">Attaching<span class="w"> </span>UE...
+</span><span id="line-7">Closing<span class="w"> </span>stdin<span class="w"> </span>thread.
+</span><span id="line-8">Current<span class="w"> </span>sample<span class="w"> </span>rate<span class="w"> </span>is<span class="w"> </span><span class="m">1</span>.92<span class="w"> </span>MHz<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>base<span class="w"> </span>rate<span class="w"> </span>of<span class="w"> </span><span class="m">23</span>.04<span class="w"> </span>MHz<span class="w"> </span><span class="o">(</span>x12<span class="w"> </span>decimation<span class="o">)</span>
+</span><span id="line-9">Current<span class="w"> </span>sample<span class="w"> </span>rate<span class="w"> </span>is<span class="w"> </span><span class="m">1</span>.92<span class="w"> </span>MHz<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>base<span class="w"> </span>rate<span class="w"> </span>of<span class="w"> </span><span class="m">23</span>.04<span class="w"> </span>MHz<span class="w"> </span><span class="o">(</span>x12<span class="w"> </span>decimation<span class="o">)</span>
+</span><span id="line-10">.
+</span><span id="line-11">
+</span><span id="line-12">Found<span class="w"> </span>Cell:<span class="w">  </span><span class="nv">Mode</span><span class="o">=</span>FDD,<span class="w"> </span><span class="nv">PCI</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">PRB</span><span class="o">=</span><span class="m">25</span>,<span class="w"> </span><span class="nv">Ports</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">CP</span><span class="o">=</span>Normal,<span class="w"> </span><span class="nv">CFO</span><span class="o">=</span>-0.2<span class="w"> </span>KHz
+</span><span id="line-13">Found<span class="w"> </span>Cell:<span class="w">  </span><span class="nv">Mode</span><span class="o">=</span>FDD,<span class="w"> </span><span class="nv">PCI</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">PRB</span><span class="o">=</span><span class="m">25</span>,<span class="w"> </span><span class="nv">Ports</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">CP</span><span class="o">=</span>Normal,<span class="w"> </span><span class="nv">CFO</span><span class="o">=</span>-0.2<span class="w"> </span>KHz
+</span><span id="line-14">Current<span class="w"> </span>sample<span class="w"> </span>rate<span class="w"> </span>is<span class="w"> </span><span class="m">5</span>.76<span class="w"> </span>MHz<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>base<span class="w"> </span>rate<span class="w"> </span>of<span class="w"> </span><span class="m">23</span>.04<span class="w"> </span>MHz<span class="w"> </span><span class="o">(</span>x4<span class="w"> </span>decimation<span class="o">)</span>
+</span><span id="line-15">Current<span class="w"> </span>sample<span class="w"> </span>rate<span class="w"> </span>is<span class="w"> </span><span class="m">5</span>.76<span class="w"> </span>MHz<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>base<span class="w"> </span>rate<span class="w"> </span>of<span class="w"> </span><span class="m">23</span>.04<span class="w"> </span>MHz<span class="w"> </span><span class="o">(</span>x4<span class="w"> </span>decimation<span class="o">)</span>
+</span><span id="line-16">Current<span class="w"> </span>sample<span class="w"> </span>rate<span class="w"> </span>is<span class="w"> </span><span class="m">5</span>.76<span class="w"> </span>MHz<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>base<span class="w"> </span>rate<span class="w"> </span>of<span class="w"> </span><span class="m">23</span>.04<span class="w"> </span>MHz<span class="w"> </span><span class="o">(</span>x4<span class="w"> </span>decimation<span class="o">)</span>
+</span><span id="line-17">Current<span class="w"> </span>sample<span class="w"> </span>rate<span class="w"> </span>is<span class="w"> </span><span class="m">5</span>.76<span class="w"> </span>MHz<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>base<span class="w"> </span>rate<span class="w"> </span>of<span class="w"> </span><span class="m">23</span>.04<span class="w"> </span>MHz<span class="w"> </span><span class="o">(</span>x4<span class="w"> </span>decimation<span class="o">)</span>
+</span><span id="line-18">Found<span class="w"> </span>PLMN:<span class="w">  </span><span class="nv">Id</span><span class="o">=</span><span class="m">00101</span>,<span class="w"> </span><span class="nv">TAC</span><span class="o">=</span><span class="m">7</span>
+</span><span id="line-19">Found<span class="w"> </span>PLMN:<span class="w">  </span><span class="nv">Id</span><span class="o">=</span><span class="m">00101</span>,<span class="w"> </span><span class="nv">TAC</span><span class="o">=</span><span class="m">7</span>
+</span><span id="line-20">Random<span class="w"> </span>Access<span class="w"> </span>Transmission:<span class="w"> </span><span class="nv">seq</span><span class="o">=</span><span class="m">9</span>,<span class="w"> </span><span class="nv">tti</span><span class="o">=</span><span class="m">341</span>,<span class="w"> </span>ra-rnti<span class="o">=</span>0x2
+</span><span id="line-21">Random<span class="w"> </span>Access<span class="w"> </span>Transmission:<span class="w"> </span><span class="nv">seq</span><span class="o">=</span><span class="m">20</span>,<span class="w"> </span><span class="nv">tti</span><span class="o">=</span><span class="m">341</span>,<span class="w"> </span>ra-rnti<span class="o">=</span>0x2
+</span><span id="line-22">RRC<span class="w"> </span>Connected
+</span><span id="line-23">Random<span class="w"> </span>Access<span class="w"> </span>Complete.<span class="w">     </span>c-rnti<span class="o">=</span>0x46,<span class="w"> </span><span class="nv">ta</span><span class="o">=</span><span class="m">0</span>
+</span><span id="line-24">RRC<span class="w"> </span>Connected
+</span><span id="line-25">Random<span class="w"> </span>Access<span class="w"> </span>Complete.<span class="w">     </span>c-rnti<span class="o">=</span>0x47,<span class="w"> </span><span class="nv">ta</span><span class="o">=</span><span class="m">0</span>
+</span><span id="line-26">Network<span class="w"> </span>attach<span class="w"> </span>successful.<span class="w"> </span>IP:<span class="w"> </span><span class="m">172</span>.16.0.2
+</span><span id="line-27">Network<span class="w"> </span>attach<span class="w"> </span>successful.<span class="w"> </span>IP:<span class="w"> </span><span class="m">172</span>.16.0.3
+</span><span id="line-28">Software<span class="w"> </span>Radio<span class="w"> </span>Systems<span class="w"> </span>RAN<span class="w"> </span><span class="o">(</span>srsRAN<span class="o">)</span><span class="w"> </span><span class="m">5</span>/8/2024<span class="w"> </span><span class="m">22</span>:38:19<span class="w"> </span>TZ:0
+</span><span id="line-29">Software<span class="w"> </span>Radio<span class="w"> </span>Systems<span class="w"> </span>RAN<span class="w"> </span><span class="o">(</span>srsRAN<span class="o">)</span><span class="w"> </span><span class="m">5</span>/8/2024<span class="w"> </span><span class="m">22</span>:38:19<span class="w"> </span>TZ:0
+</span></code></pre></div>
+</div>
+<p>If you do not observe this, please rebuild srsRAN by running <code class="docutils literal notranslate"><span class="pre">./make_ran.sh</span></code></p>
 </section>
 </section>
 <section id="stream-traffic">
@@ -361,7 +403,8 @@ After every run, a clean build may be necessary, otherwise UEs may not attach. R
 <strong>Terminal 8:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cd</span><span class="w"> </span>edgeric
 </span><span id="line-2"><span class="nb">cd</span><span class="w"> </span>muApp1
-</span><span id="line-3">sudo<span class="w"> </span>python3<span class="w"> </span>muApp1_run_DL_scheduling.py<span class="w"> </span><span class="c1"># sudo not required if you ae running in docker</span>
+</span><span id="line-3">redis-cli<span class="w"> </span><span class="nb">set</span><span class="w"> </span>scheduling_algorithm<span class="w"> </span><span class="s2">"Max CQI"</span><span class="w"> </span><span class="c1"># setting an initial scheduler</span>
+</span><span id="line-4">sudo<span class="w"> </span>python3<span class="w"> </span>muApp1_run_DL_scheduling.py<span class="w"> </span><span class="c1"># sudo not required if you ae running in docker</span>
 </span></code></pre></div>
 </div>
 <section id="setting-the-scheduler-algorithm-manually">
@@ -588,6 +631,7 @@ After every run, a clean build may be necessary, otherwise UEs may not attach. R
 </ul>
 </li>
 <li><a :data-current="activeSection === '#option-2-install-the-containerized-version'" class="reference internal" href="#option-2-install-the-containerized-version">Option 2: Install the containerized version</a><ul>
+<li><a :data-current="activeSection === '#building-the-srsran-with-edgeric-support'" class="reference internal" href="#building-the-srsran-with-edgeric-support">Building the srsRAN with EdgeRIC support</a></li>
 <li><a :data-current="activeSection === '#note-on-channel-emulation'" class="reference internal" href="#note-on-channel-emulation">Note on Channel Emulation</a></li>
 </ul>
 </li>

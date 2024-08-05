@@ -96,12 +96,20 @@ We provide the Dockerfile to run this repository inside a container, the bash sc
 
 ![Image 1](edgeric-docker.png "EdgeRIC docker")     
 
+Let us first download and install the image of the compute environment
+
+**Terminal 0**
 ```bash 
 git clone https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git
 git checkout oaic-workshop
 sudo ./dockerbuild_edgeric_oaic.sh
 sudo ./dockerrun_edgeric_oaic.sh host 0
 ```
+##### Building the srsRAN with EdgeRIC support
+```bash 
+./make_ran.sh
+```
+
 ##### Note on Channel Emulation
 We use a modified version of the ``srsue`` codebase to account for channel variation. Channel is abstracted by the CQI (Channel Quality Indicator) - a 5G MAC layer parameter defined to represent the wireless environment.
 
@@ -184,11 +192,47 @@ Press ``t`` to view the UE metrics on console
 
 ##### Known Issue
 **Make sure you have an immediate UE attach, UEs should not try to reattach**   
-After every run, a clean build may be necessary, otherwise UEs may not attach. Run the following inside container:
+After every run, a clean build may be necessary, otherwise UEs may not attach. Run the following inside container:  
+**Terminal 0**
 ```bash
-./stop-ran.sh
-./make-ran.sh
+./stop_ran.sh
+./make_ran.sh
 ```
+
+**What does immediate attach look like**
+
+```bash
+Attaching UE...
+Closing stdin thread.
+Current sample rate is 1.92 MHz with a base rate of 23.04 MHz (x12 decimation)
+Current sample rate is 1.92 MHz with a base rate of 23.04 MHz (x12 decimation)
+. # of cqis: 60000 done!
+Attaching UE...
+Closing stdin thread.
+Current sample rate is 1.92 MHz with a base rate of 23.04 MHz (x12 decimation)
+Current sample rate is 1.92 MHz with a base rate of 23.04 MHz (x12 decimation)
+.
+
+Found Cell:  Mode=FDD, PCI=1, PRB=25, Ports=1, CP=Normal, CFO=-0.2 KHz
+Found Cell:  Mode=FDD, PCI=1, PRB=25, Ports=1, CP=Normal, CFO=-0.2 KHz
+Current sample rate is 5.76 MHz with a base rate of 23.04 MHz (x4 decimation)
+Current sample rate is 5.76 MHz with a base rate of 23.04 MHz (x4 decimation)
+Current sample rate is 5.76 MHz with a base rate of 23.04 MHz (x4 decimation)
+Current sample rate is 5.76 MHz with a base rate of 23.04 MHz (x4 decimation)
+Found PLMN:  Id=00101, TAC=7
+Found PLMN:  Id=00101, TAC=7
+Random Access Transmission: seq=9, tti=341, ra-rnti=0x2
+Random Access Transmission: seq=20, tti=341, ra-rnti=0x2
+RRC Connected
+Random Access Complete.     c-rnti=0x46, ta=0
+RRC Connected
+Random Access Complete.     c-rnti=0x47, ta=0
+Network attach successful. IP: 172.16.0.2
+Network attach successful. IP: 172.16.0.3
+Software Radio Systems RAN (srsRAN) 5/8/2024 22:38:19 TZ:0
+Software Radio Systems RAN (srsRAN) 5/8/2024 22:38:19 TZ:0
+```
+If you do not observe this, please rebuild srsRAN by running ``./make_ran.sh``
 
 #### Stream Traffic:
 The traffic generators are located in folder ``/traffic-generator``
@@ -251,6 +295,7 @@ edgeric_messenger
 ```bash
 cd edgeric
 cd muApp1
+redis-cli set scheduling_algorithm "Max CQI" # setting an initial scheduler
 sudo python3 muApp1_run_DL_scheduling.py # sudo not required if you ae running in docker
 ```
 ##### Setting the scheduler algorithm manually
