@@ -101,8 +101,13 @@ Let us first download and install the image of the compute environment
 **Terminal 0**
 ```bash 
 git clone https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git
+cd EdgeRIC-A-real-time-RIC
 git checkout oaic-workshop
-sudo ./dockerbuild_edgeric_oaic.sh
+
+sudo docker pull nlpurnhyun/edgeric_base_oaic
+
+# sudo ./dockerbuild_edgeric_oaic.sh
+
 sudo ./dockerrun_edgeric_oaic.sh host 0
 ```
 ##### Building the srsRAN with EdgeRIC support
@@ -119,7 +124,11 @@ Included in this repository are the CQI trace datasets obtained from an extensiv
 
 ### How to run the network 
 
-**Running in Docker container:** Run ``sudo ./dockerexec_edgeric_oaic.sh 0`` on every terminal before running the following set of commands  
+**Running in Docker container:** Run the following on every terminal before running the following set of commands  
+```bash 
+sudo ./dockerexec_edgeric_oaic.sh 0
+cd EdgeRIC-A-real-time-RIC
+```
 **Running natively:** Use ``sudo`` for running all the commands 
 
 #### Setup the core and srsenb 
@@ -256,7 +265,7 @@ cd traffic-generator
 **Terminal 7:** 
 ```bash
 cd edgeric
-start redis-server
+redis-server
 ```
 
 #### EdgeRIC messenger
