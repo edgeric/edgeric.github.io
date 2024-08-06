@@ -1,5 +1,5 @@
 
-## EdgeRIC tutorial
+## EdgeRIC tutorial 
 In this tutorial, we will go over the EdgeRIC architecture and installation of the srsRAN network facilitated with EdgRIC hooks. We also provide a containerized version of our codebase. We will discuss how to write μApps. As an example, we will run a real-time MAC scheduler μApp that assigns scheduling decisions per UE for each TTI. We will look at  multiple scheduling algorithms with this μApp to demonstrate the system 
 behavior: ``Max Weight``, ``Max CQI``, ``Proportional Fairness``, ``Round Robin``, and ``an RL based scheduler``  
 
@@ -126,8 +126,8 @@ Included in this repository are the CQI trace datasets obtained from an extensiv
 
 **Running in Docker container:** Run the following on every terminal before running the following set of commands  
 ```bash 
-sudo ./dockerexec_edgeric_oaic.sh 0
 cd EdgeRIC-A-real-time-RIC
+sudo ./dockerexec_edgeric_oaic.sh 0
 ```
 **Running natively:** Use ``sudo`` for running all the commands 
 
@@ -305,7 +305,7 @@ edgeric_messenger
 cd edgeric
 cd muApp1
 redis-cli set scheduling_algorithm "Max CQI" # setting an initial scheduler
-sudo python3 muApp1_run_DL_scheduling.py # sudo not required if you ae running in docker
+python3 muApp1_run_DL_scheduling.py # sudo not required if you ae running in docker
 ```
 ##### Setting the scheduler algorithm manually
 Set the scheduling algorithm you want to run:
@@ -430,7 +430,7 @@ We are training a PPO agent with the objective of throughput maximization in thi
 
 ```bash
 cd muApp2
-python3 muApp2_train_RL_DL_scheduling.py --config-name=edge_ric
+python3 muApp2_train_RL_DL_scheduling.py # --config-name=edge_ric
 ```
 
 ##### muApp2_train_RL_DL_scheduling.py
