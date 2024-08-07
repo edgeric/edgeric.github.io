@@ -229,8 +229,10 @@ state of the system. We list the metrics used by this μApp below:</p>
 </span><span id="line-9">sudo<span class="w"> </span>./dockerrun_edgeric_oaic.sh<span class="w"> </span>host<span class="w"> </span><span class="m">0</span>
 </span></code></pre></div>
 </div>
+<p>To ensure the Docker is running, run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">images</span></code> and verify the image exist <code class="docutils literal notranslate"><span class="pre">nlpurnhyun/edgeric_base_oaic</span></code> and run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">docker</span> <span class="pre">ps</span></code> to check it is running</p>
 <section id="building-the-srsran-with-edgeric-support">
 <h4>Building the srsRAN with EdgeRIC support</h4>
+<p>Before the next step, make sure you are inside docker container.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">./make_ran.sh
 </span></code></pre></div>
 </div>

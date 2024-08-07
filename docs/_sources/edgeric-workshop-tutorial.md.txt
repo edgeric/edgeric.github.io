@@ -110,7 +110,10 @@ sudo docker pull nlpurnhyun/edgeric_base_oaic
 
 sudo ./dockerrun_edgeric_oaic.sh host 0
 ```
+To ensure the Docker is running, run `sudo docker images` and verify the image exist `nlpurnhyun/edgeric_base_oaic` and run `sudo docker ps` to check it is running
+
 ##### Building the srsRAN with EdgeRIC support
+Before the next step, make sure you are inside docker container.
 ```bash 
 ./make_ran.sh
 ```
