@@ -134,6 +134,7 @@ Contact us
 |
 | Ushasi Ghosh: PhD student, UCSD, ughosh@ucsd.edu  
 | Woo Hyun Ko: Senior Research Engineer, TAMU, whko@tamu.edu
+| Ish Kumar Jain: Professor, RPI, ikjain@ucsd.edu
 | Dinesh Bharadia: Professor, UCSD, dineshb@ucsd.edu
 | Srinivas Shakkottai: Professor, TAMU, sshakkot@tamu.edu
 
