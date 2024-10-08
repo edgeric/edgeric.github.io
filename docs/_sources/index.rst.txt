@@ -6,7 +6,7 @@
 EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks
 ========================================================================
 
-.. image:: intro-pic.png
+.. image:: edgeric-intro.png
   :width: 700
   :alt: sample text
 
@@ -74,19 +74,26 @@ Controlling the scheduling decision with a Reinforcement Learning based policy t
 Current Status
 ------------------------
 
-.. image:: edgeric-full-status.png
+We are currently supported on the **srsRAN Project**. 
+
+.. image:: edgeric-architecture-overview.png
   :width: 600
   :alt: sample text
 
-This release is based on srsRAN 4G, **we will shortly release our 5G version**. We suport:
-   - Realtime KPI monitoring:
-      - UL/ DL channel conditions
-      - UL/ DL pending buffers for transmission
-      - Per UE throughput
-      - Baseband I/Q sample monitoring
-   - Realtime Control actions: 
-      - MAC scheduling on the downlink, both AI training and inference capability
-      - Control for MIMO weights 
+
+**Our Currently Supported Real time Metrics:**
+
+.. image:: current-metrics.png
+  :width: 600
+  :alt: sample text
+
+**Our Currently Supported Control Capabilities:**
+
+.. image:: current-capabilities.png
+  :width: 600
+  :alt: sample text
+
+**Refer to our 5G Repository:** `Github <https://github.com/ushasigh/srsran-edgeric-5g>`_ 
 
 
 Current Publications
@@ -149,6 +156,9 @@ Contact us
    :caption: Events
 
    oaic-workshop-2024.rst 
+
+   srsran-2024-workshop.rst 
+
 .. toctree::
    :maxdepth: 2
    :caption: EdgeRIC Architecture

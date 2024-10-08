@@ -43,12 +43,14 @@ Structure of the message:
 
 - **ue_data**: Dictionary containing per-UE metrics. Each entry is keyed by the RNTI of the UE and contains the following KPIs:
 
-  - ``CQI``: Channel Quality Indicator, reflecting the downlink channel quality.
-  - ``BL``: Amount of backlog data waiting to be sent to the UE in the downlink.
-  - ``SNR``: Signal-to-Noise Ratio in the uplink, indicating the quality of the uplink signal.
-  - ``Pending_Data``: Data that is waiting to be sent in the uplink.
-  - ``Tx``: The current downlink bitrate for the UE.
-  - ``Rx``: The current uplink bitrate for the UE.
+  - ``cqi``: Channel Quality Indicator, reflecting the downlink channel quality.
+  - ``dl_buffer``: Amount of backlog data waiting to be sent to the UE in the downlink.
+  - ``snr``: Signal-to-Noise Ratio in the uplink, indicating the quality of the uplink signal.
+  - ``ul_buffer``: Data that is waiting to be sent in the uplink.
+  - ``dl_tbs``: The current downlink bytes scheduled for the UE.
+  - ``tx_bytes``: The current downlink bitrate for the UE.
+  - ``rx_bytes``: The current uplink bitrate for the UE.
+  - ``ul_tbs``: The current uplink bytes scheduled for the UE.
 
 - **RIC ID**: This is the RIC index
 - **RAN ID**: This is the RAN index or the TTI counter
@@ -60,15 +62,17 @@ Structure of the message:
 
     ue_data = {
         1001: {  # Example RNTI
-            'CQI': 15, # Downlink Channel Quality Indicator
-            'BL': 500,  # Downlink Backlog Buffer in Bytes
-            'SNR': 20.5,  # Uplink SNR in dB
-            'pending_data': 250,  # Uplink Pending Data in Bytes
-            'Tx': 100  # Downlink bitrate in Mbps
-            'Rx': 100 # Uplink bitrate in Mbps
+            'cqi': 15, # Downlink Channel Quality Indicator
+            'dl_buffer': 500,  # Downlink Backlog Buffer in Bytes
+            'snr': 20.5,  # Uplink SNR in dB
+            'ul_buffer': 250,  # Uplink Pending Data in Bytes
+            'dl_tbs' : 300, # The current downlink bytes scheduled for the UE.
+            'ul_tbs' : 320, # The current uplink bytes scheduled for the UE.
+            'tx_bytes': 100  # Downlink bitrate in Mbps
+            'rx_bytes': 100 # Uplink bitrate in Mbps
         }
     }
-    RIC_ID = 1
+    # RIC_ID = 1
     RAN_ID = 101
 
 This structured message is critical for performance management and optimization of network resources in real-time applications.
@@ -98,8 +102,11 @@ This schema is defined as a protobuf message ``metrics.proto``
 RT-E2 Policy Message
 ---------------
 
-Structure of the message:
-``μApp1-control-message``, ``μApp2-control-message``, ``RIC ID``, ``RAN ID``.  
+Structure of the message:  
+
+``μApp1-control-message``,  ``RIC ID``, ``RAN ID``. 
+ 
+``μApp2-control-message``,  ``RIC ID``, ``RAN ID``.
 
 Example message format:
     ``μApp1-control-message``---> ``UE1 RNTI``, ``Action for UE1``, ``UE2 RNTI``, ``Action for UE2``, ...

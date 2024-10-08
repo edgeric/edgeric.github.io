@@ -17,7 +17,7 @@
 <link href="search.html" rel="search" title="Search"/>
 <link href="genindex.html" rel="index" title="Index"/>
 <link href="tutorials.html" rel="next" title="&lt;no title&gt;"/>
-<link href="edgeric-workshop-tutorial.html" rel="prev" title="EdgeRIC tutorial"/>
+<link href="srsran-2024-workshop.html" rel="prev" title="srsRAN Workshop ‘24"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -82,6 +82,7 @@
 <li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html">EdgeRIC tutorial</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="srsran-2024-workshop.html">srsRAN Workshop ‘24</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
 <ul class="current">
@@ -181,12 +182,14 @@
 <ul class="simple">
 <li><p><strong>ue_data</strong>: Dictionary containing per-UE metrics. Each entry is keyed by the RNTI of the UE and contains the following KPIs:</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">CQI</span></code>: Channel Quality Indicator, reflecting the downlink channel quality.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">BL</span></code>: Amount of backlog data waiting to be sent to the UE in the downlink.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SNR</span></code>: Signal-to-Noise Ratio in the uplink, indicating the quality of the uplink signal.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Pending_Data</span></code>: Data that is waiting to be sent in the uplink.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Tx</span></code>: The current downlink bitrate for the UE.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Rx</span></code>: The current uplink bitrate for the UE.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cqi</span></code>: Channel Quality Indicator, reflecting the downlink channel quality.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dl_buffer</span></code>: Amount of backlog data waiting to be sent to the UE in the downlink.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">snr</span></code>: Signal-to-Noise Ratio in the uplink, indicating the quality of the uplink signal.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ul_buffer</span></code>: Data that is waiting to be sent in the uplink.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dl_tbs</span></code>: The current downlink bytes scheduled for the UE.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tx_bytes</span></code>: The current downlink bitrate for the UE.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rx_bytes</span></code>: The current uplink bitrate for the UE.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ul_tbs</span></code>: The current uplink bytes scheduled for the UE.</p></li>
 </ul>
 </li>
 <li><p><strong>RIC ID</strong>: This is the RIC index</p></li>
@@ -195,16 +198,18 @@
 <p><strong>Example Data Structure</strong>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">ue_data</span> <span class="o">=</span> <span class="p">{</span>
 </span><span id="line-2">    <span class="mi">1001</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># Example RNTI</span>
-</span><span id="line-3">        <span class="s1">'CQI'</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="c1"># Downlink Channel Quality Indicator</span>
-</span><span id="line-4">        <span class="s1">'BL'</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>  <span class="c1"># Downlink Backlog Buffer in Bytes</span>
-</span><span id="line-5">        <span class="s1">'SNR'</span><span class="p">:</span> <span class="mf">20.5</span><span class="p">,</span>  <span class="c1"># Uplink SNR in dB</span>
-</span><span id="line-6">        <span class="s1">'pending_data'</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>  <span class="c1"># Uplink Pending Data in Bytes</span>
-</span><span id="line-7">        <span class="s1">'Tx'</span><span class="p">:</span> <span class="mi">100</span>  <span class="c1"># Downlink bitrate in Mbps</span>
-</span><span id="line-8">        <span class="s1">'Rx'</span><span class="p">:</span> <span class="mi">100</span> <span class="c1"># Uplink bitrate in Mbps</span>
-</span><span id="line-9">    <span class="p">}</span>
-</span><span id="line-10"><span class="p">}</span>
-</span><span id="line-11"><span class="n">RIC_ID</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span id="line-12"><span class="n">RAN_ID</span> <span class="o">=</span> <span class="mi">101</span>
+</span><span id="line-3">        <span class="s1">'cqi'</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="c1"># Downlink Channel Quality Indicator</span>
+</span><span id="line-4">        <span class="s1">'dl_buffer'</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>  <span class="c1"># Downlink Backlog Buffer in Bytes</span>
+</span><span id="line-5">        <span class="s1">'snr'</span><span class="p">:</span> <span class="mf">20.5</span><span class="p">,</span>  <span class="c1"># Uplink SNR in dB</span>
+</span><span id="line-6">        <span class="s1">'ul_buffer'</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>  <span class="c1"># Uplink Pending Data in Bytes</span>
+</span><span id="line-7">        <span class="s1">'dl_tbs'</span> <span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="c1"># The current downlink bytes scheduled for the UE.</span>
+</span><span id="line-8">        <span class="s1">'ul_tbs'</span> <span class="p">:</span> <span class="mi">320</span><span class="p">,</span> <span class="c1"># The current uplink bytes scheduled for the UE.</span>
+</span><span id="line-9">        <span class="s1">'tx_bytes'</span><span class="p">:</span> <span class="mi">100</span>  <span class="c1"># Downlink bitrate in Mbps</span>
+</span><span id="line-10">        <span class="s1">'rx_bytes'</span><span class="p">:</span> <span class="mi">100</span> <span class="c1"># Uplink bitrate in Mbps</span>
+</span><span id="line-11">    <span class="p">}</span>
+</span><span id="line-12"><span class="p">}</span>
+</span><span id="line-13"><span class="c1"># RIC_ID = 1</span>
+</span><span id="line-14"><span class="n">RAN_ID</span> <span class="o">=</span> <span class="mi">101</span>
 </span></code></pre></div>
 </div>
 <p>This structured message is critical for performance management and optimization of network resources in real-time applications.</p>
@@ -231,8 +236,9 @@
 </section>
 <section id="rt-e2-policy-message">
 <h1>RT-E2 Policy Message</h1>
-<p>Structure of the message:
-<code class="docutils literal notranslate"><span class="pre">μApp1-control-message</span></code>, <code class="docutils literal notranslate"><span class="pre">μApp2-control-message</span></code>, <code class="docutils literal notranslate"><span class="pre">RIC</span> <span class="pre">ID</span></code>, <code class="docutils literal notranslate"><span class="pre">RAN</span> <span class="pre">ID</span></code>.</p>
+<p>Structure of the message:</p>
+<p><code class="docutils literal notranslate"><span class="pre">μApp1-control-message</span></code>,  <code class="docutils literal notranslate"><span class="pre">RIC</span> <span class="pre">ID</span></code>, <code class="docutils literal notranslate"><span class="pre">RAN</span> <span class="pre">ID</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">μApp2-control-message</span></code>,  <code class="docutils literal notranslate"><span class="pre">RIC</span> <span class="pre">ID</span></code>, <code class="docutils literal notranslate"><span class="pre">RAN</span> <span class="pre">ID</span></code>.</p>
 <dl class="simple">
 <dt>Example message format:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">μApp1-control-message</span></code>—&gt; <code class="docutils literal notranslate"><span class="pre">UE1</span> <span class="pre">RNTI</span></code>, <code class="docutils literal notranslate"><span class="pre">Action</span> <span class="pre">for</span> <span class="pre">UE1</span></code>, <code class="docutils literal notranslate"><span class="pre">UE2</span> <span class="pre">RNTI</span></code>, <code class="docutils literal notranslate"><span class="pre">Action</span> <span class="pre">for</span> <span class="pre">UE2</span></code>, …</p>
 </dd>
