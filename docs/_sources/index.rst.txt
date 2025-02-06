@@ -69,12 +69,21 @@ Controlling the scheduling decision with a Reinforcement Learning based policy t
      Your browser does not support the video tag.
    </video>   
 
+Multi-site Management with EdgeRIC and Near-RT RIC
+^^^^^^^^^^^^^^
+Interference Aware Resource Distribution across sites
 
+.. raw:: html
+
+   <video width="520" height="440" controls>
+     <source src="_static/sparc-video-demo.mov" type="video/mp4">
+     Your browser does not support the video tag.
+   </video>   
 
 Current Status
 ------------------------
 
-We are currently supported on the **srsRAN Project**. 
+We are currently supported on the **srsRAN and OAI Projects**. 
 
 .. image:: edgeric-architecture-overview.png
   :width: 600
@@ -93,7 +102,9 @@ We are currently supported on the **srsRAN Project**.
   :width: 600
   :alt: sample text
 
-**Refer to our 5G Repository:** `Github <https://github.com/ushasigh/srsran-edgeric-5g>`_ 
+**Refer to our 5G srsRAN version:** `Github (srsRAN) <https://github.com/ucsdwcsng/EdgeRIC-on-5G.git>`_  - Multi container solution available
+
+**Refer to our 5G OAI version:** `Github (OAI) <https://github.com/ucsdwcsng/EdgeRIC-5G-OAI.git>`_  
 
 
 Current Publications
@@ -103,6 +114,7 @@ Current Publications
 
     .. tab:: EdgeRIC 
         Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks
+        
         **Paper**: `EdgeRIC <https://www.usenix.org/conference/nsdi24/presentation/ko>`_  
         
         **Code**: `Github Respository <https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git>`_ 
@@ -129,7 +141,13 @@ Current Publications
         **Code**: `Github Repository <https://github.com/ucsdwcsng/EdgeRIC_whittleIndex.git>`_
 
     .. tab:: SPARC
-        **Code**: `Github Respository <https://github.com/ushasigh/SPARC-multi-siteManagent.git>`_
+        SPARC: Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks  
+        
+        **Paper**: `SPARC <https://dl.acm.org/doi/abs/10.1145/3696405>`_ 
+
+        **Code**: `Github Respository <https://github.com/ushasigh/SPARC-multi-siteManagent.git>`_ 
+
+        **Website**: https://wcsng.ucsd.edu/sparc/ 
 
 
 Funding 
@@ -156,7 +174,6 @@ Contact us
    :caption: Events
 
    oaic-workshop-2024.rst 
-
    srsran-2024-workshop.rst 
 
 .. toctree::
