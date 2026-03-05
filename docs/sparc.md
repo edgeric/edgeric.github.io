@@ -1,0 +1,188 @@
+<!-- This repository contains the project codebase for a multi-site Management use case in a cellular Network. This work presents SPARC (Spatio-Temporal Adaptive Resource Control), a novel approach for multi-site spectrum management in NextG cellular networks. SPARC addresses the challenge of limited licensed spectrum in dynamic environments. We leverage the O-RAN architecture to develop a multi-timescale RAN Intelligent Controller (RIC) framework, featuring an xApp for near-real-time interference detection and localization, and a $\mu$App for real-time intelligent resource allocation. By utilizing base stations as spectrum sensors, SPARC enables efficient and fine-grained dynamic resource allocation across multiple sites, enhancing signal-to-noise ratio (SNR) by up to 7dB, spectral efficiency by up to 15\%, and overall system throughput by up to 20\%. Comprehensive evaluations, including emulations and over-the-air experiments, demonstrate the significant performance gains achieved through SPARC, showcasing it as a promising solution for optimizing resource efficiency and network performance in NextG cellular networks.   -->
+## SPARC
+SPARC (Spatio-Temporal Adaptive Resource Control) offers a novel approach for multi-site spectrum management 
+in NextG cellular networks. SPARC addresses the challenge of limited licensed spectrum in dynamic environments. 
+We leverage the O-RAN architecture to develop a multi-timescale RAN Intelligent Controller (RIC) framework, 
+featuring an xApp for near-real-time interference detection and localization, and a μApp for real-time 
+intelligent resource allocation. By utilizing base stations as spectrum sensors, SPARC enables efficient and 
+fine-grained dynamic resource allocation across multiple sites, enhancing signal-to-noise ratio (SNR), spectral efficiency,  and overall system throughput. 
+### Install srsRAN supporting E2 and EdgeRIC messages and control
+
+##### Install zmq
+```bash  
+git clone https://github.com/zeromq/libzmq.git  
+cd libzmq  
+./autogen.sh  
+./configure  
+make  
+sudo make install  
+sudo ldconfig
+```
+
+```bash  
+git clone https://github.com/zeromq/czmq.git  
+cd czmq  
+./autogen.sh  
+./configure  
+make  
+sudo make install  
+sudo ldconfig  
+```
+
+##### Other Dependencies and cloning the repository
+```bash
+sudo apt-get install cmake make gcc g++ pkg-config libfftw3-dev libmbedtls-dev libsctp-dev libyaml-cpp-dev libgtest-dev # install dependencies
+git clone https://github.com/ushasigh/SPARC-multi-siteManagent.git
+```
+### Network Setup
+#### Core Network
+open5gs: https://open5gs.org/open5gs/docs/guide/01-quickstart/    
+open5gs runs as a linux daemon, config files can be found in your system at location ```~/etc/open5gs```  
+The configs used in this project are available under folder ```/open5gs-configs``` 
+
+#### Radio Access Network
+srsRAN-4g: we provide the builds used for the two sites in this repo  
+Site 1: ```/srsRAN_site1```  
+Site 2: ```/srsRAN_site2```   
+<br/>
+
+**How to build?**
+```bash
+cd srsRAN_site1
+sudo ./make-rans.sh # this script will build both sites
+```
+
+#### Running the network:
+To run in emulation mode with virtual radios:  
+###### Run the GRC broker
+```bash
+./gnu_2sites_no_inter.py # This runs 2 sites, 2 UEs in each, no interference
+```
+Other grc scripts provided for introducing interference:  
+```gnu_2sites_interf.grc``` - 2 sites, 2UEs in each, interference in both sites, -540k and +540k Hz   
+```jammer_and_4ues.grc``` - 1site, 4 UEs, 1 jammer at -540k Hz    
+```jammer_and_2ues.grc``` - 1site, 2 UEs, 1 jammer at -540k Hz    
+```one-site-freq-hopping.py``` - 1 site, 2 UEs, jammer which frequency hops 
+
+This is not needed for over the air experiments  
+
+<br/> 
+
+###### Run enb1        
+**[enb_files]** section: Update the directory in ```/srsRAN_site1/.config/enb1.conf```     
+**[rf]** section: Update 'device_name' as UHD (over the air) or zmq (virtual radios) in ```/srsRAN_site1/.config/enb1.conf``` 
+**[ric.agent]** section: update the local_port --> 38071    
+**[enb]** section: update enb_id --> 0x19B  
+**[enb]** section: mmed_addr --> 127.0.0.2 for open5gs in this setting    
+
+```bash
+cd srsRAN_site1
+./run_enb.sh
+```
+
+###### Run enb2   
+**[enb_files]** section: Update the directory in ```/srsRAN_site2/.config/enb2.conf```     
+**[rf]** section: Update 'device_name' as UHD (over the air) or zmq (virtual radios) in ```/srsRAN_site2/.config/enb2.conf```  
+**[ric.agent]** section: update the local_port --> 38072  
+**[enb]** section: update enb_id --> 0x19C  
+**[enb]** section: mmed_addr --> 127.0.0.2 for open5gs in this setting    
+```bash
+cd srsRAN_site2
+./run_enb.sh
+```
+
+###### Run the UEs
+```bash
+cd srsRAN_site1/build
+sudo ./srsue/src/srsue ../.config/ue_1_site1.conf --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6" --gw.netns=ue1
+```
+```bash
+cd srsRAN_site1/build
+sudo ./srsue/src/srsue ../.config/ue_1_site1.conf --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:2011,rx_port=tcp://localhost:2010,id=ue,base_srate=23.04e6" --gw.netns=ue2
+```
+```bash
+cd srsRAN_site1/build
+sudo ./srsue/src/srsue ../.config/ue_3_site2.conf --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:2021,rx_port=tcp://localhost:2020,id=ue,base_srate=23.04e6" --gw.netns=ue3
+```
+```bash
+cd srsRAN_site1/build
+sudo ./srsue/src/srsue ../.config/ue_4_site2.conf --rf.device_name=zmq --rf.device_args="tx_port=tcp://*:2031,rx_port=tcp://localhost:2030,id=ue,base_srate=23.04e6" --gw.netns=ue4 
+```
+#### Running Traffic
+
+```bash
+cd traffic-generator
+```
+##### Running Downlink iperf traffic
+
+Terminal 1:  
+```bash
+./iperf_server_{i}ues.sh
+```
+Terminal 2:  
+```bash
+./iperf_client_{i}ues.sh <rate_ue{i}> <duration>, eg: ./iperf_client_2ues.sh 10M 10M 1000
+```
+
+##### Running Uplink iperf traffic
+Terminal 1:  
+```bash
+./iperf_server_{i}ues_ul.sh
+```
+Terminal 2:  
+```bash
+./iperf_client_{i}ues_ul.sh <rate_ue{i}> <duration>, eg: ./iperf_client_2ues.sh 10M 10M 1000
+```
+
+
+##### Running various other kinds of Downlink Traffic profiles
+Start the servers
+```bash
+sudo ip netns exec ue1 python3 server.py --host 172.16.0.2 --port 12345
+sudo ip netns exec ue2 python3 server.py --host 172.16.0.3 --port 12345
+sudo ip netns exec ue3 python3 server.py --host 172.16.0.4 --port 12345
+sudo ip netns exec ue4 python3 server.py --host 172.16.0.5 --port 12345
+```
+Start the clients
+```bash
+sudo python3 client_embb.py --host 172.16.0.2 --port 12345  #--burst 250000 --min-interval 0.5 --max-interval 2.0
+sudo python3 client_urllc.py --host 172.16.0.3 --port 12345
+sudo python3 client_xr.py --host 172.16.0.4 --port 12345
+sudo python3 client_mmtc.py --host 172.16.0.5 --port 12345
+```
+
+
+### Hierarchical RIC deployment 
+
+#### Internal Messaging Infrastructure
+IMI: refer to ```/IMI``` 
+
+##### Start the Redis database
+Start the Redis database: ```sudo docker-compose up db```
+
+#### Near RT RIC: Spectrum Monitoring
+This component is used for interefrence detection and localization in the spectrogram.  
+icxApp: refer to ```icxApp```   
+
+#### EdgeRIC: Resource Distribution
+```bash
+cd edgeric
+```
+
+##### Running edgeric for 1 site
+```bash
+sudo python3 edgeric_1_site.py
+```
+This will run edgeric for 1 site deployment, it will run 5000 TTIs for evaluation and out the mean total bitrate, SNR and packet errors observed over the duration of the run.   
+For no blanking, set a and b to 0 - line 35 and 36   
+
+##### Running edgeric for 2 sites
+```bash
+sudo python3 edgeric_2_sites.py
+```
+**Blanking:** :Blanking variables are a and b, play with it (line 50, 51) to experiment with the blanking feature, blanking is applied to prbs between a and b   
+**Algorithm selection:** Select the algorithm for resource distribution by uncommenting the appropriate lines: 297,298,299  
+**Updating filenames:** Update the filenames in lines 482, 491 to correctly save experimental runs
+
+
+
