@@ -19,6 +19,15 @@ EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks
 
 - EdgeRIC is a platform for **real-time AI-in-the-loop** for decision and control in cellular networks. It is designed to access network and application-level information to execute AI-optimized and other policies in real-time (sub-millisecond) .
 
+5G Testbed
+------------------------
+
+.. raw:: html
+
+   <a href="5g-testbed.html">
+     <img src="_static/5g-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+   </a>
+
 
 .. .. raw:: html
 
@@ -275,6 +284,13 @@ This work was funded primarily by NSF Grants CNS 2312978, CNS 2312979 and in par
    :caption: Getting Started
 
    gettingstarted.rst
+
+.. toctree::
+   :maxdepth: 1
+   :caption: 5G Testbed
+   :hidden:
+
+   5g-testbed
 
 .. toctree::
    :maxdepth: 2
