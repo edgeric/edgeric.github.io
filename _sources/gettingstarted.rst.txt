@@ -1,0 +1,61 @@
+
+.. Platform Overview
+.. ^^^^^^^^^^^^^^^^^
+
+
+Cellular Stack 
+--------------------------
+- Based on Software Radio Systems RAN (srsRAN)
+- Support for 5G NSA
+- ZeroMQ and GNU Radio based Multiple UE Support
+- Support for Ettus USRPs
+
+.. EdgeRIC API
+.. ------------
+.. - Low Overhead Messaging
+.. - Interface with Open AI Gym:
+.. .. image:: EdgeRIC_API.png
+..   :width: 400
+..   :alt: sample text
+
+.. - Realtime Sync between RAN and RIC
+.. - EdgeRIC message formats
+
+
+Tiny-twin: Emulation module
+--------------------------
+
+This module is for offline training where we can connect a number of UEs, each UE running a separate channel trace.
+Channel Traces are collected from the over the air mobility experiments.
+
+.. image:: tiny-twin.png
+  :width: 600
+  :alt: sample text
+
+
+
+Features:
+    - Plug and play with various channel traces
+    - Good for offline training where we can connect a number of UEs
+    - offers repeatability for experimental runs
+    - offers end to end application testing by running each UE application under separate namespace
+
+
+Collecting channel traces - CQI based abstraction of channel
+""""""""""""""""""""""""""
+
+.. image:: ota-measurement.png
+  :width: 400
+  :alt: sample text
+
+We collect CQI traces for various mobility scenarios. Our dataset is elaborated in section 'Dataset'
+
+Over The Air Setup
+--------------------------
+
+.. image:: ota-setup-2.png
+  :width: 400
+  :alt: sample text
+
+.. Github repository: https://github.com/ushasigh/EdgeRIC, branch: main
+

@@ -1,0 +1,733 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Windex" href="windex.html"><link rel="prev" title="&lt;no title&gt;" href="tutorials.html">
+
+    <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+        <title>EdgeRIC main paper - EdgeRIC Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=482d98f7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #0066cc;
+  --color-brand-content: #0066cc;
+  --color-admonition-background: rgba(0, 102, 204, 0.1);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #4da6ff;
+  --color-brand-content: #4da6ff;
+  --color-admonition-background: rgba(77, 166, 255, 0.1);
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #4da6ff;
+  --color-brand-content: #4da6ff;
+  --color-admonition-background: rgba(77, 166, 255, 0.1);
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">EdgeRIC Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">EdgeRIC Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Cellular Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#tiny-twin-emulation-module">Tiny-twin: Emulation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html#over-the-air-setup">Over The Air Setup</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Events</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="oaic-workshop-2024.html">OAIC-EdgeRIC Workshop ‘24</a><input aria-label="Toggle navigation of OAIC-EdgeRIC Workshop ‘24" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html">EdgeRIC tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="srsran-2024-workshop.html">srsRAN Workshop ‘24</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html">RT-E2 interface (Real time E2 interface)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#rt-e2-report-message">RT-E2 Report Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#rt-e2-policy-message">RT-E2 Policy Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#redis-database">REDIS database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Our Projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="projects/cloud-gaming.html">Cloud Gaming on 5G</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/multimodal-sensing.html">MultiModal Sensing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/telemetry.html">Telemetry: A Packet Centric Lens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/qoe-networking.html">QoE-aware Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/other-muapps.html">Other μApps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">EdgeRIC main paper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparc.html">SPARC</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Dataset</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Channel Traces</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/yourusername/edgeric/blob/main/docs/edgeric.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/yourusername/edgeric/edit/main/docs/edgeric.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="edgeric-main-paper">
+<h1>EdgeRIC main paper<a class="headerlink" href="#edgeric-main-paper" title="Link to this heading">¶</a></h1>
+<p>This paper provides real-time MAC scheduler that assigns scheduling decisions per UE for each TTI. We implement multiple
+scheduling algorithms with this μApp. The scheduling algorithms considered in this work to demonstrate system
+behavior are: <code class="docutils literal notranslate"><span class="pre">Max</span> <span class="pre">Weight</span></code>, <code class="docutils literal notranslate"><span class="pre">Max</span> <span class="pre">CQI</span></code>, <code class="docutils literal notranslate"><span class="pre">Proportional</span> <span class="pre">Fairness</span></code>, <code class="docutils literal notranslate"><span class="pre">Round</span> <span class="pre">Robin</span></code>, and <code class="docutils literal notranslate"> <span class="pre">A</span> <span class="pre">custom</span> <span class="pre">AI</span> <span class="pre">based</span> <span class="pre">scheduler</span> <span class="pre">using</span> <span class="pre">an</span> <span class="pre">off-the-shelf</span> <span class="pre">reinforcement</span> <span class="pre">learning</span> <span class="pre">policy</span></code></p>
+</br>
+<section id="mac-scheduling">
+<h2>MAC scheduling<a class="headerlink" href="#mac-scheduling" title="Link to this heading">¶</a></h2>
+<p>This μApp offers scheduling decisions to the RAN at the granularity of one TTI (~1ms). It adopts a weight based
+approach for its decision. The weight of an UE corresponds to its relative priority to be scheduled given the current
+state of the system. We list the metrics used by this μApp below:</p>
+<p>Metrics: <code class="docutils literal notranslate"><span class="pre">ue_data[rnti]['Tx'],</span> <span class="pre">ue_data[rnti]['CQI'],</span> <span class="pre">ue_data[rnti]['BL']</span></code> for each UE.</p>
+<p>Actions Sent:  <code class="docutils literal notranslate"><span class="pre">weight_{i}</span></code> which corresponds to the weight of each UE <code class="docutils literal notranslate"><span class="pre">i</span></code></p>
+<p>RT-E2 Policy Format for this μApp: <code class="docutils literal notranslate"><span class="pre">RNTI_{i},</span> <span class="pre">weight{i}</span></code> where <code class="docutils literal notranslate"><span class="pre">i</span></code> corresponds to each UE.</p>
+<section id="training-reinforcement-learning-policy">
+<h3>Training Reinforcement Learning Policy<a class="headerlink" href="#training-reinforcement-learning-policy" title="Link to this heading">¶</a></h3>
+<p>Here, we train an RL agent with the objective of <strong>total system throughput maximization</strong>. Listed below are the specifications for our training:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- Algorithm used: Proximal Policy Optimization
+
+- State_space: [BL1,CQI1,BL2,CQI2.....]
+
+- Action_space: ``[Weight1,Weight2.....]
+
+- Reward: Total system throughput 
+</pre></div>
+</div>
+</br>
+</section>
+</section>
+<section id="install-srsran-supporting-edgeric-messages-and-control">
+<h2>Install srsRAN supporting EdgeRIC messages and control<a class="headerlink" href="#install-srsran-supporting-edgeric-messages-and-control" title="Link to this heading">¶</a></h2>
+<section id="install-zmq">
+<h3>Install zmq<a class="headerlink" href="#install-zmq" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zeromq/libzmq.git<span class="w">  </span>
+<span class="nb">cd</span><span class="w"> </span>libzmq<span class="w">  </span>
+./autogen.sh<span class="w">  </span>
+./configure<span class="w">  </span>
+make<span class="w">  </span>
+sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w">  </span>
+sudo<span class="w"> </span>ldconfig
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/zeromq/czmq.git<span class="w">  </span>
+<span class="nb">cd</span><span class="w"> </span>czmq<span class="w">  </span>
+./autogen.sh<span class="w">  </span>
+./configure<span class="w">  </span>
+make<span class="w">  </span>
+sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w">  </span>
+sudo<span class="w"> </span>ldconfig<span class="w">  </span>
+</pre></div>
+</div>
+</section>
+<section id="dependencies-and-cloning-the-repository">
+<h3>Dependencies and cloning the repository<a class="headerlink" href="#dependencies-and-cloning-the-repository" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>cmake<span class="w"> </span>make<span class="w"> </span>gcc<span class="w"> </span>g++<span class="w"> </span>pkg-config<span class="w"> </span>libfftw3-dev<span class="w"> </span>libmbedtls-dev<span class="w"> </span>libsctp-dev<span class="w"> </span>libyaml-cpp-dev<span class="w"> </span>libgtest-dev<span class="w"> </span><span class="c1"># install dependencies</span>
+
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git
+<span class="nb">cd</span><span class="w"> </span>srsRAN-4G-new-ER-design
+</pre></div>
+</div>
+</section>
+<section id="build-the-repository">
+<h3>Build the repository<a class="headerlink" href="#build-the-repository" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./make-ran.sh
+</pre></div>
+</div>
+<p>All config files are provided in <code class="docutils literal notranslate"><span class="pre">srsRAN_4G-ER/.config</span></code></p>
+<br/>
+</section>
+</section>
+<section id="how-to-run-the-network">
+<h2>How to run the network<a class="headerlink" href="#how-to-run-the-network" title="Link to this heading">¶</a></h2>
+<section id="setup-the-core-and-srsenb">
+<h3>Setup the core and srsenb<a class="headerlink" href="#setup-the-core-and-srsenb" title="Link to this heading">¶</a></h3>
+<p><strong>Terminal 1</strong>: Run the GRC broker, depending on the number of UEs {i}</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./top_block_<span class="o">{</span>i<span class="o">}</span>ue_23.04MHz.py
+</pre></div>
+</div>
+<p>This step is not needed in over the air mode</p>
+</br>
+<p><strong>Terminal 2</strong>: Run the EPC
+update the hss section in the ./config/epc.conf to your file directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./run_epc.sh
+</pre></div>
+</div>
+<p><strong>Terminal 3</strong>: Run the enb<br />
+update ./config/enb.conf:<br />
+the [rf] section for zmq/ uhd configurations<br />
+the [enb_files] section: upadte the file directories</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./run_enb.sh
+</pre></div>
+</div>
+</section>
+<section id="run-the-ues">
+<h3>Run the UEs<a class="headerlink" href="#run-the-ues" title="Link to this heading">¶</a></h3>
+<p>Run UE1:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>srsRAN_4G-ER/build
+sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue1.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">&quot;tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6&quot;</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue1
+</pre></div>
+</div>
+<p>Run UE2:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>srsRAN_4G-ER/build
+sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue2.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">&quot;tx_port=tcp://*:2011,rx_port=tcp://localhost:2010,id=ue,base_srate=23.04e6&quot;</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue2
+</pre></div>
+</div>
+<p>To run automated scripts for {i} UEs:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./run_srsran_<span class="o">{</span>i<span class="o">}</span>ue.sh<span class="w"> </span><span class="c1"># script is included for 2/ 4 UEs </span>
+</pre></div>
+</div>
+<section id="running-ues-with-cqi-trace-files">
+<h4>Running UEs with CQI trace files<a class="headerlink" href="#running-ues-with-cqi-trace-files" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./run_<span class="o">{</span>i<span class="o">}</span>ue_cqi_emul.sh<span class="w"> </span><span class="c1"># script is included for 2 UEs</span>
+</pre></div>
+</div>
+<p>You can run the UEs in separate terminals, use the commands provided in the .sh script.</p>
+<p>Press <code class="docutils literal notranslate"><span class="pre">t</span></code> to view the UE metrics on console</p>
+<p><strong>Updating the CQI channel trace</strong>: file under concern: <code class="docutils literal notranslate"><span class="pre">srsRAN_4G-er-ue1/lib/src/phy/ue/ue_dl.c</span></code>, update line 155 with the desired CQI file which should be present in folder <code class="docutils literal notranslate"><span class="pre">srsRAN_4G-er-ue1/cqis</span></code>. Repeat the same for each UE codebase.</p>
+</section>
+</section>
+<section id="stream-traffic">
+<h3>Stream Traffic:<a class="headerlink" href="#stream-traffic" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>traffic-generator
+</pre></div>
+</div>
+<section id="running-downlink-iperf-traffic">
+<h4>Running Downlink iperf traffic<a class="headerlink" href="#running-downlink-iperf-traffic" title="Link to this heading">¶</a></h4>
+<p>Terminal 1:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./iperf_server_<span class="o">{</span>i<span class="o">}</span>ues.sh
+</pre></div>
+</div>
+<p>Terminal 2:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./iperf_client_<span class="o">{</span>i<span class="o">}</span>ues.sh<span class="w"> </span>&lt;rate_ue<span class="o">{</span>i<span class="o">}</span>&gt;<span class="w"> </span>&lt;duration&gt;,<span class="w"> </span>eg:<span class="w"> </span>./iperf_client_2ues.sh<span class="w"> </span>10M<span class="w"> </span>10M<span class="w"> </span><span class="m">1000</span>
+</pre></div>
+</div>
+</section>
+<section id="running-uplink-iperf-traffic">
+<h4>Running Uplink iperf traffic<a class="headerlink" href="#running-uplink-iperf-traffic" title="Link to this heading">¶</a></h4>
+<p>Terminal 1:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./iperf_server_<span class="o">{</span>i<span class="o">}</span>ues_ul.sh
+</pre></div>
+</div>
+<p>Terminal 2:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./iperf_client_<span class="o">{</span>i<span class="o">}</span>ues_ul.sh<span class="w"> </span>&lt;rate_ue<span class="o">{</span>i<span class="o">}</span>&gt;<span class="w"> </span>&lt;duration&gt;,<span class="w"> </span>eg:<span class="w"> </span>./iperf_client_2ues.sh<span class="w"> </span>10M<span class="w"> </span>10M<span class="w"> </span><span class="m">1000</span>
+</pre></div>
+</div>
+</section>
+<section id="running-various-other-kinds-of-downlink-traffic-profiles">
+<h4>Running various other kinds of Downlink Traffic profiles<a class="headerlink" href="#running-various-other-kinds-of-downlink-traffic-profiles" title="Link to this heading">¶</a></h4>
+<p>Start the servers</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ip<span class="w"> </span>netns<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ue1<span class="w"> </span>python3<span class="w"> </span>server.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.2<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span>
+sudo<span class="w"> </span>ip<span class="w"> </span>netns<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ue2<span class="w"> </span>python3<span class="w"> </span>server.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.3<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span>
+sudo<span class="w"> </span>ip<span class="w"> </span>netns<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ue3<span class="w"> </span>python3<span class="w"> </span>server.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.4<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span>
+sudo<span class="w"> </span>ip<span class="w"> </span>netns<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>ue4<span class="w"> </span>python3<span class="w"> </span>server.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.5<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span>
+</pre></div>
+</div>
+<p>Start the clients</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>python3<span class="w"> </span>client_embb.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.2<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span><span class="w">  </span><span class="c1">#--burst 250000 --min-interval 0.5 --max-interval 2.0</span>
+sudo<span class="w"> </span>python3<span class="w"> </span>client_urllc.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.3<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span>
+sudo<span class="w"> </span>python3<span class="w"> </span>client_xr.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.4<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span>
+sudo<span class="w"> </span>python3<span class="w"> </span>client_mmtc.py<span class="w"> </span>--host<span class="w"> </span><span class="m">172</span>.16.0.5<span class="w"> </span>--port<span class="w"> </span><span class="m">12345</span>
+</pre></div>
+</div>
+<br/>
+<br/>
+</section>
+</section>
+</section>
+<section id="running-edgeric-for-downlink-scheduling-control">
+<h2>Running EdgeRIC for downlink scheduling control<a class="headerlink" href="#running-edgeric-for-downlink-scheduling-control" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>edgeric
+</pre></div>
+</div>
+<section id="edgeric-messenger">
+<h3>EdgeRIC messenger<a class="headerlink" href="#edgeric-messenger" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>edgeric_messenger
+├──<span class="w"> </span>get_metrics_multi<span class="o">()</span><span class="w">  </span><span class="c1"># get_metrics(): receive metrics from RAN, called by all μApps</span>
+│<span class="w">   </span>├──<span class="w"> </span>returns<span class="w"> </span>ue_data<span class="w"> </span>dictionary
+├──<span class="w"> </span>send_scheduling_weight<span class="o">()</span><span class="w"> </span><span class="c1"># send the RT-E2 scheduling policy message to RAN </span>
+<span class="w">    </span>
+</pre></div>
+</div>
+<!-- # ├── send_control() # send the RT-E2 policy message to RAN once all μApps complete execution
+#     ├── send_scheduling_weight() #prepares the control message for the downlink scheduling action
+      ├── send_ul_prb() #prepares the control message for the uplikn scheduling action
+#  -->
+</section>
+<section id="apps-supported-in-this-codebase">
+<h3>μApps supported in this codebase<a class="headerlink" href="#apps-supported-in-this-codebase" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>├──<span class="w"> </span>/muApp1<span class="w">           </span><span class="c1"># weight based abstraction of downlink scheduling control</span>
+│<span class="w">   </span>├──<span class="w"> </span>muApp1_run_DL_scheduling.py
+├──<span class="w"> </span>/muApp2<span class="w">           </span><span class="c1"># training an RL agent to compute downlink scheduling policy</span>
+<span class="w">    </span>├──<span class="w"> </span>muApp2_train_RL_DL_scheduling.py
+</pre></div>
+</div>
+<!-- ├── /muApp3           # training an RL agent to compute downlink scheduling policy
+    ├── metrics_monitor_aggregate.py # launch dashboard for aggregate statistics
+    ├── metrics_monitor_perUE.py     # launch dashboard for per UE metrics  -->
+</section>
+<section id="running-muapp1-downlink-scheduler">
+<h3>Running muApp1 - downlink scheduler<a class="headerlink" href="#running-muapp1-downlink-scheduler" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>muApp1
+sudo<span class="w"> </span>python3<span class="w"> </span>muApp1_run_DL_scheduling.py
+</pre></div>
+</div>
+<section id="setting-the-scheduler-algorithm-manually">
+<h4>Setting the scheduler algorithm manually<a class="headerlink" href="#setting-the-scheduler-algorithm-manually" title="Link to this heading">¶</a></h4>
+<p>Set the scheduling algorithm you want to run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Line 259</span>
+<span class="nv">selected_algorithm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Max CQI&quot;</span><span class="w">   </span><span class="c1"># selection can be: Max CQI, Max Weight,</span>
+<span class="w">                                 </span><span class="c1"># Proportional Fair (PF), Round Robin - to be implemneted</span>
+<span class="w">                                 </span><span class="c1"># RL - models are included for 2 UEs</span>
+</pre></div>
+</div>
+<p>If the algorithm selected is RL, set the directory for the RL model</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Line 270</span>
+<span class="nv">rl_model_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Fully Trained Model&quot;</span><span class="w">  </span><span class="c1"># selection can be Initial Model,</span>
+<span class="w">                                       </span><span class="c1"># Half Trained Model, Fully Trained Model - to see benefits, run UE1 with load 5Mbps, UE2 with 21Mbps</span>
+</pre></div>
+</div>
+<p>The respective models are saved in:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>├──<span class="w"> </span>../rl_model/<span class="w">           </span>
+<span class="w">    </span>├──<span class="w"> </span>initial_model<span class="w"> </span>
+<span class="w">      </span>├──model_demo.pt
+<span class="w">    </span>├──<span class="w"> </span>half_trained_model<span class="w"> </span>
+<span class="w">      </span>├──model_demo.pt
+<span class="w">    </span>├──<span class="w"> </span>fully_trained_model<span class="w"> </span>
+<span class="w">      </span>├──model_demo.pt
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-muapp2-training-an-rl-policy-for-scheduling">
+<h3>Running muApp2 - Training an RL policy for scheduling<a class="headerlink" href="#running-muapp2-training-an-rl-policy-for-scheduling" title="Link to this heading">¶</a></h3>
+<p>We are training a PPO agent with the objective of throughput maximization in this particular study.</p>
+<section id="usage">
+<h4>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>muApp2
+sudo<span class="w"> </span>python3<span class="w"> </span>muApp2_train_RL_DL_scheduling.py<span class="w"> </span>--config-name<span class="o">=</span>edge_ric
+</pre></div>
+</div>
+</section>
+<section id="muapp2-train-rl-dl-scheduling-py">
+<h4>muApp2_train_RL_DL_scheduling.py<a class="headerlink" href="#muapp2-train-rl-dl-scheduling-py" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>Trains PPO agent for <code class="docutils literal notranslate"><span class="pre">num_iters</span></code> number of iterations</p>
+<ul>
+<li><p>One iteration consists of training on 2048 samples and evaluating for 2048 timesteps</p></li>
+<li><p>The evaluation metric (avg reward per episode) is plotted as the training grap</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="repo-structure">
+<h4>Repo Structure<a class="headerlink" href="#repo-structure" title="Link to this heading">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>├──<span class="w"> </span>conf
+│<span class="w">   </span>├──<span class="w"> </span>edge_ric.yaml<span class="w">   </span><span class="c1"># Config file for edgeric RL training</span>
+│<span class="w">   </span>├──<span class="w"> </span>example.yaml
+│<span class="w">   </span>├──<span class="w"> </span>simpler_streaming.yaml
+│<span class="w">   </span>└──<span class="w"> </span>single_agent.yaml
+├──<span class="w"> </span>outputs<span class="w"> </span><span class="c1"># Output logs of each training sorted chronologically</span>
+│<span class="w">   </span>├──<span class="w"> </span><span class="m">2022</span>-10-07
+<span class="w">         </span>├──<span class="w"> </span>model_best.pt<span class="w"> </span><span class="c1"># Saved policy neural network weights</span>
+│<span class="w">          </span>.
+│<span class="w">          </span>.
+│<span class="w">          </span>.
+│<span class="w">          </span>
+└──<span class="w"> </span>../stream_rl<span class="w"> </span><span class="c1"># Name of the python package implementing the simulator mechanisms</span>
+<span class="w">    </span>├──<span class="w"> </span>callbacks.py
+<span class="w">    </span>├──<span class="w"> </span>envs<span class="w"> </span><span class="c1"># All the envs</span>
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>cqi_traces
+<span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>data.csv<span class="w"> </span><span class="c1"># CQI trace to be used by simulation env</span>
+<span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>trace_generator.py<span class="w"> </span><span class="c1"># Code to generate synthetic CQI traces</span>
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>edge_ric.py<span class="w"> </span><span class="c1"># Our Env </span>
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>simpler_streaming_env.py
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>single_agent_env.py
+<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>streaming_env.py
+<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>__init__.py
+<span class="w">    </span>├──<span class="w"> </span>__init__.py
+<span class="w">    </span>├──<span class="w"> </span>plots.py<span class="w"> </span><span class="c1"># All plotting code</span>
+<span class="w">    </span>├──<span class="w"> </span>policy_net<span class="w"> </span><span class="c1"># Custom policy net architectures (not currently used)</span>
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>conv_policy.py
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>__init__.py
+<span class="w">    </span>├──<span class="w"> </span>registry<span class="w"> </span><span class="c1"># Registry system for registering envs and rewards (to keep things modular)</span>
+<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>__init__.py
+<span class="w">    </span>└──<span class="w"> </span>rewards.py<span class="w"> </span><span class="c1"># Definition of reward functions to be used in envs</span>
+</pre></div>
+</div>
+<p>Once the training completes: take the model_best.pt and save in the ../rl_model folder</p>
+</section>
+<section id="edgeric-env-edge-ric-py">
+<h4>EdgeRIC Env (edge_ric.py)<a class="headerlink" href="#edgeric-env-edge-ric-py" title="Link to this heading">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                    CQI1          BL1
+                ┌────────────┬─┬─┬─┬─┐
+Bernoulli  ───► │            │ │ │ │ │ ──►   f(CQI1,allocated_RGB1)
+                │            │ │ │ │ │
+                └────────────┴─┴─┴─┴─┘
+                    CQI2          BL2
+                ┌────────────────┬─┬─┐
+Bernoulli  ───► │                │ │ │ ──►   f(CQI2,allocated_RGB2)
+                │                │ │ │
+                └────────────────┴─┴─┘
+                          .
+                          .
+                          .
+                          . num_UEs
+                          .
+                          .
+                          .
+                ┌────────────┬─┬─┬─┬─┐
+Bernoulli  ───► │            │ │ │ │ │ ──►   f(CQI_N,allocated_RBG_N)
+                │            │ │ │ │ │
+                └────────────┴─┴─┴─┴─┘
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>State_space : <code class="docutils literal notranslate"><span class="pre">[BL1,CQI1,BL2,CQI2.....]</span></code> (if augmented_state_space=False)</p></li>
+<li><p>Action_space : <code class="docutils literal notranslate"><span class="pre">[Weight1,Weight2.....]</span></code></p></li>
+<li><p>Parameters of the env configurable in <code class="docutils literal notranslate"><span class="pre">&quot;./conf/edge_ric.yml&quot;</span></code>, under <code class="docutils literal notranslate"><span class="pre">env_config</span></code> field</p></li>
+</ul>
+<!-- 
+## Setting the scheduler algorithm with the controller gui - TODO
+
+```bash
+sudo python3 controller_gui.py
+```
+To launch the DL scheduling μApp:
+- **Start μApp1** 
+  - **Choose the algorithm you want to run**
+    - **If traditional:** Choose between Max CQI, Max Weight, PF, Round Robin
+    - **If RL:** Specify the directory for the saved RL model [Please Note: the RL scheduler is specific to number of UEs the system started with, refer to the paper] -->
+</section>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="windex.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Windex</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="tutorials.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">&lt;no title&gt;</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Ushasi Ghosh
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">EdgeRIC main paper</a><ul>
+<li><a class="reference internal" href="#mac-scheduling">MAC scheduling</a><ul>
+<li><a class="reference internal" href="#training-reinforcement-learning-policy">Training Reinforcement Learning Policy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#install-srsran-supporting-edgeric-messages-and-control">Install srsRAN supporting EdgeRIC messages and control</a><ul>
+<li><a class="reference internal" href="#install-zmq">Install zmq</a></li>
+<li><a class="reference internal" href="#dependencies-and-cloning-the-repository">Dependencies and cloning the repository</a></li>
+<li><a class="reference internal" href="#build-the-repository">Build the repository</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-run-the-network">How to run the network</a><ul>
+<li><a class="reference internal" href="#setup-the-core-and-srsenb">Setup the core and srsenb</a></li>
+<li><a class="reference internal" href="#run-the-ues">Run the UEs</a><ul>
+<li><a class="reference internal" href="#running-ues-with-cqi-trace-files">Running UEs with CQI trace files</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#stream-traffic">Stream Traffic:</a><ul>
+<li><a class="reference internal" href="#running-downlink-iperf-traffic">Running Downlink iperf traffic</a></li>
+<li><a class="reference internal" href="#running-uplink-iperf-traffic">Running Uplink iperf traffic</a></li>
+<li><a class="reference internal" href="#running-various-other-kinds-of-downlink-traffic-profiles">Running various other kinds of Downlink Traffic profiles</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-edgeric-for-downlink-scheduling-control">Running EdgeRIC for downlink scheduling control</a><ul>
+<li><a class="reference internal" href="#edgeric-messenger">EdgeRIC messenger</a></li>
+<li><a class="reference internal" href="#apps-supported-in-this-codebase">μApps supported in this codebase</a></li>
+<li><a class="reference internal" href="#running-muapp1-downlink-scheduler">Running muApp1 - downlink scheduler</a><ul>
+<li><a class="reference internal" href="#setting-the-scheduler-algorithm-manually">Setting the scheduler algorithm manually</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-muapp2-training-an-rl-policy-for-scheduling">Running muApp2 - Training an RL policy for scheduling</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#muapp2-train-rl-dl-scheduling-py">muApp2_train_RL_DL_scheduling.py</a></li>
+<li><a class="reference internal" href="#repo-structure">Repo Structure</a></li>
+<li><a class="reference internal" href="#edgeric-env-edge-ric-py">EdgeRIC Env (edge_ric.py)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=b32bce50"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/news-sidebar.js?v=21f782de"></script>
+    </body>
+</html>
