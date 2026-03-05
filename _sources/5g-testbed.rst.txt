@@ -1,7 +1,7 @@
 5G Testbed
 ==========
 
-.. image:: _static/5g-testbed.png
+.. image:: _static/5G-testbed.png
    :width: 700
    :alt: 5G Testbed
 

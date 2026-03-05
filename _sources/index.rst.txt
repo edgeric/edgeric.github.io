@@ -25,7 +25,7 @@ EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks
 .. raw:: html
 
    <a href="5g-testbed.html">
-     <img src="_static/5g-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+     <img src="_static/5G-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
    </a>
 
 
