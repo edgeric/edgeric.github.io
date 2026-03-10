@@ -1,24 +1,11 @@
 /* EdgeRIC Custom Styles for Furo Theme */
 
-/* ===== Video Grid Layout ===== */
+/* ===== Video Grid Layout: one demo per row ===== */
 .video-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
     margin: 2rem 0;
-    align-items: stretch;
-}
-
-@media (max-width: 1000px) {
-    .video-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 650px) {
-    .video-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 .video-card {
@@ -63,6 +50,7 @@
 }
 
 .video-card video {
+    max-width: 640px;
     width: 100%;
     aspect-ratio: 4/3;
     object-fit: cover;
@@ -150,7 +138,7 @@
 }
 
 #card-qoe {
-    background: linear-gradient(135deg, #E8DCEB, #F2E0E5);
+    background: linear-gradient(135deg, #DFADBE, #F2E0E5);
 }
 
 #card-muapps {
