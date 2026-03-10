@@ -115,9 +115,9 @@ Our Team
      </div>
      <div class="team-card">
        <div class="team-photo" id="photo-qingyuan"></div>
-       <h4>Qingyuan Zhang</h4>
+       <h4>Qingyuan Zheng</h4>
        <p>MS Student, UCSD</p>
-       <a href="mailto:qiz151@ucsd.edu" class="team-email">qiz151@ucsd.edu</a>
+       <a href="mailto:qiz066@ucsd.edu" class="team-email">qiz151@ucsd.edu</a>
      </div>
      <div class="team-card">
        <div class="team-photo" id="photo-Woo"></div>
