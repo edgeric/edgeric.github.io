@@ -142,30 +142,42 @@ Our Demos
          <h3>BeamArmor</h3>
          <p>Anti-jamming: Controlling MIMO weights in realtime to steer the beam null toward the jammer</p>
        </div>
-       <video controls>
-         <source src="_static/beamarmor_demo.mp4" type="video/mp4">
-         Your browser does not support the video tag.
-       </video>
+       <div class="video-wrapper">
+         <div class="video-cover" data-poster="_static/beamarmor_cover.jpg">
+           <button type="button" class="video-play-btn" aria-label="Play video"></button>
+         </div>
+         <video preload="metadata" data-src="_static/beamarmor_demo.mp4">
+           Your browser does not support the video tag.
+         </video>
+       </div>
      </div>
      <div class="video-card">
        <div class="video-card-content">
          <h3>AI Scheduling</h3>
          <p>RL-based scheduling policy trained to maximize overall system throughput</p>
        </div>
-       <video controls>
-         <source src="_static/demo-2.mp4" type="video/mp4">
-         Your browser does not support the video tag.
-       </video>
+       <div class="video-wrapper">
+         <div class="video-cover" data-poster="_static/demo2_cover.jpg">
+           <button type="button" class="video-play-btn" aria-label="Play video"></button>
+         </div>
+         <video preload="metadata" data-src="_static/demo-2.mp4">
+           Your browser does not support the video tag.
+         </video>
+       </div>
      </div>
      <div class="video-card">
        <div class="video-card-content">
          <h3>Multi-site Management</h3>
          <p>Interference-aware resource distribution across sites with Near-RT RIC</p>
        </div>
-       <video controls>
-         <source src="_static/sparc-video-demo.mov" type="video/mp4">
-         Your browser does not support the video tag.
-       </video>
+       <div class="video-wrapper">
+         <div class="video-cover" data-poster="_static/sparc_cover.jpg">
+           <button type="button" class="video-play-btn" aria-label="Play video"></button>
+         </div>
+         <video preload="metadata" data-src="_static/sparc-video-demo.mov">
+           Your browser does not support the video tag.
+         </video>
+       </div>
      </div>
    </div>
 
