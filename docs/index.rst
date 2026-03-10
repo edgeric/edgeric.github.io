@@ -192,9 +192,9 @@ Our Repositories
      </div>
      <div class="repo-card">
        <h3>OAI + EdgeRIC</h3>
-       <p class="repo-meta"><strong>Release Date:</strong> TBD</p>
+       <p class="repo-meta"><strong>Release Date:</strong> Oct 01, 2025</p>
        <p><strong>Description:</strong> EdgeRIC integrated with OpenAirInterface</p>
-       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">Click here</a>
+       <a href="https://github.com/ucsdwcsng/EdgeRIC-5G-OAI" class="repo-link" target="_blank" rel="noopener noreferrer">Click here</a>
      </div>
    </div>
 
