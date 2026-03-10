@@ -207,39 +207,39 @@
     background-position: center;
 }
 
-/* Add individual photos: images stored under docs/team_photos/ */
-/* Example: #photo-dinesh { background-image: url('../team_photos/dinesh.jpg'); } */
+/* Add individual photos: source images under docs/team_photos/,
+   but in the built site they are copied into _static/, so URLs are just the filenames. */
 
 #photo-dinesh {
-    background-image: url('../team_photos/Dinesh.jpg');
+    background-image: url('Dinesh.jpg');
 }
 
 #photo-srinivas {
-    background-image: url('../team_photos/Srinivas.jpg');
+    background-image: url('Srinivas.jpg');
 }
 
 #photo-ish {
-    background-image: url('../team_photos/Ish.jpg');
+    background-image: url('Ish.jpg');
 }
 
 #photo-ushasi {
-    background-image: url('../team_photos/Ushasi.jpg');
+    background-image: url('Ushasi.jpg');
 }
 
 #photo-sushila {
-    background-image: url('../team_photos/Sushila.jpg');
+    background-image: url('Sushila.jpg');
 }
 
 #photo-Ali {
-    background-image: url('../team_photos/Ali.jpg');
+    background-image: url('Ali.jpg');
 }
 
 #photo-qingyuan {
-    background-image: url('../team_photos/Qingyuan.jpg');
+    background-image: url('Qingyuan.jpg');
 }
 
 #photo-Woo {
-    background-image: url('../team_photos/Woo.jpg');
+    background-image: url('Woo.jpg');
 }
 
 .team-card h4 {
