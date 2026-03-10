@@ -207,8 +207,40 @@
     background-position: center;
 }
 
-/* Add individual photos: place images in _static/ folder */
-/* Example: #photo-dinesh { background-image: url('dinesh.jpg'); } */
+/* Add individual photos: images stored under docs/team_photos/ */
+/* Example: #photo-dinesh { background-image: url('../team_photos/dinesh.jpg'); } */
+
+#photo-dinesh {
+    background-image: url('../team_photos/Dinesh.jpg');
+}
+
+#photo-srinivas {
+    background-image: url('../team_photos/Srinivas.jpg');
+}
+
+#photo-ish {
+    background-image: url('../team_photos/Ish.jpg');
+}
+
+#photo-ushasi {
+    background-image: url('../team_photos/Ushasi.jpg');
+}
+
+#photo-sushila {
+    background-image: url('../team_photos/Sushila.jpg');
+}
+
+#photo-Ali {
+    background-image: url('../team_photos/Ali.jpg');
+}
+
+#photo-qingyuan {
+    background-image: url('../team_photos/Qingyuan.jpg');
+}
+
+#photo-Woo {
+    background-image: url('../team_photos/Woo.jpg');
+}
 
 .team-card h4 {
     margin: 0 0 0.25rem 0;

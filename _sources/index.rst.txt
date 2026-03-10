@@ -45,6 +45,8 @@ EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks
 ..   :width: 600
 ..   :alt: sample text
 
+
+
 Our Projects
 ------------------------
 
@@ -67,6 +69,64 @@ Our Projects
        <h3>Other μApps</h3>
      </a>
    </div>
+
+
+Our Team
+------------------------
+
+.. raw:: html
+
+   <div class="team-grid">
+     <div class="team-card">
+       <div class="team-photo" id="photo-dinesh"></div>
+       <h4>Dinesh Bharadia</h4>
+       <p>Professor, UCSD</p>
+       <a href="mailto:dineshb@ucsd.edu" class="team-email">dineshb@ucsd.edu</a>
+     </div>
+     <div class="team-card">
+       <div class="team-photo" id="photo-srinivas"></div>
+       <h4>Srinivas Shakkottai</h4>
+       <p>Professor, TAMU</p>
+       <a href="mailto:sshakkot@tamu.edu" class="team-email">sshakkot@tamu.edu</a>
+     </div>
+     <div class="team-card">
+       <div class="team-photo" id="photo-ish"></div>
+       <h4>Ish Jain</h4>
+       <p>Professor, RPI</p>
+       <a href="mailto:jaini2@rpi.edu" class="team-email">jaini2@rpi.edu</a>
+     </div>
+     <div class="team-card">
+       <div class="team-photo" id="photo-ushasi"></div>
+       <h4>Ushasi Ghosh</h4>
+       <p>PhD Student, UCSD</p>
+       <a href="mailto:ughosh@ucsd.edu" class="team-email">ughosh@ucsd.edu</a>
+     </div>
+     <div class="team-card">
+       <div class="team-photo" id="photo-sushila"></div>
+       <h4>Sushila Seshasayee</h4>
+       <p>PhD Student, UCSD</p>
+       <a href="mailto:sseshasa@ucsd.edu" class="team-email">sseshasa@ucsd.edu</a>
+     </div>
+     <div class="team-card">
+       <div class="team-photo" id="photo-Ali"></div>
+       <h4>Ali Mamaghani</h4>
+       <p>PhD Student, UCSD</p>
+       <a href="mailto:amamaghani@ucsd.edu" class="team-email">amamaghani@ucsd.edu</a>
+     </div>
+     <div class="team-card">
+       <div class="team-photo" id="photo-qingyuan"></div>
+       <h4>Qingyuan Zhang</h4>
+       <p>MS Student, UCSD</p>
+       <a href="mailto:qiz151@ucsd.edu" class="team-email">qiz151@ucsd.edu</a>
+     </div>
+     <div class="team-card">
+       <div class="team-photo" id="photo-Woo"></div>
+       <h4>Woo Hyun Ko</h4>
+       <p>Senior Research Engineer, TAMU</p>
+       <a href="mailto:whko@tamu.edu" class="team-email">whko@tamu.edu</a>
+     </div>
+   </div>
+
 
 Our Demos 
 ------------------------
@@ -211,61 +271,7 @@ Our Repositories
 
 
 
-Meet the Team
-------------------------
 
-.. raw:: html
-
-   <div class="team-grid">
-     <div class="team-card">
-       <div class="team-photo" id="photo-dinesh"></div>
-       <h4>Dinesh Bharadia</h4>
-       <p>Professor, UCSD</p>
-       <a href="mailto:dineshb@ucsd.edu" class="team-email">dineshb@ucsd.edu</a>
-     </div>
-     <div class="team-card">
-       <div class="team-photo" id="photo-srinivas"></div>
-       <h4>Srinivas Shakkottai</h4>
-       <p>Professor, TAMU</p>
-       <a href="mailto:sshakkot@tamu.edu" class="team-email">sshakkot@tamu.edu</a>
-     </div>
-     <div class="team-card">
-       <div class="team-photo" id="photo-ish"></div>
-       <h4>Ish Jain</h4>
-       <p>Professor, RPI</p>
-       <a href="mailto:jaini2@rpi.edu" class="team-email">jaini2@rpi.edu</a>
-     </div>
-     <div class="team-card">
-       <div class="team-photo" id="photo-ushasi"></div>
-       <h4>Ushasi Ghosh</h4>
-       <p>PhD Student, UCSD</p>
-       <a href="mailto:ughosh@ucsd.edu" class="team-email">ughosh@ucsd.edu</a>
-     </div>
-     <div class="team-card">
-       <div class="team-photo" id="photo-sushila"></div>
-       <h4>Sushila Seshasayee</h4>
-       <p>PhD Student, UCSD</p>
-       <a href="mailto:sseshasa@ucsd.edu" class="team-email">sseshasa@ucsd.edu</a>
-     </div>
-     <div class="team-card">
-       <div class="team-photo" id="photo-Ali"></div>
-       <h4>Ali Mamaghani</h4>
-       <p>PhD Student, UCSD</p>
-       <a href="mailto:amamaghani@ucsd.edu" class="team-email">amamaghani@ucsd.edu</a>
-     </div>
-     <div class="team-card">
-       <div class="team-photo" id="photo-qingyuan"></div>
-       <h4>Qingyuan Zhang</h4>
-       <p>MS Student, UCSD</p>
-       <a href="mailto:qiz151@ucsd.edu" class="team-email">qiz151@ucsd.edu</a>
-     </div>
-     <div class="team-card">
-       <div class="team-photo" id="photo-Woo"></div>
-       <h4>Woo Hyun Ko</h4>
-       <p>Senior Research Engineer, TAMU</p>
-       <a href="mailto:whko@tamu.edu" class="team-email">whko@tamu.edu</a>
-     </div>
-   </div>
 
 Funding 
 ------------------------ 
