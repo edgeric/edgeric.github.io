@@ -196,15 +196,15 @@
 }
 
 .team-photo {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     margin: 0 auto 1rem auto;
     background: linear-gradient(135deg, #dbeafe, #bfdbfe);
     border: 3px solid #93c5fd;
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
     background-size: cover;
-    background-position: center;
+    background-position: center 60%;
 }
 
 /* Add individual photos: source images under docs/team_photos/,
