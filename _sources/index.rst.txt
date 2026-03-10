@@ -69,7 +69,7 @@ Our Projects
        <h3>Other μApps</h3>
      </a>
      <a href="projects/tiny-twin.html" class="project-card" id="card-tiny-twin">
-       <h3>Other μApps</h3>
+       <h3>Tiny-twin</h3>
      </a>
    </div>
 

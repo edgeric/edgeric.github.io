@@ -135,40 +135,40 @@
 }
 
 /* ===== Project Card Backgrounds ===== */
-/* Add your images to docs/_static/ folder */
+/* Schema diagram palette: light blue, peach, green, lavender, pink, gray */
 
 #card-cloud-gaming {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.9), rgba(139, 92, 246, 0.9)), 
-                url('cloud-gaming-bg.jpg') center/cover;
+    background: linear-gradient(135deg, #BCACD4, #EBE8F9);
 }
 
 #card-multimodal {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.9), rgba(5, 150, 105, 0.9)),
-                url('multimodal-bg.jpg') center/cover;
+    background: linear-gradient(135deg, #A2BFE3, #C0DAE5);
 }
 
 #card-telemetry {
-    background: linear-gradient(135deg, rgba(245, 158, 11, 0.9), rgba(217, 119, 6, 0.9)),
-                url('telemetry-bg.jpg') center/cover;
+    background: linear-gradient(135deg, #C1E2C1, #E9F5ED);
 }
 
 #card-qoe {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.9), rgba(220, 38, 38, 0.9)),
-                url('qoe-bg.jpg') center/cover;
+    background: linear-gradient(135deg, #C1A0CB, #DFADBE);
 }
 
 #card-muapps {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(37, 99, 235, 0.9)),
-                url('muapps-bg.jpg') center/cover;
+    background: linear-gradient(135deg, #C89899, #EBDFCC);
+}
+
+#card-tiny-twin {
+    background: linear-gradient(135deg, #E0E0E0, #d0d0d0);
 }
 
 #card-cloud-gaming h3,
 #card-multimodal h3,
 #card-telemetry h3,
 #card-qoe h3,
-#card-muapps h3 {
-    color: #fff;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+#card-muapps h3,
+#card-tiny-twin h3 {
+    color: #333;
+    text-shadow: none;
 }
 
 /* ===== Team Grid Layout ===== */
