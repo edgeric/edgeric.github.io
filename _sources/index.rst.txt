@@ -169,26 +169,29 @@ Our Demos
 Our Repositories
 ------------------------
 
-.. raw:: html
+* **srsRAN-4G + EdgeRIC**
 
-   <div class="repo-grid">
-     <a href="#" class="repo-card" target="_blank" rel="noopener noreferrer">
-       <h3>srsRAN-4G + EdgeRIC</h3>
-       <p>EdgeRIC integrated with srsRAN 4G</p>
-     </a>
-     <a href="https://github.com/ucsdwcsng/EdgeRIC-on-5G/tree/srsran" class="repo-card" target="_blank" rel="noopener noreferrer">
-       <h3>srsRAN-5G (2024) + EdgeRIC</h3>
-       <p>EdgeRIC on srsRAN 5G 2024 release</p>
-     </a>
-     <a href="#" class="repo-card" target="_blank" rel="noopener noreferrer">
-       <h3>srsRAN-5G (25.10) + EdgeRIC</h3>
-       <p>EdgeRIC on srsRAN 5G 25.10 release</p>
-     </a>
-     <a href="#" class="repo-card" target="_blank" rel="noopener noreferrer">
-       <h3>OAI + EdgeRIC</h3>
-       <p>EdgeRIC integrated with OpenAirInterface</p>
-     </a>
-   </div>
+  - **Release Date**: TBD  
+  - **Description**: EdgeRIC integrated with srsRAN 4G  
+  - **Link**: `Click here <#>`_
+
+* **srsRAN-5G (2024) + EdgeRIC**
+
+  - **Release Date**: 2024  
+  - **Description**: EdgeRIC on srsRAN 5G 2024 release  
+  - **Link**: `Click here <https://github.com/ucsdwcsng/EdgeRIC-on-5G/tree/srsran>`_
+
+* **srsRAN-5G (25.10) + EdgeRIC**
+
+  - **Release Date**: 25.10  
+  - **Description**: EdgeRIC on srsRAN 5G 25.10 release  
+  - **Link**: `Click here <#>`_
+
+* **OAI + EdgeRIC**
+
+  - **Release Date**: TBD  
+  - **Description**: EdgeRIC integrated with OpenAirInterface  
+  - **Link**: `Click here <#>`_
 
 5G Testbed
 ------------------------
