@@ -6,6 +6,10 @@ Overview
 
 Understanding network behavior at the packet level provides unprecedented visibility into performance bottlenecks and optimization opportunities.
 
+.. image:: telemetry/Scout_Intro.jpg
+   :width: 600px
+   :alt: SCOUT Telemetry overview
+
 .. note::
    This project develops packet-centric telemetry tools that integrate with EdgeRIC for fine-grained network analysis.
 
