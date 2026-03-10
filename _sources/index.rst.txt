@@ -67,7 +67,7 @@ Our Projects
      </a>
      <a href="projects/other-muapps.html" class="project-card" id="card-muapps">
        <h3>Other μApps</h3>
-     </a>】
+     </a>
      <a href="projects/tiny-twin.html" class="project-card" id="card-tiny-twin">
        <h3>Other μApps</h3>
      </a>
