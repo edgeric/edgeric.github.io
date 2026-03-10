@@ -169,29 +169,34 @@ Our Demos
 Our Repositories
 ------------------------
 
-* **srsRAN-4G + EdgeRIC**
+.. raw:: html
 
-  - **Release Date**: TBD  
-  - **Description**: EdgeRIC integrated with srsRAN 4G  
-  - **Link**: `Click here <#>`_
-
-* **srsRAN-5G (2024) + EdgeRIC**
-
-  - **Release Date**: 2024  
-  - **Description**: EdgeRIC on srsRAN 5G 2024 release  
-  - **Link**: `Click here <https://github.com/ucsdwcsng/EdgeRIC-on-5G/tree/srsran>`_
-
-* **srsRAN-5G (25.10) + EdgeRIC**
-
-  - **Release Date**: 25.10  
-  - **Description**: EdgeRIC on srsRAN 5G 25.10 release  
-  - **Link**: `Click here <#>`_
-
-* **OAI + EdgeRIC**
-
-  - **Release Date**: TBD  
-  - **Description**: EdgeRIC integrated with OpenAirInterface  
-  - **Link**: `Click here <#>`_
+   <div class="repo-list">
+     <div class="repo-card">
+       <h3>srsRAN-4G + EdgeRIC</h3>
+       <p class="repo-meta"><strong>Release Date:</strong> TBD</p>
+       <p><strong>Description:</strong> EdgeRIC integrated with srsRAN 4G</p>
+       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">Click here</a>
+     </div>
+     <div class="repo-card">
+       <h3>srsRAN-5G (2024) + EdgeRIC</h3>
+       <p class="repo-meta"><strong>Release Date:</strong> 2024</p>
+       <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 2024 release</p>
+       <a href="https://github.com/ucsdwcsng/EdgeRIC-on-5G/tree/srsran" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+     </div>
+     <div class="repo-card">
+       <h3>srsRAN-5G (25.10) + EdgeRIC</h3>
+       <p class="repo-meta"><strong>Release Date:</strong> 25.10</p>
+       <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 25.10 release</p>
+       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">Click here</a>
+     </div>
+     <div class="repo-card">
+       <h3>OAI + EdgeRIC</h3>
+       <p class="repo-meta"><strong>Release Date:</strong> TBD</p>
+       <p><strong>Description:</strong> EdgeRIC integrated with OpenAirInterface</p>
+       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">Click here</a>
+     </div>
+   </div>
 
 5G Testbed
 ------------------------
