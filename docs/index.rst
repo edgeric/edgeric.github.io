@@ -67,6 +67,9 @@ Our Projects
      </a>
      <a href="projects/other-muapps.html" class="project-card" id="card-muapps">
        <h3>Other μApps</h3>
+     </a>】
+     <a href="projects/tiny-twin.html" class="project-card" id="card-tiny-twin">
+       <h3>Other μApps</h3>
      </a>
    </div>
 
@@ -176,7 +179,7 @@ Our Repositories
        <h3>srsRAN-4G + EdgeRIC</h3>
        <p class="repo-meta"><strong>Release Date:</strong> TBD</p>
        <p><strong>Description:</strong> EdgeRIC integrated with srsRAN 4G</p>
-       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">Click here</a>
+       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
      </div>
      <div class="repo-card">
        <h3>srsRAN-5G (2024) + EdgeRIC</h3>
@@ -188,13 +191,13 @@ Our Repositories
        <h3>srsRAN-5G (25.10) + EdgeRIC</h3>
        <p class="repo-meta"><strong>Release Date:</strong> 25.10</p>
        <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 25.10 release</p>
-       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">Click here</a>
+       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
      </div>
      <div class="repo-card">
        <h3>OAI + EdgeRIC</h3>
        <p class="repo-meta"><strong>Release Date:</strong> Oct 01, 2025</p>
        <p><strong>Description:</strong> EdgeRIC integrated with OpenAirInterface</p>
-       <a href="https://github.com/ucsdwcsng/EdgeRIC-5G-OAI" class="repo-link" target="_blank" rel="noopener noreferrer">Click here</a>
+       <a href="https://github.com/ucsdwcsng/EdgeRIC-5G-OAI" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
      </div>
    </div>
 
