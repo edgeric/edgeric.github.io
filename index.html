@@ -10,7 +10,7 @@
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=7590f584" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=14e522a5" />
     
     
 
@@ -375,30 +375,42 @@
       <h3>BeamArmor</h3>
       <p>Anti-jamming: Controlling MIMO weights in realtime to steer the beam null toward the jammer</p>
     </div>
-    <video controls>
-      <source src="_static/beamarmor_demo.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <div class="video-wrapper">
+      <div class="video-cover" data-poster="_static/beamarmor_cover.jpg">
+        <button type="button" class="video-play-btn" aria-label="Play video"></button>
+      </div>
+      <video preload="metadata" data-src="_static/beamarmor_demo.mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
   </div>
   <div class="video-card">
     <div class="video-card-content">
       <h3>AI Scheduling</h3>
       <p>RL-based scheduling policy trained to maximize overall system throughput</p>
     </div>
-    <video controls>
-      <source src="_static/demo-2.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <div class="video-wrapper">
+      <div class="video-cover" data-poster="_static/demo2_cover.jpg">
+        <button type="button" class="video-play-btn" aria-label="Play video"></button>
+      </div>
+      <video preload="metadata" data-src="_static/demo-2.mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
   </div>
   <div class="video-card">
     <div class="video-card-content">
       <h3>Multi-site Management</h3>
       <p>Interference-aware resource distribution across sites with Near-RT RIC</p>
     </div>
-    <video controls>
-      <source src="_static/sparc-video-demo.mov" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <div class="video-wrapper">
+      <div class="video-cover" data-poster="_static/sparc_cover.jpg">
+        <button type="button" class="video-play-btn" aria-label="Play video"></button>
+      </div>
+      <video preload="metadata" data-src="_static/sparc-video-demo.mov">
+        Your browser does not support the video tag.
+      </video>
+    </div>
   </div>
 </div></section>
 <section id="our-repositories">
@@ -593,5 +605,6 @@
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="_static/news-sidebar.js?v=21f782de"></script>
+    <script src="_static/demo-video.js?v=f940bad2"></script>
     </body>
 </html>
