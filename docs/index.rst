@@ -129,7 +129,7 @@ Our Team
          <div class="team-photo" id="photo-saru"></div>
          <h4>Shunsuke Saruwatari</h4>
        </a>
-       <p>Professor, The University of Osaka</p>
+       <p>Professor, University of Osaka</p>
        <a href="mailto:ssaruwatari@ucsd.edu" class="team-email">ssaruwatari@ucsd.edu</a>
      </div>
      <div class="team-card">
