@@ -76,7 +76,6 @@ Our Projects
 .. toctree::
    :maxdepth: 1
    :caption: Our Projects
-   :hidden:
 
    projects/cloud-gaming
    projects/multimodal-sensing
@@ -348,9 +347,8 @@ Open Source Repositories
 .. toctree::
    :maxdepth: 1
    :caption: 5G Testbed
-   :hidden:
 
-   5g-Testbed
+   5g-testbed
 
 
 
@@ -359,9 +357,9 @@ EdgeRIC Architecture
 
 .. toctree::
    :maxdepth: 2
-   :hidden:
+   :caption: EdgeRIC Architecture
 
-   edgeric-architecture.rst
+   edgeric-architecture
 
 .. raw:: html
 
@@ -393,16 +391,18 @@ EdgeRIC Tutorials
 
 .. toctree::
    :maxdepth: 2
+   :caption: EdgeRIC Tutorials
 
-   tutorials.rst
+   tutorials
 
 Datasets
 ------------------------
 
 .. toctree::
    :maxdepth: 2
+   :caption: Datasets
 
-   datasets.rst
+   datasets
 
 .. Research Papers
 .. ------------------------
@@ -420,9 +420,9 @@ Datasets
 .. .. * :ref:`search`
 .. toctree::
    :maxdepth: 2
-   :hidden:
+   :caption: Getting Started
 
-   gettingstarted.rst
+   gettingstarted
 
 Funding 
 ------------------------ 
