@@ -56,7 +56,7 @@ Our Projects
 
    <div class="project-grid">
      <a href="projects/cloud-gaming.html" class="project-card" id="card-cloud-gaming">
-       <h3>Cloud Gaming on 5G</h3>
+       <h3>Cloud Gaming via 5G</h3>
      </a>
      <a href="projects/multimodal-sensing.html" class="project-card" id="card-multimodal">
        <h3>mmsRAN: Multi-Modal Sensing</h3>
@@ -178,12 +178,13 @@ Meet Our Team
          <h4>WCSNG</h4>
        </a>
        <p>Lab @ UCSD</p>
-       <a href="mailto:https://github.com/ucsdwcsng" class="team-email">github.com/ucsdwcsng</a>
+       <a href="https://github.com/ucsdwcsng" class="team-email" target="_blank" rel="noopener noreferrer">github.com/ucsdwcsng</a>
      </div>
    </div>
 
+.. container:: news-sidebar-source
 
-
+   .. include:: news.md
 
 .. _our-demos:
 
