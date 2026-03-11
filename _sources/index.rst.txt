@@ -76,7 +76,7 @@ Our Projects
 .. toctree::
    :maxdepth: 1
    :caption: Our Projects
-   :hidden:
+
    projects/cloud-gaming
    projects/multimodal-sensing
    projects/telemetry
