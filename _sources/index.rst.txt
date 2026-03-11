@@ -91,6 +91,8 @@ Our Team
    :maxdepth: 1
    :caption: Our Team
 
+   team
+
 .. raw:: html
 
    <div class="team-grid">
@@ -153,6 +155,8 @@ Demos
 .. toctree::
    :maxdepth: 1
    :caption: Demos
+
+   demo
    
 .. raw:: html
 
