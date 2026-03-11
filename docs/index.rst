@@ -87,6 +87,9 @@ Our Projects
 
 Our Team
 ------------------------
+.. toctree::
+   :maxdepth: 1
+   :caption: Our Team
 
 .. raw:: html
 
@@ -141,14 +144,16 @@ Our Team
      </div>
    </div>
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Our Team
+
 
 
 Demos 
 ------------------------
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Demos
+   
 .. raw:: html
 
    <div class="video-grid">
@@ -196,9 +201,7 @@ Demos
      </div>
    </div>
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Demos
+
 
 EdgeRIC Events
 ------------------------
@@ -402,6 +405,35 @@ EdgeRIC Tutorials
    :caption: EdgeRIC Tutorials
 
    tutorials
+
+.. raw:: html
+
+   <div class="tutorial-section-list">
+     <a class="tutorial-section" href="edgeric-tutorial.html">
+       <div class="tutorial-section-title">μApp demo: MAC scheduling</div>
+       <div class="tutorial-section-desc">Weight-based TTI scheduling, metrics and RT-E2 policy format for the MAC scheduler μApp.</div>
+     </a>
+     <a class="tutorial-section" href="edgeric-tutorial.html">
+       <div class="tutorial-section-title">Training Reinforcement Learning scheduling Policy</div>
+       <div class="tutorial-section-desc">Train a PPO agent for throughput maximization; state, action, and reward specs.</div>
+     </a>
+     <a class="tutorial-section" href="edgeric-tutorial.html">
+       <div class="tutorial-section-title">Install srsRAN supporting EdgeRIC hooks</div>
+       <div class="tutorial-section-desc">Option 1: native install (Ubuntu 20). Option 2: containerized install with Docker.</div>
+     </a>
+     <a class="tutorial-section" href="edgeric-tutorial.html">
+       <div class="tutorial-section-title">How to run the network</div>
+       <div class="tutorial-section-desc">Setup core, srsenb, run UEs, and known issues for attach and CQI traces.</div>
+     </a>
+     <a class="tutorial-section" href="edgeric-tutorial.html">
+       <div class="tutorial-section-title">Running EdgeRIC and μApps</div>
+       <div class="tutorial-section-desc">EdgeRIC messenger, supported μApps (muApp1/2/3), running the downlink scheduler and RL training.</div>
+     </a>
+     <a class="tutorial-section" href="edgeric-tutorial.html">
+       <div class="tutorial-section-title">Stream traffic and monitoring</div>
+       <div class="tutorial-section-desc">iperf traffic, Redis updates, and muApp3 monitoring of RT-E2 report and policy messages.</div>
+     </a>
+   </div>
 
 Datasets
 ------------------------
