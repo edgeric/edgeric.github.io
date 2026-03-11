@@ -711,6 +711,45 @@ table.docutils tr:hover td {
     font-weight: 600;
 }
 
+/* Sidebar captions (section titles) */
+.sidebar-tree p.caption,
+.sidebar-tree .caption {
+    font-size: 0.85rem;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 1rem 0 0.35rem 0;
+}
+
+.sidebar-tree p.caption > a.reference,
+.sidebar-tree .caption > a.reference {
+    display: inline-block;
+    color: var(--color-foreground-primary);
+}
+
+/* Sidebar indentation: keep clear hierarchy for sub-items */
+.sidebar-tree ul {
+    margin: 0;
+    padding-left: 0;
+}
+
+.sidebar-tree ul > li {
+    margin: 0;
+}
+
+.sidebar-tree .toctree-l1 > a.reference {
+    padding-left: 0.75rem;
+}
+
+.sidebar-tree .toctree-l2 > a.reference {
+    padding-left: 1.5rem;
+}
+
+.sidebar-tree .toctree-l3 > a.reference {
+    padding-left: 2.25rem;
+}
+
 /* ===== Cards/Feature Boxes ===== */
 .feature-card {
     background: var(--color-background-secondary);

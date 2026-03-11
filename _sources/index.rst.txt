@@ -429,19 +429,19 @@ Tutorials
 
    <div class="tutorial-section-list">
      <a class="tutorial-section" href="edgeric.html">
-       <div class="tutorial-section-title">EdgeRIC</div>
+       <div class="tutorial-section-title">EdgeRIC Main Paper Tutorial</div>
        <div class="tutorial-section-desc">Real-time MAC scheduler, multiple scheduling algorithms (Max Weight, Max CQI, PF, Round Robin, RL-based).</div>
      </a>
      <a class="tutorial-section" href="windex.html">
-       <div class="tutorial-section-title">Windex</div>
+       <div class="tutorial-section-title">Windex Tutorial</div>
        <div class="tutorial-section-desc">Realtime Neural Whittle Indexing for scalable service guarantees in NextG cellular networks.</div>
      </a>
      <a class="tutorial-section" href="beamarmor.html">
-       <div class="tutorial-section-title">BeamArmor</div>
+       <div class="tutorial-section-title">BeamArmor Tutorial</div>
        <div class="tutorial-section-desc">Null-steering anti-jamming on srsRAN 4G stack; MIMO-RIC and BeamArmor μApp.</div>
      </a>
      <a class="tutorial-section" href="sparc.html">
-       <div class="tutorial-section-title">SPARC</div>
+       <div class="tutorial-section-title">SPARC Tutorial</div>
        <div class="tutorial-section-desc">Spatio-Temporal Adaptive Resource Control for multi-site spectrum management in NextG networks.</div>
      </a>
    </div>
