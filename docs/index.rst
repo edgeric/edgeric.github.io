@@ -177,7 +177,7 @@ Meet Our Team
          <div class="team-photo" id="photo-wcsng"></div>
          <h4>WCSNG</h4>
        </a>
-       <p>Our Lab, UCSD</p>
+       <p>Lab @ UCSD</p>
        <a href="mailto:https://github.com/ucsdwcsng" class="team-email">github.com/ucsdwcsng</a>
      </div>
    </div>
