@@ -67,7 +67,12 @@
 .video-cover {
     position: absolute;
     inset: 0;
-    background-size: cover;
+    /* Keep poster aspect ratio, add whitespace padding */
+    padding: 10px;
+    box-sizing: border-box;
+    background-origin: content-box;
+    background-clip: content-box;
+    background-size: contain;
     background-position: center;
     background-color: #1a1a2e;
     background-repeat: no-repeat;
