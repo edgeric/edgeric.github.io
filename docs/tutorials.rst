@@ -16,7 +16,9 @@
 
 
 
+.. toctree::
 
+   beamarmor.md
 
 .. Windex
 .. ---------------------
@@ -25,6 +27,11 @@
 ..     :members:
 ..     :undoc-members:
 ..     :show-inheritance:
+
+.. toctree::
+
+   tiny-twin.md
+
 
 .. toctree::
 
@@ -37,9 +44,7 @@
 .. It contains an O-RAN driven RIC named MIMO-RIC that is specifically geared towards hosting MIMO-related xApps/μApps.
 .. One of these Apps is BeamArmor, which is included in this repo. BeamArmor is a null-steering enabled anti-jamming application that can mitigate the interference effect of jamming signals in UL traffic.
 
-.. toctree::
 
-   beamarmor.md
 
 
 
