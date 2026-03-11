@@ -300,7 +300,6 @@ Tutorials
 
 .. toctree::
    :maxdepth: 2
-   :caption: Getting Started
    :hidden:
 
    gettingstarted.rst
@@ -329,7 +328,6 @@ Events
 
 .. toctree::
    :maxdepth: 2
-   :caption: Events
 
    oaic-workshop-2024.rst
    srsran-2024-workshop.rst
@@ -339,7 +337,6 @@ EdgeRIC Architecture
 
 .. toctree::
    :maxdepth: 2
-   :caption: EdgeRIC Architecture
 
    edgeric-architecture.rst
 
@@ -348,7 +345,6 @@ EdgeRIC Tutorials
 
 .. toctree::
    :maxdepth: 2
-   :caption: EdgeRIC Tutorials
 
    tutorials.rst
 
@@ -357,7 +353,6 @@ Datasets
 
 .. toctree::
    :maxdepth: 2
-   :caption: Datasets
 
    datasets.rst
 
