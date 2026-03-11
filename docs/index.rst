@@ -143,7 +143,7 @@ Our Team
    </div>
 
 
-Our Demos 
+Demos 
 ------------------------
 
 .. raw:: html
@@ -193,7 +193,7 @@ Our Demos
      </div>
    </div>
 
-Our Repositories
+Open Source Repositories
 ------------------------
 
 .. raw:: html
@@ -224,6 +224,43 @@ Our Repositories
        <a href="https://github.com/ucsdwcsng/EdgeRIC-5G-OAI" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
      </div>
    </div>
+
+
+
+
+
+EdgeRIC Events
+------------------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: EdgeRIC Events
+   :hidden:
+
+   oaic-workshop-2024.rst
+   srsran-2024-workshop.rst
+
+.. raw:: html
+
+   <div class="event-list">
+     <a class="event-card" href="oaic-workshop-2024.html">
+       <div class="event-date">2024</div>
+       <div class="event-main">
+         <div class="event-title">OAIC Workshop 2024</div>
+         <div class="event-desc">Tutorials, demos, and hands-on sessions for OAI + EdgeRIC.</div>
+       </div>
+       <div class="event-cta">View</div>
+     </a>
+     <a class="event-card" href="srsran-2024-workshop.html">
+       <div class="event-date">2024</div>
+       <div class="event-main">
+         <div class="event-title">srsRAN Workshop 2024</div>
+         <div class="event-desc">EdgeRIC integration, experiments, and live testbed walkthroughs.</div>
+       </div>
+       <div class="event-cta">View</div>
+     </a>
+   </div>
+
 
 5G Testbed
 ------------------------
@@ -315,41 +352,6 @@ Our Repositories
 
 
 
-
-
-
-EdgeRIC Events
-------------------------
-
-.. toctree::
-   :maxdepth: 2
-   :caption: EdgeRIC Events
-   :hidden:
-
-   oaic-workshop-2024.rst
-   srsran-2024-workshop.rst
-
-.. raw:: html
-
-   <div class="event-list">
-     <a class="event-card" href="oaic-workshop-2024.html">
-       <div class="event-date">2024</div>
-       <div class="event-main">
-         <div class="event-title">OAIC Workshop 2024</div>
-         <div class="event-desc">Tutorials, demos, and hands-on sessions for OAI + EdgeRIC.</div>
-       </div>
-       <div class="event-cta">View</div>
-     </a>
-     <a class="event-card" href="srsran-2024-workshop.html">
-       <div class="event-date">2024</div>
-       <div class="event-main">
-         <div class="event-title">srsRAN Workshop 2024</div>
-         <div class="event-desc">EdgeRIC integration, experiments, and live testbed walkthroughs.</div>
-       </div>
-       <div class="event-cta">View</div>
-     </a>
-   </div>
-
 EdgeRIC Architecture
 ------------------------
 
@@ -362,21 +364,25 @@ EdgeRIC Architecture
 .. raw:: html
 
    <div class="arch-section-list">
-     <a class="arch-section" href="edgeric-architecture.html#high-level-overview">
-       <div class="arch-section-title">High-level Overview</div>
-       <div class="arch-section-desc">Big-picture view of the EdgeRIC control plane, data plane, and RAN integration.</div>
+     <a class="arch-section" href="edgeric-architecture.html">
+       <div class="arch-section-title">RT-E2 interface (Real time E2 interface)</div>
+       <div class="arch-section-desc">Messaging framework between the RAN stack and EdgeRIC, built on ZMQ and protobuf, with TTI-level synchronization.</div>
      </a>
-     <a class="arch-section" href="edgeric-architecture.html#near-rt-ric-and-microapps">
-       <div class="arch-section-title">Near-RT RIC and μApps</div>
-       <div class="arch-section-desc">How microapps plug into EdgeRIC, access telemetry, and push control decisions.</div>
+     <a class="arch-section" href="edgeric-architecture.html">
+       <div class="arch-section-title">RT-E2 Report Message</div>
+       <div class="arch-section-desc">Per-UE KPI report structure (cqi, buffers, TBS, rates) sent every TTI from the RAN to EdgeRIC.</div>
      </a>
-     <a class="arch-section" href="edgeric-architecture.html#telemetry-and-control-interfaces">
-       <div class="arch-section-title">Telemetry and Control Interfaces</div>
-       <div class="arch-section-desc">Message formats, KPIs, and control knobs that connect EdgeRIC to the RAN stack.</div>
+     <a class="arch-section" href="edgeric-architecture.html">
+       <div class="arch-section-title">RT-E2 Policy Message</div>
+       <div class="arch-section-desc">Control-action messages from μApps back to the RAN, including scheduling weights and blanking decisions.</div>
      </a>
-     <a class="arch-section" href="edgeric-architecture.html#deployment-and-runtime">
-       <div class="arch-section-title">Deployment and Runtime</div>
-       <div class="arch-section-desc">Container layout, services, and how EdgeRIC runs on a 5G testbed.</div>
+     <a class="arch-section" href="edgeric-architecture.html">
+       <div class="arch-section-title">REDIS database</div>
+       <div class="arch-section-desc">How Redis is used for model storage, μApp lifecycle management, and dynamic configuration.</div>
+     </a>
+     <a class="arch-section" href="edgeric-architecture.html">
+       <div class="arch-section-title">μApps – EdgeRIC microservices</div>
+       <div class="arch-section-desc">How μApps subscribe to metrics, compute policies, and send control via the EdgeRIC messenger.</div>
      </a>
    </div>
 
