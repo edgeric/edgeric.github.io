@@ -173,7 +173,7 @@ Demos
          <p>Anti-jamming: Controlling MIMO weights in realtime to steer the beam null toward the jammer</p>
        </div>
        <div class="video-wrapper">
-         <div class="video-cover" data-poster="demo_figs/beamarmor_cover.jpg">
+         <div class="video-cover" data-poster="_static/beamarmor_cover.jpg">
            <button type="button" class="video-play-btn" aria-label="Play video"></button>
          </div>
          <video preload="metadata" data-src="_static/beamarmor_demo.mp4">
@@ -187,7 +187,7 @@ Demos
          <p>RL-based scheduling policy trained to maximize overall system throughput</p>
        </div>
        <div class="video-wrapper">
-         <div class="video-cover" data-poster="demo_figs/demo2_cover.jpg">
+         <div class="video-cover" data-poster="_static/demo2_cover.jpg">
            <button type="button" class="video-play-btn" aria-label="Play video"></button>
          </div>
          <video preload="metadata" data-src="_static/demo-2.mp4">
@@ -201,7 +201,7 @@ Demos
          <p>Interference-aware resource distribution across sites with Near-RT RIC</p>
        </div>
        <div class="video-wrapper">
-         <div class="video-cover" data-poster="demo_figs/sparc_cover.jpg">
+         <div class="video-cover" data-poster="_static/sparc_cover.jpg">
            <button type="button" class="video-play-btn" aria-label="Play video"></button>
          </div>
          <video preload="metadata" data-src="_static/sparc-video-demo.mov">
