@@ -234,12 +234,7 @@ Our Repositories
      <img src="_static/5G-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
    </a>
 
-.. toctree::
-   :maxdepth: 1
-   :caption: 5G Testbed
-   :hidden:
 
-   5g-Testbed
 
 
 .. Current Status
@@ -311,7 +306,12 @@ Our Repositories
 
 ..         **Website**: https://wcsng.ucsd.edu/sparc/ 
 
+.. toctree::
+   :maxdepth: 1
+   :caption: 5G Testbed
+   :hidden:
 
+   5g-Testbed
 
 
 
@@ -355,8 +355,30 @@ EdgeRIC Architecture
 
 .. toctree::
    :maxdepth: 2
+   :hidden:
 
    edgeric-architecture.rst
+
+.. raw:: html
+
+   <div class="arch-section-list">
+     <a class="arch-section" href="edgeric-architecture.html#high-level-overview">
+       <div class="arch-section-title">High-level Overview</div>
+       <div class="arch-section-desc">Big-picture view of the EdgeRIC control plane, data plane, and RAN integration.</div>
+     </a>
+     <a class="arch-section" href="edgeric-architecture.html#near-rt-ric-and-microapps">
+       <div class="arch-section-title">Near-RT RIC and μApps</div>
+       <div class="arch-section-desc">How microapps plug into EdgeRIC, access telemetry, and push control decisions.</div>
+     </a>
+     <a class="arch-section" href="edgeric-architecture.html#telemetry-and-control-interfaces">
+       <div class="arch-section-title">Telemetry and Control Interfaces</div>
+       <div class="arch-section-desc">Message formats, KPIs, and control knobs that connect EdgeRIC to the RAN stack.</div>
+     </a>
+     <a class="arch-section" href="edgeric-architecture.html#deployment-and-runtime">
+       <div class="arch-section-title">Deployment and Runtime</div>
+       <div class="arch-section-desc">Container layout, services, and how EdgeRIC runs on a 5G testbed.</div>
+     </a>
+   </div>
 
 EdgeRIC Tutorials
 ------------------------

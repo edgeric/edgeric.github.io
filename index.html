@@ -10,7 +10,7 @@
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c1c804d9" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6356f369" />
     
     
 
@@ -468,18 +468,25 @@
 <section id="edgeric-architecture">
 <h2>EdgeRIC Architecture<a class="headerlink" href="#edgeric-architecture" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html">RT-E2 interface (Real time E2 interface)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#rt-e2-report-message">RT-E2 Report Message</a></li>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#rt-e2-policy-message">RT-E2 Policy Message</a></li>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#redis-database">REDIS database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="edgeric-architecture.html#how-to-write-apps">how to write μApps?</a></li>
-</ul>
-</li>
-</ul>
 </div>
-</section>
+<div class="arch-section-list">
+  <a class="arch-section" href="edgeric-architecture.html#high-level-overview">
+    <div class="arch-section-title">High-level Overview</div>
+    <div class="arch-section-desc">Big-picture view of the EdgeRIC control plane, data plane, and RAN integration.</div>
+  </a>
+  <a class="arch-section" href="edgeric-architecture.html#near-rt-ric-and-microapps">
+    <div class="arch-section-title">Near-RT RIC and μApps</div>
+    <div class="arch-section-desc">How microapps plug into EdgeRIC, access telemetry, and push control decisions.</div>
+  </a>
+  <a class="arch-section" href="edgeric-architecture.html#telemetry-and-control-interfaces">
+    <div class="arch-section-title">Telemetry and Control Interfaces</div>
+    <div class="arch-section-desc">Message formats, KPIs, and control knobs that connect EdgeRIC to the RAN stack.</div>
+  </a>
+  <a class="arch-section" href="edgeric-architecture.html#deployment-and-runtime">
+    <div class="arch-section-title">Deployment and Runtime</div>
+    <div class="arch-section-desc">Container layout, services, and how EdgeRIC runs on a 5G testbed.</div>
+  </a>
+</div></section>
 <section id="edgeric-tutorials">
 <h2>EdgeRIC Tutorials<a class="headerlink" href="#edgeric-tutorials" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
