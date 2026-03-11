@@ -9,9 +9,8 @@
         <title>EdgeRIC Documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
-    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=8941df67" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=1e53fec5" />
     
     
 
@@ -241,13 +240,15 @@
 <p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="edgeric.html">EdgeRIC main paper</a></li>
-<li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tiny-twin.html">Tiny Twin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sparc.html">SPARC</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Datasets</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="datasets.html">Channel Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset_page/edgeric-datasets.html">EdgeRIC Main Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset_page/scout-dataset.html">Scout Dataset</a></li>
 </ul>
 
 </div>
@@ -580,44 +581,84 @@
 <span id="edgeric-tutorials"></span><h2>Publications &amp; Tutorials<a class="headerlink" href="#publications-tutorials" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 </div>
-<div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">EdgeRIC</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">BeamArmor</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Tiny-twin</button><button aria-controls="panel-0-0-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">Windex</button><button aria-controls="panel-0-0-4" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-4" name="0-4" role="tab" tabindex="-1">SPARC</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks</p>
-<p><strong>Paper &#64; NSDI’24</strong>: <a class="reference external" href="https://www.usenix.org/conference/nsdi24/presentation/ko">EdgeRIC</a></p>
-<p><strong>Demo &#64; SIGCOMM’23</strong>: <a class="reference external" href="https://dl.acm.org/doi/abs/10.1145/3603269.3610867">EdgeRIC</a></p>
-<p><strong>Code</strong>: <a class="reference external" href="https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git">Github Respository</a></p>
-<p><strong>Website</strong>: <a class="reference external" href="https://wcsng.ucsd.edu/edgeric/">https://wcsng.ucsd.edu/edgeric/</a></p>
-<p><strong>Tutorial</strong>: <a class="reference external" href="edgeric.html">EdgeRIC Main Paper Tutorial</a> — Real-time MAC scheduler, multiple scheduling algorithms (Max Weight, Max CQI, PF, Round Robin, RL-based).</p>
-</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Seamless Anti-Jamming in 5G Cellular Networks with MIMO Null-steering</p>
-<p><strong>Paper &#64; HotMobile’24</strong> <a class="reference external" href="https://dl.acm.org/doi/10.1145/3638550.3641138">BamArmor</a></p>
-<p><strong>Code</strong>: <a class="reference external" href="https://github.com/ucsdwcsng/beamarmor.git">Github Respository</a></p>
-<p><strong>Website</strong>: <a class="reference external" href="https://wcsng.ucsd.edu/beamarmor/">https://wcsng.ucsd.edu/beamarmor/</a></p>
-<p><strong>Tutorial</strong>: <a class="reference external" href="beamarmor.html">BeamArmor Tutorial</a> — Null-steering anti-jamming on srsRAN 4G stack; MIMO-RIC and BeamArmor μApp.</p>
-</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><p>A Lightweight and Verifiable Digital Twin for NextG Cellular Networks</p>
-<p><strong>Paper &#64; DySPAN’26</strong>: <a class="reference external" href="https://arxiv.org/abs/2601.08217">Tiny-twin</a></p>
-<p><strong>Poster &#64; HotMobile’24</strong>: <a class="reference external" href="https://dl.acm.org/doi/abs/10.1145/3638550.3643625">Tiny-twin</a></p>
-<p><strong>Tutorial</strong>: Tiny-twin emulation is covered in the <a class="reference external" href="edgeric.html">EdgeRIC Main Paper Tutorial</a> (CQI traces, offline training).</p>
-</div><div aria-labelledby="tab-0-0-3" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-3" name="0-3" role="tabpanel" tabindex="0"><p>Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks</p>
-<p><strong>Paper</strong>: <a class="reference external" href="https://arxiv.org/abs/2406.01888">Windex</a></p>
-<p><strong>Demo &#64; MobiCom’24</strong>: <a class="reference external" href="https://dl.acm.org/doi/10.1145/3636534.3700034">Windex</a></p>
-<p><strong>Code</strong>: <a class="reference external" href="https://github.com/ucsdwcsng/EdgeRIC_whittleIndex.git">Github Repository</a></p>
-<p><strong>Website</strong>: <a class="reference external" href="https://wcsng.ucsd.edu/windex/">https://wcsng.ucsd.edu/windex/</a></p>
-<p><strong>Tutorial</strong>: <a class="reference external" href="windex.html">Windex Tutorial</a> — Realtime Neural Whittle Indexing for scalable service guarantees in NextG cellular networks.</p>
-</div><div aria-labelledby="tab-0-0-4" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-4" name="0-4" role="tabpanel" tabindex="0"><p>SPARC: Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks</p>
-<p><strong>Paper &#64; CoNEXT’25</strong>: <a class="reference external" href="https://dl.acm.org/doi/abs/10.1145/3696405">SPARC</a></p>
-<p><strong>Code</strong>: <a class="reference external" href="https://github.com/ushasigh/SPARC-multi-siteManagent.git">Github Respository</a></p>
-<p><strong>Website</strong>: <a class="reference external" href="https://wcsng.ucsd.edu/sparc/">https://wcsng.ucsd.edu/sparc/</a></p>
-<p><strong>Tutorial</strong>: <a class="reference external" href="sparc.html">SPARC Tutorial</a> — Spatio-Temporal Adaptive Resource Control for multi-site spectrum management in NextG networks.</p>
-</div></div>
-</section>
+<div class="publication-grid">
+  <div class="publication-card">
+    <h3>EdgeRIC</h3>
+    <p class="publication-desc">Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks</p>
+    <div class="publication-buttons">
+      <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@NSDI'24</a>
+      <a href="https://dl.acm.org/doi/abs/10.1145/3603269.3610867" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@SIGCOMM'23</a>
+      <a href="https://wcsng.ucsd.edu/edgeric/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
+      <a href="https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
+      <a href="edgeric.html" class="pub-btn pub-btn-tutorial">Main Paper Tutorial</a>
+    </div>
+  </div>
+  <div class="publication-card">
+    <h3>BeamArmor</h3>
+    <p class="publication-desc">Seamless Anti-Jamming in 5G Cellular Networks with MIMO Null-steering</p>
+    <div class="publication-buttons">
+      <a href="https://dl.acm.org/doi/10.1145/3638550.3641138" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@HotMobile'24</a>
+      <a href="https://wcsng.ucsd.edu/beamarmor/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
+      <a href="https://github.com/ucsdwcsng/beamarmor.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
+      <a href="beamarmor.html" class="pub-btn pub-btn-tutorial">BeamArmor Tutorial</a>
+    </div>
+  </div>
+  <div class="publication-card">
+    <h3>Tiny-twin</h3>
+    <p class="publication-desc">A Lightweight and Verifiable Digital Twin for NextG Cellular Networks</p>
+    <div class="publication-buttons">
+      <a href="https://arxiv.org/abs/2601.08217" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@DySPAN'26</a>
+      <a href="https://dl.acm.org/doi/abs/10.1145/3638550.3643625" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Poster@HotMobile'24</a>
+      <a href="tiny-twin.html" class="pub-btn pub-btn-tutorial">Tiny-twin Tutorial</a>
+    </div>
+  </div>
+  <div class="publication-card">
+    <h3>Windex</h3>
+    <p class="publication-desc">Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks</p>
+    <div class="publication-buttons">
+      <a href="https://arxiv.org/abs/2406.01888" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Main Paper</a>
+      <a href="https://dl.acm.org/doi/10.1145/3636534.3700034" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@MobiCom'24</a>
+      <a href="https://wcsng.ucsd.edu/windex/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
+      <a href="https://github.com/ucsdwcsng/EdgeRIC_whittleIndex.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
+      <a href="windex.html" class="pub-btn pub-btn-tutorial">Windex Tutorial</a>
+    </div>
+  </div>
+  <div class="publication-card">
+    <h3>SPARC</h3>
+    <p class="publication-desc">Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks</p>
+    <div class="publication-buttons">
+      <a href="https://dl.acm.org/doi/abs/10.1145/3696405" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@CoNEXT'25</a>
+      <a href="https://wcsng.ucsd.edu/sparc/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
+      <a href="https://github.com/ushasigh/SPARC-multi-siteManagent.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
+      <a href="sparc.html" class="pub-btn pub-btn-tutorial">SPARC Tutorial</a>
+    </div>
+  </div>
+</div></section>
 <section id="datasets">
-<span id="id9"></span><h2>Datasets<a class="headerlink" href="#datasets" title="Link to this heading">¶</a></h2>
+<span id="id3"></span><h2>Datasets<a class="headerlink" href="#datasets" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Datasets</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="datasets.html">Channel Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset_page/edgeric-datasets.html">EdgeRIC Main Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset_page/scout-dataset.html">Scout Dataset</a></li>
 </ul>
 </div>
-</section>
+<div class="dataset-grid">
+  <a href="dataset_page/edgeric-datasets.html" class="dataset-card">
+    <div class="dataset-card-icon"><img src="_static/database.png" alt="" aria-hidden="true"></div>
+    <div class="dataset-card-body">
+      <h4>EdgeRIC Dataset</h4>
+      <p>Channel traces (CQI) from over-the-air mobility experiments, used for Tiny-twin emulation and RL training.</p>
+    </div>
+  </a>
+  <a href="dataset_page/scout-dataset.html" class="dataset-card">
+    <div class="dataset-card-icon"><img src="_static/database.png" alt="" aria-hidden="true"></div>
+    <div class="dataset-card-body">
+      <h4>Scout Dataset</h4>
+      <p>Log dataset for SCOUT: packet-centric telemetry logs, per-packet latency, queue dynamics, and scheduling impact analysis.</p>
+    </div>
+  </a>
+</div></section>
 <section id="funding">
 <h2>Funding<a class="headerlink" href="#funding" title="Link to this heading">¶</a></h2>
 <p>This work was funded primarily by NSF Grants CNS 2312978, CNS 2312979 and in part by CNS 1955696, ECCS 2030245, ARO grant W911NF- 19-1-0367.</p>
@@ -695,7 +736,6 @@
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>
-    <script src="_static/tabs.js?v=3030b3cb"></script>
     <script src="_static/news-sidebar.js?v=5482c2ca"></script>
     <script src="_static/demo-video.js?v=f940bad2"></script>
     <script src="_static/sidebar-clickable-titles.js?v=1320f74f"></script>

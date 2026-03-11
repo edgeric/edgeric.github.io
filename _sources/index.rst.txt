@@ -424,67 +424,63 @@ Publications & Tutorials
 
    tutorials
 
-.. tabs::
+.. raw:: html
 
-    .. tab:: EdgeRIC 
-        Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks
-        
-        **Paper @ NSDI'24**: `EdgeRIC <https://www.usenix.org/conference/nsdi24/presentation/ko>`_ 
+   <div class="publication-grid">
+     <div class="publication-card">
+       <h3>EdgeRIC</h3>
+       <p class="publication-desc">Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks</p>
+       <div class="publication-buttons">
+         <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@NSDI'24</a>
+         <a href="https://dl.acm.org/doi/abs/10.1145/3603269.3610867" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@SIGCOMM'23</a>
+         <a href="https://wcsng.ucsd.edu/edgeric/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
+         <a href="https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
+         <a href="edgeric.html" class="pub-btn pub-btn-tutorial">Main Paper Tutorial</a>
+       </div>
+     </div>
+     <div class="publication-card">
+       <h3>BeamArmor</h3>
+       <p class="publication-desc">Seamless Anti-Jamming in 5G Cellular Networks with MIMO Null-steering</p>
+       <div class="publication-buttons">
+         <a href="https://dl.acm.org/doi/10.1145/3638550.3641138" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@HotMobile'24</a>
+         <a href="https://wcsng.ucsd.edu/beamarmor/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
+         <a href="https://github.com/ucsdwcsng/beamarmor.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
+         <a href="beamarmor.html" class="pub-btn pub-btn-tutorial">BeamArmor Tutorial</a>
+       </div>
+     </div>
+     <div class="publication-card">
+       <h3>Tiny-twin</h3>
+       <p class="publication-desc">A Lightweight and Verifiable Digital Twin for NextG Cellular Networks</p>
+       <div class="publication-buttons">
+         <a href="https://arxiv.org/abs/2601.08217" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@DySPAN'26</a>
+         <a href="https://dl.acm.org/doi/abs/10.1145/3638550.3643625" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Poster@HotMobile'24</a>
+         <a href="tiny-twin.html" class="pub-btn pub-btn-tutorial">Tiny-twin Tutorial</a>
+       </div>
+     </div>
+     <div class="publication-card">
+       <h3>Windex</h3>
+       <p class="publication-desc">Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks</p>
+       <div class="publication-buttons">
+         <a href="https://arxiv.org/abs/2406.01888" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Main Paper</a>
+         <a href="https://dl.acm.org/doi/10.1145/3636534.3700034" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@MobiCom'24</a>
+         <a href="https://wcsng.ucsd.edu/windex/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
+         <a href="https://github.com/ucsdwcsng/EdgeRIC_whittleIndex.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
+         <a href="windex.html" class="pub-btn pub-btn-tutorial">Windex Tutorial</a>
+       </div>
+     </div>
+     <div class="publication-card">
+       <h3>SPARC</h3>
+       <p class="publication-desc">Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks</p>
+       <div class="publication-buttons">
+         <a href="https://dl.acm.org/doi/abs/10.1145/3696405" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@CoNEXT'25</a>
+         <a href="https://wcsng.ucsd.edu/sparc/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
+         <a href="https://github.com/ushasigh/SPARC-multi-siteManagent.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
+         <a href="sparc.html" class="pub-btn pub-btn-tutorial">SPARC Tutorial</a>
+       </div>
+     </div>
+   </div>
 
-        **Demo @ SIGCOMM'23**: `EdgeRIC <https://dl.acm.org/doi/abs/10.1145/3603269.3610867>`_
-        
-        **Code**: `Github Respository <https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git>`_ 
-        
-        **Website**: https://wcsng.ucsd.edu/edgeric/
 
-        **Tutorial**: `EdgeRIC Main Paper Tutorial <edgeric.html>`_ — Real-time MAC scheduler, multiple scheduling algorithms (Max Weight, Max CQI, PF, Round Robin, RL-based).
-
-
-    .. tab:: BeamArmor
-        Seamless Anti-Jamming in 5G Cellular Networks with MIMO Null-steering
-
-        **Paper @ HotMobile'24** `BamArmor <https://dl.acm.org/doi/10.1145/3638550.3641138>`_
-
-        **Code**: `Github Respository <https://github.com/ucsdwcsng/beamarmor.git>`_
-
-        **Website**: https://wcsng.ucsd.edu/beamarmor/
-
-        **Tutorial**: `BeamArmor Tutorial <beamarmor.html>`_ — Null-steering anti-jamming on srsRAN 4G stack; MIMO-RIC and BeamArmor μApp.
-
-    .. tab:: Tiny-twin
-        A Lightweight and Verifiable Digital Twin for NextG Cellular Networks
-
-        **Paper @ DySPAN'26**: `Tiny-twin <https://arxiv.org/abs/2601.08217>`_
-
-        **Poster @ HotMobile'24**: `Tiny-twin <https://dl.acm.org/doi/abs/10.1145/3638550.3643625>`_
-
-        **Tutorial**: Tiny-twin emulation is covered in the `EdgeRIC Main Paper Tutorial <edgeric.html>`_ (CQI traces, offline training).
-
-
-    .. tab:: Windex
-        Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks
-
-        **Paper**: `Windex <https://arxiv.org/abs/2406.01888>`_
-
-        **Demo @ MobiCom'24**: `Windex <https://dl.acm.org/doi/10.1145/3636534.3700034>`_
-
-        **Code**: `Github Repository <https://github.com/ucsdwcsng/EdgeRIC_whittleIndex.git>`_
-
-        **Website**: https://wcsng.ucsd.edu/windex/
-
-        **Tutorial**: `Windex Tutorial <windex.html>`_ — Realtime Neural Whittle Indexing for scalable service guarantees in NextG cellular networks.
-
-
-    .. tab:: SPARC
-        SPARC: Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks  
-        
-        **Paper @ CoNEXT'25**: `SPARC <https://dl.acm.org/doi/abs/10.1145/3696405>`_ 
-
-        **Code**: `Github Respository <https://github.com/ushasigh/SPARC-multi-siteManagent.git>`_ 
-
-        **Website**: https://wcsng.ucsd.edu/sparc/
-
-        **Tutorial**: `SPARC Tutorial <sparc.html>`_ — Spatio-Temporal Adaptive Resource Control for multi-site spectrum management in NextG networks.
 
 .. _datasets:
 
@@ -495,7 +491,27 @@ Datasets
    :maxdepth: 2
    :caption: Datasets
 
-   datasets
+   dataset_page/edgeric-datasets
+   dataset_page/scout-dataset
+
+.. raw:: html
+
+   <div class="dataset-grid">
+     <a href="dataset_page/edgeric-datasets.html" class="dataset-card">
+       <div class="dataset-card-icon"><img src="_static/database.png" alt="" aria-hidden="true"></div>
+       <div class="dataset-card-body">
+         <h4>EdgeRIC Dataset</h4>
+         <p>Channel traces (CQI) from over-the-air mobility experiments, used for Tiny-twin emulation and RL training.</p>
+       </div>
+     </a>
+     <a href="dataset_page/scout-dataset.html" class="dataset-card">
+       <div class="dataset-card-icon"><img src="_static/database.png" alt="" aria-hidden="true"></div>
+       <div class="dataset-card-body">
+         <h4>Scout Dataset</h4>
+         <p>Log dataset for SCOUT: packet-centric telemetry logs, per-packet latency, queue dynamics, and scheduling impact analysis.</p>
+       </div>
+     </a>
+   </div>
 
 .. Research Papers
 .. ------------------------
