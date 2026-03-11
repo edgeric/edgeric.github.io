@@ -285,6 +285,7 @@ Open Source Repositories
 
 
 
+.. _5g-testbed:
 
 5G Testbed
 ------------------------
@@ -295,6 +296,11 @@ Open Source Repositories
      <img src="_static/5G-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
    </a>
 
+.. toctree::
+   :maxdepth: 1
+   :caption: 5G Testbed
+
+   5g-testbed
 
 
 
@@ -367,13 +373,8 @@ Open Source Repositories
 
 ..         **Website**: https://wcsng.ucsd.edu/sparc/ 
 
-.. _5g-testbed:
 
-.. toctree::
-   :maxdepth: 1
-   :caption: 5G Testbed
 
-   5g-testbed
 
 
 
