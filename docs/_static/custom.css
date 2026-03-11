@@ -16,6 +16,9 @@
     display: flex;
     flex-direction: column;
     transition: box-shadow 0.2s ease;
+    width: 100%;
+    max-width: 760px; /* keep cards compact */
+    margin: 0 auto;   /* center cards */
 }
 
 [data-theme="dark"] .video-card {
@@ -52,13 +55,13 @@
 /* Video wrapper: cover + play button, then video */
 .video-wrapper {
     position: relative;
-    max-width: 640px;
     width: 100%;
     aspect-ratio: 16/9;
     border-radius: 8px;
     overflow: hidden;
     background: #1a1a2e;
     margin-top: 0.45rem;
+    align-self: stretch;
 }
 
 .video-cover {
