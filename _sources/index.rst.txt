@@ -119,6 +119,18 @@ Our Team
        <a href="mailto:jaini2@rpi.edu" class="team-email">jaini2@rpi.edu</a>
      </div>
      <div class="team-card">
+       <div class="team-photo" id="photo-saru"></div>
+       <h4>Shunsuke Saruwatari</h4>
+       <p>Professor, The University of Osaka</p>
+       <a href="mailto:ssaruwatari@ucsd.edu" class="team-email">whko@tamu.edu</a>
+     </div>
+     <div class="team-card">
+       <div class="team-photo" id="photo-Woo"></div>
+       <h4>Woo Hyun Ko</h4>
+       <p>Senior Research Engineer, TAMU</p>
+       <a href="mailto:whko@tamu.edu" class="team-email">whko@tamu.edu</a>
+     </div>
+     <div class="team-card">
        <div class="team-photo" id="photo-ushasi"></div>
        <h4>Ushasi Ghosh</h4>
        <p>PhD Student, UCSD</p>
@@ -141,12 +153,6 @@ Our Team
        <h4>Qingyuan Zheng</h4>
        <p>MS Student, UCSD</p>
        <a href="mailto:qiz066@ucsd.edu" class="team-email">qiz151@ucsd.edu</a>
-     </div>
-     <div class="team-card">
-       <div class="team-photo" id="photo-Woo"></div>
-       <h4>Woo Hyun Ko</h4>
-       <p>Senior Research Engineer, TAMU</p>
-       <a href="mailto:whko@tamu.edu" class="team-email">whko@tamu.edu</a>
      </div>
    </div>
 
