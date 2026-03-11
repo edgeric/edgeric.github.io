@@ -416,41 +416,33 @@ EdgeRIC Architecture
 
 .. _edgeric-tutorials:
 
-EdgeRIC Tutorials
+Tutorials
 ------------------------
 
 .. toctree::
    :maxdepth: 2
-   :caption: EdgeRIC Tutorials
+   :caption: Tutorials
 
    tutorials
 
 .. raw:: html
 
    <div class="tutorial-section-list">
-     <a class="tutorial-section" href="edgeric-tutorial.html">
-       <div class="tutorial-section-title">μApp demo: MAC scheduling</div>
-       <div class="tutorial-section-desc">Weight-based TTI scheduling, metrics and RT-E2 policy format for the MAC scheduler μApp.</div>
+     <a class="tutorial-section" href="edgeric.html">
+       <div class="tutorial-section-title">EdgeRIC</div>
+       <div class="tutorial-section-desc">Real-time MAC scheduler, multiple scheduling algorithms (Max Weight, Max CQI, PF, Round Robin, RL-based).</div>
      </a>
-     <a class="tutorial-section" href="edgeric-tutorial.html">
-       <div class="tutorial-section-title">Training Reinforcement Learning scheduling Policy</div>
-       <div class="tutorial-section-desc">Train a PPO agent for throughput maximization; state, action, and reward specs.</div>
+     <a class="tutorial-section" href="windex.html">
+       <div class="tutorial-section-title">Windex</div>
+       <div class="tutorial-section-desc">Realtime Neural Whittle Indexing for scalable service guarantees in NextG cellular networks.</div>
      </a>
-     <a class="tutorial-section" href="edgeric-tutorial.html">
-       <div class="tutorial-section-title">Install srsRAN supporting EdgeRIC hooks</div>
-       <div class="tutorial-section-desc">Option 1: native install (Ubuntu 20). Option 2: containerized install with Docker.</div>
+     <a class="tutorial-section" href="beamarmor.html">
+       <div class="tutorial-section-title">BeamArmor</div>
+       <div class="tutorial-section-desc">Null-steering anti-jamming on srsRAN 4G stack; MIMO-RIC and BeamArmor μApp.</div>
      </a>
-     <a class="tutorial-section" href="edgeric-tutorial.html">
-       <div class="tutorial-section-title">How to run the network</div>
-       <div class="tutorial-section-desc">Setup core, srsenb, run UEs, and known issues for attach and CQI traces.</div>
-     </a>
-     <a class="tutorial-section" href="edgeric-tutorial.html">
-       <div class="tutorial-section-title">Running EdgeRIC and μApps</div>
-       <div class="tutorial-section-desc">EdgeRIC messenger, supported μApps (muApp1/2/3), running the downlink scheduler and RL training.</div>
-     </a>
-     <a class="tutorial-section" href="edgeric-tutorial.html">
-       <div class="tutorial-section-title">Stream traffic and monitoring</div>
-       <div class="tutorial-section-desc">iperf traffic, Redis updates, and muApp3 monitoring of RT-E2 report and policy messages.</div>
+     <a class="tutorial-section" href="sparc.html">
+       <div class="tutorial-section-title">SPARC</div>
+       <div class="tutorial-section-desc">Spatio-Temporal Adaptive Resource Control for multi-site spectrum management in NextG networks.</div>
      </a>
    </div>
 
