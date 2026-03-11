@@ -141,6 +141,10 @@ Our Team
      </div>
    </div>
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Our Team
+
 
 Demos 
 ------------------------
@@ -191,6 +195,10 @@ Demos
        </div>
      </div>
    </div>
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Demos
 
 EdgeRIC Events
 ------------------------
