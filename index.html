@@ -10,7 +10,7 @@
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=1e53fec5" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6a1109b0" />
     
     
 
@@ -436,7 +436,7 @@
 </ul>
 </div>
 <div class="video-grid">
-  <div class="video-card">
+  <div class="video-card" id="demo-beamarmor">
     <div class="video-card-content">
       <h3>BeamArmor</h3>
       <p>Anti-jamming: Controlling MIMO weights in realtime to steer the beam null toward the jammer</p>
@@ -450,9 +450,9 @@
       </video>
     </div>
   </div>
-  <div class="video-card">
+  <div class="video-card" id="demo-edgeric">
     <div class="video-card-content">
-      <h3>AI Scheduling</h3>
+      <h3>EdgeRIC: AI Scheduling</h3>
       <p>RL-based scheduling policy trained to maximize overall system throughput</p>
     </div>
     <div class="video-wrapper">
@@ -464,9 +464,9 @@
       </video>
     </div>
   </div>
-  <div class="video-card">
+  <div class="video-card" id="demo-sparc">
     <div class="video-card-content">
-      <h3>Multi-site Management</h3>
+      <h3>SPARC: Multi-site Management</h3>
       <p>Interference-aware resource distribution across sites with Near-RT RIC</p>
     </div>
     <div class="video-wrapper">
@@ -483,23 +483,43 @@
 <span id="edgeric-events"></span><h2>Events<a class="headerlink" href="#events" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 </div>
-<div class="event-list">
-  <a class="event-card" href="oaic-workshop-2024.html">
-    <div class="event-date">2024</div>
-    <div class="event-main">
-      <div class="event-title">OAIC Workshop 2024</div>
-      <div class="event-desc">Tutorials, demos, and hands-on sessions for OAI + EdgeRIC.</div>
+<div class="event-grid">
+  <div class="event-tile">
+    <div class="event-video-wrap">
+      <!-- Replace VIDEO_ID with your OAIC Workshop 2024 YouTube video ID -->
+      <iframe src="https://www.youtube.com/watch?v=NT78wOk5l-4&t=4795s" title="OAIC Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
-    <div class="event-cta">View</div>
-  </a>
-  <a class="event-card" href="srsran-2024-workshop.html">
-    <div class="event-date">2024</div>
-    <div class="event-main">
-      <div class="event-title">srsRAN Workshop 2024</div>
-      <div class="event-desc">EdgeRIC integration, experiments, and live testbed walkthroughs.</div>
+    <div class="event-tile-footer">
+      <span class="event-badge">2024</span>
+      <h3 class="event-tile-title">OAIC Workshop 2024</h3>
+      <p class="event-tile-desc">Tutorials, demos, and hands-on sessions for OAI + EdgeRIC.</p>
+      <a href="oaic-workshop-2024.html" class="event-tile-cta">View details</a>
     </div>
-    <div class="event-cta">View</div>
-  </a>
+  </div>
+  <div class="event-tile">
+    <div class="event-video-wrap">
+      <!-- Replace VIDEO_ID with your OAIC Workshop 2024 YouTube video ID -->
+      <iframe src="https://www.youtube.com/watch?v=KOlxJAMBRAE&t=2s" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="event-tile-footer">
+      <span class="event-badge">2024</span>
+      <h3 class="event-tile-title">srsRAN Workshop 2024</h3>
+      <p class="event-tile-desc">EdgeRIC integration, experiments, and live testbed walkthroughs.</p>
+      <a href="oaic-workshop-2024.html" class="event-tile-cta">View details</a>
+    </div>
+  </div>
+  <div class="event-tile event-tile-cover">
+    <a href="srsran-2024-workshop.html" class="event-cover-link">
+      <div class="event-cover" style="background-image: url(pics/srsran-workshop.png);">
+        <span class="event-cover-badge">2024</span>
+        <span class="event-cover-title">srsRAN Workshop 2024</span>
+      </div>
+    </a>
+    <div class="event-tile-footer">
+      <p class="event-tile-desc">EdgeRIC integration, experiments, and live testbed walkthroughs.</p>
+      <a href="srsran-2024-workshop.html" class="event-tile-cta">View details</a>
+    </div>
+  </div>
 </div></section>
 <section id="open-source-repositories">
 <h2>Open Source Repositories<a class="headerlink" href="#open-source-repositories" title="Link to this heading">¶</a></h2>
@@ -583,54 +603,54 @@
 </div>
 <div class="publication-grid">
   <div class="publication-card">
-    <h3>EdgeRIC</h3>
-    <p class="publication-desc">Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks</p>
+    <h3>EdgeRIC: Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks</h3>
     <div class="publication-buttons">
       <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@NSDI'24</a>
       <a href="https://dl.acm.org/doi/abs/10.1145/3603269.3610867" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@SIGCOMM'23</a>
+      <a href="index.html#demo-edgeric" class="pub-btn pub-btn-demo">Demo</a>
       <a href="https://wcsng.ucsd.edu/edgeric/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
       <a href="https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
-      <a href="edgeric.html" class="pub-btn pub-btn-tutorial">Main Paper Tutorial</a>
+      <a href="edgeric.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
     </div>
   </div>
   <div class="publication-card">
-    <h3>BeamArmor</h3>
-    <p class="publication-desc">Seamless Anti-Jamming in 5G Cellular Networks with MIMO Null-steering</p>
+    <h3>Beamarmor: Seamless anti-jamming in 5g cellular networks with mimo null-steering</h3>
     <div class="publication-buttons">
       <a href="https://dl.acm.org/doi/10.1145/3638550.3641138" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@HotMobile'24</a>
+      <a href="https://dl.acm.org/doi/abs/10.1145/3636534.3698870" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@MobiCom'24</a>
+      <a href="index.html#demo-beamarmor" class="pub-btn pub-btn-demo">Demo</a>
       <a href="https://wcsng.ucsd.edu/beamarmor/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
       <a href="https://github.com/ucsdwcsng/beamarmor.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
-      <a href="beamarmor.html" class="pub-btn pub-btn-tutorial">BeamArmor Tutorial</a>
+      <a href="beamarmor.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
     </div>
   </div>
   <div class="publication-card">
-    <h3>Tiny-twin</h3>
-    <p class="publication-desc">A Lightweight and Verifiable Digital Twin for NextG Cellular Networks</p>
+    <h3>Tiny-Twin: A CPU-Native Full-stack Digital Twin for NextG Cellular Networks</h3>
     <div class="publication-buttons">
       <a href="https://arxiv.org/abs/2601.08217" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@DySPAN'26</a>
       <a href="https://dl.acm.org/doi/abs/10.1145/3638550.3643625" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Poster@HotMobile'24</a>
-      <a href="tiny-twin.html" class="pub-btn pub-btn-tutorial">Tiny-twin Tutorial</a>
+      <a href="index.html#our-demos" class="pub-btn pub-btn-demo">Demo</a>
+      <a href="tiny-twin.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
     </div>
   </div>
   <div class="publication-card">
-    <h3>Windex</h3>
-    <p class="publication-desc">Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks</p>
+    <h3>Windex: Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks</h3>
     <div class="publication-buttons">
       <a href="https://arxiv.org/abs/2406.01888" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Main Paper</a>
       <a href="https://dl.acm.org/doi/10.1145/3636534.3700034" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@MobiCom'24</a>
       <a href="https://wcsng.ucsd.edu/windex/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
       <a href="https://github.com/ucsdwcsng/EdgeRIC_whittleIndex.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
-      <a href="windex.html" class="pub-btn pub-btn-tutorial">Windex Tutorial</a>
+      <a href="windex.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
     </div>
   </div>
   <div class="publication-card">
-    <h3>SPARC</h3>
-    <p class="publication-desc">Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks</p>
+    <h3>SPARC: Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks</h3>
     <div class="publication-buttons">
       <a href="https://dl.acm.org/doi/abs/10.1145/3696405" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@CoNEXT'25</a>
+      <a href="index.html#demo-sparc" class="pub-btn pub-btn-demo">Demo</a>
       <a href="https://wcsng.ucsd.edu/sparc/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
       <a href="https://github.com/ushasigh/SPARC-multi-siteManagent.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
-      <a href="sparc.html" class="pub-btn pub-btn-tutorial">SPARC Tutorial</a>
+      <a href="sparc.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
     </div>
   </div>
 </div></section>
