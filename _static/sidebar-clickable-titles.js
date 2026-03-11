@@ -1,7 +1,5 @@
 /**
- * Make sidebar section titles "Our Team" and "Demos" clickable:
- * link directly to index#our-team / index#our-demos, and hide the child page links
- * so no redirect pages are used.
+ * Make sidebar section titles clickable: link to index#anchor and hide child page links.
  */
 document.addEventListener('DOMContentLoaded', function () {
   var pathname = window.location.pathname.replace(/^\//, '');
@@ -9,6 +7,17 @@ document.addEventListener('DOMContentLoaded', function () {
   var indexHref = isIndex ? '#' : (pathname.indexOf('/') >= 0
     ? pathname.split('/').slice(0, -1).map(function () { return '..'; }).join('/') + '/index.html#'
     : 'index.html#');
+
+  var captionToAnchor = {
+    'Our Team': 'our-team',
+    'Demos': 'our-demos',
+    'Our Projects': 'our-projects',
+    'EdgeRIC Events': 'edgeric-events',
+    '5G Testbed': '5g-testbed',
+    'EdgeRIC Architecture': 'edgeric-architecture',
+    'EdgeRIC Tutorials': 'edgeric-tutorials',
+    'Datasets': 'datasets'
+  };
 
   function makeCaptionLink(captionEl, anchor) {
     if (!captionEl || !anchor) return;
@@ -29,11 +38,9 @@ document.addEventListener('DOMContentLoaded', function () {
   var captions = document.querySelectorAll('.sidebar-tree .caption, .sidebar-tree p.caption');
   captions.forEach(function (p) {
     var text = (p.textContent || '').trim();
-    if (text === 'Our Team') {
-      makeCaptionLink(p, 'our-team');
-      hideNextUl(p);
-    } else if (text === 'Demos') {
-      makeCaptionLink(p, 'our-demos');
+    var anchor = captionToAnchor[text];
+    if (anchor) {
+      makeCaptionLink(p, anchor);
       hideNextUl(p);
     }
   });

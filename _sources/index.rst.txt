@@ -47,6 +47,8 @@ EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks
 
 
 
+.. _our-projects:
+
 Our Projects
 ------------------------
 
@@ -211,6 +213,8 @@ Demos
 
 
 
+.. _edgeric-events:
+
 EdgeRIC Events
 ------------------------
 
@@ -363,6 +367,8 @@ Open Source Repositories
 
 ..         **Website**: https://wcsng.ucsd.edu/sparc/ 
 
+.. _5g-testbed:
+
 .. toctree::
    :maxdepth: 1
    :caption: 5G Testbed
@@ -370,6 +376,8 @@ Open Source Repositories
    5g-testbed
 
 
+
+.. _edgeric-architecture:
 
 EdgeRIC Architecture
 ------------------------
@@ -404,6 +412,8 @@ EdgeRIC Architecture
        <div class="arch-section-desc">How μApps subscribe to metrics, compute policies, and send control via the EdgeRIC messenger.</div>
      </a>
    </div>
+
+.. _edgeric-tutorials:
 
 EdgeRIC Tutorials
 ------------------------
@@ -443,6 +453,8 @@ EdgeRIC Tutorials
      </a>
    </div>
 
+.. _datasets:
+
 Datasets
 ------------------------
 
@@ -466,12 +478,15 @@ Datasets
 .. .. * :ref:`genindex`
 .. .. * :ref:`modindex`
 .. .. * :ref:`search`
-.. toctree::
-   :maxdepth: 2
-   :caption: Getting Started
 
-   gettingstarted
 
 Funding 
 ------------------------ 
 This work was funded primarily by NSF Grants CNS 2312978, CNS 2312979 and in part by CNS 1955696, ECCS 2030245, ARO grant W911NF- 19-1-0367.
+
+
+.. .. toctree::
+..    :maxdepth: 2
+..    :caption: Getting Started
+
+..    gettingstarted
