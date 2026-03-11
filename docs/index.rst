@@ -45,16 +45,9 @@ EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks
 ..   :width: 600
 ..   :alt: sample text
 
-.. _news:
+.. container:: news-sidebar-source
 
-News
-------------------------
-
-.. toctree::
-   :maxdepth: 1
-   :caption: News
-
-   news.md
+   .. include:: news.md
 
 
 .. _our-projects:
