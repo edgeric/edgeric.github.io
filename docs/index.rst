@@ -457,7 +457,8 @@ Current Publications
 
         **Code**: `Github Repository <https://github.com/ucsdwcsng/EdgeRIC_whittleIndex.git>`_
 
-        **Website**: https://wcsng.ucsd.edu/windex/ 
+        **Website**: https://wcsng.ucsd.edu/windex/
+
 
 
     .. tab:: SPARC
