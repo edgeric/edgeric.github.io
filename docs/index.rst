@@ -95,7 +95,7 @@ Our Team
    :maxdepth: 1
    :caption: Our Team
 
-   team
+  ..  team
 
 .. raw:: html
 
@@ -186,7 +186,7 @@ Demos
    :maxdepth: 1
    :caption: Demos
 
-   demo
+  ..  demo
    
 .. raw:: html
 
