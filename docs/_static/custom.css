@@ -752,20 +752,12 @@ table.docutils tr:hover td {
     padding-left: 0;
 }
 
+.sidebar-tree ul ul {
+    padding-left: 1.1rem;
+}
+
 .sidebar-tree ul > li {
     margin: 0;
-}
-
-.sidebar-tree .toctree-l1 > a.reference {
-    padding-left: 0.75rem;
-}
-
-.sidebar-tree .toctree-l2 > a.reference {
-    padding-left: 1.5rem;
-}
-
-.sidebar-tree .toctree-l3 > a.reference {
-    padding-left: 2.25rem;
 }
 
 /* ===== Cards/Feature Boxes ===== */
