@@ -781,6 +781,15 @@ html {
     color: var(--color-foreground-secondary);
 }
 
+/* ===== Hide in-content toctree / nav (keep only in sidebar) ===== */
+.content .toctree-wrapper {
+    display: none !important;
+}
+.content .arch-section-list,
+.content .event-list {
+    display: none !important;
+}
+
 /* ===== Print Styles ===== */
 @media print {
     .sidebar-drawer,
