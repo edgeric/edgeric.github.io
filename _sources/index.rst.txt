@@ -193,6 +193,38 @@ Demos
      </div>
    </div>
 
+EdgeRIC Events
+------------------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: EdgeRIC Events
+   :hidden:
+
+   oaic-workshop-2024.rst
+   srsran-2024-workshop.rst
+
+.. raw:: html
+
+   <div class="event-list">
+     <a class="event-card" href="oaic-workshop-2024.html">
+       <div class="event-date">2024</div>
+       <div class="event-main">
+         <div class="event-title">OAIC Workshop 2024</div>
+         <div class="event-desc">Tutorials, demos, and hands-on sessions for OAI + EdgeRIC.</div>
+       </div>
+       <div class="event-cta">View</div>
+     </a>
+     <a class="event-card" href="srsran-2024-workshop.html">
+       <div class="event-date">2024</div>
+       <div class="event-main">
+         <div class="event-title">srsRAN Workshop 2024</div>
+         <div class="event-desc">EdgeRIC integration, experiments, and live testbed walkthroughs.</div>
+       </div>
+       <div class="event-cta">View</div>
+     </a>
+   </div>
+
 Open Source Repositories
 ------------------------
 
@@ -229,37 +261,7 @@ Open Source Repositories
 
 
 
-EdgeRIC Events
-------------------------
 
-.. toctree::
-   :maxdepth: 2
-   :caption: EdgeRIC Events
-   :hidden:
-
-   oaic-workshop-2024.rst
-   srsran-2024-workshop.rst
-
-.. raw:: html
-
-   <div class="event-list">
-     <a class="event-card" href="oaic-workshop-2024.html">
-       <div class="event-date">2024</div>
-       <div class="event-main">
-         <div class="event-title">OAIC Workshop 2024</div>
-         <div class="event-desc">Tutorials, demos, and hands-on sessions for OAI + EdgeRIC.</div>
-       </div>
-       <div class="event-cta">View</div>
-     </a>
-     <a class="event-card" href="srsran-2024-workshop.html">
-       <div class="event-date">2024</div>
-       <div class="event-main">
-         <div class="event-title">srsRAN Workshop 2024</div>
-         <div class="event-desc">EdgeRIC integration, experiments, and live testbed walkthroughs.</div>
-       </div>
-       <div class="event-cta">View</div>
-     </a>
-   </div>
 
 
 5G Testbed
