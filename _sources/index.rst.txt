@@ -92,7 +92,7 @@ Our Projects
 
 .. _our-team:
 
-Meet the EdgeRIC Team
+Team
 ------------------------
 .. toctree::
    :maxdepth: 1
