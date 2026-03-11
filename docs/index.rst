@@ -175,7 +175,7 @@ Meet Our Team
      <div class="team-card">
        <a href="https://wcsng.ucsd.edu/" class="team-link">
          <div class="team-photo" id="photo-wcsng"></div>
-         <h4>Wireless Communications Sensing and Networking Group (WCSNG)</h4>
+         <h4>WCSNG</h4>
        </a>
        <p>Our Lab, UCSD</p>
        <a href="mailto:https://github.com/ucsdwcsng" class="team-email">github.com/ucsdwcsng</a>
