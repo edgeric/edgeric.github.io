@@ -141,7 +141,7 @@ Meet Our Team
        <a href="mailto:whko@tamu.edu" class="team-email">whko@tamu.edu</a>
      </div>
      <div class="team-card">
-       <a href="https://www.linkedin.com/in/ushasighosh97/" class="team-link">
+       <a href="https://ushasigh.github.io/" class="team-link">
          <div class="team-photo" id="photo-ushasi"></div>
          <h4>Ushasi Ghosh</h4>
        </a>
