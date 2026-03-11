@@ -1,5 +1,3 @@
-## News
-
 - **Mar 2026**  
   Stay tuned for upcoming events!
 
