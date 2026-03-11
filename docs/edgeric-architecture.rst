@@ -4,7 +4,7 @@
 
 RT-E2 interface (Real time E2 interface)
 -----------------------------------------
-.. image:: er-architecture.png
+.. image:: pics/er-architecture.png
   :width: 600
   :alt: sample text
 
@@ -152,7 +152,7 @@ REDIS database
 
 μApps - EdgeRIC microservices
 -----------------------------
-.. image:: er-messenger-extended.png
+.. image:: pics/er-messenger-extended.png
   :width: 600
   :alt: sample text  
 

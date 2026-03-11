@@ -46,7 +46,7 @@ plt.tight_layout()
 
 # Show the updated plot
 plt.show()
-fig.savefig("/Users/ushasighosh/Downloads/project_edgerix/docs/capacity.pdf")
+fig.savefig("pics/capacity.pdf")
 
 
 

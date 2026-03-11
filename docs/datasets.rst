@@ -1,7 +1,7 @@
 Channel Traces
 ===============
 
-.. image:: experimental-setup.png
+.. image:: pics/experimental-setup.png
   :width: 600
   :alt: sample text  
 

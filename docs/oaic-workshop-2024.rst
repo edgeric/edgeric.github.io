@@ -2,7 +2,7 @@ OAIC-EdgeRIC Workshop '24
 ===============
 First EdgeRIC workshop will be held in association with the *NSF open AI Cellular (OAIC) Workshop at Mississippi State University.*
 
-.. image:: er-architecture.png
+.. image:: pics/er-architecture.png
   :width: 600
   :alt: sample text
 

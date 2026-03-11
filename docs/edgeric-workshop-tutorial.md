@@ -94,7 +94,7 @@ All config files used in this tutorial are provided in ``.config``
 #### Option 2: Install the containerized version
 We provide the Dockerfile to run this repository inside a container, the bash scripts account for development mode by mounting the docker volume to local machine  
 
-![Image 1](edgeric-docker.png "EdgeRIC docker")     
+![Image 1](pics/edgeric-docker.png "EdgeRIC docker")     
 
 Let us first download and install the image of the compute environment
 
@@ -121,7 +121,7 @@ Before the next step, make sure you are inside docker container.
 ##### Note on Channel Emulation
 We use a modified version of the ``srsue`` codebase to account for channel variation. Channel is abstracted by the CQI (Channel Quality Indicator) - a 5G MAC layer parameter defined to represent the wireless environment.
 
-![Image 1](tiny-twin++.png "CQI emulation")
+![Image 1](pics/tiny-twin++.png "CQI emulation")
 
 Included in this repository are the CQI trace datasets obtained from an extensive measurement drive, the traces can be found in ``srsran-ue/cqis``
 
@@ -425,7 +425,7 @@ weights: 1.150280237197876
 
 #### Running muApp2 - Training an RL policy for scheduling
 
-![Image 1](training_rl.png "Open AI gym interface")
+![Image 1](pics/training_rl.png "Open AI gym interface")
 
 We are training a PPO agent with the objective of throughput maximization in this particular study.
 
