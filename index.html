@@ -362,8 +362,8 @@
     <a href="mailto:whko@tamu.edu" class="team-email">whko@tamu.edu</a>
   </div>
 </div></section>
-<section id="our-demos">
-<h2>Our Demos<a class="headerlink" href="#our-demos" title="Link to this heading">¶</a></h2>
+<section id="demos">
+<h2>Demos<a class="headerlink" href="#demos" title="Link to this heading">¶</a></h2>
 <div class="video-grid">
   <div class="video-card">
     <div class="video-card-content">
@@ -408,8 +408,8 @@
     </div>
   </div>
 </div></section>
-<section id="our-repositories">
-<h2>Our Repositories<a class="headerlink" href="#our-repositories" title="Link to this heading">¶</a></h2>
+<section id="open-source-repositories">
+<h2>Open Source Repositories<a class="headerlink" href="#open-source-repositories" title="Link to this heading">¶</a></h2>
 <div class="repo-list">
   <div class="repo-card">
     <h3>srsRAN-4G + EdgeRIC</h3>
@@ -436,13 +436,6 @@
     <a href="https://github.com/ucsdwcsng/EdgeRIC-5G-OAI" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
   </div>
 </div></section>
-<section id="g-testbed">
-<h2>5G Testbed<a class="headerlink" href="#g-testbed" title="Link to this heading">¶</a></h2>
-<a href="5g-testbed.html">
-  <img src="_static/5G-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-</a><div class="toctree-wrapper compound">
-</div>
-</section>
 <section id="edgeric-events">
 <h2>EdgeRIC Events<a class="headerlink" href="#edgeric-events" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -465,26 +458,37 @@
     <div class="event-cta">View</div>
   </a>
 </div></section>
+<section id="g-testbed">
+<h2>5G Testbed<a class="headerlink" href="#g-testbed" title="Link to this heading">¶</a></h2>
+<a href="5g-testbed.html">
+  <img src="_static/5G-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+</a><div class="toctree-wrapper compound">
+</div>
+</section>
 <section id="edgeric-architecture">
 <h2>EdgeRIC Architecture<a class="headerlink" href="#edgeric-architecture" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 </div>
 <div class="arch-section-list">
-  <a class="arch-section" href="edgeric-architecture.html#high-level-overview">
-    <div class="arch-section-title">High-level Overview</div>
-    <div class="arch-section-desc">Big-picture view of the EdgeRIC control plane, data plane, and RAN integration.</div>
+  <a class="arch-section" href="edgeric-architecture.html">
+    <div class="arch-section-title">RT-E2 interface (Real time E2 interface)</div>
+    <div class="arch-section-desc">Messaging framework between the RAN stack and EdgeRIC, built on ZMQ and protobuf, with TTI-level synchronization.</div>
   </a>
-  <a class="arch-section" href="edgeric-architecture.html#near-rt-ric-and-microapps">
-    <div class="arch-section-title">Near-RT RIC and μApps</div>
-    <div class="arch-section-desc">How microapps plug into EdgeRIC, access telemetry, and push control decisions.</div>
+  <a class="arch-section" href="edgeric-architecture.html">
+    <div class="arch-section-title">RT-E2 Report Message</div>
+    <div class="arch-section-desc">Per-UE KPI report structure (cqi, buffers, TBS, rates) sent every TTI from the RAN to EdgeRIC.</div>
   </a>
-  <a class="arch-section" href="edgeric-architecture.html#telemetry-and-control-interfaces">
-    <div class="arch-section-title">Telemetry and Control Interfaces</div>
-    <div class="arch-section-desc">Message formats, KPIs, and control knobs that connect EdgeRIC to the RAN stack.</div>
+  <a class="arch-section" href="edgeric-architecture.html">
+    <div class="arch-section-title">RT-E2 Policy Message</div>
+    <div class="arch-section-desc">Control-action messages from μApps back to the RAN, including scheduling weights and blanking decisions.</div>
   </a>
-  <a class="arch-section" href="edgeric-architecture.html#deployment-and-runtime">
-    <div class="arch-section-title">Deployment and Runtime</div>
-    <div class="arch-section-desc">Container layout, services, and how EdgeRIC runs on a 5G testbed.</div>
+  <a class="arch-section" href="edgeric-architecture.html">
+    <div class="arch-section-title">REDIS database</div>
+    <div class="arch-section-desc">How Redis is used for model storage, μApp lifecycle management, and dynamic configuration.</div>
+  </a>
+  <a class="arch-section" href="edgeric-architecture.html">
+    <div class="arch-section-title">μApps – EdgeRIC microservices</div>
+    <div class="arch-section-desc">How μApps subscribe to metrics, compute policies, and send control via the EdgeRIC messenger.</div>
   </a>
 </div></section>
 <section id="edgeric-tutorials">
@@ -585,10 +589,10 @@
 <li><a class="reference internal" href="#">EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks</a><ul>
 <li><a class="reference internal" href="#our-projects">Our Projects</a></li>
 <li><a class="reference internal" href="#our-team">Our Team</a></li>
-<li><a class="reference internal" href="#our-demos">Our Demos</a></li>
-<li><a class="reference internal" href="#our-repositories">Our Repositories</a></li>
-<li><a class="reference internal" href="#g-testbed">5G Testbed</a></li>
+<li><a class="reference internal" href="#demos">Demos</a></li>
+<li><a class="reference internal" href="#open-source-repositories">Open Source Repositories</a></li>
 <li><a class="reference internal" href="#edgeric-events">EdgeRIC Events</a></li>
+<li><a class="reference internal" href="#g-testbed">5G Testbed</a></li>
 <li><a class="reference internal" href="#edgeric-architecture">EdgeRIC Architecture</a></li>
 <li><a class="reference internal" href="#edgeric-tutorials">EdgeRIC Tutorials</a></li>
 <li><a class="reference internal" href="#datasets">Datasets</a><ul>
