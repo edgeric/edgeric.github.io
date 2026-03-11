@@ -89,7 +89,7 @@ Our Projects
 
 .. _our-team:
 
-Our Team
+Meet Our Team
 ------------------------
 .. toctree::
    :maxdepth: 1
@@ -172,6 +172,14 @@ Our Team
        <p>MS Student, UCSD</p>
        <a href="mailto:qiz066@ucsd.edu" class="team-email">qiz066@ucsd.edu</a>
      </div>
+     <div class="team-card">
+       <a href="https://wcsng.ucsd.edu/" class="team-link">
+         <div class="team-photo" id="photo-wcsng"></div>
+         <h4>Wireless Communications Sensing and Networking Group (WCSNG)</h4>
+       </a>
+       <p>Our Lab, UCSD</p>
+       <a href="mailto:https://github.com/ucsdwcsng" class="team-email">github.com/ucsdwcsng</a>
+     </div>
    </div>
 
 
@@ -239,7 +247,7 @@ Demos
 
 .. _edgeric-events:
 
-EdgeRIC Events
+Events
 ------------------------
 
 .. toctree::
@@ -270,6 +278,8 @@ EdgeRIC Events
        <div class="event-cta">View</div>
      </a>
    </div>
+
+   
 
 Open Source Repositories
 ------------------------
