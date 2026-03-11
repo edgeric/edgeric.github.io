@@ -46,7 +46,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'myenv']
 html_theme = 'furo'
 html_static_path = ['_static', 'team_photos', 'demo_figs']
 html_css_files = ['custom.css']
-html_js_files = ['news-sidebar.js', 'demo-video.js']
+html_js_files = ['news-sidebar.js', 'demo-video.js', 'sidebar-clickable-titles.js']
 
 # Furo theme options
 html_theme_options = {
