@@ -297,18 +297,11 @@ Our Repositories
 
 Tutorials
 ------------------------
-.. Contact us
-.. ------------------------ 
-.. |
-.. | Ushasi Ghosh: PhD student, UCSD, ughosh@ucsd.edu  
-.. | Woo Hyun Ko: Senior Research Engineer, TAMU, whko@tamu.edu
-.. | Ish Kumar Jain: Professor, RPI, ikjain@ucsd.edu
-.. | Dinesh Bharadia: Professor, UCSD, dineshb@ucsd.edu
-.. | Srinivas Shakkottai: Professor, TAMU, sshakkot@tamu.edu
 
 .. toctree::
    :maxdepth: 2
    :caption: Getting Started
+   :hidden:
 
    gettingstarted.rst
 
@@ -320,19 +313,6 @@ Tutorials
    5g-testbed
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Events
-
-   oaic-workshop-2024.rst 
-   srsran-2024-workshop.rst 
-
-.. toctree::
-   :maxdepth: 2
-   :caption: EdgeRIC Architecture
-
-   edgeric-architecture.rst
-
-.. toctree::
    :maxdepth: 1
    :caption: Our Projects
    :hidden:
@@ -342,27 +322,44 @@ Tutorials
    projects/telemetry
    projects/qoe-networking
    projects/other-muapps
+   projects/tiny-twin
 
-.. .. toctree::
-..    :maxdepth: 2
-..    :caption: EdgeRIC Message Formats
-
-..    ModuleB.rst
+Events
+------------------------
 
 .. toctree::
    :maxdepth: 2
-   :caption: EdgeRIC tutorials
+   :caption: Events
 
+   oaic-workshop-2024.rst
+   srsran-2024-workshop.rst
 
+EdgeRIC Architecture
+------------------------
 
-   tutorials.rst   
 .. toctree::
    :maxdepth: 2
-   :caption: Dataset
+   :caption: EdgeRIC Architecture
 
-   datasets.rst 
+   edgeric-architecture.rst
 
+EdgeRIC Tutorials
+------------------------
 
+.. toctree::
+   :maxdepth: 2
+   :caption: EdgeRIC Tutorials
+
+   tutorials.rst
+
+Datasets
+------------------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Datasets
+
+   datasets.rst
 
 .. Research Papers
 .. ------------------------
