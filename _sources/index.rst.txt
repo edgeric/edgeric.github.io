@@ -414,8 +414,15 @@ EdgeRIC Core Architecture
 
 .. _edgeric-tutorials:
 
-Current Publications
+Publications & Tutorials
 ------------------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Tutorials
+   :hidden:
+
+   tutorials
 
 .. tabs::
 
@@ -428,7 +435,9 @@ Current Publications
         
         **Code**: `Github Respository <https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git>`_ 
         
-        **Website**: https://wcsng.ucsd.edu/edgeric/ 
+        **Website**: https://wcsng.ucsd.edu/edgeric/
+
+        **Tutorial**: `EdgeRIC Main Paper Tutorial <edgeric.html>`_ — Real-time MAC scheduler, multiple scheduling algorithms (Max Weight, Max CQI, PF, Round Robin, RL-based).
 
 
     .. tab:: BeamArmor
@@ -438,7 +447,9 @@ Current Publications
 
         **Code**: `Github Respository <https://github.com/ucsdwcsng/beamarmor.git>`_
 
-        **Website**: https://wcsng.ucsd.edu/beamarmor/ 
+        **Website**: https://wcsng.ucsd.edu/beamarmor/
+
+        **Tutorial**: `BeamArmor Tutorial <beamarmor.html>`_ — Null-steering anti-jamming on srsRAN 4G stack; MIMO-RIC and BeamArmor μApp.
 
     .. tab:: Tiny-twin
         A Lightweight and Verifiable Digital Twin for NextG Cellular Networks
@@ -446,6 +457,8 @@ Current Publications
         **Paper @ DySPAN'26**: `Tiny-twin <https://arxiv.org/abs/2601.08217>`_
 
         **Poster @ HotMobile'24**: `Tiny-twin <https://dl.acm.org/doi/abs/10.1145/3638550.3643625>`_
+
+        **Tutorial**: Tiny-twin emulation is covered in the `EdgeRIC Main Paper Tutorial <edgeric.html>`_ (CQI traces, offline training).
 
 
     .. tab:: Windex
@@ -459,6 +472,7 @@ Current Publications
 
         **Website**: https://wcsng.ucsd.edu/windex/
 
+        **Tutorial**: `Windex Tutorial <windex.html>`_ — Realtime Neural Whittle Indexing for scalable service guarantees in NextG cellular networks.
 
 
     .. tab:: SPARC
@@ -468,39 +482,9 @@ Current Publications
 
         **Code**: `Github Respository <https://github.com/ushasigh/SPARC-multi-siteManagent.git>`_ 
 
-        **Website**: https://wcsng.ucsd.edu/sparc/ 
+        **Website**: https://wcsng.ucsd.edu/sparc/
 
-
-
-Publications
-------------------------
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Tutorials
-
-   tutorials
-
-.. raw:: html
-
-   <div class="tutorial-section-list">
-     <a class="tutorial-section" href="edgeric.html">
-       <div class="tutorial-section-title">EdgeRIC Main Paper Tutorial</div>
-       <div class="tutorial-section-desc">Real-time MAC scheduler, multiple scheduling algorithms (Max Weight, Max CQI, PF, Round Robin, RL-based).</div>
-     </a>
-     <a class="tutorial-section" href="windex.html">
-       <div class="tutorial-section-title">Windex Tutorial</div>
-       <div class="tutorial-section-desc">Realtime Neural Whittle Indexing for scalable service guarantees in NextG cellular networks.</div>
-     </a>
-     <a class="tutorial-section" href="beamarmor.html">
-       <div class="tutorial-section-title">BeamArmor Tutorial</div>
-       <div class="tutorial-section-desc">Null-steering anti-jamming on srsRAN 4G stack; MIMO-RIC and BeamArmor μApp.</div>
-     </a>
-     <a class="tutorial-section" href="sparc.html">
-       <div class="tutorial-section-title">SPARC Tutorial</div>
-       <div class="tutorial-section-desc">Spatio-Temporal Adaptive Resource Control for multi-site spectrum management in NextG networks.</div>
-     </a>
-   </div>
+        **Tutorial**: `SPARC Tutorial <sparc.html>`_ — Spatio-Temporal Adaptive Resource Control for multi-site spectrum management in NextG networks.
 
 .. _datasets:
 
