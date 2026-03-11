@@ -266,41 +266,52 @@ Events
    <div class="event-grid">
      <div class="event-tile">
        <div class="event-video-wrap">
-         <!-- Replace VIDEO_ID with your OAIC Workshop 2024 YouTube video ID -->
-         <iframe src="https://www.youtube.com/watch?v=NT78wOk5l-4&t=4795s" title="OAIC Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         <iframe src="https://www.youtube.com/embed/NT78wOk5l-4?start=4795" title="OAIC Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
        </div>
        <div class="event-tile-footer">
          <span class="event-badge">2024</span>
          <h3 class="event-tile-title">OAIC Workshop 2024</h3>
-         <p class="event-tile-desc">Tutorials, demos, and hands-on sessions for OAI + EdgeRIC.</p>
+         <p class="event-tile-desc">Leading the Deployment: OAI + EdgeRIC integration tutorials, demos, and hands-on sessions with Ushasi Ghosh.</p>
          <a href="oaic-workshop-2024.html" class="event-tile-cta">View details</a>
        </div>
      </div>
      <div class="event-tile">
        <div class="event-video-wrap">
-         <!-- Replace VIDEO_ID with your OAIC Workshop 2024 YouTube video ID -->
-         <iframe src="https://www.youtube.com/watch?v=KOlxJAMBRAE&t=2s" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         <iframe src="https://www.youtube.com/embed/KOlxJAMBRAE?start=2" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
        </div>
        <div class="event-tile-footer">
          <span class="event-badge">2024</span>
          <h3 class="event-tile-title">srsRAN Workshop 2024</h3>
-         <p class="event-tile-desc">EdgeRIC integration, experiments, and live testbed walkthroughs.</p>
-         <a href="oaic-workshop-2024.html" class="event-tile-cta">View details</a>
-       </div>
-     </div>
-     <div class="event-tile event-tile-cover">
-       <a href="srsran-2024-workshop.html" class="event-cover-link">
-         <div class="event-cover" style="background-image: url(pics/srsran-workshop.png);">
-           <span class="event-cover-badge">2024</span>
-           <span class="event-cover-title">srsRAN Workshop 2024</span>
-         </div>
-       </a>
-       <div class="event-tile-footer">
-         <p class="event-tile-desc">EdgeRIC integration, experiments, and live testbed walkthroughs.</p>
+         <p class="event-tile-desc">Beyond the EdgeRIC: Ushasi Ghosh's Live Guide in EdgeRIC integration, experiments, and testbed walkthroughs.</p>
          <a href="srsran-2024-workshop.html" class="event-tile-cta">View details</a>
        </div>
      </div>
+     <div class="event-tile">
+       <div class="event-video-wrap">
+         <iframe src="https://www.youtube.com/embed/rU1ksjjdUEM" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       </div>
+       <div class="event-tile-footer">
+         <span class="event-badge">2024</span>
+         <h3 class="event-tile-title">NSDI 2024</h3>
+         <p class="event-tile-desc">Woo Hyun Ko & Ushasi Ghosh: EdgeRIC main paper presentation.</p>
+         <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="event-tile-cta">View details</a>
+       </div>
+     </div>
+     <div class="event-tile">
+       <div class="event-video-wrap">
+         <iframe src="https://www.youtube.com/embed/06lc2VhoSGQ" title="OAI North American Workshop 2022" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       </div>
+       <div class="event-tile-footer">
+         <span class="event-badge">2022</span>
+         <h3 class="event-tile-title">OAI North American Workshop 2022</h3>
+         <p class="event-tile-desc">Charting the NextG Frontier: Prof. Dinesh Bharadia on the Evolution of 5G, RAN, and Digital Twins.</p>
+         <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="event-tile-cta">View details</a>
+       </div>
+     </div>
    </div>
+
+
+   
 
    
 
