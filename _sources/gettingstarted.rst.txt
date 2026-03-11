@@ -14,7 +14,7 @@ Cellular Stack
 .. ------------
 .. - Low Overhead Messaging
 .. - Interface with Open AI Gym:
-.. .. image:: EdgeRIC_API.png
+.. .. image:: pics/EdgeRIC_API.png
 ..   :width: 400
 ..   :alt: sample text
 
@@ -28,7 +28,7 @@ Tiny-twin: Emulation module
 This module is for offline training where we can connect a number of UEs, each UE running a separate channel trace.
 Channel Traces are collected from the over the air mobility experiments.
 
-.. image:: tiny-twin.png
+.. image:: pics/tiny-twin.png
   :width: 600
   :alt: sample text
 
@@ -44,7 +44,7 @@ Features:
 Collecting channel traces - CQI based abstraction of channel
 """"""""""""""""""""""""""
 
-.. image:: ota-measurement.png
+.. image:: pics/ota-measurement.png
   :width: 400
   :alt: sample text
 
@@ -53,7 +53,7 @@ We collect CQI traces for various mobility scenarios. Our dataset is elaborated 
 Over The Air Setup
 --------------------------
 
-.. image:: ota-setup-2.png
+.. image:: pics/ota-setup-2.png
   :width: 400
   :alt: sample text
 

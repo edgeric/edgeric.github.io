@@ -48,7 +48,7 @@
 
   
 
-.. .. image:: intro-v5.pdf
+.. .. image:: pics/intro-v5.pdf
 ..   :width: 700
 ..   :alt: sample text
 

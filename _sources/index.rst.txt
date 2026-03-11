@@ -6,7 +6,7 @@
 EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks
 ========================================================================
 
-.. image:: edgeric-intro.png
+.. image:: pics/edgeric-intro.png
   :width: 700
   :alt: sample text
 
@@ -41,7 +41,7 @@ EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks
 .. EdgeRIC Focus Areas
 .. ------------------------
 
-.. .. image:: edgeric-focus.png
+.. .. image:: pics/edgeric-focus.png
 ..   :width: 600
 ..   :alt: sample text
 
@@ -344,20 +344,20 @@ Open Source Repositories
 
 .. We are currently supported on the **srsRAN and OAI Projects**. 
 
-.. .. image:: edgeric-architecture-overview.png
+.. .. image:: pics/edgeric-architecture-overview.png
 ..   :width: 600
 ..   :alt: sample text
 
 
 .. **Our Currently Supported Real time Metrics:**
 
-.. .. image:: current-metrics.png
+.. .. image:: pics/current-metrics.png
 ..   :width: 600
 ..   :alt: sample text
 
 .. **Our Currently Supported Control Capabilities:**
 
-.. .. image:: current-capabilities.png
+.. .. image:: pics/current-capabilities.png
 ..   :width: 600
 ..   :alt: sample text
 

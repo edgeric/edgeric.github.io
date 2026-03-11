@@ -103,7 +103,7 @@ Option 2: Install the containerized version
 
 We provide the Dockerfile to run this repository inside a container, the bash scripts account for development mode by mounting the docker volume to the local machine.
 
-.. image:: edgeric-docker.png
+.. image:: pics/edgeric-docker.png
    :alt: EdgeRIC docker
    :align: center
 
@@ -134,7 +134,7 @@ Building the srsRAN with EdgeRIC support
 
 We use a modified version of the ``srsue`` codebase to account for channel variation. The channel is abstracted by the CQI (Channel Quality Indicator) - a 5G MAC layer parameter defined to represent the wireless environment.
 
-.. image:: tiny-twin++.png
+.. image:: pics/tiny-twin++.png
    :alt: CQI emulation
    :align: center
 
@@ -494,7 +494,7 @@ This muApp will help us see the RT-E2 Report Message from the RAN and the RT-E2 
 Running muApp2 - Training an RL policy for scheduling
 ===============
 
-.. image:: training_rl.png
+.. image:: pics/training_rl.png
    :alt: Open AI gym interface
    :align: center
 

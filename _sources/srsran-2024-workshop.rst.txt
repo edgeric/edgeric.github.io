@@ -1,7 +1,7 @@
 srsRAN Workshop '24
 ===============
 
-.. image:: srsran-workshop.png
+.. image:: pics/srsran-workshop.png
   :width: 1000
   :alt: sample text
 
