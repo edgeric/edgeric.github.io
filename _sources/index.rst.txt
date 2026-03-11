@@ -92,11 +92,11 @@ Our Projects
 
 .. _our-team:
 
-Meet Our Team
+Meet the EdgeRIC Team
 ------------------------
 .. toctree::
    :maxdepth: 1
-   :caption: Our Team
+   :caption: Team
 
    team
 
