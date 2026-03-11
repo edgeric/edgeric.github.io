@@ -1,5 +1,6 @@
 /**
- * Make sidebar section titles clickable: link to index#anchor and hide child page links.
+ * Make sidebar section titles clickable: link to index#anchor.
+ * Child items (sub-titles) remain visible.
  */
 document.addEventListener('DOMContentLoaded', function () {
   var pathname = window.location.pathname.replace(/^\//, '');
@@ -30,18 +31,12 @@ document.addEventListener('DOMContentLoaded', function () {
     captionEl.appendChild(a);
   }
 
-  function hideNextUl(captionEl) {
-    var next = captionEl.nextElementSibling;
-    if (next && next.tagName === 'UL') next.style.display = 'none';
-  }
-
   var captions = document.querySelectorAll('.sidebar-tree .caption, .sidebar-tree p.caption');
   captions.forEach(function (p) {
     var text = (p.textContent || '').trim();
     var anchor = captionToAnchor[text];
     if (anchor) {
       makeCaptionLink(p, anchor);
-      hideNextUl(p);
     }
   });
 });
