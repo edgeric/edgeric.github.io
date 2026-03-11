@@ -234,6 +234,13 @@ Our Repositories
      <img src="_static/5G-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
    </a>
 
+.. toctree::
+   :maxdepth: 1
+   :caption: 5G Testbed
+   :hidden:
+
+   5g-Testbed
+
 
 .. Current Status
 .. ------------------------
@@ -307,20 +314,16 @@ Our Repositories
 
 
 
-.. toctree::
-   :maxdepth: 1
-   :caption: 5G Testbed
-   :hidden:
-
-   5g-testbed
 
 
 
-Events
+
+EdgeRIC Events
 ------------------------
 
 .. toctree::
    :maxdepth: 2
+   :caption: EdgeRIC Events
    :hidden:
 
    oaic-workshop-2024.rst
