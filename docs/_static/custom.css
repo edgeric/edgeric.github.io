@@ -17,8 +17,8 @@
     flex-direction: column;
     transition: box-shadow 0.2s ease;
     width: 100%;
-    max-width: 760px; /* keep cards compact */
-    margin: 0 auto;   /* center cards */
+    max-width: 620px; /* keep cards compact */
+    margin: 0;        /* left align */
 }
 
 [data-theme="dark"] .video-card {
