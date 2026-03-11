@@ -86,8 +86,9 @@ Our Projects
    projects/multimodal-sensing
    projects/telemetry
    projects/qoe-networking
-   projects/other-muapps
    projects/tiny-twin
+   projects/other-muapps
+  
 
 
 .. _our-team:
@@ -367,47 +368,6 @@ Open Source Repositories
 .. **Refer to our 5G OAI version:** `Github (OAI) <https://github.com/ucsdwcsng/EdgeRIC-5G-OAI.git>`_  
 
 
-.. Current Publications
-.. ------------------------
-
-.. .. tabs::
-
-..     .. tab:: EdgeRIC 
-..         Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks
-        
-..         **Paper**: `EdgeRIC <https://www.usenix.org/conference/nsdi24/presentation/ko>`_  
-        
-..         **Code**: `Github Respository <https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git>`_ 
-        
-..         **Website**: https://wcsng.ucsd.edu/edgeric/ 
-
-..     .. tab:: BeamArmor
-..         Seamless Anti-Jamming in 5G Cellular Networks with MIMO Null-steering
-
-..         **Paper** `BamArmor <https://dl.acm.org/doi/10.1145/3638550.3641138>`_
-
-..         **Code**: `Github Respository <https://github.com/ucsdwcsng/beamarmor.git>`_
-
-..     .. tab:: Tiny-twin
-..         A Lightweight and Verifiable Digital Twin for NextG Cellular Networks
-
-..         **Paper**: `Tiny-twin <https://dl.acm.org/doi/abs/10.1145/3638550.3643625>`_
-
-..     .. tab:: Windex
-..         Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks
-
-..         **Paper**: `Windex <https://arxiv.org/abs/2406.01888>`_
-
-..         **Code**: `Github Repository <https://github.com/ucsdwcsng/EdgeRIC_whittleIndex.git>`_
-
-..     .. tab:: SPARC
-..         SPARC: Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks  
-        
-..         **Paper**: `SPARC <https://dl.acm.org/doi/abs/10.1145/3696405>`_ 
-
-..         **Code**: `Github Respository <https://github.com/ushasigh/SPARC-multi-siteManagent.git>`_ 
-
-..         **Website**: https://wcsng.ucsd.edu/sparc/ 
 
 
 
@@ -416,7 +376,7 @@ Open Source Repositories
 
 .. _edgeric-architecture:
 
-EdgeRIC Architecture
+EdgeRIC Core Architecture
 ------------------------
 
 .. toctree::
@@ -454,7 +414,64 @@ EdgeRIC Architecture
 
 .. _edgeric-tutorials:
 
-Tutorials
+Current Publications
+------------------------
+
+.. tabs::
+
+    .. tab:: EdgeRIC 
+        Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks
+        
+        **Paper @ NSDI'24**: `EdgeRIC <https://www.usenix.org/conference/nsdi24/presentation/ko>`_ 
+
+        **Demo @ SIGCOMM'23**: `EdgeRIC <https://dl.acm.org/doi/abs/10.1145/3603269.3610867>`_
+        
+        **Code**: `Github Respository <https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git>`_ 
+        
+        **Website**: https://wcsng.ucsd.edu/edgeric/ 
+
+
+    .. tab:: BeamArmor
+        Seamless Anti-Jamming in 5G Cellular Networks with MIMO Null-steering
+
+        **Paper @ HotMobile'24** `BamArmor <https://dl.acm.org/doi/10.1145/3638550.3641138>`_
+
+        **Code**: `Github Respository <https://github.com/ucsdwcsng/beamarmor.git>`_
+
+        **Website**: https://wcsng.ucsd.edu/beamarmor/ 
+
+    .. tab:: Tiny-twin
+        A Lightweight and Verifiable Digital Twin for NextG Cellular Networks
+
+        **Paper @ DySPAN'26**: `Tiny-twin <https://arxiv.org/abs/2601.08217>`_
+
+        **Poster @ HotMobile'24**: `Tiny-twin <https://dl.acm.org/doi/abs/10.1145/3638550.3643625>`_
+
+
+    .. tab:: Windex
+        Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks
+
+        **Paper**: `Windex <https://arxiv.org/abs/2406.01888>`_
+
+        **Demo @ MobiCom'24**: `Windex <https://dl.acm.org/doi/10.1145/3636534.3700034>`_
+
+        **Code**: `Github Repository <https://github.com/ucsdwcsng/EdgeRIC_whittleIndex.git>`_
+
+        **Website**: https://wcsng.ucsd.edu/windex/ 
+
+
+    .. tab:: SPARC
+        SPARC: Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks  
+        
+        **Paper @ CoNEXT'25**: `SPARC <https://dl.acm.org/doi/abs/10.1145/3696405>`_ 
+
+        **Code**: `Github Respository <https://github.com/ushasigh/SPARC-multi-siteManagent.git>`_ 
+
+        **Website**: https://wcsng.ucsd.edu/sparc/ 
+
+
+
+Publications
 ------------------------
 
 .. toctree::
