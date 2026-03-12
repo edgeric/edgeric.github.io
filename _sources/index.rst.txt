@@ -151,7 +151,7 @@ Team
          <div class="team-photo" id="photo-saru"></div>
          <h4>Shunsuke Saruwatari</h4>
        </a>
-       <p>Professor, University of Osaka</p>
+       <p>Professor, Osaka University</p>
        <a href="mailto:ssaruwatari@ucsd.edu" class="team-email">ssaruwatari@ucsd.edu</a>
      </div>
      <div class="team-card">
@@ -187,12 +187,36 @@ Team
        <a href="mailto:amamaghani@ucsd.edu" class="team-email">amamaghani@ucsd.edu</a>
      </div>
      <div class="team-card">
+       <a href="https://sites.google.com/tamu.edu/archanabura/home" class="team-link">
+         <div class="team-photo" id="photo-archana"></div>
+         <h4>Archana Bura</h4>
+       </a>
+       <p>Postdoc, UCSD</p>
+       <a href="mailto:archanabura@tamu.edu" class="team-email">archanabura@tamu.edu</a>
+     </div>
+     <div class="team-card">
        <a href="https://www.linkedin.com/in/qiz066/" class="team-link">
          <div class="team-photo" id="photo-qingyuan"></div>
          <h4>Qingyuan Zheng</h4>
        </a>
        <p>MS Student, UCSD</p>
        <a href="mailto:qiz066@ucsd.edu" class="team-email">qiz066@ucsd.edu</a>
+     </div>
+     <div class="team-card">
+       <a href="https://www.linkedin.com/in/frederik-zumegen-428ba11b5/" class="team-link">
+         <div class="team-photo" id="photo-frederik"></div>
+         <h4>Frederik Zumegen</h4>
+       </a>
+       <p>Visiting Researcher, UCSD</p>
+       <a href="mailto:fzumegen@ethz.ch" class="team-email">fzumegen@ethz.ch</a>
+     </div>
+     <div class="team-card">
+       <a href="https://www.linkedin.com/in/qiz066/" class="team-link">
+         <div class="team-photo" id="photo-Sesha"></div>
+         <h4>Sesha Sai Rakesh</h4>
+       </a>
+       <p>MS Student, UCSD</p>
+       <a href="mailto:sjonnavithula@ucsd.edu" class="team-email">sjonnavithula@ucsd.edu</a>
      </div>
      <div class="team-card">
        <a href="https://wcsng.ucsd.edu/" class="team-link">
