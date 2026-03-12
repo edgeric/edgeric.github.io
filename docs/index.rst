@@ -3,11 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks
+From EdgeRIC to Full-Stack RAN Intelligence
 ========================================================================
 
 .. image:: pics/edgeric-intro.png
-  :width: 700
+  :width: 800
   :alt: sample text
 
 .. NextG cellular networks must support a wide variety of applications that require radio access with latency, 
@@ -17,8 +17,15 @@ EdgeRIC: Delivering Real-time Intelligence to Radio Access Networks
 .. machine learning approach to optimal resource utilization has value. We introduce EdgeRIC, a real-time RIC 
 .. co-located with the Distributed Unit (DU). It is decoupled from the RAN stack, and operates at the RAN timescale.
 
-- EdgeRIC is a platform for **real-time AI-in-the-loop** for decision and control in cellular networks. It is designed to access network and application-level information to execute AI-optimized and other policies in real-time (sub-millisecond) .
+.. - EdgeRIC is a platform for **real-time AI-in-the-loop** for decision and control in cellular networks. It is designed to access network and application-level information to execute AI-optimized and other policies in real-time (sub-millisecond) .
 
+EdgeRIC is a platform for **Real-Time AI-in-the-Loop** decision making and control in cellular networks.  
+
+Our goal is to build an intelligent RAN stack capable of real-time decision making by integrating:
+
+- **Next-generation Fine-Grained Telemetry** for deep network observability
+- **Reasoning over Network Dynamics** for adaptive control
+- **Experience-Aware Learning** for continuous improvement of network performance
 
 
 .. .. raw:: html
@@ -91,6 +98,16 @@ Our Projects
   
 
 
+.. .. _getting-started:
+
+.. Getting Started
+.. ------------------------
+.. .. toctree::
+..    :maxdepth: 1
+..    :caption: Getting Started
+
+..    gettingstarted
+
 .. _our-team:
 
 Team
@@ -103,6 +120,7 @@ Team
 
 .. raw:: html
 
+   <div id="our-team"></div>
    <div class="team-grid">
      <div class="team-card">
        <a href="https://www.linkedin.com/in/dinesh-bharadia-5a42a912/" class="team-link">
@@ -203,10 +221,6 @@ Demos
 
    <div class="video-grid">
      <div class="video-card" id="demo-beamarmor">
-       <div class="video-card-content">
-         <h3>BeamArmor</h3>
-         <p>Anti-jamming: Controlling MIMO weights in realtime to steer the beam null toward the jammer</p>
-       </div>
        <div class="video-wrapper">
          <div class="video-cover" data-poster="_static/beamarmor_cover.jpg">
            <button type="button" class="video-play-btn" aria-label="Play video"></button>
@@ -215,12 +229,12 @@ Demos
            Your browser does not support the video tag.
          </video>
        </div>
+       <div class="video-card-content">
+         <h3>BeamArmor</h3>
+         <p>Anti-jamming: Controlling MIMO weights in realtime to steer the beam null toward the jammer</p>
+       </div>
      </div>
      <div class="video-card" id="demo-edgeric">
-       <div class="video-card-content">
-         <h3>EdgeRIC: AI Scheduling</h3>
-         <p>RL-based scheduling policy trained to maximize overall system throughput</p>
-       </div>
        <div class="video-wrapper">
          <div class="video-cover" data-poster="_static/demo2_cover.jpg">
            <button type="button" class="video-play-btn" aria-label="Play video"></button>
@@ -229,12 +243,12 @@ Demos
            Your browser does not support the video tag.
          </video>
        </div>
+       <div class="video-card-content">
+         <h3>EdgeRIC: AI Scheduling</h3>
+         <p>RL-based scheduling policy trained to maximize overall system throughput</p>
+       </div>
      </div>
      <div class="video-card" id="demo-sparc">
-       <div class="video-card-content">
-         <h3>SPARC: Multi-site Management</h3>
-         <p>Interference-aware resource distribution across sites with Near-RT RIC</p>
-       </div>
        <div class="video-wrapper">
          <div class="video-cover" data-poster="_static/sparc_cover.jpg">
            <button type="button" class="video-play-btn" aria-label="Play video"></button>
@@ -242,6 +256,10 @@ Demos
          <video preload="metadata" data-src="_static/sparc-video-demo.mov">
            Your browser does not support the video tag.
          </video>
+       </div>
+       <div class="video-card-content">
+         <h3>SPARC: Multi-site Management</h3>
+         <p>Interference-aware resource distribution across sites with Near-RT RIC</p>
        </div>
      </div>
    </div>
@@ -256,10 +274,9 @@ Events
 .. toctree::
    :maxdepth: 2
    :caption: EdgeRIC Events
-   :hidden:
 
-   oaic-workshop-2024.rst
-   srsran-2024-workshop.rst
+   oaic-workshop-2024
+   srsran-2024-workshop
 
 .. raw:: html
 
@@ -313,13 +330,21 @@ Events
 
    
 
-   
+.. _open-source-repositories:
 
 Open Source Repositories
 ------------------------
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Open Source Repositories
+
+   repo
+
+
 .. raw:: html
 
+   <div id="open-source-repositories"></div>
    <div class="repo-list">
      <div class="repo-card">
        <h3>srsRAN-4G + EdgeRIC</h3>
@@ -358,18 +383,17 @@ Open Source Repositories
 5G Testbed
 ------------------------
 
-.. raw:: html
-
-   <a href="5g-testbed.html">
-     <img src="_static/5G-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-   </a>
-
 .. toctree::
    :maxdepth: 1
    :caption: 5G Testbed
 
    5g-testbed
 
+.. raw:: html
+
+   <div id="5g-testbed">
+     <img src="_static/5G-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+   </div>
 
 
 .. Current Status
@@ -450,8 +474,7 @@ Publications & Tutorials
 
 .. toctree::
    :maxdepth: 2
-   :caption: Tutorials
-   :hidden:
+   :caption: Publications & Tutorials
 
    tutorials
 
@@ -459,7 +482,8 @@ Publications & Tutorials
 
    <div class="publication-grid">
      <div class="publication-card">
-       <h3>EdgeRIC: Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks</h3>
+       <h3>EdgeRIC</h3>
+       <p class="publication-desc">Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks.</p>
        <div class="publication-buttons">
          <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@NSDI'24</a>
          <a href="https://dl.acm.org/doi/abs/10.1145/3603269.3610867" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@SIGCOMM'23</a>
@@ -470,7 +494,8 @@ Publications & Tutorials
        </div>
      </div>
      <div class="publication-card">
-       <h3>Beamarmor: Seamless anti-jamming in 5g cellular networks with mimo null-steering</h3>
+       <h3>Beamarmor</h3>
+       <p class="publication-desc">Seamless anti-jamming in 5g cellular networks with mimo null-steering.</p>
        <div class="publication-buttons">
          <a href="https://dl.acm.org/doi/10.1145/3638550.3641138" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@HotMobile'24</a>
          <a href="https://dl.acm.org/doi/abs/10.1145/3636534.3698870" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@MobiCom'24</a>
@@ -481,7 +506,8 @@ Publications & Tutorials
        </div>
      </div>
      <div class="publication-card">
-       <h3>Tiny-Twin: A CPU-Native Full-stack Digital Twin for NextG Cellular Networks</h3>
+       <h3>Tiny-Twin</h3>
+       <p class="publication-desc">A CPU-Native Full-stack Digital Twin for NextG Cellular Networks.</p>
        <div class="publication-buttons">
          <a href="https://arxiv.org/abs/2601.08217" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@DySPAN'26</a>
          <a href="https://dl.acm.org/doi/abs/10.1145/3638550.3643625" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Poster@HotMobile'24</a>
@@ -490,7 +516,8 @@ Publications & Tutorials
        </div>
      </div>
      <div class="publication-card">
-       <h3>Windex: Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks</h3>
+       <h3>Windex</h3>
+       <p class="publication-desc">Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks.</p>
        <div class="publication-buttons">
          <a href="https://arxiv.org/abs/2406.01888" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Main Paper</a>
          <a href="https://dl.acm.org/doi/10.1145/3636534.3700034" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@MobiCom'24</a>
@@ -500,7 +527,8 @@ Publications & Tutorials
        </div>
      </div>
      <div class="publication-card">
-       <h3>SPARC: Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks</h3>
+       <h3>SPARC</h3>
+       <p class="publication-desc">Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks.</p>
        <div class="publication-buttons">
          <a href="https://dl.acm.org/doi/abs/10.1145/3696405" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@CoNEXT'25</a>
          <a href="index.html#demo-sparc" class="pub-btn pub-btn-demo">Demo</a>
@@ -565,8 +593,3 @@ Funding
 This work was funded primarily by NSF Grants CNS 2312978, CNS 2312979 and in part by CNS 1955696, ECCS 2030245, ARO grant W911NF- 19-1-0367.
 
 
-.. .. toctree::
-..    :maxdepth: 2
-..    :caption: Getting Started
-
-..    gettingstarted

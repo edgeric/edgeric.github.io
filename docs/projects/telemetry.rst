@@ -1,4 +1,4 @@
-Telemetry: A Packet Centric Lens
+Telemetry: Packet Centric
 =================================
 
 Overview

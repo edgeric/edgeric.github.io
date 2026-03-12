@@ -46,7 +46,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'myenv']
 html_theme = 'furo'
 html_static_path = ['_static', 'team_photos', 'demo_figs', 'pics']
 html_css_files = ['custom.css']
-html_js_files = ['news-sidebar.js', 'demo-video.js', 'sidebar-clickable-titles.js']
+html_js_files = ['sidebar-brand-logos.js', 'news-sidebar.js', 'demo-video.js', 'sidebar-clickable-titles.js', 'sidebar-expand-collapse.js']
 
 # Furo theme options
 html_theme_options = {
@@ -72,5 +72,5 @@ html_theme_options = {
 # html_logo = "_static/logo.png"
 # html_favicon = "_static/favicon.ico"
 
-html_title = "EdgeRIC Documentation"
+html_title = "EdgeRIC"
 html_show_sourcelink = True
