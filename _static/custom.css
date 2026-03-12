@@ -383,10 +383,14 @@
 }
 
 .repo-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
     background: linear-gradient(135deg, rgba(219, 234, 254, 1), rgba(191, 219, 254, 1));
     border: 1px solid rgba(147, 197, 253, 0.5);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    padding: 0.8rem 1.25rem;
     text-decoration: none;
     text-align: left;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -405,7 +409,7 @@
 }
 
 .repo-card h3 {
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.35rem 0;
     font-size: 1rem;
     font-weight: 600;
     color: #1e40af;
@@ -423,6 +427,11 @@
     pointer-events: none;
 }
 
+.repo-info {
+    flex: 1;
+    min-width: 0;
+}
+
 [data-theme="dark"] .repo-card p {
     color: #60a5fa;
 }
@@ -434,8 +443,9 @@
 }
 
 .repo-link {
-    display: inline-block;
-    margin-top: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.85rem;
     font-weight: 600;
     color: #ffffff !important;
@@ -448,6 +458,13 @@
 .repo-link:hover {
     background: #1d4ed8;
     text-decoration: none;
+}
+
+@media (max-width: 720px) {
+    .repo-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
 /* ===== Events UI (2-col grid, YouTube embed or same-size cover) ===== */

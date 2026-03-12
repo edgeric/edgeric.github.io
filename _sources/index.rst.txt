@@ -108,6 +108,187 @@ Our Projects
 
 ..    gettingstarted
 
+
+
+.. _our-demos:
+
+Demos 
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Demos
+
+   demo
+   
+.. raw:: html
+
+   <div class="video-grid">
+     <div class="video-card" id="demo-beamarmor">
+       <div class="video-wrapper">
+         <div class="video-cover" data-poster="_static/beamarmor_cover.jpg">
+           <button type="button" class="video-play-btn" aria-label="Play video"></button>
+         </div>
+         <video preload="metadata" data-src="_static/beamarmor_demo.mp4">
+           Your browser does not support the video tag.
+         </video>
+       </div>
+       <div class="video-card-content">
+         <h3>BeamArmor</h3>
+         <p>Anti-jamming: Controlling MIMO weights in realtime to steer the beam null toward the jammer</p>
+       </div>
+     </div>
+     <div class="video-card" id="demo-edgeric">
+       <div class="video-wrapper">
+         <div class="video-cover" data-poster="_static/demo2_cover.jpg">
+           <button type="button" class="video-play-btn" aria-label="Play video"></button>
+         </div>
+         <video preload="metadata" data-src="_static/demo-2.mp4">
+           Your browser does not support the video tag.
+         </video>
+       </div>
+       <div class="video-card-content">
+         <h3>EdgeRIC: AI Scheduling</h3>
+         <p>RL-based scheduling policy trained to maximize overall system throughput</p>
+       </div>
+     </div>
+     <div class="video-card" id="demo-sparc">
+       <div class="video-wrapper">
+         <div class="video-cover" data-poster="_static/sparc_cover.jpg">
+           <button type="button" class="video-play-btn" aria-label="Play video"></button>
+         </div>
+         <video preload="metadata" data-src="_static/sparc-video-demo.mov">
+           Your browser does not support the video tag.
+         </video>
+       </div>
+       <div class="video-card-content">
+         <h3>SPARC: Multi-site Management</h3>
+         <p>Interference-aware resource distribution across sites with Near-RT RIC</p>
+       </div>
+     </div>
+   </div>
+
+
+
+   
+
+.. _open-source-repositories:
+
+Open Source Repositories
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Open Source Repositories
+
+   repo
+
+
+.. raw:: html
+
+   <div id="open-source-repositories"></div>
+   <div class="repo-list">
+     <div class="repo-card">
+       <div class="repo-info">
+         <h3>srsRAN-4G + EdgeRIC</h3>
+         <p class="repo-meta"><strong>Release Date:</strong> TBD</p>
+         <p><strong>Description:</strong> EdgeRIC integrated with srsRAN 4G</p>
+       </div>
+       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+     </div>
+     <div class="repo-card">
+       <div class="repo-info">
+         <h3>srsRAN-5G (2024) + EdgeRIC</h3>
+         <p class="repo-meta"><strong>Release Date:</strong> 2024</p>
+         <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 2024 release</p>
+       </div>
+       <a href="https://github.com/ucsdwcsng/EdgeRIC-on-5G/tree/srsran" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+     </div>
+     <div class="repo-card">
+       <div class="repo-info">
+         <h3>srsRAN-5G (25.10) + EdgeRIC</h3>
+         <p class="repo-meta"><strong>Release Date:</strong> 25.10</p>
+         <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 25.10 release</p>
+       </div>
+       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+     </div>
+     <div class="repo-card">
+       <div class="repo-info">
+         <h3>OAI + EdgeRIC</h3>
+         <p class="repo-meta"><strong>Release Date:</strong> Oct 01, 2025</p>
+         <p><strong>Description:</strong> EdgeRIC integrated with OpenAirInterface</p>
+       </div>
+       <a href="https://github.com/ucsdwcsng/EdgeRIC-5G-OAI" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+     </div>
+   </div>
+
+
+
+
+
+.. _edgeric-events:
+
+Events
+------------------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: EdgeRIC Events
+
+   oaic-workshop-2024
+   srsran-2024-workshop
+
+.. raw:: html
+
+   <div class="event-grid">
+     <div class="event-tile">
+       <div class="event-video-wrap">
+         <iframe src="https://www.youtube.com/embed/NT78wOk5l-4?start=4795" title="OAIC Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       </div>
+       <div class="event-tile-footer">
+         <span class="event-badge">2024</span>
+         <h3 class="event-tile-title">OAIC Workshop 2024</h3>
+         <p class="event-tile-desc">Leading the Deployment: OAI + EdgeRIC Integration Hands-on Sessions with Ushasi Ghosh.</p>
+         <a href="oaic-workshop-2024.html" class="event-tile-cta">View details</a>
+       </div>
+     </div>
+     <div class="event-tile">
+       <div class="event-video-wrap">
+         <iframe src="https://www.youtube.com/embed/KOlxJAMBRAE?start=2" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       </div>
+       <div class="event-tile-footer">
+         <span class="event-badge">2024</span>
+         <h3 class="event-tile-title">srsRAN Workshop 2024</h3>
+         <p class="event-tile-desc">Beyond the EdgeRIC: Ushasi Ghosh's Live Guide in EdgeRIC Integration, Experiments, and Testbed.</p>
+         <a href="srsran-2024-workshop.html" class="event-tile-cta">View details</a>
+       </div>
+     </div>
+     <div class="event-tile">
+       <div class="event-video-wrap">
+         <iframe src="https://www.youtube.com/embed/rU1ksjjdUEM" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       </div>
+       <div class="event-tile-footer">
+         <span class="event-badge">2024</span>
+         <h3 class="event-tile-title">NSDI 2024</h3>
+         <p class="event-tile-desc">Woo Hyun Ko & Ushasi Ghosh: EdgeRIC Main Paper Presentation.</p>
+         <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="event-tile-cta">View details</a>
+       </div>
+     </div>
+     <div class="event-tile">
+       <div class="event-video-wrap">
+         <iframe src="https://www.youtube.com/embed/06lc2VhoSGQ" title="OAI North American Workshop 2022" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       </div>
+       <div class="event-tile-footer">
+         <span class="event-badge">2022</span>
+         <h3 class="event-tile-title">OAI North American Workshop 2022</h3>
+         <p class="event-tile-desc">Charting the NextG Frontier: Prof. Dinesh Bharadia on the Evolution of 5G, RAN, and Digital Twins.</p>
+         <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="event-tile-cta">View details</a>
+       </div>
+     </div>
+   </div>
+
+
+
 .. _our-team:
 
 Team
@@ -228,269 +409,6 @@ Team
      </div>
    </div>
 
-
-
-.. _our-demos:
-
-Demos 
-------------------------
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Demos
-
-   demo
-   
-.. raw:: html
-
-   <div class="video-grid">
-     <div class="video-card" id="demo-beamarmor">
-       <div class="video-wrapper">
-         <div class="video-cover" data-poster="_static/beamarmor_cover.jpg">
-           <button type="button" class="video-play-btn" aria-label="Play video"></button>
-         </div>
-         <video preload="metadata" data-src="_static/beamarmor_demo.mp4">
-           Your browser does not support the video tag.
-         </video>
-       </div>
-       <div class="video-card-content">
-         <h3>BeamArmor</h3>
-         <p>Anti-jamming: Controlling MIMO weights in realtime to steer the beam null toward the jammer</p>
-       </div>
-     </div>
-     <div class="video-card" id="demo-edgeric">
-       <div class="video-wrapper">
-         <div class="video-cover" data-poster="_static/demo2_cover.jpg">
-           <button type="button" class="video-play-btn" aria-label="Play video"></button>
-         </div>
-         <video preload="metadata" data-src="_static/demo-2.mp4">
-           Your browser does not support the video tag.
-         </video>
-       </div>
-       <div class="video-card-content">
-         <h3>EdgeRIC: AI Scheduling</h3>
-         <p>RL-based scheduling policy trained to maximize overall system throughput</p>
-       </div>
-     </div>
-     <div class="video-card" id="demo-sparc">
-       <div class="video-wrapper">
-         <div class="video-cover" data-poster="_static/sparc_cover.jpg">
-           <button type="button" class="video-play-btn" aria-label="Play video"></button>
-         </div>
-         <video preload="metadata" data-src="_static/sparc-video-demo.mov">
-           Your browser does not support the video tag.
-         </video>
-       </div>
-       <div class="video-card-content">
-         <h3>SPARC: Multi-site Management</h3>
-         <p>Interference-aware resource distribution across sites with Near-RT RIC</p>
-       </div>
-     </div>
-   </div>
-
-
-
-.. _edgeric-events:
-
-Events
-------------------------
-
-.. toctree::
-   :maxdepth: 2
-   :caption: EdgeRIC Events
-
-   oaic-workshop-2024
-   srsran-2024-workshop
-
-.. raw:: html
-
-   <div class="event-grid">
-     <div class="event-tile">
-       <div class="event-video-wrap">
-         <iframe src="https://www.youtube.com/embed/NT78wOk5l-4?start=4795" title="OAIC Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-       </div>
-       <div class="event-tile-footer">
-         <span class="event-badge">2024</span>
-         <h3 class="event-tile-title">OAIC Workshop 2024</h3>
-         <p class="event-tile-desc">Leading the Deployment: OAI + EdgeRIC integration tutorials, demos, and hands-on sessions with Ushasi Ghosh.</p>
-         <a href="oaic-workshop-2024.html" class="event-tile-cta">View details</a>
-       </div>
-     </div>
-     <div class="event-tile">
-       <div class="event-video-wrap">
-         <iframe src="https://www.youtube.com/embed/KOlxJAMBRAE?start=2" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-       </div>
-       <div class="event-tile-footer">
-         <span class="event-badge">2024</span>
-         <h3 class="event-tile-title">srsRAN Workshop 2024</h3>
-         <p class="event-tile-desc">Beyond the EdgeRIC: Ushasi Ghosh's Live Guide in EdgeRIC integration, experiments, and testbed walkthroughs.</p>
-         <a href="srsran-2024-workshop.html" class="event-tile-cta">View details</a>
-       </div>
-     </div>
-     <div class="event-tile">
-       <div class="event-video-wrap">
-         <iframe src="https://www.youtube.com/embed/rU1ksjjdUEM" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-       </div>
-       <div class="event-tile-footer">
-         <span class="event-badge">2024</span>
-         <h3 class="event-tile-title">NSDI 2024</h3>
-         <p class="event-tile-desc">Woo Hyun Ko & Ushasi Ghosh: EdgeRIC main paper presentation.</p>
-         <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="event-tile-cta">View details</a>
-       </div>
-     </div>
-     <div class="event-tile">
-       <div class="event-video-wrap">
-         <iframe src="https://www.youtube.com/embed/06lc2VhoSGQ" title="OAI North American Workshop 2022" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-       </div>
-       <div class="event-tile-footer">
-         <span class="event-badge">2022</span>
-         <h3 class="event-tile-title">OAI North American Workshop 2022</h3>
-         <p class="event-tile-desc">Charting the NextG Frontier: Prof. Dinesh Bharadia on the Evolution of 5G, RAN, and Digital Twins.</p>
-         <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="event-tile-cta">View details</a>
-       </div>
-     </div>
-   </div>
-
-
-   
-
-.. _open-source-repositories:
-
-Open Source Repositories
-------------------------
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Open Source Repositories
-
-   repo
-
-
-.. raw:: html
-
-   <div id="open-source-repositories"></div>
-   <div class="repo-list">
-     <div class="repo-card">
-       <h3>srsRAN-4G + EdgeRIC</h3>
-       <p class="repo-meta"><strong>Release Date:</strong> TBD</p>
-       <p><strong>Description:</strong> EdgeRIC integrated with srsRAN 4G</p>
-       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-     <div class="repo-card">
-       <h3>srsRAN-5G (2024) + EdgeRIC</h3>
-       <p class="repo-meta"><strong>Release Date:</strong> 2024</p>
-       <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 2024 release</p>
-       <a href="https://github.com/ucsdwcsng/EdgeRIC-on-5G/tree/srsran" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-     <div class="repo-card">
-       <h3>srsRAN-5G (25.10) + EdgeRIC</h3>
-       <p class="repo-meta"><strong>Release Date:</strong> 25.10</p>
-       <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 25.10 release</p>
-       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-     <div class="repo-card">
-       <h3>OAI + EdgeRIC</h3>
-       <p class="repo-meta"><strong>Release Date:</strong> Oct 01, 2025</p>
-       <p><strong>Description:</strong> EdgeRIC integrated with OpenAirInterface</p>
-       <a href="https://github.com/ucsdwcsng/EdgeRIC-5G-OAI" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-   </div>
-
-
-
-
-
-
-
-.. _5g-testbed:
-
-5G Testbed
-------------------------
-
-.. toctree::
-   :maxdepth: 1
-   :caption: 5G Testbed
-
-   5g-testbed
-
-.. raw:: html
-
-   <div id="5g-testbed">
-     <img src="_static/5G-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-   </div>
-
-
-.. Current Status
-.. ------------------------
-
-.. We are currently supported on the **srsRAN and OAI Projects**. 
-
-.. .. image:: pics/edgeric-architecture-overview.png
-..   :width: 600
-..   :alt: sample text
-
-
-.. **Our Currently Supported Real time Metrics:**
-
-.. .. image:: pics/current-metrics.png
-..   :width: 600
-..   :alt: sample text
-
-.. **Our Currently Supported Control Capabilities:**
-
-.. .. image:: pics/current-capabilities.png
-..   :width: 600
-..   :alt: sample text
-
-.. **Refer to our 5G srsRAN version:** `Github (srsRAN) <https://github.com/ucsdwcsng/EdgeRIC-on-5G.git>`_  - Multi container solution available
-
-.. **Refer to our 5G OAI version:** `Github (OAI) <https://github.com/ucsdwcsng/EdgeRIC-5G-OAI.git>`_  
-
-
-
-
-
-
-
-
-.. _edgeric-architecture:
-
-EdgeRIC Core Architecture
-------------------------
-
-.. toctree::
-   :maxdepth: 2
-   :caption: EdgeRIC Architecture
-
-   edgeric-architecture
-
-.. raw:: html
-
-   <div class="arch-section-list">
-     <a class="arch-section" href="edgeric-architecture.html">
-       <div class="arch-section-title">RT-E2 interface (Real time E2 interface)</div>
-       <div class="arch-section-desc">Messaging framework between the RAN stack and EdgeRIC, built on ZMQ and protobuf, with TTI-level synchronization.</div>
-     </a>
-     <a class="arch-section" href="edgeric-architecture.html">
-       <div class="arch-section-title">RT-E2 Report Message</div>
-       <div class="arch-section-desc">Per-UE KPI report structure (cqi, buffers, TBS, rates) sent every TTI from the RAN to EdgeRIC.</div>
-     </a>
-     <a class="arch-section" href="edgeric-architecture.html">
-       <div class="arch-section-title">RT-E2 Policy Message</div>
-       <div class="arch-section-desc">Control-action messages from μApps back to the RAN, including scheduling weights and blanking decisions.</div>
-     </a>
-     <a class="arch-section" href="edgeric-architecture.html">
-       <div class="arch-section-title">REDIS database</div>
-       <div class="arch-section-desc">How Redis is used for model storage, μApp lifecycle management, and dynamic configuration.</div>
-     </a>
-     <a class="arch-section" href="edgeric-architecture.html">
-       <div class="arch-section-title">μApps – EdgeRIC microservices</div>
-       <div class="arch-section-desc">How μApps subscribe to metrics, compute policies, and send control via the EdgeRIC messenger.</div>
-     </a>
-   </div>
-
-
-
 .. _edgeric-tutorials:
 
 Publications & Tutorials
@@ -565,6 +483,78 @@ Publications & Tutorials
 
 
 
+.. Current Status
+.. ------------------------
+
+.. We are currently supported on the **srsRAN and OAI Projects**. 
+
+.. .. image:: pics/edgeric-architecture-overview.png
+..   :width: 600
+..   :alt: sample text
+
+
+.. **Our Currently Supported Real time Metrics:**
+
+.. .. image:: pics/current-metrics.png
+..   :width: 600
+..   :alt: sample text
+
+.. **Our Currently Supported Control Capabilities:**
+
+.. .. image:: pics/current-capabilities.png
+..   :width: 600
+..   :alt: sample text
+
+.. **Refer to our 5G srsRAN version:** `Github (srsRAN) <https://github.com/ucsdwcsng/EdgeRIC-on-5G.git>`_  - Multi container solution available
+
+.. **Refer to our 5G OAI version:** `Github (OAI) <https://github.com/ucsdwcsng/EdgeRIC-5G-OAI.git>`_  
+
+
+
+
+
+
+
+
+.. _edgeric-architecture:
+
+EdgeRIC Core Architecture
+------------------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: EdgeRIC Architecture
+
+   edgeric-architecture
+
+.. raw:: html
+
+   <div class="arch-section-list">
+     <a class="arch-section" href="edgeric-architecture.html">
+       <div class="arch-section-title">RT-E2 interface (Real time E2 interface)</div>
+       <div class="arch-section-desc">Messaging framework between the RAN stack and EdgeRIC, built on ZMQ and protobuf, with TTI-level synchronization.</div>
+     </a>
+     <a class="arch-section" href="edgeric-architecture.html">
+       <div class="arch-section-title">RT-E2 Report Message</div>
+       <div class="arch-section-desc">Per-UE KPI report structure (cqi, buffers, TBS, rates) sent every TTI from the RAN to EdgeRIC.</div>
+     </a>
+     <a class="arch-section" href="edgeric-architecture.html">
+       <div class="arch-section-title">RT-E2 Policy Message</div>
+       <div class="arch-section-desc">Control-action messages from μApps back to the RAN, including scheduling weights and blanking decisions.</div>
+     </a>
+     <a class="arch-section" href="edgeric-architecture.html">
+       <div class="arch-section-title">REDIS database</div>
+       <div class="arch-section-desc">How Redis is used for model storage, μApp lifecycle management, and dynamic configuration.</div>
+     </a>
+     <a class="arch-section" href="edgeric-architecture.html">
+       <div class="arch-section-title">μApps – EdgeRIC microservices</div>
+       <div class="arch-section-desc">How μApps subscribe to metrics, compute policies, and send control via the EdgeRIC messenger.</div>
+     </a>
+   </div>
+
+
+
+
 .. _datasets:
 
 Datasets
@@ -610,6 +600,22 @@ Datasets
 .. .. * :ref:`genindex`
 .. .. * :ref:`modindex`
 .. .. * :ref:`search`
+.. _5g-testbed:
+
+5G Testbed
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+   :caption: 5G Testbed
+
+   5g-testbed
+
+.. raw:: html
+
+   <div id="5g-testbed">
+     <img src="_static/5G-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+   </div>
 
 
 Funding 

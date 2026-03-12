@@ -10,7 +10,7 @@
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=bd98b603" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=eae07445" />
     
     
 
@@ -211,13 +211,13 @@
 <li class="toctree-l1"><a class="reference internal" href="projects/tiny-twin.html">Tiny-twin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="projects/other-muapps.html">Other μApps</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Team</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="team.html">Team</a></li>
-</ul>
 <p class="caption" role="heading"><span class="caption-text">Demos</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="demo.html">Demo</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Open Source Repositories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="repo.html">Open Source Repositories</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">EdgeRIC Events</span></p>
 <ul>
@@ -227,21 +227,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="srsran-2024-workshop.html">srsRAN Workshop ‘24</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Open Source Repositories</span></p>
+<p class="caption" role="heading"><span class="caption-text">Team</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="repo.html">Open Source Repositories</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">5G Testbed</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="5g-testbed.html">5G Testbed</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html">RT-E2 interface (Real time E2 interface)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#rt-e2-report-message">RT-E2 Report Message</a></li>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#rt-e2-policy-message">RT-E2 Policy Message</a></li>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#redis-database">REDIS database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="team.html">Team</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Publications &amp; Tutorials</span></p>
 <ul>
@@ -251,10 +239,22 @@
 <li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sparc.html">SPARC</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html">RT-E2 interface (Real time E2 interface)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#rt-e2-report-message">RT-E2 Report Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#rt-e2-policy-message">RT-E2 Policy Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#redis-database">REDIS database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a></li>
+</ul>
 <p class="caption" role="heading"><span class="caption-text">Datasets</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="dataset_page/edgeric-datasets.html">EdgeRIC Main Dataset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataset_page/scout-dataset.html">Scout Dataset</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">5G Testbed</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="5g-testbed.html">5G Testbed</a></li>
 </ul>
 
 </div>
@@ -347,6 +347,162 @@
 </ul>
 </div>
 </section>
+<section id="demos">
+<span id="our-demos"></span><h2>Demos<a class="headerlink" href="#demos" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Demos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="demo.html">Demo</a></li>
+</ul>
+</div>
+<div class="video-grid">
+  <div class="video-card" id="demo-beamarmor">
+    <div class="video-wrapper">
+      <div class="video-cover" data-poster="_static/beamarmor_cover.jpg">
+        <button type="button" class="video-play-btn" aria-label="Play video"></button>
+      </div>
+      <video preload="metadata" data-src="_static/beamarmor_demo.mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="video-card-content">
+      <h3>BeamArmor</h3>
+      <p>Anti-jamming: Controlling MIMO weights in realtime to steer the beam null toward the jammer</p>
+    </div>
+  </div>
+  <div class="video-card" id="demo-edgeric">
+    <div class="video-wrapper">
+      <div class="video-cover" data-poster="_static/demo2_cover.jpg">
+        <button type="button" class="video-play-btn" aria-label="Play video"></button>
+      </div>
+      <video preload="metadata" data-src="_static/demo-2.mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="video-card-content">
+      <h3>EdgeRIC: AI Scheduling</h3>
+      <p>RL-based scheduling policy trained to maximize overall system throughput</p>
+    </div>
+  </div>
+  <div class="video-card" id="demo-sparc">
+    <div class="video-wrapper">
+      <div class="video-cover" data-poster="_static/sparc_cover.jpg">
+        <button type="button" class="video-play-btn" aria-label="Play video"></button>
+      </div>
+      <video preload="metadata" data-src="_static/sparc-video-demo.mov">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="video-card-content">
+      <h3>SPARC: Multi-site Management</h3>
+      <p>Interference-aware resource distribution across sites with Near-RT RIC</p>
+    </div>
+  </div>
+</div></section>
+<section id="open-source-repositories">
+<span id="id2"></span><h2>Open Source Repositories<a class="headerlink" href="#open-source-repositories" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Open Source Repositories</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="repo.html">Open Source Repositories</a></li>
+</ul>
+</div>
+<div id="open-source-repositories"></div>
+<div class="repo-list">
+  <div class="repo-card">
+    <div class="repo-info">
+      <h3>srsRAN-4G + EdgeRIC</h3>
+      <p class="repo-meta"><strong>Release Date:</strong> TBD</p>
+      <p><strong>Description:</strong> EdgeRIC integrated with srsRAN 4G</p>
+    </div>
+    <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+  </div>
+  <div class="repo-card">
+    <div class="repo-info">
+      <h3>srsRAN-5G (2024) + EdgeRIC</h3>
+      <p class="repo-meta"><strong>Release Date:</strong> 2024</p>
+      <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 2024 release</p>
+    </div>
+    <a href="https://github.com/ucsdwcsng/EdgeRIC-on-5G/tree/srsran" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+  </div>
+  <div class="repo-card">
+    <div class="repo-info">
+      <h3>srsRAN-5G (25.10) + EdgeRIC</h3>
+      <p class="repo-meta"><strong>Release Date:</strong> 25.10</p>
+      <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 25.10 release</p>
+    </div>
+    <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+  </div>
+  <div class="repo-card">
+    <div class="repo-info">
+      <h3>OAI + EdgeRIC</h3>
+      <p class="repo-meta"><strong>Release Date:</strong> Oct 01, 2025</p>
+      <p><strong>Description:</strong> EdgeRIC integrated with OpenAirInterface</p>
+    </div>
+    <a href="https://github.com/ucsdwcsng/EdgeRIC-5G-OAI" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+  </div>
+</div></section>
+<section id="events">
+<span id="edgeric-events"></span><h2>Events<a class="headerlink" href="#events" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC Events</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="oaic-workshop-2024.html">OAIC-EdgeRIC Workshop ‘24</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html">EdgeRIC tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="srsran-2024-workshop.html">srsRAN Workshop ‘24</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="srsran-2024-workshop.html#our-presence-at-the-workshop">Our presence at the workshop</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="event-grid">
+  <div class="event-tile">
+    <div class="event-video-wrap">
+      <iframe src="https://www.youtube.com/embed/NT78wOk5l-4?start=4795" title="OAIC Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="event-tile-footer">
+      <span class="event-badge">2024</span>
+      <h3 class="event-tile-title">OAIC Workshop 2024</h3>
+      <p class="event-tile-desc">Leading the Deployment: OAI + EdgeRIC Integration Hands-on Sessions with Ushasi Ghosh.</p>
+      <a href="oaic-workshop-2024.html" class="event-tile-cta">View details</a>
+    </div>
+  </div>
+  <div class="event-tile">
+    <div class="event-video-wrap">
+      <iframe src="https://www.youtube.com/embed/KOlxJAMBRAE?start=2" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="event-tile-footer">
+      <span class="event-badge">2024</span>
+      <h3 class="event-tile-title">srsRAN Workshop 2024</h3>
+      <p class="event-tile-desc">Beyond the EdgeRIC: Ushasi Ghosh's Live Guide in EdgeRIC Integration, Experiments, and Testbed.</p>
+      <a href="srsran-2024-workshop.html" class="event-tile-cta">View details</a>
+    </div>
+  </div>
+  <div class="event-tile">
+    <div class="event-video-wrap">
+      <iframe src="https://www.youtube.com/embed/rU1ksjjdUEM" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="event-tile-footer">
+      <span class="event-badge">2024</span>
+      <h3 class="event-tile-title">NSDI 2024</h3>
+      <p class="event-tile-desc">Woo Hyun Ko & Ushasi Ghosh: EdgeRIC Main Paper Presentation.</p>
+      <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="event-tile-cta">View details</a>
+    </div>
+  </div>
+  <div class="event-tile">
+    <div class="event-video-wrap">
+      <iframe src="https://www.youtube.com/embed/06lc2VhoSGQ" title="OAI North American Workshop 2022" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="event-tile-footer">
+      <span class="event-badge">2022</span>
+      <h3 class="event-tile-title">OAI North American Workshop 2022</h3>
+      <p class="event-tile-desc">Charting the NextG Frontier: Prof. Dinesh Bharadia on the Evolution of 5G, RAN, and Digital Twins.</p>
+      <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="event-tile-cta">View details</a>
+    </div>
+  </div>
+</div></section>
 <section id="team">
 <span id="our-team"></span><h2>Team<a class="headerlink" href="#team" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -462,202 +618,6 @@
     <a href="https://github.com/ucsdwcsng" class="team-email" target="_blank" rel="noopener noreferrer">github.com/ucsdwcsng</a>
   </div>
 </div></section>
-<section id="demos">
-<span id="our-demos"></span><h2>Demos<a class="headerlink" href="#demos" title="Link to this heading">¶</a></h2>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Demos</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="demo.html">Demo</a></li>
-</ul>
-</div>
-<div class="video-grid">
-  <div class="video-card" id="demo-beamarmor">
-    <div class="video-wrapper">
-      <div class="video-cover" data-poster="_static/beamarmor_cover.jpg">
-        <button type="button" class="video-play-btn" aria-label="Play video"></button>
-      </div>
-      <video preload="metadata" data-src="_static/beamarmor_demo.mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-    <div class="video-card-content">
-      <h3>BeamArmor</h3>
-      <p>Anti-jamming: Controlling MIMO weights in realtime to steer the beam null toward the jammer</p>
-    </div>
-  </div>
-  <div class="video-card" id="demo-edgeric">
-    <div class="video-wrapper">
-      <div class="video-cover" data-poster="_static/demo2_cover.jpg">
-        <button type="button" class="video-play-btn" aria-label="Play video"></button>
-      </div>
-      <video preload="metadata" data-src="_static/demo-2.mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-    <div class="video-card-content">
-      <h3>EdgeRIC: AI Scheduling</h3>
-      <p>RL-based scheduling policy trained to maximize overall system throughput</p>
-    </div>
-  </div>
-  <div class="video-card" id="demo-sparc">
-    <div class="video-wrapper">
-      <div class="video-cover" data-poster="_static/sparc_cover.jpg">
-        <button type="button" class="video-play-btn" aria-label="Play video"></button>
-      </div>
-      <video preload="metadata" data-src="_static/sparc-video-demo.mov">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-    <div class="video-card-content">
-      <h3>SPARC: Multi-site Management</h3>
-      <p>Interference-aware resource distribution across sites with Near-RT RIC</p>
-    </div>
-  </div>
-</div></section>
-<section id="events">
-<span id="edgeric-events"></span><h2>Events<a class="headerlink" href="#events" title="Link to this heading">¶</a></h2>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">EdgeRIC Events</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="oaic-workshop-2024.html">OAIC-EdgeRIC Workshop ‘24</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html">EdgeRIC tutorial</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="srsran-2024-workshop.html">srsRAN Workshop ‘24</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="srsran-2024-workshop.html#our-presence-at-the-workshop">Our presence at the workshop</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="event-grid">
-  <div class="event-tile">
-    <div class="event-video-wrap">
-      <iframe src="https://www.youtube.com/embed/NT78wOk5l-4?start=4795" title="OAIC Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-    <div class="event-tile-footer">
-      <span class="event-badge">2024</span>
-      <h3 class="event-tile-title">OAIC Workshop 2024</h3>
-      <p class="event-tile-desc">Leading the Deployment: OAI + EdgeRIC integration tutorials, demos, and hands-on sessions with Ushasi Ghosh.</p>
-      <a href="oaic-workshop-2024.html" class="event-tile-cta">View details</a>
-    </div>
-  </div>
-  <div class="event-tile">
-    <div class="event-video-wrap">
-      <iframe src="https://www.youtube.com/embed/KOlxJAMBRAE?start=2" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-    <div class="event-tile-footer">
-      <span class="event-badge">2024</span>
-      <h3 class="event-tile-title">srsRAN Workshop 2024</h3>
-      <p class="event-tile-desc">Beyond the EdgeRIC: Ushasi Ghosh's Live Guide in EdgeRIC integration, experiments, and testbed walkthroughs.</p>
-      <a href="srsran-2024-workshop.html" class="event-tile-cta">View details</a>
-    </div>
-  </div>
-  <div class="event-tile">
-    <div class="event-video-wrap">
-      <iframe src="https://www.youtube.com/embed/rU1ksjjdUEM" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-    <div class="event-tile-footer">
-      <span class="event-badge">2024</span>
-      <h3 class="event-tile-title">NSDI 2024</h3>
-      <p class="event-tile-desc">Woo Hyun Ko & Ushasi Ghosh: EdgeRIC main paper presentation.</p>
-      <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="event-tile-cta">View details</a>
-    </div>
-  </div>
-  <div class="event-tile">
-    <div class="event-video-wrap">
-      <iframe src="https://www.youtube.com/embed/06lc2VhoSGQ" title="OAI North American Workshop 2022" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-    <div class="event-tile-footer">
-      <span class="event-badge">2022</span>
-      <h3 class="event-tile-title">OAI North American Workshop 2022</h3>
-      <p class="event-tile-desc">Charting the NextG Frontier: Prof. Dinesh Bharadia on the Evolution of 5G, RAN, and Digital Twins.</p>
-      <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="event-tile-cta">View details</a>
-    </div>
-  </div>
-</div></section>
-<section id="open-source-repositories">
-<span id="id2"></span><h2>Open Source Repositories<a class="headerlink" href="#open-source-repositories" title="Link to this heading">¶</a></h2>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Open Source Repositories</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="repo.html">Open Source Repositories</a></li>
-</ul>
-</div>
-<div id="open-source-repositories"></div>
-<div class="repo-list">
-  <div class="repo-card">
-    <h3>srsRAN-4G + EdgeRIC</h3>
-    <p class="repo-meta"><strong>Release Date:</strong> TBD</p>
-    <p><strong>Description:</strong> EdgeRIC integrated with srsRAN 4G</p>
-    <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-  </div>
-  <div class="repo-card">
-    <h3>srsRAN-5G (2024) + EdgeRIC</h3>
-    <p class="repo-meta"><strong>Release Date:</strong> 2024</p>
-    <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 2024 release</p>
-    <a href="https://github.com/ucsdwcsng/EdgeRIC-on-5G/tree/srsran" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-  </div>
-  <div class="repo-card">
-    <h3>srsRAN-5G (25.10) + EdgeRIC</h3>
-    <p class="repo-meta"><strong>Release Date:</strong> 25.10</p>
-    <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 25.10 release</p>
-    <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-  </div>
-  <div class="repo-card">
-    <h3>OAI + EdgeRIC</h3>
-    <p class="repo-meta"><strong>Release Date:</strong> Oct 01, 2025</p>
-    <p><strong>Description:</strong> EdgeRIC integrated with OpenAirInterface</p>
-    <a href="https://github.com/ucsdwcsng/EdgeRIC-5G-OAI" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-  </div>
-</div></section>
-<section id="g-testbed">
-<span id="id3"></span><h2>5G Testbed<a class="headerlink" href="#g-testbed" title="Link to this heading">¶</a></h2>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">5G Testbed</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="5g-testbed.html">5G Testbed</a></li>
-</ul>
-</div>
-<div id="5g-testbed">
-  <img src="_static/5G-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-</div></section>
-<section id="edgeric-core-architecture">
-<span id="edgeric-architecture"></span><h2>EdgeRIC Core Architecture<a class="headerlink" href="#edgeric-core-architecture" title="Link to this heading">¶</a></h2>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html">RT-E2 interface (Real time E2 interface)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#rt-e2-report-message">RT-E2 Report Message</a></li>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#rt-e2-policy-message">RT-E2 Policy Message</a></li>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#redis-database">REDIS database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="edgeric-architecture.html#how-to-write-apps">how to write μApps?</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="arch-section-list">
-  <a class="arch-section" href="edgeric-architecture.html">
-    <div class="arch-section-title">RT-E2 interface (Real time E2 interface)</div>
-    <div class="arch-section-desc">Messaging framework between the RAN stack and EdgeRIC, built on ZMQ and protobuf, with TTI-level synchronization.</div>
-  </a>
-  <a class="arch-section" href="edgeric-architecture.html">
-    <div class="arch-section-title">RT-E2 Report Message</div>
-    <div class="arch-section-desc">Per-UE KPI report structure (cqi, buffers, TBS, rates) sent every TTI from the RAN to EdgeRIC.</div>
-  </a>
-  <a class="arch-section" href="edgeric-architecture.html">
-    <div class="arch-section-title">RT-E2 Policy Message</div>
-    <div class="arch-section-desc">Control-action messages from μApps back to the RAN, including scheduling weights and blanking decisions.</div>
-  </a>
-  <a class="arch-section" href="edgeric-architecture.html">
-    <div class="arch-section-title">REDIS database</div>
-    <div class="arch-section-desc">How Redis is used for model storage, μApp lifecycle management, and dynamic configuration.</div>
-  </a>
-  <a class="arch-section" href="edgeric-architecture.html">
-    <div class="arch-section-title">μApps – EdgeRIC microservices</div>
-    <div class="arch-section-desc">How μApps subscribe to metrics, compute policies, and send control via the EdgeRIC messenger.</div>
-  </a>
-</div></section>
 <section id="publications-tutorials">
 <span id="edgeric-tutorials"></span><h2>Publications &amp; Tutorials<a class="headerlink" href="#publications-tutorials" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -751,8 +711,45 @@
     </div>
   </div>
 </div></section>
+<section id="edgeric-core-architecture">
+<span id="edgeric-architecture"></span><h2>EdgeRIC Core Architecture<a class="headerlink" href="#edgeric-core-architecture" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html">RT-E2 interface (Real time E2 interface)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#rt-e2-report-message">RT-E2 Report Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#rt-e2-policy-message">RT-E2 Policy Message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#redis-database">REDIS database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edgeric-architecture.html#apps-edgeric-microservices">μApps - EdgeRIC microservices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="edgeric-architecture.html#how-to-write-apps">how to write μApps?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="arch-section-list">
+  <a class="arch-section" href="edgeric-architecture.html">
+    <div class="arch-section-title">RT-E2 interface (Real time E2 interface)</div>
+    <div class="arch-section-desc">Messaging framework between the RAN stack and EdgeRIC, built on ZMQ and protobuf, with TTI-level synchronization.</div>
+  </a>
+  <a class="arch-section" href="edgeric-architecture.html">
+    <div class="arch-section-title">RT-E2 Report Message</div>
+    <div class="arch-section-desc">Per-UE KPI report structure (cqi, buffers, TBS, rates) sent every TTI from the RAN to EdgeRIC.</div>
+  </a>
+  <a class="arch-section" href="edgeric-architecture.html">
+    <div class="arch-section-title">RT-E2 Policy Message</div>
+    <div class="arch-section-desc">Control-action messages from μApps back to the RAN, including scheduling weights and blanking decisions.</div>
+  </a>
+  <a class="arch-section" href="edgeric-architecture.html">
+    <div class="arch-section-title">REDIS database</div>
+    <div class="arch-section-desc">How Redis is used for model storage, μApp lifecycle management, and dynamic configuration.</div>
+  </a>
+  <a class="arch-section" href="edgeric-architecture.html">
+    <div class="arch-section-title">μApps – EdgeRIC microservices</div>
+    <div class="arch-section-desc">How μApps subscribe to metrics, compute policies, and send control via the EdgeRIC messenger.</div>
+  </a>
+</div></section>
 <section id="datasets">
-<span id="id4"></span><h2>Datasets<a class="headerlink" href="#datasets" title="Link to this heading">¶</a></h2>
+<span id="id3"></span><h2>Datasets<a class="headerlink" href="#datasets" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Datasets</span></p>
 <ul>
@@ -775,6 +772,17 @@
       <p>Log dataset for SCOUT: packet-centric telemetry logs, per-packet latency, queue dynamics, and scheduling impact analysis.</p>
     </div>
   </a>
+</div></section>
+<section id="g-testbed">
+<span id="id4"></span><h2>5G Testbed<a class="headerlink" href="#g-testbed" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">5G Testbed</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="5g-testbed.html">5G Testbed</a></li>
+</ul>
+</div>
+<div id="5g-testbed">
+  <img src="_static/5G-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
 </div></section>
 <section id="funding">
 <h2>Funding<a class="headerlink" href="#funding" title="Link to this heading">¶</a></h2>
@@ -829,14 +837,14 @@
             <ul>
 <li><a class="reference internal" href="#">From EdgeRIC to Intelligent RAN</a><ul>
 <li><a class="reference internal" href="#our-projects">Our Projects</a></li>
-<li><a class="reference internal" href="#team">Team</a></li>
 <li><a class="reference internal" href="#demos">Demos</a></li>
-<li><a class="reference internal" href="#events">Events</a></li>
 <li><a class="reference internal" href="#open-source-repositories">Open Source Repositories</a></li>
-<li><a class="reference internal" href="#g-testbed">5G Testbed</a></li>
-<li><a class="reference internal" href="#edgeric-core-architecture">EdgeRIC Core Architecture</a></li>
+<li><a class="reference internal" href="#events">Events</a></li>
+<li><a class="reference internal" href="#team">Team</a></li>
 <li><a class="reference internal" href="#publications-tutorials">Publications &amp; Tutorials</a></li>
+<li><a class="reference internal" href="#edgeric-core-architecture">EdgeRIC Core Architecture</a></li>
 <li><a class="reference internal" href="#datasets">Datasets</a></li>
+<li><a class="reference internal" href="#g-testbed">5G Testbed</a></li>
 <li><a class="reference internal" href="#funding">Funding</a></li>
 </ul>
 </li>
