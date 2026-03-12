@@ -10,13 +10,14 @@ document.addEventListener('DOMContentLoaded', function () {
     : 'index.html#');
 
   var captionToAnchor = {
-    'Our Team': 'our-team',
-    'Demos': 'our-demos',
     'Our Projects': 'our-projects',
+    'Team': 'our-team',
+    'Demos': 'our-demos',
     'EdgeRIC Events': 'edgeric-events',
+    'Open Source Repositories': 'open-source-repositories',
     '5G Testbed': '5g-testbed',
     'EdgeRIC Architecture': 'edgeric-architecture',
-    'EdgeRIC Tutorials': 'edgeric-tutorials',
+    'Publications & Tutorials': 'edgeric-tutorials',
     'Datasets': 'datasets'
   };
 

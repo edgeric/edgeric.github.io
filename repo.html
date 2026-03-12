@@ -3,10 +3,10 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="5G Testbed" href="5g-testbed.html"><link rel="prev" title="srsRAN Workshop ‘24" href="srsran-2024-workshop.html">
 
     <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
-        <title>RT-E2 Report Message - EdgeRIC</title>
+        <title>Open Source Repositories - EdgeRIC</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -228,8 +228,8 @@
 <li class="toctree-l1"><a class="reference internal" href="srsran-2024-workshop.html">srsRAN Workshop ‘24</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Open Source Repositories</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="repo.html">Open Source Repositories</a></li>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Open Source Repositories</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">5G Testbed</span></p>
 <ul>
@@ -275,12 +275,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/yourusername/edgeric/blob/main/docs/ModuleB.rst?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/yourusername/edgeric/blob/main/docs/repo.rst?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/yourusername/edgeric/edit/main/docs/ModuleB.rst" rel="edit" title="Edit this page">
+  <a class="muted-link" href="https://github.com/yourusername/edgeric/edit/main/docs/repo.rst" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -297,50 +297,9 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="rt-e2-report-message">
-<h1>RT-E2 Report Message<a class="headerlink" href="#rt-e2-report-message" title="Link to this heading">¶</a></h1>
-<p>The RT-E2 report message includes per-UE key performance indicators (KPIs) received from the RAN. Each UE is identified by its unique RNTI (Radio Network Temporary Identifier) along with its corresponding KPIs.</p>
-<p>Structure of the message:
-<code class="docutils literal notranslate"><span class="pre">ue_data</span></code> followed by <code class="docutils literal notranslate"><span class="pre">RIC</span> <span class="pre">ID</span></code> and <code class="docutils literal notranslate"><span class="pre">RAN</span> <span class="pre">ID</span></code>.</p>
-<p><strong>Message Details</strong>:</p>
-<ul class="simple">
-<li><p><strong>ue_data</strong>: Dictionary containing per-UE metrics. Each entry is keyed by the RNTI of the UE and contains the following KPIs:</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">CQI</span></code>: Channel Quality Indicator, reflecting the downlink channel quality.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">BL</span></code>: Amount of backlog data waiting to be sent to the UE in the downlink.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SNR</span></code>: Signal-to-Noise Ratio in the uplink, indicating the quality of the uplink signal.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Pending_Data</span></code>: Data that is waiting to be sent in the uplink.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Tx</span></code>: The current downlinnk bitrate for the UE.</p></li>
-</ul>
-</li>
-<li><p><strong>RIC ID</strong>: This is the RIC index</p></li>
-<li><p><strong>RAN ID</strong>: This is the RAN index or the TTI counter</p></li>
-</ul>
-<p><strong>Example Data Structure</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ue_data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="mi">1001</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># Example RNTI</span>
-        <span class="s1">&#39;CQI&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="c1"># Downlink Channel Quality Indicator</span>
-        <span class="s1">&#39;BL&#39;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>  <span class="c1"># Downlink Backlog Buffer in Bytes</span>
-        <span class="s1">&#39;SNR&#39;</span><span class="p">:</span> <span class="mf">20.5</span><span class="p">,</span>  <span class="c1"># Uplink SNR in dB</span>
-        <span class="s1">&#39;pending_data&#39;</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>  <span class="c1"># Uplink Pending Data in Bytes</span>
-        <span class="s1">&#39;Tx&#39;</span><span class="p">:</span> <span class="mi">100</span>  <span class="c1"># Downlink bitrate in Mbps</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="n">RIC_ID</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">RAN_ID</span> <span class="o">=</span> <span class="mi">101</span>
-</pre></div>
-</div>
-<p>This structured message is critical for performance management and optimization of network resources in real-time applications.</p>
-</section>
-<section id="rt-e2-policy-message">
-<h1>RT-E2 Policy Message<a class="headerlink" href="#rt-e2-policy-message" title="Link to this heading">¶</a></h1>
-<p>Structure of the message:
-<code class="docutils literal notranslate"><span class="pre">μApp1-control-message</span></code>, <code class="docutils literal notranslate"><span class="pre">μApp2-control-message</span></code> followed by <code class="docutils literal notranslate"><span class="pre">RIC</span> <span class="pre">ID</span></code> and <code class="docutils literal notranslate"><span class="pre">RAN</span> <span class="pre">ID</span></code>.</p>
-<dl class="simple">
-<dt>Control message format:</dt><dd><p>to support downlink scheduling:
-to support uplink RB blanking:</p>
-</dd>
-</dl>
+          <section id="open-source-repositories">
+<h1>Open Source Repositories<a class="headerlink" href="#open-source-repositories" title="Link to this heading">¶</a></h1>
+<p>See the <strong>Open Source Repositories</strong> section on the main page: <a class="reference external" href="index.html#open-source-repositories">Open Source Repositories on index</a>.</p>
 </section>
 
         </article>
@@ -348,8 +307,26 @@ to support uplink RB blanking:</p>
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="5g-testbed.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">5G Testbed</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="srsran-2024-workshop.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">srsRAN Workshop ‘24</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
