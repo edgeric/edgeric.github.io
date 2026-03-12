@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-From EdgeRIC to Full-Stack RAN Intelligence
+From EdgeRIC to Intelligent RAN
 ========================================================================
 
 .. image:: pics/edgeric-intro.png
