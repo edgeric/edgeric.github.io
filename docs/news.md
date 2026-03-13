@@ -1,5 +1,5 @@
 
-- **Mar 2026** - Stay tuned for upcoming events!
+- **Mar 2026** - EdgeRIC with srsRAN 25.10 release 
 
-- **Feb 2026** - Check out our latest updates!
+- **Feb 2026** - Sushila and Ushasi attended HotMobile
 

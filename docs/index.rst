@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-From EdgeRIC to Intelligent RAN
+EdgeRIC: Enabling Real-Time AI-on-RAN systems
 ========================================================================
 
 .. image:: pics/edgeric-intro.png
@@ -25,7 +25,7 @@ Our goal is to build an intelligent RAN stack capable of real-time decision maki
 
 - **Next-generation Fine-Grained Telemetry** for deep network observability
 - **Reasoning over Network Dynamics** for adaptive control
-- **Experience-Aware Learning** for continuous improvement of network performance
+- **Experience-Aware Cellular** for satisfying user experience over cellular networks
 
 
 .. .. raw:: html
@@ -78,10 +78,10 @@ Our Projects
        <h3>QoE-aware Networking</h3>
      </a>
      <a href="projects/tiny-twin.html" class="project-card" id="card-tiny-twin">
-       <h3>Tiny-twin</h3>
+       <h3>Cellular Digital Twins</h3>
      </a>
-     <a href="projects/other-muapps.html" class="project-card" id="card-muapps">
-       <h3>Meet Our μApps Family</h3>
+     <a href="projects/prism.html" class="project-card" id="card-muapps">
+       <h3>PRISM: 5G log Analysis</h3>
      </a>
    </div>
 
@@ -268,7 +268,7 @@ Demos
          </video>
        </div>
        <div class="video-card-content">
-         <h3>EdgeRIC: AI Scheduling</h3>
+         <h3>EdgeRIC: AI driven Scheduling</h3>
          <p>RL-based scheduling policy trained to maximize overall system throughput</p>
        </div>
      </div>
@@ -307,13 +307,13 @@ Events
    <div class="event-grid">
      <div class="event-tile">
        <div class="event-video-wrap">
-         <iframe src="https://www.youtube.com/embed/NT78wOk5l-4?start=4795" title="OAIC Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         <iframe src="https://www.youtube.com/embed/BNcryaZDQfU" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
        </div>
        <div class="event-tile-footer">
          <span class="event-badge">2024</span>
-         <h3 class="event-tile-title">OAIC Workshop 2024</h3>
-         <p class="event-tile-desc">Leading the Deployment: OAI + EdgeRIC integration tutorials, demos, and hands-on sessions with Ushasi Ghosh.</p>
-         <a href="oaic-workshop-2024.html" class="event-tile-cta">View details</a>
+         <h3 class="event-tile-title">srsRAN Workshop 2024</h3>
+         <p class="event-tile-desc">Talk - EdgeRIC: Empowering Real-time Intelligent Optimization & Control in NextG Edge Networks (Professor Srinivas Shakkottai)</p>
+         <a href="srsran-2024-workshop.html" class="event-tile-cta">View details</a>
        </div>
      </div>
      <div class="event-tile">
@@ -323,19 +323,19 @@ Events
        <div class="event-tile-footer">
          <span class="event-badge">2024</span>
          <h3 class="event-tile-title">srsRAN Workshop 2024</h3>
-         <p class="event-tile-desc">Beyond the EdgeRIC: Ushasi Ghosh's Live Guide in EdgeRIC integration, experiments, and testbed walkthroughs.</p>
+         <p class="event-tile-desc">EdgeRIC tutorial talk: integration, experiments, and muApps deployment (Ushasi Ghosh)</p>
          <a href="srsran-2024-workshop.html" class="event-tile-cta">View details</a>
        </div>
      </div>
      <div class="event-tile">
        <div class="event-video-wrap">
-         <iframe src="https://www.youtube.com/embed/rU1ksjjdUEM" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         <iframe src="https://www.youtube.com/embed/NT78wOk5l-4?start=4795" title="OAIC Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
        </div>
        <div class="event-tile-footer">
          <span class="event-badge">2024</span>
-         <h3 class="event-tile-title">NSDI 2024</h3>
-         <p class="event-tile-desc">Woo Hyun Ko & Ushasi Ghosh: EdgeRIC main paper presentation.</p>
-         <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="event-tile-cta">View details</a>
+         <h3 class="event-tile-title">OAIC Workshop 2024</h3>
+         <p class="event-tile-desc">Hand on Workshop on EdgeRIC integration and muApps deployment (Ushasi Ghosh)</p>
+         <a href="oaic-workshop-2024.html" class="event-tile-cta">View details</a>
        </div>
      </div>
      <div class="event-tile">
@@ -487,6 +487,10 @@ EdgeRIC Core Architecture
        <div class="arch-section-title">μApps – EdgeRIC microservices</div>
        <div class="arch-section-desc">How μApps subscribe to metrics, compute policies, and send control via the EdgeRIC messenger.</div>
      </a>
+     <a class="arch-section" href="edgeric-architecture.html">
+       <div class="arch-section-title">Some Example μApps </div>
+       <div class="arch-section-desc">Available suite of muApps for different use cases.</div>
+     </a>
    </div>
 
 
@@ -506,8 +510,7 @@ Publications & Tutorials
 
    <div class="publication-grid">
      <div class="publication-card">
-       <h3>EdgeRIC</h3>
-       <p class="publication-desc">Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks.</p>
+       <h3>EdgeRIC: Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks.</h3>
        <div class="publication-buttons">
          <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@NSDI'24</a>
          <a href="https://dl.acm.org/doi/abs/10.1145/3603269.3610867" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@SIGCOMM'23</a>
@@ -518,8 +521,7 @@ Publications & Tutorials
        </div>
      </div>
      <div class="publication-card">
-       <h3>Beamarmor</h3>
-       <p class="publication-desc">Seamless anti-jamming in 5g cellular networks with mimo null-steering.</p>
+       <h3>Beamarmor: Seamless anti-jamming in 5g cellular networks with mimo null-steering.</h3>
        <div class="publication-buttons">
          <a href="https://dl.acm.org/doi/10.1145/3638550.3641138" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@HotMobile'24</a>
          <a href="https://dl.acm.org/doi/abs/10.1145/3636534.3698870" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@MobiCom'24</a>
@@ -530,8 +532,7 @@ Publications & Tutorials
        </div>
      </div>
      <div class="publication-card">
-       <h3>Tiny-Twin</h3>
-       <p class="publication-desc">A CPU-Native Full-stack Digital Twin for NextG Cellular Networks.</p>
+       <h3>Tiny-Twin: A CPU-Native Full-stack Digital Twin for NextG Cellular Networks.</h3>
        <div class="publication-buttons">
          <a href="https://arxiv.org/abs/2601.08217" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@DySPAN'26</a>
          <a href="https://dl.acm.org/doi/abs/10.1145/3638550.3643625" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Poster@HotMobile'24</a>
@@ -540,8 +541,7 @@ Publications & Tutorials
        </div>
      </div>
      <div class="publication-card">
-       <h3>Windex</h3>
-       <p class="publication-desc">Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks.</p>
+       <h3>Windex: Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks.</h3>
        <div class="publication-buttons">
          <a href="https://arxiv.org/abs/2406.01888" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Main Paper</a>
          <a href="https://dl.acm.org/doi/10.1145/3636534.3700034" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@MobiCom'24</a>
@@ -551,8 +551,7 @@ Publications & Tutorials
        </div>
      </div>
      <div class="publication-card">
-       <h3>SPARC</h3>
-       <p class="publication-desc">Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks.</p>
+       <h3>SPARC: Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks.</h3>
        <div class="publication-buttons">
          <a href="https://dl.acm.org/doi/abs/10.1145/3696405" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@CoNEXT'25</a>
          <a href="index.html#demo-sparc" class="pub-btn pub-btn-demo">Demo</a>
