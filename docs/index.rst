@@ -19,9 +19,9 @@ EdgeRIC: Enabling Real-Time AI-on-RAN systems
 
 .. - EdgeRIC is a platform for **real-time AI-in-the-loop** for decision and control in cellular networks. It is designed to access network and application-level information to execute AI-optimized and other policies in real-time (sub-millisecond) .
 
-EdgeRIC is a platform for **Real-Time AI-in-the-Loop** decision making and control in cellular networks.  
+EdgeRIC: **Real-Time AI-in-the-Loop** decision making and control in cellular networks.  
 
-Our goal is to build an intelligent RAN stack capable of real-time decision making by integrating:
+.. Our goal is to build an intelligent RAN stack capable of real-time decision making by integrating:
 
 - **Next-generation Fine-Grained Telemetry** for deep network observability
 - **Reasoning over Network Dynamics** for adaptive control
