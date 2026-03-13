@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-From EdgeRIC to Intelligent RAN
+EdgeRIC: Enabling Real-Time AI-on-RAN systems
 ========================================================================
 
 .. image:: pics/edgeric-intro.png
@@ -25,7 +25,7 @@ Our goal is to build an intelligent RAN stack capable of real-time decision maki
 
 - **Next-generation Fine-Grained Telemetry** for deep network observability
 - **Reasoning over Network Dynamics** for adaptive control
-- **Experience-Aware Learning** for continuous improvement of network performance
+- **Experience-Aware Cellular** for satisfying user experience over cellular networks
 
 
 .. .. raw:: html
@@ -78,10 +78,10 @@ Our Projects
        <h3>QoE-aware Networking</h3>
      </a>
      <a href="projects/tiny-twin.html" class="project-card" id="card-tiny-twin">
-       <h3>Tiny-twin</h3>
+       <h3>Cellular Digital Twins</h3>
      </a>
-     <a href="projects/other-muapps.html" class="project-card" id="card-muapps">
-       <h3>Meet Our μApps Family</h3>
+     <a href="projects/prism.html" class="project-card" id="card-muapps">
+       <h3>PRISM: 5G log Analysis</h3>
      </a>
    </div>
 
@@ -107,187 +107,6 @@ Our Projects
 ..    :caption: Getting Started
 
 ..    gettingstarted
-
-
-
-.. _our-demos:
-
-Demos 
-------------------------
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Demos
-
-   demo
-   
-.. raw:: html
-
-   <div class="video-grid">
-     <div class="video-card" id="demo-beamarmor">
-       <div class="video-wrapper">
-         <div class="video-cover" data-poster="_static/beamarmor_cover.jpg">
-           <button type="button" class="video-play-btn" aria-label="Play video"></button>
-         </div>
-         <video preload="metadata" data-src="_static/beamarmor_demo.mp4">
-           Your browser does not support the video tag.
-         </video>
-       </div>
-       <div class="video-card-content">
-         <h3>BeamArmor</h3>
-         <p>Anti-jamming: Controlling MIMO weights in realtime to steer the beam null toward the jammer</p>
-       </div>
-     </div>
-     <div class="video-card" id="demo-edgeric">
-       <div class="video-wrapper">
-         <div class="video-cover" data-poster="_static/demo2_cover.jpg">
-           <button type="button" class="video-play-btn" aria-label="Play video"></button>
-         </div>
-         <video preload="metadata" data-src="_static/demo-2.mp4">
-           Your browser does not support the video tag.
-         </video>
-       </div>
-       <div class="video-card-content">
-         <h3>EdgeRIC: AI Scheduling</h3>
-         <p>RL-based scheduling policy trained to maximize overall system throughput</p>
-       </div>
-     </div>
-     <div class="video-card" id="demo-sparc">
-       <div class="video-wrapper">
-         <div class="video-cover" data-poster="_static/sparc_cover.jpg">
-           <button type="button" class="video-play-btn" aria-label="Play video"></button>
-         </div>
-         <video preload="metadata" data-src="_static/sparc-video-demo.mov">
-           Your browser does not support the video tag.
-         </video>
-       </div>
-       <div class="video-card-content">
-         <h3>SPARC: Multi-site Management</h3>
-         <p>Interference-aware resource distribution across sites with Near-RT RIC</p>
-       </div>
-     </div>
-   </div>
-
-
-
-   
-
-.. _open-source-repositories:
-
-Open Source Repositories
-------------------------
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Open Source Repositories
-
-   repo
-
-
-.. raw:: html
-
-   <div id="open-source-repositories"></div>
-   <div class="repo-list">
-     <div class="repo-card">
-       <div class="repo-info">
-         <h3>srsRAN-4G + EdgeRIC</h3>
-         <p class="repo-meta"><strong>Release Date:</strong> TBD</p>
-         <p><strong>Description:</strong> EdgeRIC integrated with srsRAN 4G</p>
-       </div>
-       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-     <div class="repo-card">
-       <div class="repo-info">
-         <h3>srsRAN-5G (2024) + EdgeRIC</h3>
-         <p class="repo-meta"><strong>Release Date:</strong> 2024</p>
-         <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 2024 release</p>
-       </div>
-       <a href="https://github.com/ucsdwcsng/EdgeRIC-on-5G/tree/srsran" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-     <div class="repo-card">
-       <div class="repo-info">
-         <h3>srsRAN-5G (25.10) + EdgeRIC</h3>
-         <p class="repo-meta"><strong>Release Date:</strong> 25.10</p>
-         <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 25.10 release</p>
-       </div>
-       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-     <div class="repo-card">
-       <div class="repo-info">
-         <h3>OAI + EdgeRIC</h3>
-         <p class="repo-meta"><strong>Release Date:</strong> Oct 01, 2025</p>
-         <p><strong>Description:</strong> EdgeRIC integrated with OpenAirInterface</p>
-       </div>
-       <a href="https://github.com/ucsdwcsng/EdgeRIC-5G-OAI" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-   </div>
-
-
-
-
-
-.. _edgeric-events:
-
-Events
-------------------------
-
-.. toctree::
-   :maxdepth: 2
-   :caption: EdgeRIC Events
-
-   oaic-workshop-2024
-   srsran-2024-workshop
-
-.. raw:: html
-
-   <div class="event-grid">
-     <div class="event-tile">
-       <div class="event-video-wrap">
-         <iframe src="https://www.youtube.com/embed/NT78wOk5l-4?start=4795" title="OAIC Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-       </div>
-       <div class="event-tile-footer">
-         <span class="event-badge">2024</span>
-         <h3 class="event-tile-title">OAIC Workshop 2024</h3>
-         <p class="event-tile-desc">Leading the Deployment: OAI + EdgeRIC Integration Hands-on Sessions with Ushasi Ghosh.</p>
-         <a href="oaic-workshop-2024.html" class="event-tile-cta">View details</a>
-       </div>
-     </div>
-     <div class="event-tile">
-       <div class="event-video-wrap">
-         <iframe src="https://www.youtube.com/embed/KOlxJAMBRAE?start=2" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-       </div>
-       <div class="event-tile-footer">
-         <span class="event-badge">2024</span>
-         <h3 class="event-tile-title">srsRAN Workshop 2024</h3>
-         <p class="event-tile-desc">Beyond the EdgeRIC: Ushasi Ghosh's Live Guide in EdgeRIC Integration, Experiments, and Testbed.</p>
-         <a href="srsran-2024-workshop.html" class="event-tile-cta">View details</a>
-       </div>
-     </div>
-     <div class="event-tile">
-       <div class="event-video-wrap">
-         <iframe src="https://www.youtube.com/embed/rU1ksjjdUEM" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-       </div>
-       <div class="event-tile-footer">
-         <span class="event-badge">2024</span>
-         <h3 class="event-tile-title">NSDI 2024</h3>
-         <p class="event-tile-desc">Woo Hyun Ko & Ushasi Ghosh: EdgeRIC Main Paper Presentation.</p>
-         <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="event-tile-cta">View details</a>
-       </div>
-     </div>
-     <div class="event-tile">
-       <div class="event-video-wrap">
-         <iframe src="https://www.youtube.com/embed/06lc2VhoSGQ" title="OAI North American Workshop 2022" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-       </div>
-       <div class="event-tile-footer">
-         <span class="event-badge">2022</span>
-         <h3 class="event-tile-title">OAI North American Workshop 2022</h3>
-         <p class="event-tile-desc">Charting the NextG Frontier: Prof. Dinesh Bharadia on the Evolution of 5G, RAN, and Digital Twins.</p>
-         <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="event-tile-cta">View details</a>
-       </div>
-     </div>
-   </div>
-
-
 
 .. _our-team:
 
@@ -409,78 +228,196 @@ Team
      </div>
    </div>
 
-.. _edgeric-tutorials:
 
-Publications & Tutorials
+
+.. _our-demos:
+
+Demos 
 ------------------------
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Publications & Tutorials
+   :maxdepth: 1
+   :caption: Demos
 
-   tutorials
-
+   demo
+   
 .. raw:: html
 
-   <div class="publication-grid">
-     <div class="publication-card">
-       <h3>EdgeRIC</h3>
-       <p class="publication-desc">Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks.</p>
-       <div class="publication-buttons">
-         <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@NSDI'24</a>
-         <a href="https://dl.acm.org/doi/abs/10.1145/3603269.3610867" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@SIGCOMM'23</a>
-         <a href="index.html#demo-edgeric" class="pub-btn pub-btn-demo">Demo</a>
-         <a href="https://wcsng.ucsd.edu/edgeric/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
-         <a href="https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
-         <a href="edgeric.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
+   <div class="video-grid">
+     <div class="video-card" id="demo-beamarmor">
+       <div class="video-wrapper">
+         <div class="video-cover" data-poster="_static/beamarmor_cover.jpg">
+           <button type="button" class="video-play-btn" aria-label="Play video"></button>
+         </div>
+         <video preload="metadata" data-src="_static/beamarmor_demo.mp4">
+           Your browser does not support the video tag.
+         </video>
+       </div>
+       <div class="video-card-content">
+         <h3>BeamArmor</h3>
+         <p>Anti-jamming: Controlling MIMO weights in realtime to steer the beam null toward the jammer</p>
        </div>
      </div>
-     <div class="publication-card">
-       <h3>Beamarmor</h3>
-       <p class="publication-desc">Seamless anti-jamming in 5g cellular networks with mimo null-steering.</p>
-       <div class="publication-buttons">
-         <a href="https://dl.acm.org/doi/10.1145/3638550.3641138" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@HotMobile'24</a>
-         <a href="https://dl.acm.org/doi/abs/10.1145/3636534.3698870" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@MobiCom'24</a>
-         <a href="index.html#demo-beamarmor" class="pub-btn pub-btn-demo">Demo</a>
-         <a href="https://wcsng.ucsd.edu/beamarmor/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
-         <a href="https://github.com/ucsdwcsng/beamarmor.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
-         <a href="beamarmor.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
+     <div class="video-card" id="demo-edgeric">
+       <div class="video-wrapper">
+         <div class="video-cover" data-poster="_static/demo2_cover.jpg">
+           <button type="button" class="video-play-btn" aria-label="Play video"></button>
+         </div>
+         <video preload="metadata" data-src="_static/demo-2.mp4">
+           Your browser does not support the video tag.
+         </video>
+       </div>
+       <div class="video-card-content">
+         <h3>EdgeRIC: AI driven Scheduling</h3>
+         <p>RL-based scheduling policy trained to maximize overall system throughput</p>
        </div>
      </div>
-     <div class="publication-card">
-       <h3>Tiny-Twin</h3>
-       <p class="publication-desc">A CPU-Native Full-stack Digital Twin for NextG Cellular Networks.</p>
-       <div class="publication-buttons">
-         <a href="https://arxiv.org/abs/2601.08217" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@DySPAN'26</a>
-         <a href="https://dl.acm.org/doi/abs/10.1145/3638550.3643625" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Poster@HotMobile'24</a>
-         <a href="index.html#our-demos" class="pub-btn pub-btn-demo">Demo</a>
-         <a href="tiny-twin.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
+     <div class="video-card" id="demo-sparc">
+       <div class="video-wrapper">
+         <div class="video-cover" data-poster="_static/sparc_cover.jpg">
+           <button type="button" class="video-play-btn" aria-label="Play video"></button>
+         </div>
+         <video preload="metadata" data-src="_static/sparc-video-demo.mov">
+           Your browser does not support the video tag.
+         </video>
        </div>
-     </div>
-     <div class="publication-card">
-       <h3>Windex</h3>
-       <p class="publication-desc">Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks.</p>
-       <div class="publication-buttons">
-         <a href="https://arxiv.org/abs/2406.01888" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Main Paper</a>
-         <a href="https://dl.acm.org/doi/10.1145/3636534.3700034" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@MobiCom'24</a>
-         <a href="https://wcsng.ucsd.edu/windex/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
-         <a href="https://github.com/ucsdwcsng/EdgeRIC_whittleIndex.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
-         <a href="windex.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
-       </div>
-     </div>
-     <div class="publication-card">
-       <h3>SPARC</h3>
-       <p class="publication-desc">Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks.</p>
-       <div class="publication-buttons">
-         <a href="https://dl.acm.org/doi/abs/10.1145/3696405" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@CoNEXT'25</a>
-         <a href="index.html#demo-sparc" class="pub-btn pub-btn-demo">Demo</a>
-         <a href="https://wcsng.ucsd.edu/sparc/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
-         <a href="https://github.com/ushasigh/SPARC-multi-siteManagent.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
-         <a href="sparc.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
+       <div class="video-card-content">
+         <h3>SPARC: Multi-site Management</h3>
+         <p>Interference-aware resource distribution across sites with Near-RT RIC</p>
        </div>
      </div>
    </div>
 
+
+
+.. _edgeric-events:
+
+Events
+------------------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: EdgeRIC Events
+
+   oaic-workshop-2024
+   srsran-2024-workshop
+
+.. raw:: html
+
+   <div class="event-grid">
+     <div class="event-tile">
+       <div class="event-video-wrap">
+         <iframe src="https://www.youtube.com/embed/BNcryaZDQfU" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       </div>
+       <div class="event-tile-footer">
+         <span class="event-badge">2024</span>
+         <h3 class="event-tile-title">srsRAN Workshop 2024</h3>
+         <p class="event-tile-desc">Talk - EdgeRIC: Empowering Real-time Intelligent Optimization & Control in NextG Edge Networks (Professor Srinivas Shakkottai)</p>
+         <a href="srsran-2024-workshop.html" class="event-tile-cta">View details</a>
+       </div>
+     </div>
+     <div class="event-tile">
+       <div class="event-video-wrap">
+         <iframe src="https://www.youtube.com/embed/KOlxJAMBRAE?start=2" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       </div>
+       <div class="event-tile-footer">
+         <span class="event-badge">2024</span>
+         <h3 class="event-tile-title">srsRAN Workshop 2024</h3>
+         <p class="event-tile-desc">EdgeRIC tutorial talk: integration, experiments, and muApps deployment (Ushasi Ghosh)</p>
+         <a href="srsran-2024-workshop.html" class="event-tile-cta">View details</a>
+       </div>
+     </div>
+     <div class="event-tile">
+       <div class="event-video-wrap">
+         <iframe src="https://www.youtube.com/embed/NT78wOk5l-4?start=4795" title="OAIC Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       </div>
+       <div class="event-tile-footer">
+         <span class="event-badge">2024</span>
+         <h3 class="event-tile-title">OAIC Workshop 2024</h3>
+         <p class="event-tile-desc">Hand on Workshop on EdgeRIC integration and muApps deployment (Ushasi Ghosh)</p>
+         <a href="oaic-workshop-2024.html" class="event-tile-cta">View details</a>
+       </div>
+     </div>
+     <div class="event-tile">
+       <div class="event-video-wrap">
+         <iframe src="https://www.youtube.com/embed/06lc2VhoSGQ" title="OAI North American Workshop 2022" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       </div>
+       <div class="event-tile-footer">
+         <span class="event-badge">2022</span>
+         <h3 class="event-tile-title">OAI North American Workshop 2022</h3>
+         <p class="event-tile-desc">Charting the NextG Frontier: Prof. Dinesh Bharadia on the Evolution of 5G, RAN, and Digital Twins.</p>
+         <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="event-tile-cta">View details</a>
+       </div>
+     </div>
+   </div>
+
+
+   
+
+.. _open-source-repositories:
+
+Open Source Repositories
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Open Source Repositories
+
+   repo
+
+
+.. raw:: html
+
+   <div id="open-source-repositories"></div>
+   <div class="repo-list">
+     <div class="repo-card">
+       <h3>srsRAN-4G + EdgeRIC</h3>
+       <p class="repo-meta"><strong>Release Date:</strong> TBD</p>
+       <p><strong>Description:</strong> EdgeRIC integrated with srsRAN 4G</p>
+       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+     </div>
+     <div class="repo-card">
+       <h3>srsRAN-5G (2024) + EdgeRIC</h3>
+       <p class="repo-meta"><strong>Release Date:</strong> 2024</p>
+       <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 2024 release</p>
+       <a href="https://github.com/ucsdwcsng/EdgeRIC-on-5G/tree/srsran" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+     </div>
+     <div class="repo-card">
+       <h3>srsRAN-5G (25.10) + EdgeRIC</h3>
+       <p class="repo-meta"><strong>Release Date:</strong> 25.10</p>
+       <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 25.10 release</p>
+       <a href="#" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+     </div>
+     <div class="repo-card">
+       <h3>OAI + EdgeRIC</h3>
+       <p class="repo-meta"><strong>Release Date:</strong> Oct 01, 2025</p>
+       <p><strong>Description:</strong> EdgeRIC integrated with OpenAirInterface</p>
+       <a href="https://github.com/ucsdwcsng/EdgeRIC-5G-OAI" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+     </div>
+   </div>
+
+
+
+
+
+
+
+.. _5g-testbed:
+
+5G Testbed
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+   :caption: 5G Testbed
+
+   5g-testbed
+
+.. raw:: html
+
+   <div id="5g-testbed">
+     <img src="_static/5G-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+   </div>
 
 
 .. Current Status
@@ -550,8 +487,80 @@ EdgeRIC Core Architecture
        <div class="arch-section-title">μApps – EdgeRIC microservices</div>
        <div class="arch-section-desc">How μApps subscribe to metrics, compute policies, and send control via the EdgeRIC messenger.</div>
      </a>
+     <a class="arch-section" href="edgeric-architecture.html">
+       <div class="arch-section-title">Some Example μApps </div>
+       <div class="arch-section-desc">Available suite of muApps for different use cases.</div>
+     </a>
    </div>
 
+
+
+.. _edgeric-tutorials:
+
+Publications & Tutorials
+------------------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Publications & Tutorials
+
+   tutorials
+
+.. raw:: html
+
+   <div class="publication-grid">
+     <div class="publication-card">
+       <h3>EdgeRIC: Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks.</h3>
+       <div class="publication-buttons">
+         <a href="https://www.usenix.org/conference/nsdi24/presentation/ko" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@NSDI'24</a>
+         <a href="https://dl.acm.org/doi/abs/10.1145/3603269.3610867" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@SIGCOMM'23</a>
+         <a href="index.html#demo-edgeric" class="pub-btn pub-btn-demo">Demo</a>
+         <a href="https://wcsng.ucsd.edu/edgeric/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
+         <a href="https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
+         <a href="edgeric.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
+       </div>
+     </div>
+     <div class="publication-card">
+       <h3>Beamarmor: Seamless anti-jamming in 5g cellular networks with mimo null-steering.</h3>
+       <div class="publication-buttons">
+         <a href="https://dl.acm.org/doi/10.1145/3638550.3641138" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@HotMobile'24</a>
+         <a href="https://dl.acm.org/doi/abs/10.1145/3636534.3698870" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@MobiCom'24</a>
+         <a href="index.html#demo-beamarmor" class="pub-btn pub-btn-demo">Demo</a>
+         <a href="https://wcsng.ucsd.edu/beamarmor/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
+         <a href="https://github.com/ucsdwcsng/beamarmor.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
+         <a href="beamarmor.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
+       </div>
+     </div>
+     <div class="publication-card">
+       <h3>Tiny-Twin: A CPU-Native Full-stack Digital Twin for NextG Cellular Networks.</h3>
+       <div class="publication-buttons">
+         <a href="https://arxiv.org/abs/2601.08217" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@DySPAN'26</a>
+         <a href="https://dl.acm.org/doi/abs/10.1145/3638550.3643625" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Poster@HotMobile'24</a>
+         <a href="index.html#our-demos" class="pub-btn pub-btn-demo">Demo</a>
+         <a href="tiny-twin.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
+       </div>
+     </div>
+     <div class="publication-card">
+       <h3>Windex: Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks.</h3>
+       <div class="publication-buttons">
+         <a href="https://arxiv.org/abs/2406.01888" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Main Paper</a>
+         <a href="https://dl.acm.org/doi/10.1145/3636534.3700034" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@MobiCom'24</a>
+         <a href="https://wcsng.ucsd.edu/windex/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
+         <a href="https://github.com/ucsdwcsng/EdgeRIC_whittleIndex.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
+         <a href="windex.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
+       </div>
+     </div>
+     <div class="publication-card">
+       <h3>SPARC: Spatio-Temporal Adaptive Resource Control for Multi-site Spectrum Management in NextG Cellular Networks.</h3>
+       <div class="publication-buttons">
+         <a href="https://dl.acm.org/doi/abs/10.1145/3696405" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Paper@CoNEXT'25</a>
+         <a href="index.html#demo-sparc" class="pub-btn pub-btn-demo">Demo</a>
+         <a href="https://wcsng.ucsd.edu/sparc/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
+         <a href="https://github.com/ushasigh/SPARC-multi-siteManagent.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
+         <a href="sparc.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
+       </div>
+     </div>
+   </div>
 
 
 
@@ -600,22 +609,6 @@ Datasets
 .. .. * :ref:`genindex`
 .. .. * :ref:`modindex`
 .. .. * :ref:`search`
-.. _5g-testbed:
-
-5G Testbed
-------------------------
-
-.. toctree::
-   :maxdepth: 1
-   :caption: 5G Testbed
-
-   5g-testbed
-
-.. raw:: html
-
-   <div id="5g-testbed">
-     <img src="_static/5G-testbed.png" alt="5G Testbed" style="width: 700px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-   </div>
 
 
 Funding 
