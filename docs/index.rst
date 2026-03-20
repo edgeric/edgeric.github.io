@@ -59,6 +59,36 @@ EdgeRIC: **Real-Time AI-in-the-Loop** decision making and control in cellular ne
 
 .. _our-projects:
 
+.. raw:: html
+
+   <div id="open-source-repositories"></div>
+   <div class="repo-list">
+     <div class="repo-card">
+       <h3>srsRAN-5G (25.10) + EdgeRIC</h3>
+       <p class="repo-meta"><strong>Release Date:</strong> 25.10</p>
+       <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 25.10 release</p>
+       <a href="https://github.com/ushasigh/EdgeRIC-srsRAN-25.10/tree/main" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+     </div>
+     <div class="repo-card">
+       <h3>srsRAN-5G (2024) + EdgeRIC</h3>
+       <p class="repo-meta"><strong>Release Date:</strong> 2024</p>
+       <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 2024 release</p>
+       <a href="https://github.com/ucsdwcsng/EdgeRIC-on-5G" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+     </div>
+     <div class="repo-card">
+       <h3>srsRAN-4G + EdgeRIC</h3>
+       <p class="repo-meta"><strong>Release Date:</strong> TBD</p>
+       <p><strong>Description:</strong> EdgeRIC integrated with srsRAN 4G</p>
+       <a href="https://github.com/ucsdwcsng/EdgeRIC-A-real-time-RIC/tree/oaic-workshop" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+     </div>
+     <div class="repo-card">
+       <h3>OAI + EdgeRIC</h3>
+       <p class="repo-meta"><strong>Release Date:</strong> Oct 01, 2025</p>
+       <p><strong>Description:</strong> EdgeRIC integrated with OpenAirInterface</p>
+       <a href="https://github.com/ucsdwcsng/EdgeRIC-5G-OAI" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+     </div>
+   </div>
+
 Our Projects
 ------------------------
 
@@ -354,47 +384,19 @@ Events
 
    
 
-.. _open-source-repositories:
+.. .. _open-source-repositories:
 
-Open Source Repositories
-------------------------
+.. Open Source Repositories
+.. ------------------------
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Open Source Repositories
+.. .. toctree::
+..    :maxdepth: 1
+..    :caption: Open Source Repositories
 
-   repo
+..    repo
 
 
-.. raw:: html
 
-   <div id="open-source-repositories"></div>
-   <div class="repo-list">
-     <div class="repo-card">
-       <h3>srsRAN-4G + EdgeRIC</h3>
-       <p class="repo-meta"><strong>Release Date:</strong> TBD</p>
-       <p><strong>Description:</strong> EdgeRIC integrated with srsRAN 4G</p>
-       <a href="https://github.com/ucsdwcsng/EdgeRIC-on-5G" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-     <div class="repo-card">
-       <h3>srsRAN-5G (2024) + EdgeRIC</h3>
-       <p class="repo-meta"><strong>Release Date:</strong> 2024</p>
-       <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 2024 release</p>
-       <a href="https://github.com/ucsdwcsng/EdgeRIC-on-5G" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-     <div class="repo-card">
-       <h3>srsRAN-5G (25.10) + EdgeRIC</h3>
-       <p class="repo-meta"><strong>Release Date:</strong> 25.10</p>
-       <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 25.10 release</p>
-       <a href="https://github.com/ucsdwcsng/EdgeRIC-on-5G" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-     <div class="repo-card">
-       <h3>OAI + EdgeRIC</h3>
-       <p class="repo-meta"><strong>Release Date:</strong> Oct 01, 2025</p>
-       <p><strong>Description:</strong> EdgeRIC integrated with OpenAirInterface</p>
-       <a href="https://github.com/ucsdwcsng/EdgeRIC-5G-OAI" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-   </div>
 
 
 
