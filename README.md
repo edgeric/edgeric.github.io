@@ -55,3 +55,7 @@ Open in your browser: http://localhost:8000
 ```bash
 make clean
 ```
+
+### push to UCSD server
+Refer to ``push_to_ucsd.md`` or canvas in 5g-stack slack channel for commands. 
+
