@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="EdgeRIC Main Dataset" href="dataset_page/edgeric-datasets.html"><link rel="prev" title="Windex" href="windex.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets" href="open-ai-ran-tutorial.html"><link rel="prev" title="Windex" href="windex.html">
 
     <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
         <title>SPARC - EdgeRIC</title>
@@ -246,6 +246,12 @@
 <li class="toctree-l1"><a class="reference internal" href="tiny-twin.html">Tiny Twin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">SPARC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html">Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-0-bring-up-the-testbed">Part 0: Bring up the testbed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-1-loading-and-unloading-codelets">Part 1: Loading and unloading codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-2-writing-new-codelets">Part 2: Writing new codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-3-a-control-codelet-for-rlc-buffer-management">Part 3: A control codelet for RLC buffer management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#appendix">Appendix</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Datasets</span></p>
 <ul>
@@ -396,19 +402,19 @@ sudo<span class="w"> </span>./make-rans.sh<span class="w"> </span><span class="c
 <section id="run-the-ues">
 <h4>Run the UEs<a class="headerlink" href="#run-the-ues" title="Link to this heading">¶</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>srsRAN_site1/build
-sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue_1_site1.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">&quot;tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6&quot;</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue1
+sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue_1_site1.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">"tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6"</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue1
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>srsRAN_site1/build
-sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue_1_site1.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">&quot;tx_port=tcp://*:2011,rx_port=tcp://localhost:2010,id=ue,base_srate=23.04e6&quot;</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue2
+sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue_1_site1.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">"tx_port=tcp://*:2011,rx_port=tcp://localhost:2010,id=ue,base_srate=23.04e6"</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue2
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>srsRAN_site1/build
-sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue_3_site2.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">&quot;tx_port=tcp://*:2021,rx_port=tcp://localhost:2020,id=ue,base_srate=23.04e6&quot;</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue3
+sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue_3_site2.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">"tx_port=tcp://*:2021,rx_port=tcp://localhost:2020,id=ue,base_srate=23.04e6"</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue3
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>srsRAN_site1/build
-sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue_4_site2.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">&quot;tx_port=tcp://*:2031,rx_port=tcp://localhost:2030,id=ue,base_srate=23.04e6&quot;</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue4<span class="w"> </span>
+sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue_4_site2.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">"tx_port=tcp://*:2031,rx_port=tcp://localhost:2030,id=ue,base_srate=23.04e6"</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue4<span class="w"> </span>
 </pre></div>
 </div>
 </section>
@@ -505,12 +511,12 @@ For no blanking, set a and b to 0 - line 35 and 36</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="dataset_page/edgeric-datasets.html">
+          <a class="next-page" href="open-ai-ran-tutorial.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">EdgeRIC Main Dataset</div>
+                <div class="title">Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

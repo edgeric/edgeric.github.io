@@ -246,6 +246,12 @@
 <li class="toctree-l1"><a class="reference internal" href="tiny-twin.html">Tiny Twin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sparc.html">SPARC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html">Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-0-bring-up-the-testbed">Part 0: Bring up the testbed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-1-loading-and-unloading-codelets">Part 1: Loading and unloading codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-2-writing-new-codelets">Part 2: Writing new codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-3-a-control-codelet-for-rlc-buffer-management">Part 3: A control codelet for RLC buffer management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#appendix">Appendix</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Datasets</span></p>
 <ul>
@@ -686,6 +692,56 @@
 <li class="toctree-l2"><a class="reference internal" href="sparc.html#install-srsran-supporting-e2-and-edgeric-messages-and-control">Install srsRAN supporting E2 and EdgeRIC messages and control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sparc.html#network-setup">Network Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sparc.html#hierarchical-ric-deployment">Hierarchical RIC deployment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html">Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#architecture">Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-0-bring-up-the-testbed">Part 0: Bring up the testbed</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#clone-and-set-up-the-environment">Clone and set up the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#create-the-cluster">Create the cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#deploy-the-5g-core-and-the-subscribers">Deploy the 5G core and the subscribers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#deploy-the-ran-pod-and-the-jrt-controller">Deploy the RAN pod and the jrt-controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#build-the-images-one-time-20-min">Build the images (one time, ~20 min)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#start-the-radio">Start the radio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#traffic">Traffic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-1-loading-and-unloading-codelets">Part 1: Loading and unloading codelets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#the-two-yaml-files-you-need-to-understand">1.1 The two YAML files you need to understand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#load-the-mac-stats-codeletset">1.2 Load the MAC stats codeletset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#unload">1.3 Unload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#load-unload-troubleshooting">1.4 Load/unload troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#start-the-dashboard">1.5 Start the dashboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#visualize-grafana-victoriametrics">1.6 Visualize: Grafana + VictoriaMetrics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-2-writing-new-codelets">Part 2: Writing new codelets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#anatomy-of-a-codelet">2.0 Anatomy of a codelet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#the-design-decision-bucket-inside-the-codelet">2.1 The design decision: bucket inside the codelet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#codelet-1-rlc-queuing-latency">2.2 Codelet 1 — RLC queuing latency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#codelet-2-rlc-buffer-occupancy">2.3 Codelet 2 — RLC buffer occupancy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#advanced-lossless-per-packet-records">2.4 Advanced — lossless per-packet records</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#build-deploy-observe">2.5 Build, deploy, observe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#sanity-check-the-measurement">2.6 Sanity-check the measurement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#traps-all-of-these-were-hit-during-development">2.7 Traps (all of these were hit during development)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-3-a-control-codelet-for-rlc-buffer-management">Part 3: A control codelet for RLC buffer management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#monitor-hooks-vs-control-hooks">3.1 Monitor hooks vs. control hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#the-simplest-control-codelet-a-fixed-cap">3.2 The simplest control codelet: a fixed cap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#run-it">3.3 Run it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#what-the-control-actually-buys-you">3.4 What the control actually buys you</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#closing-the-loop">3.5 Closing the loop</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#appendix">Appendix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#stop-and-status">Stop and status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#verification-cheat-sheet">Verification cheat sheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#hooks-used-in-this-tutorial">Hooks used in this tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#repository-layout">Repository layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial.html#further-reading">Further reading</a></li>
 </ul>
 </li>
 </ul>

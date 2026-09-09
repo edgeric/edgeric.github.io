@@ -75,3 +75,11 @@
 
 .. Resource Distribution μApp
 .. ----------------------------
+
+.. Open AI-RAN tutorial: jbpf codelets on the OCUDU + Duranta k3d testbed
+.. ---------------------
+
+.. toctree::
+
+   open-ai-ran-tutorial.md
+

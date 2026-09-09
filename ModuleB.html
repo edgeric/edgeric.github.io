@@ -246,6 +246,12 @@
 <li class="toctree-l1"><a class="reference internal" href="tiny-twin.html">Tiny Twin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sparc.html">SPARC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html">Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-0-bring-up-the-testbed">Part 0: Bring up the testbed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-1-loading-and-unloading-codelets">Part 1: Loading and unloading codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-2-writing-new-codelets">Part 2: Writing new codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-3-a-control-codelet-for-rlc-buffer-management">Part 3: A control codelet for RLC buffer management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#appendix">Appendix</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Datasets</span></p>
 <ul>
@@ -315,11 +321,11 @@
 <p><strong>Example Data Structure</strong>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ue_data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="mi">1001</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># Example RNTI</span>
-        <span class="s1">&#39;CQI&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="c1"># Downlink Channel Quality Indicator</span>
-        <span class="s1">&#39;BL&#39;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>  <span class="c1"># Downlink Backlog Buffer in Bytes</span>
-        <span class="s1">&#39;SNR&#39;</span><span class="p">:</span> <span class="mf">20.5</span><span class="p">,</span>  <span class="c1"># Uplink SNR in dB</span>
-        <span class="s1">&#39;pending_data&#39;</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>  <span class="c1"># Uplink Pending Data in Bytes</span>
-        <span class="s1">&#39;Tx&#39;</span><span class="p">:</span> <span class="mi">100</span>  <span class="c1"># Downlink bitrate in Mbps</span>
+        <span class="s1">'CQI'</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="c1"># Downlink Channel Quality Indicator</span>
+        <span class="s1">'BL'</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>  <span class="c1"># Downlink Backlog Buffer in Bytes</span>
+        <span class="s1">'SNR'</span><span class="p">:</span> <span class="mf">20.5</span><span class="p">,</span>  <span class="c1"># Uplink SNR in dB</span>
+        <span class="s1">'pending_data'</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>  <span class="c1"># Uplink Pending Data in Bytes</span>
+        <span class="s1">'Tx'</span><span class="p">:</span> <span class="mi">100</span>  <span class="c1"># Downlink bitrate in Mbps</span>
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="n">RIC_ID</span> <span class="o">=</span> <span class="mi">1</span>

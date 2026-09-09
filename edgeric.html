@@ -246,6 +246,12 @@
 <li class="toctree-l1"><a class="reference internal" href="tiny-twin.html">Tiny Twin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sparc.html">SPARC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html">Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-0-bring-up-the-testbed">Part 0: Bring up the testbed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-1-loading-and-unloading-codelets">Part 1: Loading and unloading codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-2-writing-new-codelets">Part 2: Writing new codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-3-a-control-codelet-for-rlc-buffer-management">Part 3: A control codelet for RLC buffer management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#appendix">Appendix</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Datasets</span></p>
 <ul>
@@ -390,12 +396,12 @@ the [enb_files] section: upadte the file directories</p>
 <h3>Run the UEs<a class="headerlink" href="#run-the-ues" title="Link to this heading">¶</a></h3>
 <p>Run UE1:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>srsRAN_4G-ER/build
-sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue1.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">&quot;tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6&quot;</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue1
+sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue1.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">"tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6"</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue1
 </pre></div>
 </div>
 <p>Run UE2:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>srsRAN_4G-ER/build
-sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue2.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">&quot;tx_port=tcp://*:2011,rx_port=tcp://localhost:2010,id=ue,base_srate=23.04e6&quot;</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue2
+sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue2.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">"tx_port=tcp://*:2011,rx_port=tcp://localhost:2010,id=ue,base_srate=23.04e6"</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue2
 </pre></div>
 </div>
 <p>To run automated scripts for {i} UEs:</p>
@@ -501,14 +507,14 @@ sudo<span class="w"> </span>python3<span class="w"> </span>muApp1_run_DL_schedul
 <h4>Setting the scheduler algorithm manually<a class="headerlink" href="#setting-the-scheduler-algorithm-manually" title="Link to this heading">¶</a></h4>
 <p>Set the scheduling algorithm you want to run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Line 259</span>
-<span class="nv">selected_algorithm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Max CQI&quot;</span><span class="w">   </span><span class="c1"># selection can be: Max CQI, Max Weight,</span>
+<span class="nv">selected_algorithm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Max CQI"</span><span class="w">   </span><span class="c1"># selection can be: Max CQI, Max Weight,</span>
 <span class="w">                                 </span><span class="c1"># Proportional Fair (PF), Round Robin - to be implemneted</span>
 <span class="w">                                 </span><span class="c1"># RL - models are included for 2 UEs</span>
 </pre></div>
 </div>
 <p>If the algorithm selected is RL, set the directory for the RL model</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Line 270</span>
-<span class="nv">rl_model_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Fully Trained Model&quot;</span><span class="w">  </span><span class="c1"># selection can be Initial Model,</span>
+<span class="nv">rl_model_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Fully Trained Model"</span><span class="w">  </span><span class="c1"># selection can be Initial Model,</span>
 <span class="w">                                       </span><span class="c1"># Half Trained Model, Fully Trained Model - to see benefits, run UE1 with load 5Mbps, UE2 with 21Mbps</span>
 </pre></div>
 </div>

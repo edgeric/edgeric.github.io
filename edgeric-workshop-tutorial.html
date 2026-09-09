@@ -246,6 +246,12 @@
 <li class="toctree-l1"><a class="reference internal" href="tiny-twin.html">Tiny Twin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sparc.html">SPARC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html">Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-0-bring-up-the-testbed">Part 0: Bring up the testbed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-1-loading-and-unloading-codelets">Part 1: Loading and unloading codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-2-writing-new-codelets">Part 2: Writing new codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-3-a-control-codelet-for-rlc-buffer-management">Part 3: A control codelet for RLC buffer management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#appendix">Appendix</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Datasets</span></p>
 <ul>
@@ -476,11 +482,11 @@ to run UE with a specified channel trace collected from real world experiments [
 </pre></div>
 </div>
 <p>Run UE1:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue1.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">&quot;tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6&quot;</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue1<span class="w"> </span>--params_filename<span class="o">=</span><span class="s2">&quot;../params1.txt&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>./srsue/src/srsue<span class="w"> </span>../.config/ue1.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">"tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6"</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue1<span class="w"> </span>--params_filename<span class="o">=</span><span class="s2">"../params1.txt"</span>
 </pre></div>
 </div>
 <p>Run UE2:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>./srsue/src/srsue2<span class="w"> </span>../.config/ue2.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">&quot;tx_port=tcp://*:2011,rx_port=tcp://localhost:2010,id=ue,base_srate=23.04e6&quot;</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue2<span class="w"> </span>--params_filename<span class="o">=</span><span class="s2">&quot;../params2.txt&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>./srsue/src/srsue2<span class="w"> </span>../.config/ue2.conf<span class="w"> </span>--rf.device_name<span class="o">=</span>zmq<span class="w"> </span>--rf.device_args<span class="o">=</span><span class="s2">"tx_port=tcp://*:2011,rx_port=tcp://localhost:2010,id=ue,base_srate=23.04e6"</span><span class="w"> </span>--gw.netns<span class="o">=</span>ue2<span class="w"> </span>--params_filename<span class="o">=</span><span class="s2">"../params2.txt"</span>
 </pre></div>
 </div>
 <p>Press <code class="docutils literal notranslate"><span class="pre">t</span></code> to view the UE metrics on console</p>
@@ -588,7 +594,7 @@ redis-server
 <strong>Terminal 8:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>edgeric
 <span class="nb">cd</span><span class="w"> </span>muApp1
-redis-cli<span class="w"> </span><span class="nb">set</span><span class="w"> </span>scheduling_algorithm<span class="w"> </span><span class="s2">&quot;Max CQI&quot;</span><span class="w"> </span><span class="c1"># setting an initial scheduler</span>
+redis-cli<span class="w"> </span><span class="nb">set</span><span class="w"> </span>scheduling_algorithm<span class="w"> </span><span class="s2">"Max CQI"</span><span class="w"> </span><span class="c1"># setting an initial scheduler</span>
 python3<span class="w"> </span>muApp1_run_DL_scheduling.py<span class="w"> </span><span class="c1"># sudo not required if you ae running in docker</span>
 </pre></div>
 </div>
@@ -596,14 +602,14 @@ python3<span class="w"> </span>muApp1_run_DL_scheduling.py<span class="w"> </spa
 <h4>Setting the scheduler algorithm manually<a class="headerlink" href="#setting-the-scheduler-algorithm-manually" title="Link to this heading">¶</a></h4>
 <p>Set the scheduling algorithm you want to run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Line 259</span>
-<span class="nv">selected_algorithm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Max CQI&quot;</span><span class="w">   </span><span class="c1"># selection can be: Max CQI, Max Weight,</span>
+<span class="nv">selected_algorithm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Max CQI"</span><span class="w">   </span><span class="c1"># selection can be: Max CQI, Max Weight,</span>
 <span class="w">                                 </span><span class="c1"># Proportional Fair (PF), Round Robin </span>
 <span class="w">                                 </span><span class="c1"># RL - models are included for 2 UEs</span>
 </pre></div>
 </div>
 <p>If the algorithm selected is RL, set the directory for the RL model</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Line 270</span>
-<span class="nv">rl_model_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Fully Trained Model&quot;</span><span class="w">  </span><span class="c1"># selection can be Initial Model,</span>
+<span class="nv">rl_model_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Fully Trained Model"</span><span class="w">  </span><span class="c1"># selection can be Initial Model,</span>
 <span class="w">                                       </span><span class="c1"># Half Trained Model, Fully Trained Model - to see benefits, run UE1 with load 5Mbps, UE2 with 21Mbps</span>
 </pre></div>
 </div>
@@ -622,7 +628,7 @@ python3<span class="w"> </span>muApp1_run_DL_scheduling.py<span class="w"> </spa
 <section id="using-redis-to-update-the-scheduling-algorithm">
 <h3>Using redis to update the scheduling algorithm<a class="headerlink" href="#using-redis-to-update-the-scheduling-algorithm" title="Link to this heading">¶</a></h3>
 <p><strong>Terminal 9:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>redis-cli<span class="w"> </span><span class="nb">set</span><span class="w"> </span>scheduling_algorithm<span class="w"> </span><span class="s2">&quot;Max Weight&quot;</span><span class="w"> </span><span class="c1">#selection can be: Max CQI, Max Weight,</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>redis-cli<span class="w"> </span><span class="nb">set</span><span class="w"> </span>scheduling_algorithm<span class="w"> </span><span class="s2">"Max Weight"</span><span class="w"> </span><span class="c1">#selection can be: Max CQI, Max Weight,</span>
 <span class="w">                                                </span><span class="c1"># Proportional Fair (PF), Round Robin</span>
 <span class="w">                                                </span><span class="c1"># RL - models are included for 2 UEs</span>
 </pre></div>
@@ -656,7 +662,7 @@ total<span class="w"> </span>system<span class="w"> </span>throughput:<span clas
 </pre></div>
 </div>
 <p><strong>Terminal 9</strong> - To observe the throughput updates, let us update the scheduler with the following command</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>redis-cli<span class="w"> </span><span class="nb">set</span><span class="w"> </span>scheduling_algorithm<span class="w"> </span><span class="s2">&quot;RL&quot;</span><span class="w"> </span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>redis-cli<span class="w"> </span><span class="nb">set</span><span class="w"> </span>scheduling_algorithm<span class="w"> </span><span class="s2">"RL"</span><span class="w"> </span>
 </pre></div>
 </div>
 <p><strong>Terminal 8</strong> - Increased system throughput observed with our trained RL model</p>
@@ -695,7 +701,7 @@ python3<span class="w"> </span>muApp3_monitor_terminal.py<span class="w"> </span
 
 RAN<span class="w"> </span>Index:<span class="w"> </span><span class="m">791000</span>,<span class="w"> </span>RIC<span class="w"> </span>index:<span class="w"> </span><span class="m">790998</span><span class="w"> </span>
 
-UE<span class="w"> </span>Dictionary:<span class="w"> </span><span class="o">{</span><span class="m">70</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;CQI&#39;</span>:<span class="w"> </span><span class="m">7</span>,<span class="w"> </span><span class="s1">&#39;SNR&#39;</span>:<span class="w"> </span><span class="m">115</span>.46858215332031,<span class="w"> </span><span class="s1">&#39;Backlog&#39;</span>:<span class="w"> </span><span class="m">384977</span>,<span class="w"> </span><span class="s1">&#39;Pending Data&#39;</span>:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="s1">&#39;Tx_brate&#39;</span>:<span class="w"> </span><span class="m">1980</span>.0,<span class="w"> </span><span class="s1">&#39;Rx_brate&#39;</span>:<span class="w"> </span><span class="m">0</span>.0<span class="o">}</span>,<span class="w"> </span><span class="m">71</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;CQI&#39;</span>:<span class="w"> </span><span class="m">8</span>,<span class="w"> </span><span class="s1">&#39;SNR&#39;</span>:<span class="w"> </span><span class="m">116</span>.41766357421875,<span class="w"> </span><span class="s1">&#39;Backlog&#39;</span>:<span class="w"> </span><span class="m">1503</span>,<span class="w"> </span><span class="s1">&#39;Pending Data&#39;</span>:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="s1">&#39;Tx_brate&#39;</span>:<span class="w"> </span><span class="m">0</span>.0,<span class="w"> </span><span class="s1">&#39;Rx_brate&#39;</span>:<span class="w"> </span><span class="m">0</span>.0<span class="o">}}</span><span class="w"> </span>
+UE<span class="w"> </span>Dictionary:<span class="w"> </span><span class="o">{</span><span class="m">70</span>:<span class="w"> </span><span class="o">{</span><span class="s1">'CQI'</span>:<span class="w"> </span><span class="m">7</span>,<span class="w"> </span><span class="s1">'SNR'</span>:<span class="w"> </span><span class="m">115</span>.46858215332031,<span class="w"> </span><span class="s1">'Backlog'</span>:<span class="w"> </span><span class="m">384977</span>,<span class="w"> </span><span class="s1">'Pending Data'</span>:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="s1">'Tx_brate'</span>:<span class="w"> </span><span class="m">1980</span>.0,<span class="w"> </span><span class="s1">'Rx_brate'</span>:<span class="w"> </span><span class="m">0</span>.0<span class="o">}</span>,<span class="w"> </span><span class="m">71</span>:<span class="w"> </span><span class="o">{</span><span class="s1">'CQI'</span>:<span class="w"> </span><span class="m">8</span>,<span class="w"> </span><span class="s1">'SNR'</span>:<span class="w"> </span><span class="m">116</span>.41766357421875,<span class="w"> </span><span class="s1">'Backlog'</span>:<span class="w"> </span><span class="m">1503</span>,<span class="w"> </span><span class="s1">'Pending Data'</span>:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="s1">'Tx_brate'</span>:<span class="w"> </span><span class="m">0</span>.0,<span class="w"> </span><span class="s1">'Rx_brate'</span>:<span class="w"> </span><span class="m">0</span>.0<span class="o">}}</span><span class="w"> </span>
 
 RT-E2<span class="w"> </span>Policy<span class="w"> </span><span class="o">(</span>Scheduling<span class="o">)</span>:<span class="w"> </span>
 Sent<span class="w"> </span>to<span class="w"> </span>RAN:<span class="w"> </span>ran_index:<span class="w"> </span><span class="m">790999</span>

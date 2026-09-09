@@ -246,6 +246,12 @@
 <li class="toctree-l1"><a class="reference internal" href="tiny-twin.html">Tiny Twin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sparc.html">SPARC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html">Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-0-bring-up-the-testbed">Part 0: Bring up the testbed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-1-loading-and-unloading-codelets">Part 1: Loading and unloading codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-2-writing-new-codelets">Part 2: Writing new codelets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#part-3-a-control-codelet-for-rlc-buffer-management">Part 3: A control codelet for RLC buffer management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-ai-ran-tutorial.html#appendix">Appendix</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Datasets</span></p>
 <ul>
@@ -368,14 +374,14 @@
 <p><strong>Example Data Structure</strong>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ue_data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="mi">1001</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># Example RNTI</span>
-        <span class="s1">&#39;cqi&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="c1"># Downlink Channel Quality Indicator</span>
-        <span class="s1">&#39;dl_buffer&#39;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>  <span class="c1"># Downlink Backlog Buffer in Bytes</span>
-        <span class="s1">&#39;snr&#39;</span><span class="p">:</span> <span class="mf">20.5</span><span class="p">,</span>  <span class="c1"># Uplink SNR in dB</span>
-        <span class="s1">&#39;ul_buffer&#39;</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>  <span class="c1"># Uplink Pending Data in Bytes</span>
-        <span class="s1">&#39;dl_tbs&#39;</span> <span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="c1"># The current downlink bytes scheduled for the UE.</span>
-        <span class="s1">&#39;ul_tbs&#39;</span> <span class="p">:</span> <span class="mi">320</span><span class="p">,</span> <span class="c1"># The current uplink bytes scheduled for the UE.</span>
-        <span class="s1">&#39;tx_bytes&#39;</span><span class="p">:</span> <span class="mi">100</span>  <span class="c1"># Downlink bitrate in Mbps</span>
-        <span class="s1">&#39;rx_bytes&#39;</span><span class="p">:</span> <span class="mi">100</span> <span class="c1"># Uplink bitrate in Mbps</span>
+        <span class="s1">'cqi'</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="c1"># Downlink Channel Quality Indicator</span>
+        <span class="s1">'dl_buffer'</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>  <span class="c1"># Downlink Backlog Buffer in Bytes</span>
+        <span class="s1">'snr'</span><span class="p">:</span> <span class="mf">20.5</span><span class="p">,</span>  <span class="c1"># Uplink SNR in dB</span>
+        <span class="s1">'ul_buffer'</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>  <span class="c1"># Uplink Pending Data in Bytes</span>
+        <span class="s1">'dl_tbs'</span> <span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="c1"># The current downlink bytes scheduled for the UE.</span>
+        <span class="s1">'ul_tbs'</span> <span class="p">:</span> <span class="mi">320</span><span class="p">,</span> <span class="c1"># The current uplink bytes scheduled for the UE.</span>
+        <span class="s1">'tx_bytes'</span><span class="p">:</span> <span class="mi">100</span>  <span class="c1"># Downlink bitrate in Mbps</span>
+        <span class="s1">'rx_bytes'</span><span class="p">:</span> <span class="mi">100</span> <span class="c1"># Uplink bitrate in Mbps</span>
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="c1"># RIC_ID = 1</span>
@@ -384,7 +390,7 @@
 </div>
 <p>This structured message is critical for performance management and optimization of network resources in real-time applications.</p>
 <p>This schema is defined as a protobuf message <code class="docutils literal notranslate"><span class="pre">metrics.proto</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">syntax</span> <span class="o">=</span> <span class="s2">&quot;proto3&quot;</span><span class="p">;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">syntax</span> <span class="o">=</span> <span class="s2">"proto3"</span><span class="p">;</span>
 
 <span class="n">message</span> <span class="n">UeMetrics</span> <span class="p">{</span>
    <span class="n">uint32</span> <span class="n">rnti</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
@@ -417,7 +423,7 @@
 <li><p>EdgeRIC messenger then publishes the control actions to the RAN</p></li>
 </ul>
 <p>This schema is defined as a protobuf message <code class="docutils literal notranslate"><span class="pre">control_actions.proto</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">syntax</span> <span class="o">=</span> <span class="s2">&quot;proto3&quot;</span><span class="p">;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">syntax</span> <span class="o">=</span> <span class="s2">"proto3"</span><span class="p">;</span>
 
 <span class="n">message</span> <span class="n">SchedulingWeights</span> <span class="p">{</span>
    <span class="n">uint32</span> <span class="n">ran_index</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
@@ -458,7 +464,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">gym</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">)))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">'..'</span><span class="p">)))</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
@@ -469,7 +475,7 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_policy</span><span class="p">():</span>
    <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># to be deleted</span>
-   <span class="n">ue_data</span> <span class="o">=</span> <span class="n">get_metrics_multi</span><span class="p">()</span>            <span class="c1">#### subscribe to RAN&#39;s RT-E2 agent via EdgeRIC messenger to receive metrics</span>
+   <span class="n">ue_data</span> <span class="o">=</span> <span class="n">get_metrics_multi</span><span class="p">()</span>            <span class="c1">#### subscribe to RAN's RT-E2 agent via EdgeRIC messenger to receive metrics</span>
    <span class="n">numues</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ue_data</span><span class="p">)</span>
    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">numues</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
    <span class="n">RNTIs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ue_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
@@ -480,10 +486,10 @@
       <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">numues</span>
 
    <span class="n">send_control_μApp_1</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="n">flag</span><span class="p">)</span>   <span class="c1">#### send the scheduling control action to the EdgeRIC messenger</span>
-   <span class="n">value_algo</span> <span class="o">=</span> <span class="s2">&quot;Fixed Weights&quot;</span>
+   <span class="n">value_algo</span> <span class="o">=</span> <span class="s2">"Fixed Weights"</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
 
    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
       <span class="n">compute_policy</span><span class="p">()</span>
