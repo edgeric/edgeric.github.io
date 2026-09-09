@@ -30,6 +30,10 @@ extensions = [
     'myst_parser',
 ]
 
+# Generate HTML anchors for markdown headings (h1-h4) so in-page links
+# like [text](#some-heading) resolve.
+myst_heading_anchors = 4
+
 source_suffix = {
     '.rst': 'restructuredtext',
     '.md': 'markdown',
