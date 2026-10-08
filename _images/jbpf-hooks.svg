@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 430" width="820" height="430" role="img" aria-labelledby="hk-title hk-desc">
+  <title id="hk-title">jbpf hooks in the OCUDU gNB</title>
+  <desc id="hk-desc">The OCUDU gNB has 83 jbpf hooks: 19 in the CU-CP, 16 in PDCP, 18 in RLC, 17 in the MAC scheduler and 13 at FAPI, DU and fronthaul. Five are control hooks. Zooming into one slot of the MAC scheduler: slot_indication advances RANtime and calls the control hook mac_sched_slot_ctrl, where the rt_ctrl codelet reads the action for this slot from its input channel rt_act_in and writes the status and per-UE weights back into the context. The scheduler then splits the PRBs by weight on a HIT, or runs its stock policy. post_process_results calls the telemetry hook mac_sched_slot_report, where the rt_report codelet copies the 1080-byte report into its output channel out_rt_report. Both channels live in shared memory that jrtc reads and writes.</desc>
+  <defs>
+    <marker id="hk-rep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f6db5"/></marker>
+    <marker id="hk-act" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0561b"/></marker>
+    <marker id="hk-dat" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3e4c59"/></marker>
+  </defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #3e4c59; font-size: 14px; }
+    .t { font-size: 15px; font-weight: 700; fill: #1f2933; }
+    .m { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 13px; }
+    .mb { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 14px; font-weight: 700; fill: #1f2933; }
+    .s { font-size: 13px; fill: #616e7c; }
+    .c { text-anchor: middle; }
+    .grp { fill: #fafbfc; stroke: #9aa5b1; stroke-width: 1.3; stroke-dasharray: 7 5; }
+    .box { fill: #eef2f7; stroke: #5b6b82; stroke-width: 1.4; }
+    .ran { fill: #e8f1fb; stroke: #2f6db5; stroke-width: 1.6; }
+    .step { fill: #ffffff; stroke: #2f6db5; stroke-width: 1.2; }
+    .cdl { fill: #ffffff; stroke: #5b6b82; stroke-width: 1.4; }
+    .chan { fill: #eef2f7; stroke: #5b6b82; stroke-width: 1.2; stroke-dasharray: 4 3; }
+    .zoom { stroke: #9aa5b1; stroke-width: 1; fill: none; }
+    .rep { stroke: #2f6db5; stroke-width: 2; fill: none; }
+    .act { stroke: #c0561b; stroke-width: 2; fill: none; }
+    .dat { stroke: #3e4c59; stroke-width: 1.6; fill: none; }
+    .ctl { fill: #c0561b; }
+    .tel { fill: #2f6db5; }
+  </style>
+
+  <rect width="820" height="430" fill="#ffffff"/>
+
+  <!-- hooks per layer -->
+  <text class="t c" x="76" y="22">OCUDU gNB</text>
+  <text class="s c" x="76" y="39">hooks per layer</text>
+  <rect class="box" x="16" y="50" width="120" height="44" rx="6"/>
+  <text class="t c" x="76" y="69">CU-CP</text>
+  <text class="s c" x="76" y="86">19 hooks</text>
+  <rect class="box" x="16" y="102" width="120" height="44" rx="6"/>
+  <text class="t c" x="76" y="121">PDCP</text>
+  <text class="s c" x="70" y="138">16 hooks</text>
+  <path class="ctl" d="M115,130 l5,5 l-5,5 l-5,-5 z"/>
+  <rect class="box" x="16" y="154" width="120" height="44" rx="6"/>
+  <text class="t c" x="76" y="173">RLC</text>
+  <text class="s c" x="70" y="190">18 hooks</text>
+  <path class="ctl" d="M115,182 l5,5 l-5,5 l-5,-5 z"/>
+  <rect class="ran" x="16" y="206" width="120" height="44" rx="6"/>
+  <text class="t c" x="76" y="225">MAC scheduler</text>
+  <text class="s c" x="60" y="242">17 hooks</text>
+  <path class="ctl" d="M99,234 l5,5 l-5,5 l-5,-5 z"/>
+  <path class="ctl" d="M111,234 l5,5 l-5,5 l-5,-5 z"/>
+  <path class="ctl" d="M123,234 l5,5 l-5,5 l-5,-5 z"/>
+  <rect class="box" x="16" y="258" width="120" height="44" rx="6"/>
+  <text class="t c" x="76" y="277">FAPI · DU</text>
+  <text class="s c" x="76" y="294">13 hooks</text>
+  <text class="s c" x="76" y="322">83 hooks in all</text>
+
+  <!-- zoom into the MAC scheduler -->
+  <line class="zoom" x1="136" y1="206" x2="166" y2="50"/>
+  <line class="zoom" x1="136" y1="250" x2="166" y2="356"/>
+
+  <!-- one slot of the MAC scheduler -->
+  <rect class="ran" x="166" y="50" width="220" height="306" rx="10"/>
+  <text class="t c" x="276" y="72">MAC scheduler, one slot</text>
+  <text class="m c" x="276" y="90" fill="#616e7c">intra_slice_scheduler</text>
+
+  <rect class="step" x="180" y="104" width="192" height="66" rx="6"/>
+  <text class="mb c" x="276" y="125">slot_indication(t)</text>
+  <text class="c" x="276" y="143">RANtime t</text>
+  <path class="ctl" d="M193,154 l5,5 l-5,5 l-5,-5 z"/>
+  <text class="m" x="204" y="163">mac_sched_slot_ctrl</text>
+
+  <line class="dat" x1="276" y1="170" x2="276" y2="184" marker-end="url(#hk-dat)"/>
+  <rect class="step" x="180" y="186" width="192" height="66" rx="6"/>
+  <text class="t c" x="276" y="207">schedule DL newTx</text>
+  <text class="c" x="276" y="225">HIT: PRBs by weight</text>
+  <text class="c" x="276" y="243">NONE: stock scheduler</text>
+
+  <line class="dat" x1="276" y1="252" x2="276" y2="266" marker-end="url(#hk-dat)"/>
+  <rect class="step" x="180" y="268" width="192" height="66" rx="6"/>
+  <text class="mb c" x="276" y="289">post_process_results()</text>
+  <text class="c" x="276" y="307">grants of slot t are final</text>
+  <circle class="tel" cx="193" cy="323" r="4.5"/>
+  <text class="m" x="204" y="327">mac_sched_slot_report</text>
+
+  <!-- jbpf agent -->
+  <rect class="grp" x="436" y="50" width="280" height="306" rx="10"/>
+  <rect x="446" y="40" width="192" height="20" fill="#ffffff"/>
+  <text class="s" x="452" y="55">jbpf agent · in the gNB process</text>
+
+  <rect class="cdl" x="452" y="104" width="130" height="66" rx="6"/>
+  <text class="mb c" x="517" y="125">rt_ctrl</text>
+  <text class="c" x="517" y="143">codelet (eBPF)</text>
+  <text class="s c" x="517" y="161">map: ring[16]</text>
+
+  <rect class="chan" x="604" y="114" width="98" height="46" rx="6"/>
+  <text class="m c" x="653" y="133">rt_act_in</text>
+  <text class="s c" x="653" y="150">input channel</text>
+
+  <rect class="box" x="452" y="190" width="250" height="58" rx="6"/>
+  <text class="t c" x="577" y="212">codelet runtime</text>
+  <text class="s c" x="577" y="230">verifier · JIT · maps · IO channels</text>
+  <text class="s c" x="577" y="244">loaded and unloaded live (LCM)</text>
+
+  <rect class="cdl" x="452" y="268" width="130" height="66" rx="6"/>
+  <text class="mb c" x="517" y="289">rt_report</text>
+  <text class="c" x="517" y="307">codelet (eBPF)</text>
+  <text class="s c" x="517" y="325">one output per slot</text>
+
+  <rect class="chan" x="604" y="278" width="98" height="46" rx="6"/>
+  <text class="m c" x="653" y="297" style="font-size:11.5px">out_rt_report</text>
+  <text class="s c" x="653" y="314">output channel</text>
+
+  <!-- hook calls: the gNB passes a pointer to the slot's context -->
+  <line class="dat" x1="372" y1="124" x2="450" y2="124" marker-end="url(#hk-dat)"/>
+  <text class="s c" x="411" y="117">context</text>
+  <line class="act" x1="450" y1="150" x2="374" y2="150" marker-end="url(#hk-act)"/>
+  <text class="s c" x="411" y="166">weights</text>
+
+  <line class="rep" x1="372" y1="300" x2="450" y2="300" marker-end="url(#hk-rep)"/>
+  <text class="s c" x="411" y="292">report</text>
+  <text class="s c" x="411" y="316">1080 B</text>
+
+  <!-- channels: codelet helpers -->
+  <line class="act" x1="602" y1="137" x2="584" y2="137" marker-end="url(#hk-act)"/>
+  <line class="rep" x1="582" y1="301" x2="602" y2="301" marker-end="url(#hk-rep)"/>
+
+  <!-- to and from jrtc -->
+  <line class="act" x1="812" y1="137" x2="704" y2="137" marker-end="url(#hk-act)"/>
+  <text class="c" x="760" y="129">from jrtc</text>
+  <text class="s c" x="760" y="153">actions</text>
+  <line class="rep" x1="704" y1="301" x2="812" y2="301" marker-end="url(#hk-rep)"/>
+  <text class="c" x="760" y="293">to jrtc</text>
+  <text class="s c" x="760" y="317">reports</text>
+  <text class="s c" x="760" y="214">shared</text>
+  <text class="s c" x="760" y="230">memory</text>
+
+  <!-- helper calls under the channels -->
+  <text class="m c" x="577" y="97" style="font-size:11.5px;fill:#616e7c">jbpf_control_input_receive()</text>
+  <text class="m c" x="577" y="349" style="font-size:11.5px;fill:#616e7c">jbpf_ringbuf_output()</text>
+
+  <!-- legend -->
+  <path class="ctl" d="M24,382 l5,5 l-5,5 l-5,-5 z"/>
+  <text x="36" y="392">control hook: the codelet writes into the context, the gNB acts on it</text>
+  <circle class="tel" cx="24" cy="410" r="4.5"/>
+  <text x="36" y="414">telemetry hook: the codelet reads the context</text>
+  <line class="rep" x1="480" y1="388" x2="510" y2="388" marker-end="url(#hk-rep)"/>
+  <text x="518" y="392">reports</text>
+  <line class="act" x1="600" y1="388" x2="630" y2="388" marker-end="url(#hk-act)"/>
+  <text x="638" y="392">actions</text>
+</svg>

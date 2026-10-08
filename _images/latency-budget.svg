@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 300" width="820" height="300" role="img" aria-labelledby="lb-title lb-desc">
+  <title id="lb-title">The latency budget</title>
+  <desc id="lb-desc">Report to action latency at the bridge against one 0.5 ms slot, with 4 UEs and full buffers. The bridge alone, jbpf and jrtc without a muApp: median 51 microseconds, p99 90, and 99.9 to 100 percent of DL slots get their action in the exact TTI. Through the max-weight muApp: median 114, p99 193, 99.8 percent. Through the PPO muApp: median 248, p99 428, 98.1 percent.</desc>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #3e4c59; font-size: 14px; }
+    .l { font-size: 15px; font-weight: 700; fill: #1f2933; }
+    .m { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 12.5px; fill: #616e7c; }
+    .s { font-size: 13px; fill: #616e7c; }
+    .b { font-weight: 700; fill: #1f2933; }
+    .halo { paint-order: stroke; stroke: #ffffff; stroke-width: 5px; stroke-linejoin: round; }
+    .c { text-anchor: middle; }
+    .grid { stroke: #e4e7eb; stroke-width: 1; }
+    .axis { stroke: #9aa5b1; stroke-width: 1; }
+    .slot { stroke: #1f2933; stroke-width: 1.6; }
+    .p50 { fill: #c0561b; }
+    .p99 { fill: #f2c4ab; }
+  </style>
+
+  <rect width="820" height="300" fill="#ffffff"/>
+
+  <!-- key; x = 250 + 0.94 * microseconds -->
+  <rect class="p50" x="250" y="14" width="14" height="12" rx="2"/>
+  <text class="s" x="270" y="25">median (p50)</text>
+  <rect class="p99" x="368" y="14" width="14" height="12" rx="2"/>
+  <text class="s" x="388" y="25">p99</text>
+  <text class="b c" x="720" y="25">next slot</text>
+  <text class="b c" x="772" y="56">HIT</text>
+
+  <!-- grid, the 0 axis and the slot boundary at 500 us -->
+  <line class="grid" x1="344" y1="40" x2="344" y2="250"/>
+  <line class="grid" x1="438" y1="40" x2="438" y2="250"/>
+  <line class="grid" x1="532" y1="40" x2="532" y2="250"/>
+  <line class="grid" x1="626" y1="40" x2="626" y2="250"/>
+  <line class="axis" x1="250" y1="40" x2="250" y2="250"/>
+  <line class="slot" x1="720" y1="34" x2="720" y2="250"/>
+
+  <!-- bridge alone -->
+  <text class="l" x="16" y="88">Bridge alone</text>
+  <text class="s" x="16" y="107">jbpf + jrtc, no muApp</text>
+  <rect class="p99" x="250" y="72" width="84.6" height="22" rx="3"/>
+  <rect class="p50" x="250" y="72" width="47.9" height="22" rx="3"/>
+  <text class="m halo" x="255" y="114">p50 51 µs · p99 90 µs</text>
+  <text class="c" x="772" y="88">99.9–100 %</text>
+
+  <!-- max-weight -->
+  <text class="l" x="16" y="152">Max-weight</text>
+  <text class="s" x="16" y="171">muApp in edgeric-0</text>
+  <rect class="p99" x="250" y="136" width="181.4" height="22" rx="3"/>
+  <rect class="p50" x="250" y="136" width="107.2" height="22" rx="3"/>
+  <text class="m halo" x="255" y="178">p50 114 µs · p99 193 µs</text>
+  <text class="c" x="772" y="152">99.8 %</text>
+
+  <!-- PPO -->
+  <text class="l" x="16" y="216">PPO</text>
+  <text class="s" x="16" y="235">muApp in edgeric-0</text>
+  <rect class="p99" x="250" y="200" width="402.3" height="22" rx="3"/>
+  <rect class="p50" x="250" y="200" width="233.1" height="22" rx="3"/>
+  <text class="m halo" x="255" y="242">p50 248 µs · p99 428 µs</text>
+  <text class="c" x="772" y="216">98.1 %</text>
+
+  <!-- axis -->
+  <text class="m c" x="250" y="268">0</text>
+  <text class="m c" x="344" y="268">100</text>
+  <text class="m c" x="438" y="268">200</text>
+  <text class="m c" x="532" y="268">300</text>
+  <text class="m c" x="626" y="268">400</text>
+  <text class="m c" x="720" y="268">500 µs</text>
+  <text class="s" x="250" y="290">report → action at the bridge, against one 0.5 ms slot</text>
+</svg>

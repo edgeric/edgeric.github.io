@@ -1,0 +1,648 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="AI-driven muApp for RAN Scheduling" href="projects/qoe-networking.html"><link rel="prev" title="EdgeRIC: Enabling Real-Time AI-on-RAN systems" href="index.html">
+
+    <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+        <title>EdgeRIC with OCUDU-jbpf: System Design - EdgeRIC</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=5817fbd0" />
+    <link rel="stylesheet" type="text/css" href="_static/news.css?v=0615dc85" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #0066cc;
+  --color-brand-content: #0066cc;
+  --color-admonition-background: rgba(0, 102, 204, 0.1);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #4da6ff;
+  --color-brand-content: #4da6ff;
+  --color-admonition-background: rgba(77, 166, 255, 0.1);
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #4da6ff;
+  --color-brand-content: #4da6ff;
+  --color-admonition-background: rgba(77, 166, 255, 0.1);
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">EdgeRIC</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky">
+<div class="sidebar-brand">
+  <div class="sidebar-school-logos">
+    <img data-src="all_logos.png" alt="Partner Universities" class="sidebar-school-logo sidebar-school-logo-single">
+  </div>
+  <a href="index.html" class="sidebar-brand-text">EdgeRIC</a>
+</div><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">EdgeRIC with OCUDU-jbpf</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">EdgeRIC with OCUDU-jbpf: System Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Our Projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="projects/qoe-networking.html">AI-driven muApp for RAN Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/tiny-twin.html">Cellular Digital Twins: Plug and Play Channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/telemetry.html">SCOUT: Packet Centric Telemetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/multimodal-sensing.html">mmsRAN: Multimodal Uplink for Physical AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/robonest.html">RoboNEST: Edge Driven Robotics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/lens.html">LENS: Log Analysis Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects/other-muapps.html">Other μApps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Team</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="team.html">Team</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Demos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="demo.html">Demo</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC Events</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="open-ai-ran-tutorial.html">Open AI-RAN Tutorial</a><input aria-label="Toggle navigation of Open AI-RAN Tutorial" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/miscellaneous.html">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="oaic-workshop-2024.html">OAIC-EdgeRIC Workshop ‘24</a><input aria-label="Toggle navigation of OAIC-EdgeRIC Workshop ‘24" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="edgeric-workshop-tutorial.html">EdgeRIC tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="srsran-2024-workshop.html">srsRAN Workshop ‘24</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">5G Testbed</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="5g-testbed.html">5G Testbed</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Publications &amp; Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="edgeric.html">EdgeRIC main paper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beamarmor.html">BeamArmor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tiny-twin.html">Tiny Twin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="windex.html">Windex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparc.html">SPARC</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="open-ai-ran-tutorial.html">Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets</a><input aria-label="Toggle navigation of Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/miscellaneous.html">Miscellaneous</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Datasets</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dataset_page/edgeric-datasets.html">EdgeRIC Main Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataset_page/scout-dataset.html">Scout Dataset</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/yourusername/edgeric/blob/main/docs/edgeric-ocudu-jbpf.rst?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/yourusername/edgeric/edit/main/docs/edgeric-ocudu-jbpf.rst" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="edgeric-with-ocudu-jbpf-system-design">
+<h1>EdgeRIC with OCUDU-jbpf: System Design<a class="headerlink" href="#edgeric-with-ocudu-jbpf-system-design" title="Link to this heading">¶</a></h1>
+<p>EdgeRIC runs AI-in-the-loop control of the RAN at the TTI timescale. This release runs it on the OCUDU
+gNB instrumented with jbpf. Every slot, two jbpf hooks in the MAC scheduler carry the state of every UE
+out and the muApp’s action back in. jrt-controller (jrtc) moves them between the gNB and the muApps.
+The whole system runs on one server as a k3d (Kubernetes) cluster.</p>
+<p><strong>Code:</strong> <a class="reference external" href="https://github.com/ucsdwcsng/edgeric-ocudu-jbpf">edgeric-ocudu-jbpf</a> (branch <code class="docutils literal notranslate"><span class="pre">open-ai-ran-tutorial</span></code>).
+Guides: <a class="reference external" href="https://github.com/ucsdwcsng/edgeric-ocudu-jbpf/blob/open-ai-ran-tutorial/README.md">README</a> (build
+and deploy) and
+<a class="reference external" href="https://github.com/ucsdwcsng/edgeric-ocudu-jbpf/blob/open-ai-ran-tutorial/docs/edgeric-rt.md">edgeric-rt.md</a>
+(the loop and the muApps).</p>
+<section id="end-to-end-deployment-on-k3d">
+<h2>End-to-End Deployment on k3d<a class="headerlink" href="#end-to-end-deployment-on-k3d" title="Link to this heading">¶</a></h2>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/k3d-deployment.svg"><img alt="One k3d cluster on one host. Namespace open5gs runs the Open5GS core. Namespace ran runs pod srs-gnb-du1-0 with the OCUDU gNB, a C++ ZMQ broker and N OAI UEs; pod jrtc-0 with jrt-controller and its xApps; pod edgeric-0 with the EdgeRIC muApps; and VictoriaMetrics with Grafana. The gNB and jrtc share jbpf shared memory, and jrtc and edgeric-0 share Unix sockets." src="_images/k3d-deployment.svg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">One cluster, two namespaces, three RAN pods. Blue carries reports and telemetry out of the gNB, orange
+carries actions back in, the dashed purple line loads codelets and the dotted lines carry metrics.</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<ul>
+<li><p><strong>open5gs:</strong> the 5G core, from the Open5GS Helm chart. iperf3 servers on the UPF generate traffic.</p></li>
+<li><p><strong>ran:</strong> one Helm release (<code class="docutils literal notranslate"><span class="pre">jrtc-apps/containers/Helm</span></code>) creates three pods.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">srs-gnb-du1-0</span></code>: the OCUDU gNB with its jbpf agent, a C++ ZMQ broker and N Duranta OAI UEs, each
+UE in its own network namespace. They run as ephemeral containers and pass IQ samples over ZMQ
+<code class="docutils literal notranslate"><span class="pre">ipc://</span></code> sockets in place of radios. <code class="docutils literal notranslate"><span class="pre">srs-gnb-proxy</span></code> takes codelet loads on port 30450.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code>: jrt-controller with its stream router and Python xApps, plus <code class="docutils literal notranslate"><span class="pre">jrtc-decoder</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code>: the EdgeRIC muApps, with Python 3.12, numpy and PyTorch (CPU).</p></li>
+</ul>
+<p>VictoriaMetrics and Grafana (NodePort 30490) serve the dashboards.</p>
+</li>
+</ul>
+<p>The pods talk through host directories they share. The gNB and jrtc mount the same host directory as
+<code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code>, so jbpf’s shared memory spans both pods. jrtc and <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code> mount the same <code class="docutils literal notranslate"><span class="pre">run/</span></code>
+directory, which holds the Unix sockets between the bridge and the muApps. The xApps and muApps run
+straight from the repo checkout, mounted into the pods, so changing one needs no image rebuild.</p>
+</section>
+<section id="software-architecture">
+<h2>Software Architecture<a class="headerlink" href="#software-architecture" title="Link to this heading">¶</a></h2>
+<p>Four layers, from the gNB up: jbpf hooks in the gNB, the jrtc stream router, xApps on jrtc and the
+EdgeRIC muApps.</p>
+<section id="jbpf-hooks-in-the-ocudu-gnb">
+<h3>jbpf Hooks in the OCUDU gNB<a class="headerlink" href="#jbpf-hooks-in-the-ocudu-gnb" title="Link to this heading">¶</a></h3>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="_images/jbpf-hooks.svg"><img alt="Left, the gNB's 83 hooks by layer: CU-CP 19, PDCP 16, RLC 18, MAC scheduler 17 and FAPI and DU 13, five of them control hooks. Right, one slot of the MAC scheduler: slot_indication calls mac_sched_slot_ctrl, where rt_ctrl reads rt_act_in and writes the weights back; after scheduling, post_process_results calls mac_sched_slot_report, where rt_report writes the report to out_rt_report." src="_images/jbpf-hooks.svg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Left: the gNB’s hooks per layer. Right: one slot of the MAC scheduler, with the two EdgeRIC-RT hooks
+and their codelets.</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>A hook is a call site compiled into the gNB. When a codelet is attached to it, the gNB thread runs the
+codelet inline and passes it a pointer to a context struct. A codelet is eBPF: jbpf verifies it and
+JIT-compiles it when it is loaded, and codelets load and unload while the gNB runs. A codelet talks to
+jrtc through channels in shared memory. <code class="docutils literal notranslate"><span class="pre">jbpf_ringbuf_output()</span></code> writes to an output channel and
+<code class="docutils literal notranslate"><span class="pre">jbpf_control_input_receive()</span></code> reads an input channel. At a control hook the codelet also writes into
+the context, and the gNB acts on what it wrote.</p>
+<p>EdgeRIC-RT adds two hooks to the MAC scheduler (<code class="docutils literal notranslate"><span class="pre">intra_slice_scheduler</span></code>):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mac_sched_slot_ctrl</span></code>, a control hook, runs at the start of every slot. Its codelet <code class="docutils literal notranslate"><span class="pre">rt_ctrl</span></code>
+moves new actions from <code class="docutils literal notranslate"><span class="pre">rt_act_in</span></code> into a 16-entry ring indexed by target TTI. It hands the gNB an
+action only if one targets exactly this slot.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mac_sched_slot_report</span></code> runs once the slot is scheduled. Its codelet <code class="docutils literal notranslate"><span class="pre">rt_report</span></code> writes the
+1080-byte report to <code class="docutils literal notranslate"><span class="pre">out_rt_report</span></code>. The report holds RANtime, each UE’s CQI, backlog and grants,
+and the echo of the action applied in the slot.</p></li>
+</ul>
+<p>The codeletset <code class="docutils literal notranslate"><span class="pre">edgeric_rt.yaml</span></code> binds each codelet to its hook and declares its channels.
+<code class="docutils literal notranslate"><span class="pre">rt_wire.h</span></code> and its Python mirror <code class="docutils literal notranslate"><span class="pre">rt_wire.py</span></code> fix the byte layout of the report and the action.
+Building the codelets produces their eBPF objects and, for each output channel, a protobuf serializer
+and a ctypes module for Python xApps.</p>
+</section>
+<section id="jrtc-stream-router">
+<h3>jrtc Stream Router<a class="headerlink" href="#jrtc-stream-router" title="Link to this heading">¶</a></h3>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="_images/jrtc-router.svg"><img alt="Codelet output channels in the gNB pass through jbpf IO shared memory to jrtc's stream router, which queues each message for every app subscribed to its stream: the dashboard, upt and rt_bridge xApps. rt_bridge writes actions back into rt_ctrl's input channel rt_act_in. Below, the 16-byte stream ID: version, forward destination, device ID, a hash of the stream path and a hash of the channel name." src="_images/jrtc-router.svg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The router fans each output stream out to the apps that subscribed to it. The stream ID ties a
+channel to the codelet that owns it.</span><a class="headerlink" href="#id3" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>jrtc’s router thread reads the codelets’ output channels from jbpf’s shared memory. It puts each
+message on the queue of every app subscribed to that stream, without copying it, so one stream can
+feed many apps. Each app drains its own queue with <code class="docutils literal notranslate"><span class="pre">jrtc_router_receive()</span></code>. To reach a codelet, an
+app writes into the codelet’s input channel with <code class="docutils literal notranslate"><span class="pre">jrtc_router_channel_send_input_msg()</span></code>.</p>
+<p>A stream ID is 16 bytes. <code class="docutils literal notranslate"><span class="pre">jrtc-ctl</span></code> derives it when it loads a deployment, from the device, the
+stream path <code class="docutils literal notranslate"><span class="pre">&lt;deployment&gt;://jbpf_agent/&lt;codeletset&gt;/&lt;codelet&gt;</span></code> and the channel name.</p>
+</section>
+<section id="xapps-on-jrtc">
+<h3>xApps on jrtc<a class="headerlink" href="#xapps-on-jrtc" title="Link to this heading">¶</a></h3>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="_images/jrtc-xapps.svg"><img alt="A deployment YAML is loaded with jrtc-ctl load -c: the codelets go to the gNB's jbpf agent, the Python module to jrtc and the schemas to jrtc-decoder. Inside jrtc, an xApp stands on five layers: the xApp modules, the message layouts, the jrtc_app Python API, the ctypes bindings to the jrtc router library, and the jrtc runtime with its Python app loader." src="_images/jrtc-xapps.svg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Top: loading a deployment. Bottom: the Python packages an xApp stands on.</span><a class="headerlink" href="#id4" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>An xApp is a deployment YAML plus a Python module. <code class="docutils literal notranslate"><span class="pre">jrtc-ctl</span> <span class="pre">load</span> <span class="pre">-c</span> <span class="pre">&lt;yaml&gt;</span></code> loads the codelets
+into the gNB, the module into jrtc and the protobuf schemas into the decoder. jrtc runs each Python
+xApp in its own sub-interpreter and calls its <code class="docutils literal notranslate"><span class="pre">jrtc_start_app(capsule)</span></code>. There the xApp declares its
+streams with <code class="docutils literal notranslate"><span class="pre">JrtcStreamCfg_t</span></code> and its queue and timeouts with <code class="docutils literal notranslate"><span class="pre">JrtcAppCfg_t</span></code>. It then runs one of
+two ways:</p>
+<ul class="simple">
+<li><p><strong>Handler.</strong> <code class="docutils literal notranslate"><span class="pre">jrtc_app_create(...)</span></code>, then <code class="docutils literal notranslate"><span class="pre">JrtcApp.run()</span></code> calls
+<code class="docutils literal notranslate"><span class="pre">app_handler(timeout,</span> <span class="pre">stream_idx,</span> <span class="pre">data_entry,</span> <span class="pre">state)</span></code> for every message. The dashboard xApps work
+this way.</p></li>
+<li><p><strong>Own loop.</strong> <code class="docutils literal notranslate"><span class="pre">rt_bridge</span></code> subclasses <code class="docutils literal notranslate"><span class="pre">JrtcApp</span></code> and loops without sleeping. It calls
+<code class="docutils literal notranslate"><span class="pre">jrtc_router_receive()</span></code> and <code class="docutils literal notranslate"><span class="pre">jrtc_router_channel_send_input_msg()</span></code> directly, so a report leaves
+within microseconds.</p></li>
+</ul>
+<p>All Python xApps in jrtc share one GIL, so a heavy xApp delays the bridge. Keep the xApps that run
+next to the bridge light.</p>
+</section>
+<section id="edgeric-muapps">
+<h3>EdgeRIC muApps<a class="headerlink" href="#edgeric-muapps" title="Link to this heading">¶</a></h3>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="_images/edgeric-muapps.svg"><img alt="sched_muapp.py runs one pass per batch of reports: RtE2.poll, Policy.observe on every report, Policy.weights on the newest, RtE2.send to bridge.sock, then bookkeeping. Every scheduler implements Policy: Stock, Fixed, RoundRobin, PF, MaxCQI, BestCQI, MaxWeight and RL. train_ppo.py runs the same loop: the policy acts, SampleRing remembers each action by its sequence number, matches it to the report of its target TTI, and PPO.update learns from the samples." src="_images/edgeric-muapps.svg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Top: one pass of the scheduler muApp. Middle: the interface every scheduler implements. Bottom: how
+the PPO trainer learns from the same loop.</span><a class="headerlink" href="#id5" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>A muApp is a plain Python process in <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code>, so it can use numpy and PyTorch and never shares
+jrtc’s interpreter. Reports arrive on the Unix socket <code class="docutils literal notranslate"><span class="pre">muapp.sock</span></code> and actions go to <code class="docutils literal notranslate"><span class="pre">bridge.sock</span></code>.
+<code class="docutils literal notranslate"><span class="pre">edgeric_rt.rte2.RtE2</span></code> wraps both sockets:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">poll()</span></code> blocks until a report arrives, then drains the queue and returns every report newer than
+RICtime.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">send(rep,</span> <span class="pre">weights)</span></code> tags the action with the next DL slot after the report, and with a sequence
+number.</p></li>
+</ul>
+<p>A scheduler is a <code class="docutils literal notranslate"><span class="pre">Policy</span></code> with two methods. <code class="docutils literal notranslate"><span class="pre">observe(rep)</span></code> sees every report. <code class="docutils literal notranslate"><span class="pre">weights(rep)</span></code>
+returns a weight per UE for the newest one, or <code class="docutils literal notranslate"><span class="pre">None</span></code> to leave the slot to the gNB’s own scheduler.
+The muApp sends the action before it logs anything, since the action must reach the gNB within the
+slot.</p>
+<p>To train, <code class="docutils literal notranslate"><span class="pre">SampleRing</span></code> matches each action to the report of the slot it was applied in, which echoes
+its sequence number. State, action and reward therefore always belong to one TTI. PyTorch runs only
+for the PPO updates. Decisions run in numpy (<code class="docutils literal notranslate"><span class="pre">NumpyPolicy</span></code>), in about 70 µs.</p>
+</section>
+<section id="python-packages">
+<h3>Python Packages<a class="headerlink" href="#python-packages" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26.0%" />
+<col style="width: 21.0%" />
+<col style="width: 53.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Package or module</p></th>
+<th class="head"><p>Runs in</p></th>
+<th class="head"><p>Interface</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jrtc_app</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">JrtcApp</span></code>, <code class="docutils literal notranslate"><span class="pre">JrtcAppCfg_t</span></code>, <code class="docutils literal notranslate"><span class="pre">JrtcStreamCfg_t</span></code>, <code class="docutils literal notranslate"><span class="pre">JrtcStreamIdCfg_t</span></code>,
+<code class="docutils literal notranslate"><span class="pre">jrtc_app_create()</span></code>; <code class="docutils literal notranslate"><span class="pre">app_handler()</span></code> is called per message</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jrtc_router_lib</span></code>, <code class="docutils literal notranslate"><span class="pre">jrtc_bindings</span></code>, <code class="docutils literal notranslate"><span class="pre">jrtc_wrapper_utils</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code></p></td>
+<td><p>ctypes bindings to <code class="docutils literal notranslate"><span class="pre">libjrtc_router</span></code>: <code class="docutils literal notranslate"><span class="pre">jrtc_router_receive()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">jrtc_router_channel_send_input_msg()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rt_bridge_app.py</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code></p></td>
+<td><p>The bridge xApp: reports to <code class="docutils literal notranslate"><span class="pre">muapp.sock</span></code>, actions from <code class="docutils literal notranslate"><span class="pre">bridge.sock</span></code> into <code class="docutils literal notranslate"><span class="pre">rt_act_in</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rt_wire.py</span></code></p></td>
+<td><p>both</p></td>
+<td><p>The 1080-byte report and the 168-byte action: <code class="docutils literal notranslate"><span class="pre">decode_report()</span></code>, <code class="docutils literal notranslate"><span class="pre">encode_action()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">next_dl_tti()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">edgeric_rt.rte2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RtE2.poll()</span></code>, <code class="docutils literal notranslate"><span class="pre">RtE2.send()</span></code>, <code class="docutils literal notranslate"><span class="pre">SampleRing</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">edgeric_rt.policies</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Policy.weights()</span></code>, <code class="docutils literal notranslate"><span class="pre">Policy.observe()</span></code>, the schedulers, <code class="docutils literal notranslate"><span class="pre">SlotSelector</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">edgeric_rt.rl.ppo</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Observer</span></code>, <code class="docutils literal notranslate"><span class="pre">NumpyPolicy</span></code>, <code class="docutils literal notranslate"><span class="pre">PPO.update()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">edgeric_rt.metrics</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RunLog</span></code> (every TTI to <code class="docutils literal notranslate"><span class="pre">ttis.npz</span></code>), <code class="docutils literal notranslate"><span class="pre">VmPusher</span></code> (to VictoriaMetrics)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">edgeric_rt.ue_map</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">UeMap</span></code>: UE name to C-RNTI to <code class="docutils literal notranslate"><span class="pre">du_ue_index</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">muapps/</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sched_muapp.py</span></code>, <code class="docutils literal notranslate"><span class="pre">train_ppo.py</span></code>, <code class="docutils literal notranslate"><span class="pre">eval.py</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="edgeric-control-tti-by-tti">
+<h2>EdgeRIC Control, TTI by TTI<a class="headerlink" href="#edgeric-control-tti-by-tti" title="Link to this heading">¶</a></h2>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="_images/tti-timeline.svg"><img alt="Panel A, eight slots D D D D S U U D: every slot sends a report and the muApp answers with an action for the next DL slot, applied there as a HIT. A slow decision misses slot t+2, which runs the stock scheduler. The actions computed in S and U slots all target slot t+7, and the newest wins. Panel B, one TTI to scale: report at 22 microseconds, action 114 microseconds later with max-weight or 248 with PPO, then a wait of 328 or 214 microseconds for slot t+1." src="_images/tti-timeline.svg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">A: eight slots of the TDD pattern. B: one TTI to scale, with medians over about 120,000 TTIs per run
+(4 UEs, full buffer). Under ZMQ emulation the gNB starts a slot every 471 µs at the median; the TTI
+is 0.5 ms.</span><a class="headerlink" href="#id6" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p><strong>RANtime</strong> is the gNB’s slot counter, carried in every report. <strong>RICtime</strong> is the RANtime of the
+newest report the muApp has read.</p>
+<ul class="simple">
+<li><p>Every slot sends a report, UL slots included.</p></li>
+<li><p>The muApp tags each action with the first DL slot after its report. During S and U slots it
+refreshes the action for the next DL slot, and <code class="docutils literal notranslate"><span class="pre">rt_ctrl</span></code> keeps the newest.</p></li>
+<li><p>At the start of each slot, <code class="docutils literal notranslate"><span class="pre">rt_ctrl</span></code> applies an action only if one targets exactly this RANtime
+(a HIT). Otherwise the slot runs the gNB’s own scheduler, and an action that arrives after its slot
+is dropped.</p></li>
+<li><p>The report of the slot an action was applied in echoes the action’s sequence number. The reward,
+the DRB bytes scheduled in that slot, is therefore paired with the action that earned it.</p></li>
+<li><p>With no new report the muApp waits (Lazy RAN). If it falls behind, it acts on the newest report only
+(Lazy RIC).</p></li>
+</ul>
+<p>Measured with 4 UEs, the gNB sends the report 22 µs into the slot. Report to action takes 114 µs with
+max-weight (p99 193 µs) and 248 µs with PPO (p99 428 µs). With the bridge acting by itself, without a
+muApp, it takes 51 µs: the cost of jbpf and jrtc. The action then waits 328 or 214 µs for its slot.
+Max-weight’s action lands in its exact TTI in 99.8% of DL slots, and PPO’s in 98.1%. The rest run the
+gNB’s own scheduler.</p>
+<section id="latency-budget">
+<h3>Latency Budget<a class="headerlink" href="#latency-budget" title="Link to this heading">¶</a></h3>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="_images/latency-budget.svg"><img alt="Report-to-action latency at the bridge against one 0.5 ms slot. The bridge alone, jbpf and jrtc without a muApp: median 51 µs, p99 90 µs, and 99.9 to 100 % of DL slots get their action in the exact TTI. Through the max-weight muApp: median 114 µs, p99 193 µs, 99.8 %. Through the PPO muApp: median 248 µs, p99 428 µs, 98.1 %." src="_images/latency-budget.svg" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Report to action at the bridge, with 4 UEs and full buffers, against one 0.5 ms slot. HIT is the
+share of DL slots whose action was applied in its exact TTI.</span><a class="headerlink" href="#id7" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="projects/qoe-networking.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">AI-driven muApp for RAN Scheduling</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Ushasi Ghosh
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">EdgeRIC with OCUDU-jbpf: System Design</a><ul>
+<li><a class="reference internal" href="#end-to-end-deployment-on-k3d">End-to-End Deployment on k3d</a></li>
+<li><a class="reference internal" href="#software-architecture">Software Architecture</a><ul>
+<li><a class="reference internal" href="#jbpf-hooks-in-the-ocudu-gnb">jbpf Hooks in the OCUDU gNB</a></li>
+<li><a class="reference internal" href="#jrtc-stream-router">jrtc Stream Router</a></li>
+<li><a class="reference internal" href="#xapps-on-jrtc">xApps on jrtc</a></li>
+<li><a class="reference internal" href="#edgeric-muapps">EdgeRIC muApps</a></li>
+<li><a class="reference internal" href="#python-packages">Python Packages</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#edgeric-control-tti-by-tti">EdgeRIC Control, TTI by TTI</a><ul>
+<li><a class="reference internal" href="#latency-budget">Latency Budget</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=b32bce50"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/sidebar-brand-logos.js?v=577991cb"></script>
+    <script src="_static/news-sidebar.js?v=394020a7"></script>
+    <script src="_static/demo-video.js?v=f940bad2"></script>
+    <script src="_static/sidebar-clickable-titles.js?v=92accabe"></script>
+    <script src="_static/sidebar-expand-collapse.js?v=778dbc98"></script>
+    </body>
+</html>

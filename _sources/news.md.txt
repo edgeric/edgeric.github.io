@@ -1,4 +1,10 @@
 
+- **Oct 2026** - Release: EdgeRIC with OCUDU and jbpf codelets
+
+- **Oct 21–23, 2026** - OCUDU Workshop 2026: presenting demos in DC
+
+- **Oct 30, 2026** - Tutorial at the Open AI-RAN Workshop, MobiCom 2026
+
 - **Mar 2026** - EdgeRIC with srsRAN 25.10 release 
 
 - **Feb 2026** - Sushila and Ushasi attended HotMobile

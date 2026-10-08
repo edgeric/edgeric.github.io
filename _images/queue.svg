@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 206" width="780" height="206" role="img" aria-labelledby="bq-title bq-desc">
+  <title id="bq-title">One RLC queue, measured and limited by codelets</title>
+  <desc id="bq-desc">The UPF sends a video call and a download to one UE. Both wait in the gNB's downlink RLC queue for the UE's bearer. The upt telemetry codelets report the queue's latency and occupancy to Grafana; a control codelet on the rlc_dl_ctrl hook, bufcap or bufctl, sets the queue's limit.</desc>
+  <defs>
+    <marker id="bq-dl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#52606d"/></marker>
+    <marker id="bq-tel" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f6db5"/></marker>
+    <marker id="bq-ctl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0561b"/></marker>
+  </defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #3e4c59; font-size: 14px; text-anchor: middle; }
+    .t { font-size: 16px; font-weight: 700; fill: #1f2933; }
+    .ltel { fill: #2f6db5; font-weight: 700; }
+    .lctl { fill: #c0561b; font-weight: 700; }
+    .core { fill: #f1ecfa; stroke: #6b4fa3; stroke-width: 1.6; }
+    .ran { fill: #e8f1fb; stroke: #2f6db5; stroke-width: 1.6; }
+    .ue { fill: #f3f8f3; stroke: #4f8a55; stroke-width: 1.6; }
+    .q { fill: #ffffff; stroke: #2f6db5; stroke-width: 1.4; }
+    .pkt { fill: #7b93b0; }
+    .dl { stroke: #52606d; stroke-width: 2.2; fill: none; }
+    .tel { stroke: #2f6db5; stroke-width: 2.2; fill: none; }
+    .ctl { stroke: #c0561b; stroke-width: 2.2; fill: none; }
+    .lim { stroke: #c0561b; stroke-width: 2.4; stroke-dasharray: 5 3; }
+  </style>
+
+  <rect width="780" height="206" fill="#ffffff"/>
+
+  <text class="ltel" x="390" y="22">telemetry: upt codelets → Grafana (queuing latency, occupancy)</text>
+
+  <rect class="core" x="20" y="56" width="170" height="76" rx="10"/>
+  <text class="t" x="105" y="88">UPF</text>
+  <text x="105" y="110">call + download</text>
+
+  <rect class="ran" x="230" y="38" width="320" height="132" rx="10"/>
+  <text class="t" x="390" y="62">OCUDU gNB</text>
+  <rect class="q" x="270" y="78" width="240" height="32" rx="3"/>
+  <rect class="pkt" x="336" y="84" width="12" height="20" rx="2"/>
+  <rect class="pkt" x="352" y="84" width="12" height="20" rx="2"/>
+  <rect class="pkt" x="368" y="84" width="12" height="20" rx="2"/>
+  <rect class="pkt" x="384" y="84" width="12" height="20" rx="2"/>
+  <rect class="pkt" x="400" y="84" width="12" height="20" rx="2"/>
+  <rect class="pkt" x="416" y="84" width="12" height="20" rx="2"/>
+  <rect class="pkt" x="432" y="84" width="12" height="20" rx="2"/>
+  <rect class="pkt" x="448" y="84" width="12" height="20" rx="2"/>
+  <rect class="pkt" x="464" y="84" width="12" height="20" rx="2"/>
+  <rect class="pkt" x="480" y="84" width="12" height="20" rx="2"/>
+  <rect class="pkt" x="496" y="84" width="12" height="20" rx="2"/>
+  <line class="lim" x1="327" y1="70" x2="327" y2="118"/>
+  <text x="420" y="136">RLC DL queue</text>
+
+  <rect class="ue" x="590" y="56" width="170" height="76" rx="10"/>
+  <text class="t" x="675" y="88">UE</text>
+  <text x="675" y="110">one bearer</text>
+
+  <line class="dl" x1="192" y1="94" x2="266" y2="94" marker-end="url(#bq-dl)"/>
+  <line class="dl" x1="512" y1="94" x2="586" y2="94" marker-end="url(#bq-dl)"/>
+  <line class="tel" x1="470" y1="76" x2="470" y2="32" marker-end="url(#bq-tel)"/>
+  <line class="ctl" x1="327" y1="184" x2="327" y2="122" marker-end="url(#bq-ctl)"/>
+
+  <text class="lctl" x="390" y="200">control: bufcap or bufctl on rlc_dl_ctrl sets the limit</text>
+</svg>

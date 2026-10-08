@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     'Demos': 'our-demos',
     'EdgeRIC Events': 'edgeric-events',
     'Open Source Repositories': 'open-source-repositories',
+    'EdgeRIC with OCUDU-jbpf': 'open-source-repositories',
     '5G Testbed': '5g-testbed',
     'EdgeRIC Architecture': 'edgeric-architecture',
     'Publications & Tutorials': 'edgeric-tutorials',

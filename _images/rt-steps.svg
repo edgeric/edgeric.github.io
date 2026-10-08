@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 340" width="780" height="340" role="img">
+  <title>Real time with 4 UEs after each update</title>
+  <desc>Percent of real time with 4 UEs under full load: start 66 to 69, then 77, 81.5, 85, 97 to 99 and 100.</desc>
+  <style>text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #52606d; font-size: 13px; }</style>
+  <rect width="780" height="340" fill="#ffffff"/>
+  <text x="16.0" y="28.0" style="font-size:14px;fill:#1f2933;font-weight:700" text-anchor="start">Real time, 4 UEs under full load</text>
+  <text x="16.0" y="46.0" style="font-size:12.5px;fill:#7b8794;font-weight:400" text-anchor="start">% of 23.04 MS/s moved through the ZMQ chain</text>
+  <line x1="64.0" y1="250.0" x2="764.0" y2="250.0" stroke="#9aa5b1" stroke-width="1"/>
+  <text x="56.0" y="254.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="end">0</text>
+  <line x1="64.0" y1="203.5" x2="764.0" y2="203.5" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="56.0" y="207.5" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="end">25</text>
+  <line x1="64.0" y1="157.0" x2="764.0" y2="157.0" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="56.0" y="161.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="end">50</text>
+  <line x1="64.0" y1="110.5" x2="764.0" y2="110.5" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="56.0" y="114.5" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="end">75</text>
+  <line x1="64.0" y1="64.0" x2="764.0" y2="64.0" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="56.0" y="68.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="end">100</text>
+  <path d="M110.3,250.0 V128.4 A4,4 0 0 1 114.3,124.5 H130.3 A4,4 0 0 1 134.3,128.4 V250.0 Z" fill="#2a78d6"/>
+  <text x="122.3" y="117.5" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="middle">66–69 %</text>
+  <text x="122.3" y="276.0" style="font-size:12.5px;fill:#1f2933;font-weight:700" text-anchor="middle">Start</text>
+  <text x="122.3" y="300.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">GNU Radio broker,</text>
+  <text x="122.3" y="316.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">TCP links</text>
+  <path d="M227.0,250.0 V110.8 A4,4 0 0 1 231.0,106.8 H247.0 A4,4 0 0 1 251.0,110.8 V250.0 Z" fill="#2a78d6"/>
+  <text x="239.0" y="99.8" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="middle">77 %</text>
+  <circle cx="239.0" cy="272.0" r="10" fill="#1f2933"/>
+  <text x="239.0" y="276.5" style="font-size:12.5px;fill:#ffffff;font-weight:700" text-anchor="middle">1</text>
+  <text x="239.0" y="300.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">SCHED_FIFO,</text>
+  <text x="239.0" y="316.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">one NUMA node</text>
+  <path d="M343.7,250.0 V102.4 A4,4 0 0 1 347.7,98.4 H363.7 A4,4 0 0 1 367.7,102.4 V250.0 Z" fill="#2a78d6"/>
+  <text x="355.7" y="91.4" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="middle">81.5 %</text>
+  <circle cx="355.7" cy="272.0" r="10" fill="#1f2933"/>
+  <text x="355.7" y="276.5" style="font-size:12.5px;fill:#ffffff;font-weight:700" text-anchor="middle">2</text>
+  <text x="355.7" y="300.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">DL 8 slots ahead,</text>
+  <text x="355.7" y="316.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">DL-only pacing</text>
+  <path d="M460.3,250.0 V95.9 A4,4 0 0 1 464.3,91.9 H480.3 A4,4 0 0 1 484.3,95.9 V250.0 Z" fill="#2a78d6"/>
+  <text x="472.3" y="84.9" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="middle">85 %</text>
+  <circle cx="472.3" cy="272.0" r="10" fill="#1f2933"/>
+  <text x="472.3" y="276.5" style="font-size:12.5px;fill:#ffffff;font-weight:700" text-anchor="middle">3</text>
+  <text x="472.3" y="300.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">ipc:// to UEs</text>
+  <path d="M577.0,250.0 V71.7 A4,4 0 0 1 581.0,67.7 H597.0 A4,4 0 0 1 601.0,71.7 V250.0 Z" fill="#2a78d6"/>
+  <text x="589.0" y="60.7" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="middle">97–99 %</text>
+  <circle cx="589.0" cy="272.0" r="10" fill="#1f2933"/>
+  <text x="589.0" y="276.5" style="font-size:12.5px;fill:#ffffff;font-weight:700" text-anchor="middle">4</text>
+  <text x="589.0" y="300.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">C++ broker</text>
+  <path d="M693.7,250.0 V68.0 A4,4 0 0 1 697.7,64.0 H713.7 A4,4 0 0 1 717.7,68.0 V250.0 Z" fill="#2a78d6"/>
+  <text x="705.7" y="57.0" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="middle">100 %</text>
+  <circle cx="705.7" cy="272.0" r="10" fill="#1f2933"/>
+  <text x="705.7" y="276.5" style="font-size:12.5px;fill:#ffffff;font-weight:700" text-anchor="middle">5</text>
+  <text x="705.7" y="300.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">ipc:// to gNB</text>
+</svg>

@@ -1,0 +1,1035 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Demo 3: TCP Flow Optimization with Real-Time Buffer Management" href="demo3-buffer-management.html"><link rel="prev" title="Demo 1: Cellular Digital Twin" href="demo1-plug-and-play-channels.html">
+
+    <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+        <title>Demo 2: AI-Driven Scheduling - EdgeRIC</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=5817fbd0" />
+    <link rel="stylesheet" type="text/css" href="../_static/news.css?v=0615dc85" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #0066cc;
+  --color-brand-content: #0066cc;
+  --color-admonition-background: rgba(0, 102, 204, 0.1);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #4da6ff;
+  --color-brand-content: #4da6ff;
+  --color-admonition-background: rgba(77, 166, 255, 0.1);
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #4da6ff;
+  --color-brand-content: #4da6ff;
+  --color-admonition-background: rgba(77, 166, 255, 0.1);
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">EdgeRIC</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky">
+<div class="sidebar-brand">
+  <div class="sidebar-school-logos">
+    <img data-src="all_logos.png" alt="Partner Universities" class="sidebar-school-logo sidebar-school-logo-single">
+  </div>
+  <a href="../index.html" class="sidebar-brand-text">EdgeRIC</a>
+</div><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">EdgeRIC with OCUDU-jbpf</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../edgeric-ocudu-jbpf.html">EdgeRIC with OCUDU-jbpf: System Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Our Projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../projects/qoe-networking.html">AI-driven muApp for RAN Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/tiny-twin.html">Cellular Digital Twins: Plug and Play Channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/telemetry.html">SCOUT: Packet Centric Telemetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/multimodal-sensing.html">mmsRAN: Multimodal Uplink for Physical AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/robonest.html">RoboNEST: Edge Driven Robotics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/lens.html">LENS: Log Analysis Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/other-muapps.html">Other μApps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Team</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../team.html">Team</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Demos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../demo.html">Demo</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC Events</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../open-ai-ran-tutorial.html">Open AI-RAN Tutorial</a><input aria-label="Toggle navigation of Open AI-RAN Tutorial" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Demo 2: AI-Driven Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../oaic-workshop-2024.html">OAIC-EdgeRIC Workshop ‘24</a><input aria-label="Toggle navigation of OAIC-EdgeRIC Workshop ‘24" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../edgeric-workshop-tutorial.html">EdgeRIC tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../srsran-2024-workshop.html">srsRAN Workshop ‘24</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">5G Testbed</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../5g-testbed.html">5G Testbed</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Publications &amp; Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../edgeric.html">EdgeRIC main paper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../beamarmor.html">BeamArmor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tiny-twin.html">Tiny Twin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../windex.html">Windex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sparc.html">SPARC</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../open-ai-ran-tutorial.html">Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets</a><input aria-label="Toggle navigation of Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Demo 2: AI-Driven Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Datasets</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataset_page/edgeric-datasets.html">EdgeRIC Main Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataset_page/scout-dataset.html">Scout Dataset</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/yourusername/edgeric/blob/main/docs/open-ai-ran-tutorial/demo2-ai-scheduling.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/yourusername/edgeric/edit/main/docs/open-ai-ran-tutorial/demo2-ai-scheduling.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="demo-2-ai-driven-scheduling">
+<h1>Demo 2: AI-Driven Scheduling<a class="headerlink" href="#demo-2-ai-driven-scheduling" title="Link to this heading">¶</a></h1>
+<p>EdgeRIC-RT puts a scheduler muApp in the gNB’s loop every TTI. With four UEs, you switch schedulers
+while you watch Grafana, then train a PPO scheduler online.</p>
+<div class="info-box docutils container">
+<ul class="simple">
+<li><p><strong>Before you start:</strong> Parts 1 and 2 of the <a class="reference internal" href="../open-ai-ran-tutorial.html"><span class="std std-doc">tutorial</span></a>.</p></li>
+<li><p><strong>Design:</strong> <a class="reference internal" href="../edgeric-ocudu-jbpf.html"><span class="doc">EdgeRIC with OCUDU-jbpf: System Design</span></a> (the hooks, jrtc and the TTI timeline) and
+<a class="reference internal" href="../projects/qoe-networking.html"><span class="doc">AI-driven muApp for RAN Scheduling</span></a> (the scheduling loop and the policies).</p></li>
+<li><p><strong>Runtime:</strong> about 20 minutes.</p></li>
+</ul>
+</div>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/loop.svg"><img alt="Every TTI the OCUDU gNB's MAC scheduler sends each UE's CQI and backlog to rt_bridge in jrtc, which passes it to the scheduler muApp; the muApp's per-UE weights travel back the same way, and the gNB applies them in exactly the next DL slot" src="../_images/loop.svg" style="width: 100%;" />
+</a>
+</figure>
+<section id="run-the-system">
+<h2>1. Run the System<a class="headerlink" href="#run-the-system" title="Link to this heading">¶</a></h2>
+<p>Open four terminals on the testbed host.</p>
+<section id="terminal-1-ran">
+<h3>Terminal 1: RAN<a class="headerlink" href="#terminal-1-ran" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
+bash<span class="w"> </span>scripts/setup_zmq_chan_demo.sh<span class="w"> </span><span class="m">4</span><span class="w"> </span>--ran<span class="w"> </span>--edgeric
+</pre></div>
+</div>
+<p>The script stops everything still running, provisions four subscribers in the core, restarts <code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code>
+with the EdgeRIC-RT codelets and the <code class="docutils literal notranslate"><span class="pre">rt_bridge</span></code> xApp, starts the broker for four UEs and the gNB, and
+then shows the gNB console. It takes about 2 minutes; start Terminal 2 when the console appears.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>== [1/7] stop everything ==
+    UPF iperf3 stopped
+    UE iperf3 stopped
+    tcp_probe stopped
+    UE stopped (live now: 0)
+    gNB stopped; log truncated (was 8.0K)
+    broker stopped
+  ues stopped
+  broker stopped
+== [2/7] core: IMSIs 999700000000001..999700000000004 ==
+  provisioned (0 added)
+== [3/7] fresh jrtc-0 (clean app registry + jbpf IPC peer) ==
+  jrtc-0 ready
+== [4/7] stage broker, UE and gNB configs; netns for 4 UE(s) ==
+  ue1: pod 10.201.1.1 &lt;-&gt; netns 10.201.1.2
+  ue2: pod 10.201.2.1 &lt;-&gt; netns 10.201.2.2
+  ue3: pod 10.201.3.1 &lt;-&gt; netns 10.201.3.2
+  ue4: pod 10.201.4.1 &lt;-&gt; netns 10.201.4.2
+== [5/7] broker (4 UE) ==
+  [broker] C++ single-thread, gNB tx ipc:///tmp/zmq/gnb_tx -&gt; 4 UE(s) -&gt; gNB rx ipc:///tmp/zmq/gnb_rx
+  [broker] gNB receiver noise -65.0 dBFS
+  [broker]   UE1: rx ipc:///tmp/zmq/ue1_rx  tx ipc:///tmp/zmq/ue1_tx  (DL +0.0 dB, UL +0.0 dB)
+  [broker]   UE2: rx ipc:///tmp/zmq/ue2_rx  tx ipc:///tmp/zmq/ue2_tx  (DL +0.0 dB, UL +0.0 dB)
+  [broker]   UE3: rx ipc:///tmp/zmq/ue3_rx  tx ipc:///tmp/zmq/ue3_tx  (DL +0.0 dB, UL +0.0 dB)
+  [broker]   UE4: rx ipc:///tmp/zmq/ue4_rx  tx ipc:///tmp/zmq/ue4_tx  (DL +0.0 dB, UL +0.0 dB)
+  [broker] running (chunk 11520, queue 23040, pacing DL at srate)
+== [6/7] gNB (broker mode, dynamic pod-IP NG-U bind) ==
+  gnb tx_port=ipc:///proc/52540/root/tmp/zmq/gnb_tx
+  gnb started (bind=10.42.0.92)
+  gnb procs=1 ngsetup=1
+  == bridge.conf: inline=off lead=1 cpu=- fifo=0 ==
+  == codelets -&gt; srs-gnb-du1-0/ocudujbpf:/codelets/edgeric_rt ==
+  == jbpf LCM forwarder in jrtc-0 ==
+    fwd: fwd 127.0.0.1:30450 -&gt; ('srs-gnb-du1-proxy.ran.svc.cluster.local', 30450)
+  == load /apps/edgeric_rt/rt_deployment.yaml ==
+    jrtc: Running Python script: /apps/edgeric_rt/rt_bridge_app.py
+    jrtc: Calling Python function /apps/edgeric_rt/rt_bridge_app.py...
+    jrtc: [rt_bridge] starting, conf={'inline': 'off', 'lead': '1', 'cpu': '', 'fifo': '0', 'stats_s': '5'}
+    jrtc: 2026-10-08 04:57:39 - jrtc_app - INFO - b'rt_bridge':: App initialization started
+    jrtc: 2026-10-08 04:57:39 - jrtc_app - INFO - b'rt_bridge':: App initialization completed successfully
+    jrtc: [rt_bridge] running: inline=off lead=1 run_dir=/apps/edgeric_rt/run
+
+RAN UP. Broker for 4 UE(s); gNB connected to the AMF.
+  UEs     : bash scripts/setup_zmq_chan_demo.sh 4 --ues [--channel FILE | --traces FILE]   (another terminal)
+  console : bash scripts/gnb_console.sh
+
+--== OCUDU gNB (commit ) ==--
+
+Lower PHY in executor sequential baseband mode.
+Available radio types: zmq and realtime_loopback.
+Cell pci=1, bw=20 MHz, 1T1R, dl_arfcn=632628 (n78), dl_freq=3489.42 MHz, dl_ssb_arfcn=632256, ul_freq=3489.42 MHz
+
+N2: Connection to AMF on open5gs-amf-ngap.open5gs.svc.cluster.local:38412 completed
+Remote control server listening on 127.0.0.1:55555
+==== gNB started ===
+Type &lt;h&gt; to view help
+</pre></div>
+</div>
+<p>Once the UEs attach (Terminal 2) and traffic flows (Terminal 3), the console prints one row per UE
+every second: on the DL side the CQI, MCS, bit rate (<code class="docutils literal notranslate"><span class="pre">brate</span></code>), HARQ acks and the backlog (<code class="docutils literal notranslate"><span class="pre">dl_bs</span></code>):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>          |--------------------DL---------------------|-------------------------------UL-----------------------------
+ pci rnti | cqi  ri  mcs  brate   ok  nok  (%)  dl_bs | pusch  rsrp  ri  mcs  brate   ok  nok  (%)    bsr     ta  phr
+   1 4601 |   7 1.0    4   1.9M  288   22   7%  6.18M |  24.7 -36.7   1   23   104k   24    3  11%      0   261n   38
+   1 4602 |   5 1.0    1   1.1M  466    0   0%  6.18M |  24.6 -36.7   1   22  96.3k   22    0   0%      0   260n   38
+   1 4603 |  15 1.0   18   4.2M  140    0   0%  6.18M |  24.4 -36.7   1   22   103k   23    0   0%      0   261n   38
+   1 4604 |   5 1.0    1   1.2M  484    0   0%  6.17M |  25.3 -35.7   1   25   107k   24    0   0%      0   261n   38
+   1 4601 |   5 1.0    1   1.2M  543    0   0%  6.18M |  24.5 -36.7   1   22   101k   23    0   0%      0   260n   38
+   1 4602 |   7 1.0    4   2.4M  353   15   4%  6.17M |  24.5 -36.7   1   23   112k   25    1   3%      0   261n   38
+   1 4603 |  15 1.0   19   4.9M  155    0   0%  6.17M |  24.7 -36.7   1   23   100k   23    0   0%      0   260n   38
+   1 4604 |   7 1.0    4   2.3M  303   31   9%  6.18M |  25.3 -35.8   1   25   103k   23    0   0%      0   260n   38
+</pre></div>
+</div>
+<p>Ctrl-C leaves the console and the RAN keeps running; <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/gnb_console.sh</span></code> reopens it.</p>
+</section>
+<section id="terminal-2-ues">
+<h3>Terminal 2: UEs<a class="headerlink" href="#terminal-2-ues" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
+bash<span class="w"> </span>scripts/setup_zmq_chan_demo.sh<span class="w"> </span><span class="m">4</span><span class="w"> </span>--ues<span class="w"> </span>--traces<span class="w"> </span>duranta-oai-ue/ue_traces_cqi_4ue.conf
+bash<span class="w"> </span>scripts/ue_rnti_map.sh<span class="w"> </span><span class="m">4</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--ues</span></code> starts the four UEs against Terminal 1’s broker and gNB and waits until every UE attaches,
+about 20 s. Each UE then starts its CQI walk at the same instant: <code class="docutils literal notranslate"><span class="pre">ue_traces_cqi_4ue.conf</span></code> gives every UE
+an independent walk over CQI 4–15, so the best UE keeps changing. <code class="docutils literal notranslate"><span class="pre">ue_rnti_map.sh</span></code> maps <code class="docutils literal notranslate"><span class="pre">ue1</span></code>..<code class="docutils literal notranslate"><span class="pre">ue4</span></code> to
+their C-RNTIs, so the muApps and the dashboard can name the UEs. The UEs join a RAN once: to restart
+them, restart Terminal 1, then run <code class="docutils literal notranslate"><span class="pre">--ues</span></code> again.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  traces from attach: ue1 cqi_walk_1  ue2 cqi_walk_2  ue3 cqi_walk_3  ue4 cqi_walk_4
+== [1-6/7] the RAN of the last --ran ==
+  broker pid 52540 for 4 UE(s), UL noise -65; gNB up; telemetry off
+== [7/7] 4 UE(s) ==
+  ue1: IMSI 999700000000001  chan: distance=50,speed=0,min_distance=40,max_distance=60,dl_snr_ref=30,ul_snr_ref=30,seed=1,jitter_db=0,trace_ctl=/tmp/traces/ue1.ctl,ul_noise_dbfs=-65
+  ue2: IMSI 999700000000002  chan: distance=50,speed=0,min_distance=40,max_distance=60,dl_snr_ref=30,ul_snr_ref=30,seed=2,jitter_db=0,trace_ctl=/tmp/traces/ue2.ctl,ul_noise_dbfs=-65
+  ue3: IMSI 999700000000003  chan: distance=50,speed=0,min_distance=40,max_distance=60,dl_snr_ref=30,ul_snr_ref=30,seed=3,jitter_db=0,trace_ctl=/tmp/traces/ue3.ctl,ul_noise_dbfs=-65
+  ue4: IMSI 999700000000004  chan: distance=50,speed=0,min_distance=40,max_distance=60,dl_snr_ref=30,ul_snr_ref=30,seed=4,jitter_db=0,trace_ctl=/tmp/traces/ue4.ctl,ul_noise_dbfs=-65
+  tune: gnb + broker threads SCHED_FIFO; gnb, broker, UEs on CPUs 16-31,48-63
+
+################ verify ################
+  ue1 ip=10.45.0.74  t 6.0 s, d 50.0 m, DL SNR 30.0 dB (ref -27.3 dBFS), UL SNR 30.0 dB, UL gain 8.4 dB
+  ue2 ip=10.45.0.76  t 6.0 s, d 50.0 m, DL SNR 30.0 dB (ref -27.3 dBFS), UL SNR 30.0 dB, UL gain 8.4 dB
+  ue3 ip=10.45.0.73  t 6.0 s, d 50.0 m, DL SNR 30.0 dB (ref -27.3 dBFS), UL SNR 30.0 dB, UL gain 8.4 dB
+  ue4 ip=10.45.0.75  t 6.0 s, d 50.0 m, DL SNR 30.0 dB (ref -27.3 dBFS), UL SNR 30.0 dB, UL gain 9.4 dB
+
+== traces: duranta-oai-ue/ue_traces_cqi_4ue.conf ==
+  copied cqi_walk_1.csv
+  copied cqi_walk_2.csv
+  copied cqi_walk_3.csv
+  copied cqi_walk_4.csv
+ue1 -&gt; cqi_walk_1
+ue2 -&gt; cqi_walk_2
+ue3 -&gt; cqi_walk_3
+ue4 -&gt; cqi_walk_4
+  at t 7.0 s: ue1, ue2, ue3, ue4 switch at t 10.0 s
+    ue1: trace cqi_walk_1 (3000 rows, looping) from t 10.0 s (set at t 8.0 s)
+    ue2: trace cqi_walk_2 (3000 rows, looping) from t 10.0 s (set at t 8.0 s)
+    ue3: trace cqi_walk_3 (3000 rows, looping) from t 10.0 s (set at t 8.0 s)
+    ue4: trace cqi_walk_4 (3000 rows, looping) from t 10.0 s (set at t 7.9 s)
+  now:
+    ue1: t 11.0 s, trace cqi_walk_1 row 9 (T 10.0 s), DL SNR 4.0 dB (ref -27.3 dBFS), UL SNR 20.0 dB, UL gain -1.6 dB
+    ue2: t 11.0 s, trace cqi_walk_2 row 9 (T 10.0 s), DL SNR 10.5 dB (ref -27.3 dBFS), UL SNR 20.0 dB, UL gain -1.6 dB
+    ue3: t 11.0 s, trace cqi_walk_3 row 9 (T 10.0 s), DL SNR 1.4 dB (ref -27.3 dBFS), UL SNR 20.0 dB, UL gain -1.6 dB
+    ue4: t 11.0 s, trace cqi_walk_4 row 9 (T 10.0 s), DL SNR 2.0 dB (ref -27.3 dBFS), UL SNR 20.0 dB, UL gain -0.6 dB
+
+SETUP DONE. 4 UE(s) attached.
+  traffic : bash scripts/traffic_nue.sh start     (DL iperf3, UPF -&gt; every UE)
+  rates   : bash scripts/traffic_nue.sh status    (per-UE + total, measured at the UE)
+  channel : kubectl exec -n ran srs-gnb-du1-0 -c durue1 -- grep 'ZMQ chan' /tmp/ues/ue1.log | tail
+  traces  : bash scripts/trace_ctl.sh status | set &lt;ues&gt; &lt;trace&gt; | stop &lt;ues&gt; | list
+  stop    : bash scripts/traffic_nue.sh stop &amp;&amp; bash scripts/stop_demo.sh
+ue1 0x4601
+ue2 0x4602
+ue3 0x4603
+ue4 0x4604
+wrote &lt;your clone of edgeric-ocudu-jbpf&gt;/jrtc-apps/jrtc_apps/edgeric_rt/run/ue_map.txt
+</pre></div>
+</div>
+</section>
+<section id="terminal-3-traffic">
+<h3>Terminal 3: Traffic<a class="headerlink" href="#terminal-3-traffic" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
+bash<span class="w"> </span>scripts/traffic_nue.sh<span class="w"> </span>start<span class="w"> </span>--udp<span class="w"> </span>100M
+watch<span class="w"> </span>-n<span class="w"> </span><span class="m">2</span><span class="w"> </span>bash<span class="w"> </span>scripts/traffic_nue.sh<span class="w"> </span>status
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ue1: DL started  UPF -&gt; 10.45.0.74:5201  (udp 100M, 3600s)
+ue2: DL started  UPF -&gt; 10.45.0.76:5202  (udp 100M, 3600s)
+ue3: DL started  UPF -&gt; 10.45.0.73:5203  (udp 100M, 3600s)
+ue4: DL started  UPF -&gt; 10.45.0.75:5204  (udp 100M, 3600s)
+Give TCP ~10 s to ramp, then: bash scripts/traffic_nue.sh status
+
+  ue1        1.9 Mbit/s  loss 98.1%  (mean of last 10 s at the UE)
+  ue2        4.3 Mbit/s  loss 95.7%  (mean of last 10 s at the UE)
+  ue3        4.7 Mbit/s  loss 95.2%  (mean of last 10 s at the UE)
+  ue4        2.4 Mbit/s  loss 97.6%  (mean of last 10 s at the UE)
+  total     13.3 Mbit/s
+</pre></div>
+</div>
+</section>
+<section id="terminal-4-grafana">
+<h3>Terminal 4: Grafana<a class="headerlink" href="#terminal-4-grafana" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
+bash<span class="w"> </span>scripts/dashboard_realtime_scheduling.sh<span class="w"> </span>load
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>== codelet -&gt; srs-gnb-du1-0/ocudujbpf:/codelets/dashboard_realtime_scheduling ==
+== jbpf LCM forwarder in jrtc-0 ==
+  fwd30450.py already running
+== load /apps/dashboard_realtime_scheduling/deployment.yaml ==
+  gnb: 2026-10-08T05:00:19.487221Z [JBPF][CORE][INFO]: Codelet created and loaded successfully: rts_stats
+  jrtc: [rts] writing to http://victoria-metrics.ran.svc.cluster.local:8428/write; UE names from /apps/edgeric_rt/run/ue_map.txt; core events on udp 127.0.0.1:30503
+  jrtc: [rts] /apps/edgeric_rt/run/ue_map.txt: 4 UEs
+== UE names ==
+  ue1 0x4601
+  ue2 0x4602
+  ue3 0x4603
+  ue4 0x4604
+  wrote &lt;your clone of edgeric-ocudu-jbpf&gt;/jrtc-apps/jrtc_apps/edgeric_rt/run/ue_map.txt
+  UE 1  IMSI 999700000000001  IP 10.45.0.74   RAN_UE_NGAP_ID 0  AMF_UE_NGAP_ID 72
+  UE 2  IMSI 999700000000002  IP 10.45.0.76   RAN_UE_NGAP_ID 2  AMF_UE_NGAP_ID 74
+  UE 3  IMSI 999700000000003  IP 10.45.0.73   RAN_UE_NGAP_ID 1  AMF_UE_NGAP_ID 73
+  UE 4  IMSI 999700000000004  IP 10.45.0.75   RAN_UE_NGAP_ID 3  AMF_UE_NGAP_ID 75
+  -&gt; 4 core events to the dashboard xApps (jrtc-0, udp 127.0.0.1:30502 dashboard, :30503 dashboard-realtime-scheduling)
+== Grafana ==
+  grafana-upt-dashboard/rt-scheduling-dashboard.json updated (Grafana picks it up within 1-2 min)
+== tcp_probe (TCP, tcpdump on the UPF) and ue_rx_probe (UDP, the UE receivers' logs) ==
+  tcp_probe started (--map 10.45.0.74=1,10.45.0.76=2,10.45.0.73=3,10.45.0.75=4): [tcp_probe] capturing on open5gs-upf-59bcf7bbb8-v7djt:ogstun
+  ue_rx_probe already running (434770)
+Dashboard: http://localhost:30490/d/rt-scheduling
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">load</span></code> puts the <code class="docutils literal notranslate"><span class="pre">rts_stats</span></code> codelet on the <code class="docutils literal notranslate"><span class="pre">mac_sched_slot_report</span></code> hook and its xApp in <code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code>, names
+the UEs from the core down to their C-RNTIs, and starts the probes that measure what the UEs receive.
+Open <a class="reference external" href="http://localhost:30490/d/rt-scheduling">http://localhost:30490/d/rt-scheduling</a> (“EdgeRIC real-time scheduling”). From a laptop, forward
+the port first: <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-N</span> <span class="pre">-L</span> <span class="pre">30490:localhost:30490</span> <span class="pre">&lt;user&gt;&#64;&lt;testbed-host&gt;</span></code>.</p>
+<figure class="align-default" id="id1">
+<a class="reference external image-reference" href="../_images/grafana-gnb-scheduler.png"><img alt="The EdgeRIC real-time scheduling dashboard with the gNB's own scheduler in charge: the UE identity table for four UEs, a gray scheduler strip, four CQI walks between 5 and 15, full DL backlogs of 6.2 MB and about 14 Mbit/s of cell throughput" src="../_images/grafana-gnb-scheduler.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The dashboard before any muApp runs.</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>Top row:</strong> each UE from the core (IMSI, IP) down to the gNB (C-RNTI), the scheduler in charge, the
+share of TTIs a muApp ran, and the cell’s DL throughput at the gNB and as received.</p></li>
+<li><p><strong>Per UE:</strong> the CQI walks, the DL backlog (full at 6.2 MB), and the DL throughput, received and at the
+gNB. The thick gray line is the mean under the gNB’s own scheduler.</p></li>
+</ul>
+</section>
+</section>
+<section id="scheduling-muapps">
+<h2>2. Scheduling muApps<a class="headerlink" href="#scheduling-muapps" title="Link to this heading">¶</a></h2>
+<section id="terminal-5-scheduler-muapp">
+<h3>Terminal 5: Scheduler muApp<a class="headerlink" href="#terminal-5-scheduler-muapp" title="Link to this heading">¶</a></h3>
+<p>Open a fifth terminal, and keep Terminal 2 free for channel changes
+(<a class="reference internal" href="demo1-plug-and-play-channels.html"><span class="std std-doc">Demo 1</span></a>’s <code class="docutils literal notranslate"><span class="pre">trace_ctl.sh</span></code>). The muApp runs in pod <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code>: start
+a scheduler, follow its log, then switch it live while you watch Grafana.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
+bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>start<span class="w"> </span>sched<span class="w"> </span>--scheduler<span class="w"> </span>maxweight<span class="w"> </span>--tag<span class="w"> </span>demo2-sched
+bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>logs<span class="w"> </span>sched<span class="w">      </span><span class="c1"># Ctrl-C stops following; the muApp keeps running</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>started sched (pid 15979)
+[sched] maxweight | alloc single | lead 1 | strict | hold 0 | min-share 0.02 | reports from /apps/edgeric_rt/run/muapp.sock | run demo2-sched
+[sched maxweight] tti=379461 |  29.1 Mbps (ue1   1.0 ue2   1.1 ue3  27.0 ue4   0.0) | DL HIT  99.7% of 7000 | report-&gt;action p50 122 p99 213 us | slack p1 56 us | RB use 1.05 | lazy-RIC 41 lost 9
+[sched maxweight] tti=389461 |  40.4 Mbps (ue1   0.0 ue2  36.9 ue3   3.5 ue4   0.0) | DL HIT  99.9% of 7000 | report-&gt;action p50 114 p99 182 us | slack p1 75 us | RB use 1.02 | lazy-RIC 46 lost 9
+[sched maxweight] tti=399462 |  43.4 Mbps (ue1   0.0 ue2  43.3 ue3   0.0 ue4   0.0) | DL HIT  99.8% of 7001 | report-&gt;action p50 116 p99 214 us | slack p1 70 us | RB use 1.05 | lazy-RIC 56 lost 10
+[sched maxweight] tti=409461 |  28.7 Mbps (ue1   0.0 ue2  23.8 ue3   1.5 ue4   3.4) | DL HIT  99.8% of 6999 | report-&gt;action p50 118 p99 219 us | slack p1 63 us | RB use 1.03 | lazy-RIC 70 lost 10
+</pre></div>
+</div>
+<p>Every 5 s (10,000 TTIs) the muApp logs:</p>
+<ul class="simple">
+<li><p>the cell’s DL throughput, total and per UE;</p></li>
+<li><p>DL HIT: the share of DL slots that applied its action in exactly the TTI the action targeted;</p></li>
+<li><p>the report-to-action latency, p50 and p99;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lazy-RIC</span></code>: reports that arrived while it was still deciding. It read them but acted only on the
+newest.</p></li>
+</ul>
+<p>Max-weight gives each slot to the UE with the largest CQI × backlog, so the per-UE split swings from
+one log line to the next as the CQI walks move.</p>
+<p>Press Ctrl-C to leave the log (the muApp keeps running), then switch schedulers live, a minute or so
+apart:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>ctl<span class="w"> </span><span class="s2">"scheduler maxcqi"</span>
+bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>ctl<span class="w"> </span><span class="s2">"scheduler pf"</span>
+bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>ctl<span class="w"> </span><span class="s2">"scheduler rr"</span>
+bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>ctl<span class="w"> </span><span class="s2">"scheduler rl models/ppo_walk4/last.npz"</span>
+bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>ctl<span class="w"> </span><span class="s2">"scheduler stock"</span>
+</pre></div>
+</div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">ctl</span></code> answers at once, and the switch takes effect at the next report:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ok at RANtime 515487: maxcqi | alloc single | lead 1 | strict | hold 0 | min-share 0.02 | sent 154790 lazy-RIC 182 lost 300
+</pre></div>
+</div>
+<p>The muApp’s log marks every switch. <code class="docutils literal notranslate"><span class="pre">rl</span> <span class="pre">models/ppo_walk4/last.npz</span></code> runs a PPO policy trained on these
+same CQI walks, shipped in <code class="docutils literal notranslate"><span class="pre">edgeric-rt/models/</span></code>. Its decisions take about twice as long as the classic
+schedulers’, so a few more DL slots miss their TTI. <code class="docutils literal notranslate"><span class="pre">stock</span></code> sends no actions, so the gNB’s own scheduler
+runs every slot (DL HIT 0 %):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[sched] switched at RANtime 515487: maxcqi | alloc single | lead 1 | strict | hold 0 | min-share 0.02
+[sched rl models/ppo_walk4/last.npz (cat/set, argmax)] tti=978979 |  29.5 Mbps (ue1   0.4 ue2   0.3 ue3  28.7 ue4   0.1) | DL HIT  97.6% of 7000 | report-&gt;action p50 251 p99 440 us | slack p1 14 us | RB use 1.05 | lazy-RIC 694 lost 2797
+[sched stock] tti=1128929 |  14.0 Mbps (ue1   4.5 ue2   2.7 ue3   4.2 ue4   2.6) | DL HIT   0.0% of 7000 | report-&gt;action p50 nan p99 nan us | slack p1 nan us | RB use 1.03 | lazy-RIC 1055 lost 3993
+</pre></div>
+</div>
+<figure class="align-default" id="id2">
+<a class="reference external image-reference" href="../_images/grafana-schedulers.png"><img alt="The dashboard over six schedulers in a row: the scheduler strip shows max-weight, max-CQI, proportional fair, round robin, PPO and stock in turn, and the throughput panels show each scheduler's mean as a thick line, highest for max-weight and PPO" src="../_images/grafana-schedulers.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Six schedulers, 75 s each, after the gNB’s own scheduler (gray, left).</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>Strip:</strong> which scheduler was in charge.</p></li>
+<li><p><strong>Thick lines:</strong> each scheduler’s mean throughput. Received in this run: max-weight 35 Mbit/s, PPO 35,
+max-CQI 28, round robin 20, proportional fair 17, and the gNB’s own scheduler 14.</p></li>
+</ul>
+<p>Each scheduler saw a different stretch of the CQI walks, so for a controlled comparison use
+<code class="docutils literal notranslate"><span class="pre">edgeric_eval.sh</span></code>. It is in the <a class="reference internal" href="#reference-to-be-updated">Reference</a>, with the schedulers and the options of
+<code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">sched</span></code>.</p>
+</section>
+</section>
+<section id="training-the-rl-policy">
+<h2>3. Training the RL Policy<a class="headerlink" href="#training-the-rl-policy" title="Link to this heading">¶</a></h2>
+<section id="terminal-6-training">
+<h3>Terminal 6: Training<a class="headerlink" href="#terminal-6-training" title="Link to this heading">¶</a></h3>
+<p>Open a sixth terminal. PPO learns which UE should get each slot, online against the live gNB. The
+bridge feeds one muApp at a time, so stop the scheduler first.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
+bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>stop<span class="w"> </span>sched
+bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>start<span class="w"> </span>train<span class="w"> </span>--ues<span class="w"> </span><span class="m">4</span><span class="w"> </span>--iters<span class="w"> </span><span class="m">30</span><span class="w"> </span>--tag<span class="w"> </span>demo2_ppo
+bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>logs<span class="w"> </span>train
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>stopped sched
+started train (pid 16174)
+[train] demo2_ppo: 4 UEs, action single, arch set, 30 iterations x 5000 applied TTIs, lead 1, strict
+[train] it   0 | train  15.8 Mbps (HIT  97.6%) | best  25.0% eff 0.442 | eval  27.2 Mbps best 100.0% | reward 0.239 | p_top 0.35 | kl 0.0197 | collect 4.0s update 0.9s
+[train] it   1 | train  19.0 Mbps (HIT  97.1%) | best  33.6% eff 0.584 | eval   nan Mbps best   nan% | reward 0.286 | p_top 0.41 | kl 0.0143 | collect 3.8s update 0.9s
+[train] it   2 | train  22.8 Mbps (HIT  98.7%) | best  43.7% eff 0.793 | eval   nan Mbps best   nan% | reward 0.342 | p_top 0.37 | kl 0.0084 | collect 3.7s update 0.9s
+...
+[train] it   9 | train  44.6 Mbps (HIT  95.6%) | best  97.5% eff 0.992 | eval   nan Mbps best   nan% | reward 0.690 | p_top 0.90 | kl 0.0009 | collect 3.8s update 0.9s
+[train] it  10 | train  48.2 Mbps (HIT  99.0%) | best  97.6% eff 0.996 | eval  50.0 Mbps best 100.0% | reward 0.723 | p_top 0.65 | kl 0.0001 | collect 3.7s update 0.9s
+...
+[train] it  29 | train  45.7 Mbps (HIT  99.4%) | best  99.5% eff 0.998 | eval  33.1 Mbps best 100.0% | reward 0.684 | p_top 0.93 | kl 0.0007 | collect 3.7s update 0.9s
+[train] done: best eval 50.02 Mbps -&gt; /edgeric/runs/demo2_ppo/best.npz
+</pre></div>
+</div>
+<p>Each iteration collects 5000 TTIs in which the gNB applied the policy’s sampled action (<code class="docutils literal notranslate"><span class="pre">collect</span></code>, about
+3.7 s). It then pauses while PyTorch updates the policy (<code class="docutils literal notranslate"><span class="pre">update</span></code>, about 0.9 s); the gNB’s own scheduler
+runs meanwhile. Each line shows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">train</span></code>: the cell’s DL throughput while the policy explores;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">best</span></code> and <code class="docutils literal notranslate"><span class="pre">eff</span></code>: the share of slots the policy gave to a UE with the highest CQI, and the CQI
+efficiency of its choice relative to that UE. These show convergence on any stretch of the channel,
+while throughput swings with the CQI walks;</p></li>
+<li><p>every 5 iterations, <code class="docutils literal notranslate"><span class="pre">eval</span></code>: the policy without exploration, giving each slot to its top UE;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p_top</span></code>: the policy’s mean probability for its top UE, which rises as it commits.</p></li>
+</ul>
+<p>Thirty iterations take about 3 minutes. Here <code class="docutils literal notranslate"><span class="pre">best</span></code> climbed from 25 % to about 95 % within 10
+iterations.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>State</p></td>
+<td><p>per UE: CQI / 15 and log(1 + backlog) / log(1 + 8 MB)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Action</p></td>
+<td><p>the UE that gets the slot (<code class="docutils literal notranslate"><span class="pre">--action</span> <span class="pre">single</span></code>), or RB shares (<code class="docutils literal notranslate"><span class="pre">--action</span> <span class="pre">shared</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p>Reward</p></td>
+<td><p>DRB bytes scheduled in the TTI the action was applied in</p></td>
+</tr>
+<tr class="row-odd"><td><p>Network</p></td>
+<td><p>one 64-64 network scores every UE from its own state plus the mean and max over all UEs (<code class="docutils literal notranslate"><span class="pre">--arch</span> <span class="pre">set</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Plot the run on the host (needs matplotlib):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>edgeric-rt/tools/plot_training.py<span class="w"> </span>edgeric-rt/runs/demo2_ppo
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{"iterations": 30, "eff_min": 0.97, "reached_at_iter": 16, "held_from_iter": 16, "ma10_eff_min_after": 0.9707, "ma10_best_min_after": 91.41, "share_iters_eff_ok_after": 0.857, "mean_eff_after": 0.9839, "mean_best_pct_after": 95.81, "final_train_best_pct": 95.14, "final_train_eff": 0.9826, "eval_best_pct_min": 100.0, "final_entropy": 0.108}
+wrote edgeric-rt/runs/demo2_ppo/train_curve.png and .svg
+</pre></div>
+</div>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/ppo-training.png"><img alt="Cell throughput of the PPO run over 30 iterations: per iteration, its 10-iteration mean rising from 16 to about 38 Mbit/s, and an evaluation every 5 iterations" src="../_images/ppo-training.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The throughput panel of <code class="docutils literal notranslate"><span class="pre">train_curve.png</span></code>: per iteration (gray), its 10-iteration mean (blue) and the
+evaluations (dots).</span><a class="headerlink" href="#id3" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>When the log shows <code class="docutils literal notranslate"><span class="pre">[train]</span> <span class="pre">done</span></code>, press Ctrl-C to leave it, then run the trained policy in the loop:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>start<span class="w"> </span>sched<span class="w"> </span>--scheduler<span class="w"> </span>rl<span class="w"> </span>--model<span class="w"> </span>runs/demo2_ppo/last.npz<span class="w"> </span>--tag<span class="w"> </span>demo2-ppo
+bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>logs<span class="w"> </span>sched
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>started sched (pid 16188)
+[sched] rl runs/demo2_ppo/last.npz (cat/set, argmax) | alloc single | lead 1 | strict | hold 0 | min-share 0.02 | reports from /apps/edgeric_rt/run/muapp.sock | run demo2-ppo
+[sched rl runs/demo2_ppo/last.npz (cat/set, argmax)] tti=1823689 |  22.6 Mbps (ue1   8.1 ue2  12.3 ue3   2.0 ue4   0.2) | DL HIT  99.2% of 7000 | report-&gt;action p50 238 p99 369 us | slack p1 14 us | RB use 1.04 | lazy-RIC 501 lost 285
+[sched rl runs/demo2_ppo/last.npz (cat/set, argmax)] tti=1833617 |  25.4 Mbps (ue1   0.1 ue2  22.4 ue3   0.1 ue4   2.9) | DL HIT  97.9% of 6947 | report-&gt;action p50 245 p99 409 us | slack p1 13 us | RB use 1.02 | lazy-RIC 526 lost 293
+[sched rl runs/demo2_ppo/last.npz (cat/set, argmax)] tti=1843617 |  46.3 Mbps (ue1   0.0 ue2  27.6 ue3   0.0 ue4  18.6) | DL HIT  98.4% of 7000 | report-&gt;action p50 248 p99 425 us | slack p1 11 us | RB use 1.03 | lazy-RIC 549 lost 293
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">last.npz</span></code> is the final policy. <code class="docutils literal notranslate"><span class="pre">best.npz</span></code> is the one with the highest evaluation throughput, which also
+depends on the stretch of the channel the evaluation saw. Its decisions take about 250 µs (p50), against
+about 115 µs for the classic schedulers, and about 1–2 % of DL slots miss their TTI.</p>
+<figure class="align-default" id="id4">
+<a class="reference external image-reference" href="../_images/grafana-ppo.png"><img alt="The dashboard during training and then the trained PPO policy: throughput climbing during training, then the PPO band in the scheduler strip with its mean line near 32 Mbit/s received, and 98.4 % of TTIs run by the muApp" src="../_images/grafana-ppo.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Training, then the trained policy.</span><a class="headerlink" href="#id4" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>Training:</strong> the trainer reports no scheduler name, so the strip shows the gNB’s scheduler. Its
+actions still run in about 98 % of TTIs, and the throughput climbs as the policy learns.</p></li>
+<li><p><strong>Trained policy (red):</strong> 98.4 % of TTIs, with a mean near 32 Mbit/s received on this stretch of the
+walks.</p></li>
+</ul>
+</section>
+</section>
+<section id="stop">
+<h2>4. Stop<a class="headerlink" href="#stop" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>stop<span class="w"> </span>all
+bash<span class="w"> </span>scripts/traffic_nue.sh<span class="w"> </span>stop
+bash<span class="w"> </span>scripts/stop_demo.sh
+</pre></div>
+</div>
+</section>
+<section id="reference-to-be-updated">
+<h2>Reference [To be updated]<a class="headerlink" href="#reference-to-be-updated" title="Link to this heading">¶</a></h2>
+<section id="schedulers">
+<h3>Schedulers<a class="headerlink" href="#schedulers" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Scheduler</p></th>
+<th class="head"><p>Policy</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">stock</span></code></p></td>
+<td><p>none: the gNB’s own scheduler</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fixed</span> <span class="pre">--weights</span> <span class="pre">ue1=0.2,ue2=0.2,ue3=0.2,ue4=0.4</span></code></p></td>
+<td><p>share: 20/20/20/40 % of the slots</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rr</span></code></p></td>
+<td><p>metric, all equal: the UEs with data in turn</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pf</span></code></p></td>
+<td><p>metric CQI / EWMA(CQI), proportional fair</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">maxcqi</span></code></p></td>
+<td><p>metric CQI</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bestcqi</span></code></p></td>
+<td><p>metric CQI, always one UE per slot (the full-buffer throughput optimum)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">maxweight</span></code></p></td>
+<td><p>metric CQI × backlog</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rl</span> <span class="pre">--model</span> <span class="pre">models/ppo_walk4/last.npz</span></code></p></td>
+<td><p>a trained PPO policy: its top UE gets the slot (<code class="docutils literal notranslate"><span class="pre">--rl-pick</span> <span class="pre">share</span></code> for slot shares)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>By default each scheduler gives one UE the whole slot (<code class="docutils literal notranslate"><span class="pre">--alloc</span> <span class="pre">single</span></code>), as the gNB’s own scheduler
+does with full buffers. Metric policies give the slot to the UE with the highest metric; share policies
+hand out whole slots in proportion to their weights. Model paths are relative to <code class="docutils literal notranslate"><span class="pre">edgeric-rt/</span></code>, which
+is <code class="docutils literal notranslate"><span class="pre">/edgeric</span></code> in the <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code> container; trained models for the three scenarios ship in
+<code class="docutils literal notranslate"><span class="pre">edgeric-rt/models/</span></code> (<code class="docutils literal notranslate"><span class="pre">ppo_walk4</span></code>, <code class="docutils literal notranslate"><span class="pre">ppo_walk2</span></code>, <code class="docutils literal notranslate"><span class="pre">ppo_load8844</span></code>).</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--alloc</span> <span class="pre">shared</span></code></p></td>
+<td><p>split each slot’s RBs by weight among the weighted UEs (slows the ZMQ chain to about 88 % of real time with 4 UEs)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--lead</span> <span class="pre">N</span></code></p></td>
+<td><p>target the first DL slot at least N TTIs ahead; about 30 emulates a near-RT RIC</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--work-conserving</span></code></p></td>
+<td><p>give RBs a UE cannot use to the UEs that can</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--duration</span> <span class="pre">S</span></code>, <code class="docutils literal notranslate"><span class="pre">--tag</span> <span class="pre">NAME</span></code></p></td>
+<td><p>run length and output name</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Each run saves every TTI to <code class="docutils literal notranslate"><span class="pre">edgeric-rt/runs/&lt;tag&gt;/ttis.npz</span></code> with a <code class="docutils literal notranslate"><span class="pre">summary.json</span></code>, and pushes 10 Hz
+aggregates to VictoriaMetrics.</p>
+</section>
+<section id="channel-scenarios">
+<h3>Channel scenarios<a class="headerlink" href="#channel-scenarios" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Table</p></th>
+<th class="head"><p>Scenario</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">duranta-oai-ue/ue_traces_cqi_4ue.conf</span></code></p></td>
+<td><p>4 UEs on independent CQI walks (this demo, and the RL scenario)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">duranta-oai-ue/ue_traces_cqi_4ue_mob.conf</span></code></p></td>
+<td><p>2 cars and 2 drones, from the EdgeRIC over-the-air recordings</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">duranta-oai-ue/ue_traces_cqi_s1.conf</span></code></p></td>
+<td><p>2 UEs on CQI walks</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">duranta-oai-ue/ue_traces_cqi_s2.conf</span></code></p></td>
+<td><p>2 UEs, one good and one bad channel</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">duranta-oai-ue/ue_traces_cqi_s3.conf</span></code></p></td>
+<td><p>2 UEs, CQI drawn at random</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Switch scenarios on the running UEs with <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/trace_ctl.sh</span> <span class="pre">apply</span> <span class="pre">&lt;table&gt;</span></code>
+(<a class="reference internal" href="demo1-plug-and-play-channels.html"><span class="std std-doc">Demo 1</span></a>).</p>
+</section>
+<section id="compare-schedulers-on-the-same-channel">
+<h3>Compare schedulers on the same channel<a class="headerlink" href="#compare-schedulers-on-the-same-channel" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/edgeric_eval.sh<span class="w"> </span>--duration<span class="w"> </span><span class="m">60</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>rl:models/ppo_walk4/last.npz<span class="w"> </span>bestcqi<span class="w"> </span>maxcqi<span class="w"> </span>maxweight<span class="w"> </span>pf<span class="w"> </span>rr<span class="w"> </span>fixed:0.25,0.25,0.25,0.25<span class="w"> </span>stock
+</pre></div>
+</div>
+<p>Before each run the script re-applies the trace table, so every scheduler sees the same channel from
+t = 0. It ends with a table per scheduler: throughput per air time, total and per UE, Jain fairness, the
+share of DL slots applied in their exact TTI (DL HIT %), and report-to-action latency. Measured with
+four UEs on CQI walks, full-buffer UDP:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Scheduler</p></th>
+<th class="head"><p>gNB Mbit/s</p></th>
+<th class="head"><p>UDP Mbit/s</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>bestcqi</p></td>
+<td><p>41.54</p></td>
+<td><p>37.85</p></td>
+</tr>
+<tr class="row-odd"><td><p>maxweight</p></td>
+<td><p>40.91</p></td>
+<td><p>37.42</p></td>
+</tr>
+<tr class="row-even"><td><p>PPO</p></td>
+<td><p>40.80</p></td>
+<td><p>36.89</p></td>
+</tr>
+<tr class="row-odd"><td><p>rr</p></td>
+<td><p>19.83</p></td>
+<td><p>18.70</p></td>
+</tr>
+<tr class="row-even"><td><p>pf</p></td>
+<td><p>17.33</p></td>
+<td><p>16.01</p></td>
+</tr>
+<tr class="row-odd"><td><p>stock (the gNB’s own)</p></td>
+<td><p>15.49</p></td>
+<td><p>14.76</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For finite, unequal loads, <code class="docutils literal notranslate"><span class="pre">edgeric_eval.sh</span> <span class="pre">--loads</span> <span class="pre">8,8,4,4</span></code> drives one plain UDP flow per UE at those
+rates.</p>
+</section>
+<section id="measure-the-bare-loop">
+<h3>Measure the bare loop<a class="headerlink" href="#measure-the-bare-loop" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/edgeric_rt.sh<span class="w"> </span>load<span class="w"> </span>--inline<span class="w"> </span>fixed:0.2,0.2,0.2,0.4
+kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-n<span class="w"> </span>ran<span class="w"> </span>jrtc-0<span class="w"> </span>-c<span class="w"> </span>jrtc<span class="w"> </span>--<span class="w"> </span>tail<span class="w"> </span>/tmp/edgeric_rt_bridge.log
+</pre></div>
+</div>
+<p>In inline mode the bridge acts on every report by itself, without a muApp. Its log gives the DL HIT %
+and the report-to-action latency inside jrtc. Measured with four UEs:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Path</p></th>
+<th class="head"><p>DL slots applied in their exact TTI</p></th>
+<th class="head"><p>Report to action, p50 / p99</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>bridge acting inline (jbpf and jrtc only)</p></td>
+<td><p>99.9–100 %</p></td>
+<td><p>51 / 90 µs</p></td>
+</tr>
+<tr class="row-odd"><td><p>muApp in <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code>, classic schedulers</p></td>
+<td><p>99.8–99.9 %</p></td>
+<td><p>110 / 180–210 µs</p></td>
+</tr>
+<tr class="row-even"><td><p>muApp in <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code>, PPO</p></td>
+<td><p>98.1–98.5 %</p></td>
+<td><p>250 / 390–430 µs</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>One report consumer.</strong> The bridge sends reports to one muApp socket: stop <code class="docutils literal notranslate"><span class="pre">sched</span></code> before <code class="docutils literal notranslate"><span class="pre">train</span></code>,
+and the reverse.</p></li>
+<li><p><strong>Keep jrtc light.</strong> Start the RAN with <code class="docutils literal notranslate"><span class="pre">--edgeric</span></code> and without <code class="docutils literal notranslate"><span class="pre">--telemetry</span></code>, so heavy Python xApps
+do not share the bridge’s GIL. The real-time scheduling dashboard is light enough to run beside it.</p></li>
+<li><p><strong>One scheduler controller.</strong> Unload the older <code class="docutils literal notranslate"><span class="pre">edgeric_sched</span></code> and <code class="docutils literal notranslate"><span class="pre">edgeric_mcs</span></code> sets while
+<code class="docutils literal notranslate"><span class="pre">edgeric_rt</span></code> is loaded; they act on the same scheduler.</p></li>
+<li><p><strong>PPO is slower than the classic schedulers</strong> (p50 about 250 µs against 110 µs), so 1.5–1.9 % of its
+DL slots miss their TTI and run the gNB’s own scheduler.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="demo3-buffer-management.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="demo1-plug-and-play-channels.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Demo 1: Cellular Digital Twin</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Ushasi Ghosh
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Demo 2: AI-Driven Scheduling</a><ul>
+<li><a class="reference internal" href="#run-the-system">1. Run the System</a><ul>
+<li><a class="reference internal" href="#terminal-1-ran">Terminal 1: RAN</a></li>
+<li><a class="reference internal" href="#terminal-2-ues">Terminal 2: UEs</a></li>
+<li><a class="reference internal" href="#terminal-3-traffic">Terminal 3: Traffic</a></li>
+<li><a class="reference internal" href="#terminal-4-grafana">Terminal 4: Grafana</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#scheduling-muapps">2. Scheduling muApps</a><ul>
+<li><a class="reference internal" href="#terminal-5-scheduler-muapp">Terminal 5: Scheduler muApp</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#training-the-rl-policy">3. Training the RL Policy</a><ul>
+<li><a class="reference internal" href="#terminal-6-training">Terminal 6: Training</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#stop">4. Stop</a></li>
+<li><a class="reference internal" href="#reference-to-be-updated">Reference [To be updated]</a><ul>
+<li><a class="reference internal" href="#schedulers">Schedulers</a></li>
+<li><a class="reference internal" href="#channel-scenarios">Channel scenarios</a></li>
+<li><a class="reference internal" href="#compare-schedulers-on-the-same-channel">Compare schedulers on the same channel</a></li>
+<li><a class="reference internal" href="#measure-the-bare-loop">Measure the bare loop</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=b32bce50"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/sidebar-brand-logos.js?v=577991cb"></script>
+    <script src="../_static/news-sidebar.js?v=394020a7"></script>
+    <script src="../_static/demo-video.js?v=f940bad2"></script>
+    <script src="../_static/sidebar-clickable-titles.js?v=92accabe"></script>
+    <script src="../_static/sidebar-expand-collapse.js?v=778dbc98"></script>
+    </body>
+</html>

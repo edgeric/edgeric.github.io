@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 530" width="820" height="530" role="img" aria-labelledby="tt-title tt-desc">
+  <title id="tt-title">EdgeRIC control, TTI by TTI</title>
+  <desc id="tt-desc">Panel A: eight slots of the TDD pattern, D D D D S U U D. Every slot sends a report up to the muApp, and the muApp answers with an action tagged with the next DL slot. The action from slot t is applied in slot t+1 (HIT). A slow decision on the report of slot t+1 arrives after slot t+2 has started, so slot t+2 runs the gNB's stock scheduler and the late action is dropped; the report of slot t+2, queued while the muApp was busy, gets its action in time for slot t+3. The reports of slots t+3 to t+6 (the last D, then S, U, U) all produce actions for slot t+7; each newer one replaces the older one in rt_ctrl's ring, and slot t+7 applies the newest, whose sequence number its report echoes. Panel B, to scale with medians over about 120,000 TTIs with 4 UEs: the gNB schedules slot t and sends its report 22 microseconds after the slot starts; report to action through jbpf, jrtc and the muApp takes 114 microseconds for max-weight and 248 for PPO; the action then waits in rt_act_in for 328 or 214 microseconds until slot t+1 starts, where rt_ctrl applies it. DL slots with the action applied: 99.8 percent for max-weight, 98.1 percent for PPO.</desc>
+  <defs>
+    <marker id="tt-rep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f6db5"/></marker>
+    <marker id="tt-act" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0561b"/></marker>
+    <marker id="tt-old" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e3a07f"/></marker>
+  </defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #3e4c59; font-size: 14px; }
+    .t { font-size: 15px; font-weight: 700; fill: #1f2933; }
+    .l { font-size: 14px; font-weight: 700; fill: #1f2933; }
+    .m { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 13px; }
+    .s { font-size: 13px; fill: #616e7c; }
+    .xs { font-size: 11.5px; fill: #616e7c; }
+    .c { text-anchor: middle; }
+    .e { text-anchor: end; }
+    .lane { fill: #f3f8f3; }
+    .dec { fill: #4f8a55; }
+    .dl { fill: #e8f1fb; stroke: #2f6db5; stroke-width: 1.4; }
+    .ul { fill: #f5f7fa; stroke: #9aa5b1; stroke-width: 1.2; }
+    .rep { stroke: #2f6db5; stroke-width: 1.8; fill: none; }
+    .act { stroke: #c0561b; stroke-width: 1.8; fill: none; }
+    .old { stroke: #e3a07f; stroke-width: 1.6; fill: none; }
+    .hit { fill: #2f7d46; font-weight: 700; font-size: 13px; }
+    .lrep { fill: #2f6db5; font-weight: 700; }
+    .lact { fill: #c0561b; font-weight: 700; }
+    .bnd { stroke: #9aa5b1; stroke-width: 1.2; stroke-dasharray: 4 4; }
+    .b1 { fill: #2f6db5; }
+    .b2 { fill: #4f8a55; }
+    .b3 { fill: #fbe3d6; stroke: #e3a07f; stroke-width: 1; }
+    .wait { stroke: #c0561b; stroke-width: 1.8; stroke-dasharray: 2 4; stroke-linecap: round; fill: none; }
+  </style>
+
+  <rect width="820" height="530" fill="#ffffff"/>
+
+  <!-- ===== A: TTI by TTI ===== -->
+  <text class="t" x="16" y="22">A · TTI by TTI</text>
+  <text x="128" y="22" style="font-size:13.5px">every slot sends a <tspan class="lrep">report</tspan>; the muApp answers with an <tspan class="lact">action</tspan> for the next DL slot</text>
+
+  <rect class="lane" x="104" y="44" width="700" height="52" rx="6"/>
+  <text class="l" x="16" y="68">muApp</text>
+  <text class="s" x="16" y="84">RICtime</text>
+  <text class="l" x="16" y="158">gNB</text>
+  <text class="s" x="16" y="174">RANtime</text>
+
+  <!-- slots: D D D D S U U D -->
+  <rect class="dl" x="104" y="138" width="83" height="44" rx="5"/>
+  <text class="l c" x="145" y="156">D</text><text class="hit c" x="145" y="174">HIT</text>
+  <rect class="dl" x="191" y="138" width="83" height="44" rx="5"/>
+  <text class="l c" x="232" y="156">D</text><text class="hit c" x="232" y="174">HIT</text>
+  <rect class="dl" x="278" y="138" width="83" height="44" rx="5"/>
+  <text class="l c" x="319" y="156">D</text><text class="s c" x="319" y="174">stock</text>
+  <rect class="dl" x="365" y="138" width="83" height="44" rx="5"/>
+  <text class="l c" x="406" y="156">D</text><text class="hit c" x="406" y="174">HIT</text>
+  <rect class="ul" x="452" y="138" width="83" height="44" rx="5"/>
+  <text class="l c" x="493" y="156">S</text><text class="s c" x="493" y="174">UL</text>
+  <rect class="ul" x="539" y="138" width="83" height="44" rx="5"/>
+  <text class="l c" x="580" y="156">U</text><text class="s c" x="580" y="174">UL</text>
+  <rect class="ul" x="626" y="138" width="83" height="44" rx="5"/>
+  <text class="l c" x="667" y="156">U</text><text class="s c" x="667" y="174">UL</text>
+  <rect class="dl" x="713" y="138" width="83" height="44" rx="5"/>
+  <text class="l c" x="754" y="156">D</text><text class="hit c" x="754" y="174">HIT</text>
+
+  <text class="m c" x="145" y="198">t</text>
+  <text class="m c" x="232" y="198">t+1</text>
+  <text class="m c" x="319" y="198">t+2</text>
+  <text class="m c" x="406" y="198">t+3</text>
+  <text class="m c" x="493" y="198">t+4</text>
+  <text class="m c" x="580" y="198">t+5</text>
+  <text class="m c" x="667" y="198">t+6</text>
+  <text class="m c" x="754" y="198">t+7</text>
+
+  <!-- t: report -> action for t+1 -->
+  <line class="rep" x1="116" y1="136" x2="124" y2="88" marker-end="url(#tt-rep)"/>
+  <rect class="dec" x="124" y="62" width="22" height="22" rx="4"/>
+  <line class="act" x1="146" y1="86" x2="192" y2="134" marker-end="url(#tt-act)"/>
+
+  <!-- t+1: a slow decision, its action arrives after t+2 started -->
+  <line class="rep" x1="203" y1="136" x2="211" y2="88" marker-end="url(#tt-rep)"/>
+  <rect class="dec" x="211" y="62" width="98" height="22" rx="4"/>
+  <text class="c" x="260" y="78" style="font-size:11.5px;fill:#ffffff">slow decision</text>
+  <line class="act" x1="309" y1="86" x2="318" y2="134" marker-end="url(#tt-act)"/>
+  <path d="M313,121 l10,10 M323,121 l-10,10" stroke="#c0561b" stroke-width="2"/>
+
+  <!-- t+2: report queued while the muApp is busy, action in time for t+3 -->
+  <line class="rep" x1="290" y1="136" x2="294" y2="98" marker-end="url(#tt-rep)"/>
+  <line class="wait" x1="296" y1="92" x2="309" y2="92" style="stroke:#2f6db5"/>
+  <rect class="dec" x="313" y="62" width="22" height="22" rx="4"/>
+  <line class="act" x1="335" y1="86" x2="366" y2="134" marker-end="url(#tt-act)"/>
+
+  <!-- t+3 .. t+6: all target t+7, the newest wins -->
+  <line class="rep" x1="377" y1="136" x2="385" y2="88" marker-end="url(#tt-rep)"/>
+  <rect class="dec" x="385" y="62" width="22" height="22" rx="4"/>
+  <line class="rep" x1="464" y1="136" x2="472" y2="88" marker-end="url(#tt-rep)"/>
+  <rect class="dec" x="472" y="62" width="22" height="22" rx="4"/>
+  <line class="rep" x1="551" y1="136" x2="559" y2="88" marker-end="url(#tt-rep)"/>
+  <rect class="dec" x="559" y="62" width="22" height="22" rx="4"/>
+  <line class="rep" x1="638" y1="136" x2="646" y2="88" marker-end="url(#tt-rep)"/>
+  <rect class="dec" x="646" y="62" width="22" height="22" rx="4"/>
+
+  <path class="old" d="M407,86 L413,114 L700,114"/>
+  <path class="old" d="M494,86 L500,114"/>
+  <path class="old" d="M581,86 L587,114"/>
+  <circle cx="413" cy="114" r="3.5" fill="#ffffff" stroke="#e3a07f" stroke-width="1.6"/>
+  <circle cx="500" cy="114" r="3.5" fill="#ffffff" stroke="#e3a07f" stroke-width="1.6"/>
+  <circle cx="587" cy="114" r="3.5" fill="#ffffff" stroke="#e3a07f" stroke-width="1.6"/>
+  <path class="act" d="M668,86 L674,114 L704,114 L714,134" marker-end="url(#tt-act)"/>
+  <circle cx="674" cy="114" r="3.5" fill="#c0561b"/>
+
+  <!-- t+7: its report echoes the applied action -->
+  <line class="rep" x1="725" y1="136" x2="733" y2="88" marker-end="url(#tt-rep)"/>
+  <rect class="dec" x="733" y="62" width="22" height="22" rx="4"/>
+  <line class="act" x1="755" y1="86" x2="798" y2="128" marker-end="url(#tt-act)"/>
+
+  <!-- notes under the slots -->
+  <text class="xs c" x="319" y="218" style="fill:#c0561b">late action: dropped</text>
+  <text class="xs c" x="536" y="218">refreshed in S and U slots: the newest seq wins</text>
+  <text class="xs c" x="754" y="218">report echoes seq</text>
+  <text class="xs c" x="754" y="232">→ reward</text>
+
+  <!-- ===== B: inside one TTI ===== -->
+  <text class="t" x="16" y="270">B · Inside one TTI</text>
+  <text class="s" x="152" y="270">to scale · medians of ~120k TTIs per run, 4 UEs · lanes: max-weight</text>
+
+  <!-- slot boundaries -->
+  <line class="bnd" x1="130" y1="284" x2="130" y2="486"/>
+  <line class="bnd" x1="742" y1="284" x2="742" y2="486"/>
+  <text class="xs" x="134" y="292">slot t starts</text>
+  <text class="xs e" x="738" y="292">slot t+1 starts · 471 µs</text>
+
+  <!-- lanes -->
+  <text class="l" x="16" y="316">muApp</text>
+  <rect class="lane" x="130" y="300" width="674" height="26" style="fill:#f3f8f3"/>
+  <text class="l" x="16" y="358">rt_bridge</text>
+  <rect x="130" y="342" width="674" height="26" style="fill:#f1ecfa"/>
+  <text class="l" x="16" y="400">gNB</text>
+  <rect x="130" y="384" width="674" height="26" style="fill:#e8f1fb"/>
+
+  <!-- gNB: rt_ctrl gate, schedule slot t, report -->
+  <path d="M130,391 l6,6 l-6,6 l-6,-6 z" fill="#c0561b"/>
+  <rect class="b1" x="136" y="391" width="22" height="12"/>
+  <circle cx="159" cy="397" r="4" fill="#2f6db5"/>
+  <!-- report: gNB -> bridge -> muApp -->
+  <line class="rep" x1="161" y1="384" x2="164" y2="370" marker-end="url(#tt-rep)"/>
+  <rect x="164" y="349" width="4" height="12" fill="#6b4fa3"/>
+  <line class="rep" x1="168" y1="342" x2="171" y2="328" marker-end="url(#tt-rep)"/>
+  <!-- muApp decides -->
+  <rect class="b2" x="172" y="307" width="128" height="12" rx="2"/>
+  <text x="310" y="318" style="font-size:13px">poll · observe · weights · send</text>
+  <!-- action: muApp -> bridge -> rt_act_in -->
+  <line class="act" x1="300" y1="326" x2="303" y2="340" marker-end="url(#tt-act)"/>
+  <rect x="303" y="349" width="4" height="12" fill="#6b4fa3"/>
+  <text x="314" y="360" style="font-size:13px">stamps <tspan class="m" style="font-size:11.5px">t_sent</tspan>, writes <tspan class="m" style="font-size:11.5px">rt_act_in</tspan></text>
+  <line class="act" x1="307" y1="368" x2="309" y2="382" marker-end="url(#tt-act)"/>
+  <line class="wait" x1="314" y1="397" x2="734" y2="397"/>
+  <text class="xs c" x="524" y="392">the action waits in rt_act_in</text>
+  <!-- slot t+1: HIT -->
+  <path d="M742,391 l6,6 l-6,6 l-6,-6 z" fill="#c0561b"/>
+  <rect class="b1" x="748" y="391" width="22" height="12"/>
+  <text class="hit" x="774" y="402">HIT</text>
+
+  <!-- budget bars, same scale -->
+  <text class="l" x="16" y="440">max-weight</text>
+  <text class="xs" x="16" y="455">DL HIT 99.8%</text>
+  <rect class="b1" x="130" y="430" width="28.6" height="20"/>
+  <rect class="b2" x="158.6" y="430" width="148.2" height="20"/>
+  <rect class="b3" x="306.8" y="430" width="435.2" height="20"/>
+  <text class="c" x="232.7" y="444" style="font-size:13px;fill:#ffffff;font-weight:700">114 µs</text>
+  <text class="c" x="524.4" y="444" style="font-size:13px;fill:#9a4a1a">waits 328 µs</text>
+
+  <text class="l" x="16" y="476">PPO</text>
+  <text class="xs" x="16" y="491">DL HIT 98.1%</text>
+  <rect class="b1" x="130" y="466" width="28.6" height="20"/>
+  <rect class="b2" x="158.6" y="466" width="322.4" height="20"/>
+  <rect class="b3" x="481" y="466" width="261" height="20"/>
+  <text class="c" x="319.8" y="480" style="font-size:13px;fill:#ffffff;font-weight:700">248 µs</text>
+  <text class="c" x="611.5" y="480" style="font-size:13px;fill:#9a4a1a">waits 214 µs</text>
+
+  <!-- legend -->
+  <rect class="b1" x="130" y="506" width="12" height="12"/>
+  <text x="148" y="516" style="font-size:13px">schedule slot t, send report: 22 µs</text>
+  <rect class="b2" x="370" y="506" width="12" height="12"/>
+  <text x="388" y="516" style="font-size:13px">report → action: jbpf, jrtc, muApp</text>
+  <rect class="b3" x="610" y="506" width="12" height="12"/>
+  <text x="628" y="516" style="font-size:13px">slack to slot t+1</text>
+</svg>

@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 612" width="780" height="612" role="img" aria-labelledby="ce-title ce-desc">
+  <title id="ce-title">End-to-end channel emulation</title>
+  <desc id="ce-desc">An Open5GS core connects to an OCUDU gNB. The gNB exchanges IQ samples over ZMQ with a broker, which copies the downlink to each UE and sums the uplink with a gNB noise floor. Each Duranta OAI UE applies its own channel in its ZMQ radio driver. trace_ctl.sh writes a control file per UE to switch channel traces at run time, and jbpf codelets in the gNB feed jrtc xApps and Grafana.</desc>
+  <defs>
+    <marker id="ce-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3e4c59"/>
+    </marker>
+    <marker id="ce-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b4fa3"/>
+    </marker>
+    <marker id="ce-t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7b8794"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #3e4c59; font-size: 14px; }
+    .t { font-size: 16px; font-weight: 700; fill: #1f2933; }
+    .m { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 13px; }
+    .tm { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 15px; font-weight: 700; fill: #1f2933; }
+    .s { font-size: 13px; fill: #616e7c; }
+    .c { text-anchor: middle; }
+    .data { stroke: #3e4c59; stroke-width: 1.8; fill: none; }
+    .ctl { stroke: #6b4fa3; stroke-width: 1.8; stroke-dasharray: 6 4; fill: none; }
+    .tel { stroke: #7b8794; stroke-width: 1.8; stroke-dasharray: 1 4; stroke-linecap: round; fill: none; }
+  </style>
+
+  <rect width="780" height="612" fill="#ffffff"/>
+
+  <!-- legend -->
+  <line class="data" x1="556" y1="34" x2="588" y2="34"/>
+  <text x="598" y="39">data path</text>
+  <line class="ctl" x1="556" y1="58" x2="588" y2="58"/>
+  <text x="598" y="63">channel control</text>
+  <line class="tel" x1="556" y1="82" x2="588" y2="82"/>
+  <text x="598" y="87">telemetry</text>
+
+  <!-- RAN pod boundary, labelled on its top edge -->
+  <rect x="12" y="128" width="756" height="356" rx="12" fill="#fafbfc" stroke="#9aa5b1" stroke-width="1.4" stroke-dasharray="7 5"/>
+  <rect x="224" y="118" width="222" height="20" fill="#ffffff"/>
+  <text class="s" x="232" y="133">RAN pod (k3d), ZMQ links on ipc://</text>
+
+  <!-- 5G core -->
+  <rect x="28" y="20" width="160" height="80" rx="8" fill="#eef2f7" stroke="#5b6b82" stroke-width="1.5"/>
+  <text class="t c" x="108" y="46">5G core</text>
+  <text class="c" x="108" y="66">Open5GS</text>
+  <text class="c" x="108" y="86">iperf3 traffic</text>
+
+  <!-- gNB -->
+  <rect x="28" y="244" width="160" height="100" rx="8" fill="#e8f1fb" stroke="#2f6db5" stroke-width="1.5"/>
+  <text class="t c" x="108" y="272">OCUDU gNB</text>
+  <text class="c" x="108" y="294">n78, 20 MHz TDD</text>
+  <text class="c" x="108" y="316">jbpf codelets</text>
+
+  <!-- broker -->
+  <rect x="236" y="234" width="180" height="120" rx="8" fill="#fdf3e3" stroke="#b7791f" stroke-width="1.5"/>
+  <text class="t c" x="326" y="262">C++ ZMQ broker</text>
+  <text class="c" x="326" y="285">DL: copy per UE</text>
+  <text class="c" x="326" y="306">UL: sum of UEs</text>
+  <text class="c" x="326" y="327">+ gNB noise floor</text>
+
+  <!-- UE container -->
+  <rect x="462" y="164" width="290" height="304" rx="10" fill="#f3f8f3" stroke="#4f8a55" stroke-width="1.5"/>
+  <text class="t c" x="607" y="189">N Duranta OAI UEs</text>
+
+  <!-- UE row 1 -->
+  <rect x="476" y="200" width="262" height="68" rx="7" fill="#ffffff"/>
+  <path d="M483,200 H612 V268 H483 A7,7 0 0 1 476,261 V207 A7,7 0 0 1 483,200 Z" fill="#fde8e1"/>
+  <rect x="476" y="200" width="262" height="68" rx="7" fill="none" stroke="#4f8a55" stroke-width="1.3"/>
+  <line x1="612" y1="200" x2="612" y2="268" stroke="#4f8a55" stroke-width="1.3"/>
+  <text class="t c" x="544" y="222" style="font-size:15px">Channel</text>
+  <text class="c" x="544" y="242">DL: add noise</text>
+  <text class="c" x="544" y="260">UL: scale gain</text>
+  <text class="t c" x="675" y="229" style="font-size:15px">nr-UE 1</text>
+  <text class="m c" x="675" y="250">netns ue1</text>
+
+  <!-- UE row 2 -->
+  <rect x="476" y="280" width="262" height="68" rx="7" fill="#ffffff"/>
+  <path d="M483,280 H612 V348 H483 A7,7 0 0 1 476,341 V287 A7,7 0 0 1 483,280 Z" fill="#fde8e1"/>
+  <rect x="476" y="280" width="262" height="68" rx="7" fill="none" stroke="#4f8a55" stroke-width="1.3"/>
+  <line x1="612" y1="280" x2="612" y2="348" stroke="#4f8a55" stroke-width="1.3"/>
+  <text class="t c" x="544" y="302" style="font-size:15px">Channel</text>
+  <text class="c" x="544" y="322">DL: add noise</text>
+  <text class="c" x="544" y="340">UL: scale gain</text>
+  <text class="t c" x="675" y="309" style="font-size:15px">nr-UE 2</text>
+  <text class="m c" x="675" y="330">netns ue2</text>
+
+  <!-- more UEs -->
+  <circle cx="607" cy="360" r="2.2" fill="#4f8a55"/>
+  <circle cx="607" cy="368" r="2.2" fill="#4f8a55"/>
+  <circle cx="607" cy="376" r="2.2" fill="#4f8a55"/>
+
+  <!-- UE row N -->
+  <rect x="476" y="388" width="262" height="68" rx="7" fill="#ffffff"/>
+  <path d="M483,388 H612 V456 H483 A7,7 0 0 1 476,449 V395 A7,7 0 0 1 483,388 Z" fill="#fde8e1"/>
+  <rect x="476" y="388" width="262" height="68" rx="7" fill="none" stroke="#4f8a55" stroke-width="1.3"/>
+  <line x1="612" y1="388" x2="612" y2="456" stroke="#4f8a55" stroke-width="1.3"/>
+  <text class="t c" x="544" y="410" style="font-size:15px">Channel</text>
+  <text class="c" x="544" y="430">DL: add noise</text>
+  <text class="c" x="544" y="448">UL: scale gain</text>
+  <text class="t c" x="675" y="417" style="font-size:15px">nr-UE N</text>
+  <text class="m c" x="675" y="438">netns ueN</text>
+
+  <!-- telemetry -->
+  <rect x="28" y="514" width="196" height="76" rx="8" fill="#f2f3f5" stroke="#7b8794" stroke-width="1.5"/>
+  <text class="t c" x="126" y="542" style="font-size:15px">jrtc xApps → Grafana</text>
+  <text class="c" x="126" y="566">per-UE CQI, MCS, Mb/s</text>
+
+  <!-- trace library -->
+  <rect x="244" y="514" width="180" height="76" rx="8" fill="#f1ecfa" stroke="#6b4fa3" stroke-width="1.5"/>
+  <text class="t c" x="334" y="538" style="font-size:15px">Trace library</text>
+  <text class="m c" x="334" y="558">traces/lib/*.csv</text>
+  <text class="m c" x="334" y="577">gen_traces.py</text>
+
+  <!-- trace_ctl.sh -->
+  <rect x="460" y="514" width="190" height="76" rx="8" fill="#f1ecfa" stroke="#6b4fa3" stroke-width="1.5"/>
+  <text class="tm c" x="555" y="538">trace_ctl.sh</text>
+  <text class="c" x="555" y="558" style="font-size:13px">switches UE 1 to trace_2</text>
+  <text class="c" x="555" y="577" style="font-size:13px">by writing <tspan class="m">ue1.ctl</tspan></text>
+
+  <!-- data path -->
+  <line class="data" x1="108" y1="102" x2="108" y2="242" marker-start="url(#ce-a)" marker-end="url(#ce-a)"/>
+  <text class="s" x="116" y="214">N2 / N3</text>
+  <line class="data" x1="190" y1="294" x2="234" y2="294" marker-start="url(#ce-a)" marker-end="url(#ce-a)"/>
+  <text class="s c" x="212" y="286">IQ</text>
+  <line class="data" x1="418" y1="262" x2="474" y2="234" marker-start="url(#ce-a)" marker-end="url(#ce-a)"/>
+  <line class="data" x1="418" y1="294" x2="474" y2="314" marker-start="url(#ce-a)" marker-end="url(#ce-a)"/>
+  <line class="data" x1="418" y1="326" x2="474" y2="422" marker-start="url(#ce-a)" marker-end="url(#ce-a)"/>
+
+  <!-- channel control -->
+  <line class="ctl" x1="426" y1="552" x2="458" y2="552" marker-end="url(#ce-c)"/>
+  <line class="ctl" x1="555" y1="512" x2="555" y2="470" marker-end="url(#ce-c)"/>
+
+  <!-- telemetry -->
+  <line class="tel" x1="108" y1="346" x2="108" y2="512" marker-end="url(#ce-t)"/>
+</svg>
