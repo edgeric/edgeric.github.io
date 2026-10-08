@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 184" width="780" height="184" role="img" aria-labelledby="lp-title lp-desc">
+  <title id="lp-title">The EdgeRIC-RT loop</title>
+  <desc id="lp-desc">Every TTI the OCUDU gNB's MAC scheduler sends a report of each UE's CQI and backlog to the rt_bridge xApp in jrtc, which passes it to the scheduler muApp. The muApp answers with per-UE weights, which rt_bridge hands back to the gNB to apply in exactly the next DL slot.</desc>
+  <defs>
+    <marker id="lp-rep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f6db5"/></marker>
+    <marker id="lp-act" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0561b"/></marker>
+  </defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #3e4c59; font-size: 14px; text-anchor: middle; }
+    .t { font-size: 16px; font-weight: 700; fill: #1f2933; }
+    .mt { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 16px; font-weight: 700; fill: #1f2933; }
+    .lrep { fill: #2f6db5; font-weight: 700; }
+    .lact { fill: #c0561b; font-weight: 700; }
+    .ran { fill: #e8f1fb; stroke: #2f6db5; stroke-width: 1.6; }
+    .rtc { fill: #f1ecfa; stroke: #6b4fa3; stroke-width: 1.6; }
+    .ric { fill: #f3f8f3; stroke: #4f8a55; stroke-width: 1.6; }
+    .rep { stroke: #2f6db5; stroke-width: 2.2; fill: none; }
+    .act { stroke: #c0561b; stroke-width: 2.2; fill: none; }
+  </style>
+
+  <rect width="780" height="184" fill="#ffffff"/>
+
+  <text class="lrep" x="390" y="28">report: each UE's CQI and backlog, every TTI</text>
+
+  <rect class="ran" x="20" y="50" width="200" height="84" rx="10"/>
+  <text class="t" x="120" y="86">OCUDU gNB</text>
+  <text x="120" y="108">MAC scheduler</text>
+
+  <rect class="rtc" x="290" y="50" width="200" height="84" rx="10"/>
+  <text class="mt" x="390" y="86">rt_bridge</text>
+  <text x="390" y="108">jrtc xApp</text>
+
+  <rect class="ric" x="560" y="50" width="200" height="84" rx="10"/>
+  <text class="t" x="660" y="86">scheduler muApp</text>
+  <text x="660" y="108">max-weight, PF, PPO, …</text>
+
+  <line class="rep" x1="222" y1="76" x2="286" y2="76" marker-end="url(#lp-rep)"/>
+  <line class="rep" x1="492" y1="76" x2="556" y2="76" marker-end="url(#lp-rep)"/>
+  <line class="act" x1="558" y1="110" x2="494" y2="110" marker-end="url(#lp-act)"/>
+  <line class="act" x1="288" y1="110" x2="224" y2="110" marker-end="url(#lp-act)"/>
+
+  <text class="lact" x="390" y="168">action: per-UE weights, applied in exactly the next DL slot</text>
+</svg>
