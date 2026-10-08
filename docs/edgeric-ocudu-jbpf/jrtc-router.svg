@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 420" width="820" height="420" role="img" aria-labelledby="rt-title rt-desc">
+  <title id="rt-title">The jrtc stream router</title>
+  <desc id="rt-desc">Codelets in the gNB write to output channels in jbpf IO shared memory: out_rts_stats, the upt channels and out_rt_report. jrt-controller's router thread matches each message's stream ID against the apps' subscriptions and puts it on the queue of every app that subscribed: dashboard_realtime_scheduling.py, upt_app_demo.py and rt_bridge_app.py, which drain their queues with jrtc_router_receive. In the other direction, rt_bridge writes actions with jrtc_router_channel_send_input_msg into the input channel rt_act_in of the rt_ctrl codelet. A stream ID is 16 bytes: a version, a forward destination, the device ID, a hash of the stream path (deployment, codeletset and codelet) and a hash of the channel name.</desc>
+  <defs>
+    <marker id="rt-rep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f6db5"/></marker>
+    <marker id="rt-act" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0561b"/></marker>
+  </defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #3e4c59; font-size: 14px; }
+    .t { font-size: 15px; font-weight: 700; fill: #1f2933; }
+    .m { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 13px; }
+    .mb { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 13px; font-weight: 700; fill: #1f2933; }
+    .s { font-size: 13px; fill: #616e7c; }
+    .c { text-anchor: middle; }
+    .grp { fill: #fafbfc; stroke: #9aa5b1; stroke-width: 1.3; stroke-dasharray: 7 5; }
+    .box { fill: #eef2f7; stroke: #5b6b82; stroke-width: 1.4; }
+    .rtc { fill: #f1ecfa; stroke: #6b4fa3; stroke-width: 1.6; }
+    .app { fill: #ffffff; stroke: #6b4fa3; stroke-width: 1.3; }
+    .chan { fill: #eef2f7; stroke: #5b6b82; stroke-width: 1.2; stroke-dasharray: 4 3; }
+    .q { fill: #f1ecfa; stroke: #6b4fa3; stroke-width: 1; }
+    .rep { stroke: #2f6db5; stroke-width: 2; fill: none; }
+    .act { stroke: #c0561b; stroke-width: 2; fill: none; }
+    .fld { fill: #ffffff; stroke: #5b6b82; stroke-width: 1.2; }
+  </style>
+
+  <rect width="820" height="420" fill="#ffffff"/>
+
+  <!-- gNB: codelet channels -->
+  <rect class="grp" x="12" y="38" width="172" height="252" rx="10"/>
+  <rect x="22" y="28" width="152" height="20" fill="#ffffff"/>
+  <text class="s" x="28" y="43">OCUDU gNB · device 1</text>
+
+  <rect class="chan" x="24" y="58" width="148" height="40" rx="6"/>
+  <text class="m c" x="98" y="75">out_rts_stats</text>
+  <text class="s c" x="98" y="91">rts_stats · 134 ms</text>
+  <rect class="chan" x="24" y="110" width="148" height="40" rx="6"/>
+  <text class="m c" x="98" y="127">out_rlc_queue, …</text>
+  <text class="s c" x="98" y="143">upt codelets</text>
+  <rect class="chan" x="24" y="162" width="148" height="40" rx="6"/>
+  <text class="m c" x="98" y="179">out_rt_report</text>
+  <text class="s c" x="98" y="195">rt_report · every slot</text>
+  <rect class="chan" x="24" y="236" width="148" height="40" rx="6"/>
+  <text class="m c" x="98" y="253">rt_act_in</text>
+  <text class="s c" x="98" y="269">rt_ctrl · input</text>
+
+  <!-- jrt-controller -->
+  <rect class="grp" x="198" y="38" width="610" height="252" rx="10"/>
+  <rect x="208" y="28" width="176" height="20" fill="#ffffff"/>
+  <text class="s" x="214" y="43">jrt-controller · pod jrtc-0</text>
+
+  <rect class="box" x="212" y="58" width="70" height="218" rx="8"/>
+  <text class="t c" x="247" y="154">jbpf IO</text>
+  <text class="s c" x="247" y="172">shared</text>
+  <text class="s c" x="247" y="187">memory</text>
+
+  <rect class="rtc" x="310" y="58" width="136" height="144" rx="8"/>
+  <text class="t c" x="378" y="100">stream router</text>
+  <text class="m c" x="378" y="120" fill="#616e7c">jrtc_router</text>
+  <text class="c" x="378" y="146">stream ID →</text>
+  <text class="c" x="378" y="163">subscribed apps</text>
+  <text class="s c" x="378" y="186">1 stream : N apps</text>
+
+  <!-- apps, one queue each -->
+  <text class="s" x="520" y="54">Python xApps · one queue each</text>
+  <rect class="app" x="520" y="62" width="276" height="44" rx="6"/>
+  <text class="mb" x="562" y="80" style="font-size:11.5px">dashboard_realtime_scheduling.py</text>
+  <text class="s" x="562" y="97">→ VictoriaMetrics</text>
+  <rect class="app" x="520" y="114" width="276" height="44" rx="6"/>
+  <text class="mb" x="562" y="132">upt_app_demo.py</text>
+  <text class="s" x="562" y="149">→ VictoriaMetrics</text>
+  <rect class="app" x="520" y="166" width="276" height="66" rx="6"/>
+  <text class="mb" x="562" y="184">rt_bridge_app.py</text>
+  <text class="s" x="562" y="201">own loop, never sleeps</text>
+  <text class="s" x="562" y="218">↔ muApps over Unix sockets</text>
+
+  <!-- queue glyphs -->
+  <rect class="q" x="528" y="74" width="7" height="20"/><rect class="q" x="537" y="74" width="7" height="20"/><rect class="q" x="546" y="74" width="7" height="20"/>
+  <rect class="q" x="528" y="126" width="7" height="20"/><rect class="q" x="537" y="126" width="7" height="20"/><rect class="q" x="546" y="126" width="7" height="20"/>
+  <rect class="q" x="528" y="174" width="7" height="20"/><rect class="q" x="537" y="174" width="7" height="20"/><rect class="q" x="546" y="174" width="7" height="20"/>
+
+  <!-- output streams: codelet -> shared memory -> router -> app queue -->
+  <line class="rep" x1="172" y1="78" x2="210" y2="78" marker-end="url(#rt-rep)"/>
+  <line class="rep" x1="172" y1="130" x2="210" y2="130" marker-end="url(#rt-rep)"/>
+  <line class="rep" x1="172" y1="182" x2="210" y2="182" marker-end="url(#rt-rep)"/>
+  <line class="rep" x1="282" y1="78" x2="308" y2="78" marker-end="url(#rt-rep)"/>
+  <line class="rep" x1="282" y1="130" x2="308" y2="130" marker-end="url(#rt-rep)"/>
+  <line class="rep" x1="282" y1="182" x2="308" y2="182" marker-end="url(#rt-rep)"/>
+  <line class="rep" x1="446" y1="84" x2="518" y2="84" marker-end="url(#rt-rep)"/>
+  <line class="rep" x1="446" y1="136" x2="518" y2="136" marker-end="url(#rt-rep)"/>
+  <line class="rep" x1="446" y1="184" x2="518" y2="184" marker-end="url(#rt-rep)"/>
+  <text class="s" x="520" y="254">read: <tspan class="m" style="font-size:11.5px">jrtc_router_receive()</tspan></text>
+  <text class="s" x="520" y="272">write: <tspan class="m" style="font-size:11px">jrtc_router_channel_send_input_msg()</tspan></text>
+
+  <!-- input stream: app -> shared memory -> codelet -->
+  <text class="c" x="400" y="219" style="font-size:12.5px;font-weight:700;fill:#c0561b">actions</text>
+  <line class="act" x1="518" y1="226" x2="284" y2="226" marker-end="url(#rt-act)"/>
+  <line class="act" x1="212" y1="256" x2="174" y2="256" marker-end="url(#rt-act)"/>
+
+  <!-- stream ID -->
+  <text class="t" x="16" y="333">stream ID</text>
+  <text class="s" x="16" y="350">16 bytes</text>
+  <rect class="fld" x="110" y="316" width="50" height="30"/>
+  <text class="m c" x="135" y="335">ver</text>
+  <rect class="fld" x="160" y="316" width="76" height="30"/>
+  <text class="m c" x="198" y="335">fwd_dst</text>
+  <rect class="fld" x="236" y="316" width="94" height="30"/>
+  <text class="m c" x="283" y="335">device_id</text>
+  <rect class="fld" x="330" y="316" width="235" height="30" style="fill:#e8f1fb"/>
+  <text class="m c" x="447" y="335">stream_path</text>
+  <rect class="fld" x="565" y="316" width="235" height="30" style="fill:#e8f1fb"/>
+  <text class="m c" x="682" y="335">stream_name</text>
+  <text class="s c" x="135" y="364">6 bit</text>
+  <text class="s c" x="198" y="364">7 bit</text>
+  <text class="s c" x="283" y="364">7 bit · gNB = 1</text>
+  <text class="s c" x="447" y="364">54-bit hash of</text>
+  <text class="m c" x="447" y="382" style="font-size:11.5px">edgeric_rt://jbpf_agent/</text>
+  <text class="m c" x="447" y="397" style="font-size:11.5px">edgeric_rt/rt_report</text>
+  <text class="s c" x="682" y="364">54-bit hash of the channel</text>
+  <text class="m c" x="682" y="382" style="font-size:11.5px">out_rt_report</text>
+</svg>

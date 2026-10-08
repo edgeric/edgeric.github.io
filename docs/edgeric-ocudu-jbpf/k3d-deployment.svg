@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640" role="img" aria-labelledby="dep-title dep-desc">
+  <title id="dep-title">EdgeRIC with OCUDU-jbpf: end-to-end k3d deployment</title>
+  <desc id="dep-desc">One k3d cluster on one Docker host. Namespace open5gs runs the Open5GS core. Namespace ran, from the Helm release ran, runs three pods. Pod srs-gnb-du1-0 holds the OCUDU gNB with its jbpf agent, a C++ ZMQ broker and N Duranta OAI UEs that exchange IQ samples over ZMQ, plus the srs-gnb-proxy container that takes codelet loads on port 30450. Pod jrtc-0 runs jrt-controller, its stream router and Python xApps, and jrtc-decoder. Pod edgeric-0 runs the EdgeRIC muApps. The gNB and jrtc share jbpf shared memory: reports and telemetry out, actions in. jrtc and edgeric-0 exchange reports and actions over Unix sockets. Both write metrics to VictoriaMetrics, which Grafana reads on NodePort 30490. The repo checkout is mounted into the pods as hostPath volumes.</desc>
+  <defs>
+    <marker id="dep-rep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f6db5"/></marker>
+    <marker id="dep-act" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0561b"/></marker>
+    <marker id="dep-dat" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3e4c59"/></marker>
+    <marker id="dep-dat-s" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M10,0 L0,5 L10,10 z" fill="#3e4c59"/></marker>
+    <marker id="dep-mgt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b4fa3"/></marker>
+    <marker id="dep-met" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7b8794"/></marker>
+  </defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #3e4c59; font-size: 14px; }
+    .t { font-size: 15px; font-weight: 700; fill: #1f2933; }
+    .h { font-size: 16px; font-weight: 700; fill: #1f2933; }
+    .m { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 13px; }
+    .s { font-size: 13px; fill: #616e7c; }
+    .c { text-anchor: middle; }
+    .host { fill: #ffffff; stroke: #cbd2d9; stroke-width: 1.2; }
+    .clu { fill: #f5f7fa; stroke: #5b6b82; stroke-width: 1.4; }
+    .grp { fill: #fafbfc; stroke: #9aa5b1; stroke-width: 1.3; stroke-dasharray: 7 5; }
+    .box { fill: #eef2f7; stroke: #5b6b82; stroke-width: 1.4; }
+    .ran { fill: #e8f1fb; stroke: #2f6db5; stroke-width: 1.6; }
+    .rtc { fill: #f1ecfa; stroke: #6b4fa3; stroke-width: 1.6; }
+    .ric { fill: #f3f8f3; stroke: #4f8a55; stroke-width: 1.6; }
+    .rep { stroke: #2f6db5; stroke-width: 2; fill: none; }
+    .act { stroke: #c0561b; stroke-width: 2; fill: none; }
+    .dat { stroke: #3e4c59; stroke-width: 1.6; fill: none; }
+    .mgt { stroke: #6b4fa3; stroke-width: 1.6; stroke-dasharray: 6 4; fill: none; }
+    .met { stroke: #7b8794; stroke-width: 1.8; stroke-dasharray: 1 4; stroke-linecap: round; fill: none; }
+    .lrep { fill: #2f6db5; font-weight: 700; }
+    .lact { fill: #c0561b; font-weight: 700; }
+  </style>
+
+  <rect width="800" height="640" fill="#ffffff"/>
+
+  <!-- host -->
+  <rect class="host" x="4" y="4" width="792" height="632" rx="14"/>
+  <text class="s" x="20" y="24">Host · Linux with Docker</text>
+
+  <rect class="box" x="20" y="36" width="232" height="44" rx="8"/>
+  <text class="t c" x="136" y="54">edgeric-ocudu-jbpf checkout</text>
+  <text class="m c" x="136" y="72">$REPO_ROOT</text>
+
+  <!-- legend -->
+  <line class="rep" x1="300" y1="50" x2="332" y2="50" marker-end="url(#dep-rep)"/>
+  <text x="340" y="54">reports, telemetry</text>
+  <line class="act" x1="500" y1="50" x2="532" y2="50" marker-end="url(#dep-act)"/>
+  <text x="540" y="54">actions</text>
+  <line class="dat" x1="620" y1="50" x2="652" y2="50" marker-end="url(#dep-dat)"/>
+  <text x="660" y="54">IQ, N2 / N3</text>
+  <line class="mgt" x1="300" y1="72" x2="332" y2="72" marker-end="url(#dep-mgt)"/>
+  <text x="340" y="76">load / unload codelets</text>
+  <line class="met" x1="500" y1="72" x2="532" y2="72" marker-end="url(#dep-met)"/>
+  <text x="540" y="76">metrics</text>
+
+  <!-- hostPath mounts into the cluster -->
+  <line class="dat" x1="136" y1="80" x2="136" y2="108" stroke-dasharray="4 3" marker-end="url(#dep-dat)"/>
+  <text class="s" x="146" y="98">hostPath mounts: codelets, xApps, muApps</text>
+
+  <!-- cluster -->
+  <rect class="clu" x="16" y="112" width="768" height="512" rx="12"/>
+  <rect x="30" y="102" width="292" height="20" fill="#ffffff"/>
+  <text class="t" x="38" y="117">k3d cluster janus-cluster <tspan class="s" font-weight="400">· one k3s node</tspan></text>
+
+  <!-- namespace open5gs -->
+  <rect class="grp" x="28" y="140" width="142" height="300" rx="10"/>
+  <rect x="38" y="130" width="98" height="20" fill="#f5f7fa"/>
+  <text class="s" x="44" y="145">ns open5gs</text>
+  <text class="t c" x="99" y="172">Open5GS core</text>
+  <rect class="box" x="42" y="186" width="114" height="30" rx="6"/>
+  <text class="c" x="99" y="206">AMF</text>
+  <rect class="box" x="42" y="226" width="114" height="30" rx="6"/>
+  <text class="c" x="99" y="246">SMF</text>
+  <rect class="box" x="42" y="266" width="114" height="30" rx="6"/>
+  <text class="c" x="99" y="286">UPF · iperf3</text>
+  <rect class="box" x="42" y="306" width="114" height="44" rx="6"/>
+  <text class="c" x="99" y="324" style="font-size:12px">NRF · AUSF · UDM</text>
+  <text class="c" x="99" y="341" style="font-size:12px">UDR · PCF · …</text>
+  <rect class="box" x="42" y="360" width="114" height="30" rx="6"/>
+  <text class="c" x="99" y="380">MongoDB</text>
+  <text class="s c" x="99" y="420">Helm chart open5gs</text>
+
+  <!-- namespace ran -->
+  <rect class="grp" x="182" y="140" width="590" height="470" rx="10"/>
+  <rect x="192" y="130" width="226" height="20" fill="#f5f7fa"/>
+  <text class="s" x="198" y="145">ns ran · Helm release ran</text>
+
+  <!-- pod srs-gnb-du1-0 -->
+  <rect class="grp" x="194" y="160" width="566" height="148" rx="10"/>
+  <rect x="204" y="150" width="128" height="20" fill="#fafbfc"/>
+  <text class="s" x="210" y="165">pod srs-gnb-du1-0</text>
+
+  <rect class="ran" x="208" y="178" width="178" height="66" rx="8"/>
+  <text class="h c" x="297" y="200">OCUDU gNB</text>
+  <text class="c" x="297" y="218">+ jbpf agent, codelets</text>
+  <text class="m c" x="297" y="236">ocudujbpf</text>
+
+  <rect class="box" x="450" y="178" width="124" height="66" rx="8"/>
+  <text class="t c" x="512" y="200">ZMQ broker</text>
+  <text class="c" x="512" y="218">C++</text>
+  <text class="m c" x="512" y="236">grbroker</text>
+
+  <rect class="box" x="626" y="178" width="122" height="66" rx="8"/>
+  <text class="t c" x="687" y="200">N × OAI UE</text>
+  <text class="c" x="687" y="218">netns ue1…ueN</text>
+  <text class="m c" x="687" y="236">durue1</text>
+
+  <rect class="box" x="208" y="262" width="112" height="38" rx="6"/>
+  <text class="m c" x="264" y="278">srs-gnb-proxy</text>
+  <text class="s c" x="264" y="294">LCM :30450</text>
+
+  <!-- IQ over ZMQ -->
+  <line class="dat" x1="388" y1="211" x2="448" y2="211" marker-start="url(#dep-dat-s)" marker-end="url(#dep-dat)"/>
+  <text class="s c" x="418" y="203">IQ</text>
+  <text class="s c" x="418" y="229">ipc://</text>
+  <line class="dat" x1="576" y1="211" x2="624" y2="211" marker-start="url(#dep-dat-s)" marker-end="url(#dep-dat)"/>
+  <text class="s c" x="600" y="203">IQ</text>
+  <text class="s c" x="600" y="229">ipc://</text>
+
+  <!-- N2 / N3 to the core -->
+  <line class="dat" x1="206" y1="198" x2="158" y2="201" marker-start="url(#dep-dat-s)" marker-end="url(#dep-dat)"/>
+  <text class="s c" x="182" y="192">N2</text>
+  <line class="dat" x1="206" y1="232" x2="158" y2="281" marker-start="url(#dep-dat-s)" marker-end="url(#dep-dat)"/>
+  <text class="s c" x="176" y="248">N3</text>
+
+  <!-- proxy to gNB agent: LCM socket -->
+  <line class="mgt" x1="264" y1="260" x2="264" y2="246" marker-end="url(#dep-mgt)"/>
+
+  <!-- pod jrtc-0 -->
+  <rect class="grp" x="194" y="352" width="282" height="148" rx="10"/>
+  <rect x="204" y="342" width="84" height="20" fill="#fafbfc"/>
+  <text class="s" x="210" y="357">pod jrtc-0</text>
+  <rect class="rtc" x="208" y="370" width="254" height="74" rx="8"/>
+  <text class="h c" x="335" y="392">jrt-controller</text>
+  <text class="c" x="335" y="410">stream router + Python xApps</text>
+  <text class="m c" x="335" y="430">rt_bridge · dashboards</text>
+  <rect class="box" x="208" y="454" width="186" height="34" rx="6"/>
+  <text class="c" x="301" y="475"><tspan class="m">jrtc-decoder</tspan> · gRPC</text>
+
+  <!-- pod edgeric-0 -->
+  <rect class="grp" x="566" y="352" width="194" height="148" rx="10"/>
+  <rect x="576" y="342" width="104" height="20" fill="#fafbfc"/>
+  <text class="s" x="582" y="357">pod edgeric-0</text>
+  <rect class="ric" x="580" y="370" width="166" height="118" rx="8"/>
+  <text class="h c" x="663" y="392">EdgeRIC muApps</text>
+  <text class="m c" x="663" y="414">sched_muapp.py</text>
+  <text class="m c" x="663" y="432">train_ppo.py</text>
+  <text class="m c" x="663" y="450">eval.py</text>
+  <text class="s c" x="663" y="474">numpy · torch (CPU)</text>
+
+  <!-- gNB <-> jrtc: jbpf shared memory -->
+  <line class="rep" x1="340" y1="246" x2="340" y2="368" marker-end="url(#dep-rep)"/>
+  <line class="act" x1="364" y1="368" x2="364" y2="246" marker-end="url(#dep-act)"/>
+  <text x="376" y="324">jbpf shared memory</text>
+  <text class="s" x="376" y="340">hostPath /dev/shm</text>
+
+  <!-- jrtc-ctl load path -->
+  <line class="mgt" x1="300" y1="368" x2="300" y2="302" marker-end="url(#dep-mgt)"/>
+  <text class="s" x="292" y="334" text-anchor="end">jrtc-ctl</text>
+
+  <!-- jrtc <-> edgeric: Unix sockets -->
+  <line class="rep" x1="464" y1="404" x2="578" y2="404" marker-end="url(#dep-rep)"/>
+  <line class="act" x1="578" y1="428" x2="464" y2="428" marker-end="url(#dep-act)"/>
+  <text class="c" x="521" y="394">Unix sockets</text>
+  <text class="s c" x="521" y="448">hostPath run/</text>
+
+  <!-- metrics -->
+  <rect class="box" x="360" y="540" width="236" height="46" rx="8"/>
+  <text class="t c" x="478" y="560">VictoriaMetrics</text>
+  <text class="m c" x="478" y="577">:8428</text>
+  <rect class="box" x="626" y="540" width="134" height="46" rx="8"/>
+  <text class="t c" x="693" y="560">Grafana</text>
+  <text class="s c" x="693" y="577">NodePort 30490</text>
+  <line class="met" x1="430" y1="446" x2="430" y2="536"/>
+  <line class="met" x1="430" y1="500" x2="430" y2="536" marker-end="url(#dep-met)"/>
+  <line class="met" x1="590" y1="490" x2="590" y2="536" marker-end="url(#dep-met)"/>
+  <line class="met" x1="598" y1="563" x2="622" y2="563" marker-end="url(#dep-met)"/>
+  <text class="s" x="438" y="522">HTTP /write</text>
+</svg>

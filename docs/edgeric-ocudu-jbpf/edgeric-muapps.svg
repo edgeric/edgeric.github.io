@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 498" width="820" height="498" role="img" aria-labelledby="mu-title mu-desc">
+  <title id="mu-title">EdgeRIC muApps: the per-TTI loop and its Python packages</title>
+  <desc id="mu-desc">A muApp is a Python process in pod edgeric-0. sched_muapp.py runs one pass per batch of reports: RtE2.poll waits on muapp.sock for a report newer than RICtime and drains the queue; the policy observes every report; it computes weights from the newest report only; RtE2.send tags the action with the next DL slot and a sequence number and sends it to bridge.sock; only then does it log the reports with RunLog and VmPusher. Every scheduler implements the Policy interface: weights(rep) returns a weight per du_ue_index, or None for the gNB's stock scheduler, and observe(rep) sees every report. The schedulers are Stock, Fixed, RoundRobin, PF, MaxCQI, BestCQI, MaxWeight and RL, a trained NumpyPolicy. train_ppo.py runs the same loop while learning: the NumpyPolicy samples an action, RtE2.send gives it a sequence number that SampleRing remembers, SampleRing.resolve matches it to the report of its target TTI that echoes the same sequence number with status HIT and reads the reward from it, and PPO.update in torch learns from every 5000 samples.</desc>
+  <defs>
+    <marker id="mu-rep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f6db5"/></marker>
+    <marker id="mu-act" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0561b"/></marker>
+    <marker id="mu-dat" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3e4c59"/></marker>
+    <marker id="mu-lp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7b8794"/></marker>
+  </defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #3e4c59; font-size: 14px; }
+    .t { font-size: 15px; font-weight: 700; fill: #1f2933; }
+    .m { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 13px; }
+    .mb { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 13px; font-weight: 700; fill: #1f2933; }
+    .tag { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4f8a55; }
+    .s { font-size: 13px; fill: #616e7c; }
+    .c { text-anchor: middle; }
+    .pod { fill: #fafbfc; stroke: #9aa5b1; stroke-width: 1.3; stroke-dasharray: 7 5; }
+    .stg { fill: #f3f8f3; stroke: #4f8a55; stroke-width: 1.5; }
+    .side { fill: #ffffff; stroke: #9aa5b1; stroke-width: 1.3; }
+    .chip { fill: #ffffff; stroke: #4f8a55; stroke-width: 1.2; }
+    .rep { stroke: #2f6db5; stroke-width: 2; fill: none; }
+    .act { stroke: #c0561b; stroke-width: 2; fill: none; }
+    .dat { stroke: #3e4c59; stroke-width: 1.6; fill: none; }
+    .lp { stroke: #7b8794; stroke-width: 1.4; stroke-dasharray: 5 4; fill: none; }
+    .lrep { fill: #2f6db5; font-weight: 700; }
+    .lact { fill: #c0561b; font-weight: 700; }
+  </style>
+
+  <rect width="820" height="498" fill="#ffffff"/>
+  <rect class="pod" x="4" y="12" width="812" height="482" rx="12"/>
+  <rect x="14" y="2" width="318" height="20" fill="#ffffff"/>
+  <text class="s" x="20" y="17">pod edgeric-0 · Python 3.12 · numpy · torch (CPU)</text>
+
+  <!-- 1. the scheduler loop -->
+  <text class="t" x="20" y="44">sched_muapp.py <tspan class="s" font-weight="400">· one pass per batch of reports</tspan></text>
+
+  <line class="rep" x1="18" y1="108" x2="98" y2="108" marker-end="url(#mu-rep)"/>
+  <text class="lrep" x="22" y="99">reports</text>
+  <text class="m" x="22" y="126" style="font-size:11.5px">muapp.sock</text>
+
+  <rect class="stg" x="100" y="64" width="128" height="88" rx="8"/>
+  <text class="tag" x="108" y="80">rte2</text>
+  <text class="mb" x="108" y="99">RtE2.poll()</text>
+  <text x="108" y="118" style="font-size:12.5px">waits for a report</text>
+  <text x="108" y="135" style="font-size:12.5px">newer than RICtime</text>
+
+  <rect class="stg" x="244" y="64" width="128" height="88" rx="8"/>
+  <text class="tag" x="252" y="80">policies</text>
+  <text class="mb" x="252" y="99">observe(r)</text>
+  <text x="252" y="118" style="font-size:12.5px">every report:</text>
+  <text x="252" y="135" style="font-size:12.5px">PF averages, …</text>
+
+  <rect class="stg" x="388" y="64" width="128" height="88" rx="8"/>
+  <text class="tag" x="396" y="80">policies</text>
+  <text class="mb" x="396" y="99">weights(newest)</text>
+  <text x="396" y="118" style="font-size:12.5px">acts on the newest</text>
+  <text x="396" y="135" style="font-size:12.5px">only (Lazy RIC)</text>
+
+  <rect class="stg" x="532" y="64" width="128" height="88" rx="8"/>
+  <text class="tag" x="540" y="80">rte2</text>
+  <text class="mb" x="540" y="99">RtE2.send()</text>
+  <text x="540" y="118" style="font-size:12.5px">target: next DL slot</text>
+  <text x="540" y="135" style="font-size:12.5px">+ seq number</text>
+
+  <rect class="side" x="676" y="64" width="128" height="88" rx="8"/>
+  <text class="tag" x="684" y="80">metrics</text>
+  <text class="t" x="684" y="99" style="font-size:14px">bookkeeping</text>
+  <text x="684" y="118" style="font-size:12.5px">RunLog → ttis.npz</text>
+  <text x="684" y="135" style="font-size:12.5px">VmPusher thread</text>
+
+  <line class="dat" x1="228" y1="108" x2="242" y2="108" marker-end="url(#mu-dat)"/>
+  <line class="dat" x1="372" y1="108" x2="386" y2="108" marker-end="url(#mu-dat)"/>
+  <line class="dat" x1="516" y1="108" x2="530" y2="108" marker-end="url(#mu-dat)"/>
+  <line class="dat" x1="660" y1="108" x2="674" y2="108" marker-end="url(#mu-dat)"/>
+
+  <!-- action out -->
+  <path class="act" d="M596,64 L596,52 L812,52" marker-end="url(#mu-act)"/>
+  <text class="lact" x="608" y="46">action</text>
+  <text class="m" x="660" y="46" style="font-size:11.5px">→ bridge.sock</text>
+
+  <!-- next batch -->
+  <path class="lp" d="M740,152 L740,168 L164,168 L164,156" marker-end="url(#mu-lp)"/>
+  <text class="s c" x="452" y="184">next batch</text>
+
+  <!-- 2. the policy interface -->
+  <text class="t" x="20" y="214">Policy interface <tspan class="s" font-weight="400">· edgeric_rt.policies</tspan></text>
+  <rect class="side" x="20" y="224" width="300" height="94" rx="8"/>
+  <text class="mb" x="32" y="244">class Policy</text>
+  <text class="m" x="32" y="266">weights(rep)</text>
+  <text class="s" x="140" y="266">→ {du_ue_index: weight}</text>
+  <text class="m" x="32" y="286">observe(rep)</text>
+  <text class="s" x="140" y="286">sees every report</text>
+  <text class="s" x="32" y="307">None: no action, the gNB's own scheduler</text>
+
+  <line class="dat" x1="320" y1="271" x2="346" y2="271" marker-end="url(#mu-dat)"/>
+
+  <rect class="chip" x="348" y="226" width="56" height="26" rx="13"/>
+  <text class="m c" x="376" y="243">Stock</text>
+  <rect class="chip" x="412" y="226" width="56" height="26" rx="13"/>
+  <text class="m c" x="440" y="243">Fixed</text>
+  <rect class="chip" x="476" y="226" width="92" height="26" rx="13"/>
+  <text class="m c" x="522" y="243">RoundRobin</text>
+  <rect class="chip" x="576" y="226" width="36" height="26" rx="13"/>
+  <text class="m c" x="594" y="243">PF</text>
+  <rect class="chip" x="620" y="226" width="64" height="26" rx="13"/>
+  <text class="m c" x="652" y="243">MaxCQI</text>
+  <rect class="chip" x="692" y="226" width="70" height="26" rx="13"/>
+  <text class="m c" x="727" y="243">BestCQI</text>
+  <rect class="chip" x="348" y="258" width="84" height="26" rx="13"/>
+  <text class="m c" x="390" y="275">MaxWeight</text>
+  <rect class="chip" x="440" y="258" width="148" height="26" rx="13" style="fill:#f3f8f3"/>
+  <text class="m c" x="514" y="275">RL · NumpyPolicy</text>
+  <text class="s" x="348" y="306"><tspan class="m" style="font-size:11.5px">SlotSelector</tspan>: one UE per slot (default),</text>
+  <text class="s" x="348" y="322">or <tspan class="m" style="font-size:11.5px">--alloc shared</tspan>: the slot's PRBs split by weight</text>
+
+  <!-- 3. online training -->
+  <text class="t" x="20" y="358">train_ppo.py <tspan class="s" font-weight="400">· the same loop, learning online</tspan></text>
+
+  <rect class="stg" x="20" y="370" width="176" height="82" rx="8"/>
+  <text class="t" x="32" y="390" style="font-size:14px">act</text>
+  <text class="mb" x="32" y="410">NumpyPolicy</text>
+  <text class="s" x="32" y="430">samples an action</text>
+
+  <rect class="stg" x="216" y="370" width="176" height="82" rx="8"/>
+  <text class="t" x="228" y="390" style="font-size:14px">send and remember</text>
+  <text class="mb" x="228" y="410">RtE2.send()</text>
+  <text class="mb" x="228" y="430">SampleRing.add()</text>
+
+  <rect class="stg" x="412" y="370" width="196" height="82" rx="8"/>
+  <text class="t" x="424" y="390" style="font-size:14px">match the reward</text>
+  <text class="mb" x="424" y="410">SampleRing.resolve()</text>
+  <text class="s" x="424" y="429">report of its target TTI:</text>
+  <text class="s" x="424" y="445">HIT, same seq → DRB bytes</text>
+
+  <rect class="stg" x="628" y="370" width="176" height="82" rx="8"/>
+  <text class="t" x="640" y="390" style="font-size:14px">learn</text>
+  <text class="mb" x="640" y="410">PPO.update()</text>
+  <text class="s" x="640" y="430">torch, per 5000 samples</text>
+
+  <line class="dat" x1="196" y1="408" x2="214" y2="408" marker-end="url(#mu-dat)"/>
+  <line class="dat" x1="392" y1="408" x2="410" y2="408" marker-end="url(#mu-dat)"/>
+  <line class="dat" x1="608" y1="408" x2="626" y2="408" marker-end="url(#mu-dat)"/>
+  <path class="lp" d="M716,452 L716,468 L108,468 L108,456" marker-end="url(#mu-lp)"/>
+  <text class="s c" x="412" y="484">new policy weights, exported to numpy</text>
+</svg>

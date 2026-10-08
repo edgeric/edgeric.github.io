@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 470" width="820" height="470" role="img" aria-labelledby="xa-title xa-desc">
+  <title id="xa-title">xApps on jrtc: deployment and Python packages</title>
+  <desc id="xa-desc">A deployment YAML names a codeletset, a Python xApp and a decoder. jrtc-ctl load sends the codelets to the gNB's jbpf agent through LCM on port 30450, the Python module to jrtc over REST on port 3001, and the protobuf schemas to jrtc-decoder over gRPC. Inside jrtc an xApp stands on five layers. The xApp modules: rt_bridge_app.py runs its own loop and never sleeps; dashboard_realtime_scheduling.py and upt_app_demo.py get one handler call per message. Message layouts: rt_wire.py for the 1080-byte report and 168-byte action, and ctypes structs generated from each codelet's .proto. The jrtc_app Python API: JrtcApp, JrtcAppCfg_t, JrtcStreamCfg_t and JrtcStreamIdCfg_t, jrtc_app_create and run, which calls app_handler. The ctypes bindings: jrtc_router_lib for libjrtc_router, jrtc_bindings and jrtc_wrapper_utils. The jrtc runtime in C: the Python app loader, which calls jrtc_start_app in one sub-interpreter per app, all sharing one GIL, and the stream router.</desc>
+  <defs>
+    <marker id="xa-mgt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6b4fa3"/></marker>
+  </defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #3e4c59; font-size: 14px; }
+    .t { font-size: 15px; font-weight: 700; fill: #1f2933; }
+    .m { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 13px; }
+    .mb { font-family: SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace; font-size: 13px; font-weight: 700; fill: #1f2933; }
+    .s { font-size: 13px; fill: #616e7c; }
+    .c { text-anchor: middle; }
+    .box { fill: #eef2f7; stroke: #5b6b82; stroke-width: 1.4; }
+    .band { fill: #fafbfc; stroke: #9aa5b1; stroke-width: 1.2; }
+    .bandx { fill: #f1ecfa; stroke: #6b4fa3; stroke-width: 1.4; }
+    .pkg { fill: #ffffff; stroke: #6b4fa3; stroke-width: 1.2; }
+    .pkgn { fill: #ffffff; stroke: #9aa5b1; stroke-width: 1.2; }
+    .mgt { stroke: #6b4fa3; stroke-width: 1.6; stroke-dasharray: 6 4; fill: none; }
+  </style>
+
+  <rect width="820" height="470" fill="#ffffff"/>
+
+  <!-- deploy -->
+  <rect class="box" x="16" y="12" width="204" height="82" rx="8"/>
+  <text class="mb" x="28" y="32">rt_deployment.yaml</text>
+  <text class="m" x="28" y="52" style="font-size:11.5px">app: rt_bridge_app.py</text>
+  <text class="m" x="28" y="68" style="font-size:11.5px">codelet_set: edgeric_rt</text>
+  <text class="m" x="28" y="84" style="font-size:11.5px">decoder: jrtc-decoder</text>
+
+  <line class="mgt" x1="220" y1="53" x2="256" y2="53" marker-end="url(#xa-mgt)"/>
+  <rect class="box" x="258" y="34" width="140" height="38" rx="8"/>
+  <text class="m c" x="328" y="57">jrtc-ctl load -c</text>
+
+  <path class="mgt" d="M398,53 L414,53 L414,26 L436,26" marker-end="url(#xa-mgt)"/>
+  <line class="mgt" x1="414" y1="53" x2="436" y2="53" marker-end="url(#xa-mgt)"/>
+  <path class="mgt" d="M414,53 L414,80 L436,80" marker-end="url(#xa-mgt)"/>
+  <text x="444" y="30">codelets → gNB jbpf agent <tspan class="s">(LCM :30450)</tspan></text>
+  <text x="444" y="57">Python module → jrtc <tspan class="s">(REST :3001)</tspan></text>
+  <text x="444" y="84">protobuf schemas → jrtc-decoder <tspan class="s">(gRPC)</tspan></text>
+
+  <!-- the stack -->
+  <text class="s" x="16" y="124">Inside jrtc: each layer uses the one below it</text>
+
+  <!-- L1 xApp modules -->
+  <rect class="band" x="16" y="134" width="788" height="58" rx="8"/>
+  <text class="t" x="28" y="159">xApp modules</text>
+  <text class="s" x="28" y="176">one per deployment</text>
+  <rect class="pkg" x="160" y="141" width="182" height="44" rx="6"/>
+  <text class="mb" x="172" y="159">rt_bridge_app.py</text>
+  <text class="s" x="172" y="177">own loop, never sleeps</text>
+  <rect class="pkg" x="352" y="141" width="244" height="44" rx="6"/>
+  <text class="mb" x="364" y="159" style="font-size:11.5px">dashboard_realtime_scheduling.py</text>
+  <text class="s" x="364" y="177">app_handler() per message</text>
+  <rect class="pkg" x="606" y="141" width="190" height="44" rx="6"/>
+  <text class="mb" x="618" y="159">upt_app_demo.py</text>
+  <text class="s" x="618" y="177">app_handler() per message</text>
+
+  <!-- L2 message layouts -->
+  <rect class="band" x="16" y="200" width="788" height="58" rx="8"/>
+  <text class="t" x="28" y="225">message layouts</text>
+  <text class="s" x="28" y="242">match the codelets</text>
+  <rect class="pkgn" x="160" y="207" width="296" height="44" rx="6"/>
+  <text class="mb" x="172" y="225">rt_wire.py</text>
+  <text class="s" x="172" y="243">report 1080 B, action 168 B; muApps share it</text>
+  <rect class="pkgn" x="466" y="207" width="330" height="44" rx="6"/>
+  <text class="mb" x="478" y="225">rts_stats.py · rt_report.py</text>
+  <text class="s" x="478" y="243">ctypes structs generated from each .proto</text>
+
+  <!-- L3 jrtc_app -->
+  <rect class="bandx" x="16" y="266" width="788" height="58" rx="8"/>
+  <text class="mb" x="28" y="291" style="font-size:14px">jrtc_app</text>
+  <text class="s" x="28" y="308">jrtc Python API</text>
+  <rect class="pkg" x="160" y="273" width="330" height="44" rx="6"/>
+  <text class="m" x="172" y="291">JrtcApp · JrtcAppCfg_t</text>
+  <text class="m" x="172" y="309">JrtcStreamCfg_t · JrtcStreamIdCfg_t</text>
+  <rect class="pkg" x="500" y="273" width="296" height="44" rx="6"/>
+  <text class="m" x="512" y="291">jrtc_app_create(capsule, cfg, …)</text>
+  <text class="m" x="512" y="309">JrtcApp.run() → app_handler()</text>
+
+  <!-- L4 ctypes bindings -->
+  <rect class="band" x="16" y="332" width="788" height="58" rx="8"/>
+  <text class="t" x="28" y="357">ctypes bindings</text>
+  <text class="s" x="28" y="374">to the C library</text>
+  <rect class="pkgn" x="160" y="339" width="250" height="44" rx="6"/>
+  <text class="mb" x="172" y="357">jrtc_router_lib</text>
+  <text class="s" x="172" y="375">ctypes → <tspan class="m" style="font-size:11.5px">libjrtc_router.so</tspan></text>
+  <rect class="pkgn" x="420" y="339" width="180" height="44" rx="6"/>
+  <text class="mb" x="432" y="357">jrtc_bindings</text>
+  <text class="s" x="432" y="375">C structs, stream IDs</text>
+  <rect class="pkgn" x="610" y="339" width="186" height="44" rx="6"/>
+  <text class="mb" x="622" y="357">jrtc_wrapper_utils</text>
+  <text class="s" x="622" y="375">capsule, data entries</text>
+
+  <!-- L5 runtime -->
+  <rect class="band" x="16" y="398" width="788" height="58" rx="8"/>
+  <text class="t" x="28" y="423">jrtc runtime</text>
+  <text class="s" x="28" y="440">C, pod jrtc-0</text>
+  <rect class="pkgn" x="160" y="405" width="440" height="44" rx="6"/>
+  <text x="172" y="423">Python app loader: calls <tspan class="m">jrtc_start_app(capsule)</tspan></text>
+  <text class="s" x="172" y="441">one sub-interpreter per app; all apps share one GIL</text>
+  <rect class="pkgn" x="610" y="405" width="186" height="44" rx="6"/>
+  <text class="t" x="622" y="423" style="font-size:14px">stream router</text>
+  <text class="s" x="622" y="441">app queues, jbpf IO</text>
+</svg>
