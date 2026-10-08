@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 540" width="780" height="540" role="img">
+  <title>Real time and TCP throughput against the number of UEs</title>
+  <desc>Real time: 96 to 97 percent with 1 UE, 98 to 99 with 2, 100 with 4, 70 to 72 with 8. TCP at the UEs: 59.1, 59.6, 59.9 and 42.6 Mbit/s; the gNB carries 63 to 64 Mbit/s per air-second for any number of UEs.</desc>
+  <style>text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #52606d; font-size: 13px; }</style>
+  <rect width="780" height="540" fill="#ffffff"/>
+  <text x="16.0" y="28.0" style="font-size:14px;fill:#1f2933;font-weight:700" text-anchor="start">Real time</text>
+  <text x="16.0" y="46.0" style="font-size:12.5px;fill:#7b8794;font-weight:400" text-anchor="start">% of 23.04 MS/s, under full TCP load</text>
+  <line x1="64.0" y1="210.0" x2="764.0" y2="210.0" stroke="#9aa5b1" stroke-width="1"/>
+  <text x="56.0" y="214.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="end">0</text>
+  <line x1="64.0" y1="140.0" x2="764.0" y2="140.0" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="56.0" y="144.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="end">50</text>
+  <line x1="64.0" y1="70.0" x2="764.0" y2="70.0" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="56.0" y="74.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="end">100</text>
+  <path d="M139.5,210.0 V78.9 A4,4 0 0 1 143.5,74.9 H159.5 A4,4 0 0 1 163.5,78.9 V210.0 Z" fill="#2a78d6"/>
+  <text x="151.5" y="67.9" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="middle">96–97 %</text>
+  <path d="M314.5,210.0 V76.1 A4,4 0 0 1 318.5,72.1 H334.5 A4,4 0 0 1 338.5,76.1 V210.0 Z" fill="#2a78d6"/>
+  <text x="326.5" y="65.1" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="middle">98–99 %</text>
+  <path d="M489.5,210.0 V74.0 A4,4 0 0 1 493.5,70.0 H509.5 A4,4 0 0 1 513.5,74.0 V210.0 Z" fill="#2a78d6"/>
+  <text x="501.5" y="63.0" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="middle">100 %</text>
+  <path d="M664.5,210.0 V114.6 A4,4 0 0 1 668.5,110.6 H684.5 A4,4 0 0 1 688.5,114.6 V210.0 Z" fill="#2a78d6"/>
+  <text x="676.5" y="103.6" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="middle">70–72 %</text>
+  <text x="16.0" y="270.0" style="font-size:14px;fill:#1f2933;font-weight:700" text-anchor="start">TCP throughput at the UEs</text>
+  <text x="16.0" y="288.0" style="font-size:12.5px;fill:#7b8794;font-weight:400" text-anchor="start">Mbit/s per wall-clock second, iperf3, all UEs together</text>
+  <line x1="64.0" y1="456.0" x2="764.0" y2="456.0" stroke="#9aa5b1" stroke-width="1"/>
+  <text x="56.0" y="460.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="end">0</text>
+  <line x1="64.0" y1="416.0" x2="764.0" y2="416.0" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="56.0" y="420.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="end">20</text>
+  <line x1="64.0" y1="376.0" x2="764.0" y2="376.0" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="56.0" y="380.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="end">40</text>
+  <line x1="64.0" y1="336.0" x2="764.0" y2="336.0" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="56.0" y="340.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="end">60</text>
+  <rect x="64" y="328.0" width="700" height="2.0" fill="#cbd2d9" opacity="0.6"/>
+  <text x="764.0" y="322.0" style="font-size:12px;fill:#52606d;font-weight:400" text-anchor="end">gNB: 63–64 Mbit/s per air-second</text>
+  <path d="M139.5,456.0 V341.8 A4,4 0 0 1 143.5,337.8 H159.5 A4,4 0 0 1 163.5,341.8 V456.0 Z" fill="#2a78d6"/>
+  <text x="151.5" y="330.8" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="middle">59.1</text>
+  <path d="M314.5,456.0 V340.8 A4,4 0 0 1 318.5,336.8 H334.5 A4,4 0 0 1 338.5,340.8 V456.0 Z" fill="#2a78d6"/>
+  <text x="326.5" y="329.8" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="middle">59.6</text>
+  <path d="M489.5,456.0 V340.2 A4,4 0 0 1 493.5,336.2 H509.5 A4,4 0 0 1 513.5,340.2 V456.0 Z" fill="#2a78d6"/>
+  <text x="501.5" y="329.2" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="middle">59.9</text>
+  <path d="M664.5,456.0 V374.8 A4,4 0 0 1 668.5,370.8 H684.5 A4,4 0 0 1 688.5,374.8 V456.0 Z" fill="#2a78d6"/>
+  <text x="676.5" y="363.8" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="middle">42.6</text>
+  <text x="696.5" y="386.8" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="start">6 of 8 UEs</text>
+  <text x="696.5" y="401.8" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="start">attached</text>
+  <text x="151.5" y="480.0" style="font-size:13px;fill:#1f2933;font-weight:600" text-anchor="middle">1 UE</text>
+  <text x="326.5" y="480.0" style="font-size:13px;fill:#1f2933;font-weight:600" text-anchor="middle">2 UEs</text>
+  <text x="501.5" y="480.0" style="font-size:13px;fill:#1f2933;font-weight:600" text-anchor="middle">4 UEs</text>
+  <text x="676.5" y="480.0" style="font-size:13px;fill:#1f2933;font-weight:600" text-anchor="middle">8 UEs</text>
+  <text x="414.0" y="504.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">Static 30 dB channel on every UE (CQI 15, MCS 27)</text>
+</svg>

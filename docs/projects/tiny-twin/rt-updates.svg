@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 436" width="800" height="436" role="img" aria-labelledby="ru-title ru-desc">
+  <title id="ru-title">Software architecture for real-time operation</title>
+  <desc id="ru-desc">One Linux host. NUMA node 1 holds every gNB, broker and UE thread (update 1). The OCUDU gNB runs its radio thread at SCHED_FIFO 90, PHY workers at 80 and other threads at 60 (update 1), and prepares the downlink up to 8 slots ahead (update 2). The C++ ZMQ broker runs one thread with one zmq_poll loop at SCHED_FIFO 70 (updates 4 and 1), copies each downlink block into one queue per UE, sums the uplink with noise, and paces the downlink at 23.04 MS/s (update 2). It talks to the gNB over ipc:// (update 5) and to the UEs over ipc:// (update 3). Each nr-UE process has an RX thread, a TX thread that waits on its queue (update 0), a per-block channel and a side thread for traces (C).</desc>
+  <defs>
+    <marker id="ru-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3e4c59"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #3e4c59; font-size: 12.5px; }
+    .t { font-size: 15px; font-weight: 700; fill: #1f2933; text-anchor: middle; }
+    .h { font-size: 13.5px; font-weight: 700; fill: #1f2933; text-anchor: middle; }
+    .c { text-anchor: middle; }
+    .e { text-anchor: end; }
+    .m { fill: #616e7c; font-size: 12px; }
+    .tag { font-size: 12px; font-weight: 700; text-anchor: end; }
+    .n { font-size: 12.5px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+    .link { stroke: #3e4c59; stroke-width: 1.8; fill: none; }
+  </style>
+
+  <rect width="800" height="436" fill="#ffffff"/>
+
+  <!-- host and NUMA node -->
+  <rect x="8" y="8" width="784" height="420" rx="12" fill="#fbfcfd" stroke="#9aa5b1" stroke-width="1.2"/>
+  <text x="24" y="31" style="font-size:14px;font-weight:700;fill:#1f2933">Linux host</text>
+  <text class="m" x="106" y="31">2 × Xeon Gold 5218 (2 × 16 cores, 64 threads), Ubuntu 24.04</text>
+  <rect x="20" y="44" width="760" height="372" rx="10" fill="#ffffff" stroke="#7b8794" stroke-width="1.2" stroke-dasharray="6 4"/>
+  <circle cx="40" cy="66" r="10" fill="#1f2933"/><text class="n" x="40" y="70.5">1</text>
+  <text x="58" y="70" style="font-size:13px">NUMA node 1, CPUs 16–31 and 48–63: every gNB, broker and UE thread</text>
+
+  <!-- gNB process -->
+  <rect x="36" y="88" width="200" height="312" rx="8" fill="#e8f1fb" stroke="#2f6db5" stroke-width="1.5"/>
+  <text class="t" x="136" y="112">OCUDU gNB</text>
+  <circle cx="47" cy="168" r="10" fill="#1f2933"/><text class="n" x="47" y="172.5">1</text>
+  <rect x="60" y="126" width="166" height="24" rx="12" fill="#ffffff" stroke="#2f6db5" stroke-width="1"/>
+  <text x="70" y="142.5">radio (ZMQ I/O)</text><text class="tag" x="218" y="142.5" style="fill:#2f6db5">FIFO 90</text>
+  <rect x="60" y="156" width="166" height="24" rx="12" fill="#ffffff" stroke="#2f6db5" stroke-width="1"/>
+  <text x="70" y="172.5">PHY workers</text><text class="tag" x="218" y="172.5" style="fill:#2f6db5">FIFO 80</text>
+  <rect x="60" y="186" width="166" height="24" rx="12" fill="#ffffff" stroke="#2f6db5" stroke-width="1"/>
+  <text x="70" y="202.5">other threads</text><text class="tag" x="218" y="202.5" style="fill:#2f6db5">FIFO 60</text>
+  <text class="c" x="143" y="242">DL prepared up to 8 slots</text>
+  <text class="c m" x="143" y="258">ahead of air time (was 5)</text>
+  <circle cx="47" cy="276" r="10" fill="#1f2933"/><text class="n" x="47" y="280.5">2</text>
+  <g fill="#cfe1f7" stroke="#2f6db5" stroke-width="0.8">
+    <rect x="66" y="268" width="17" height="17" rx="2"/><rect x="86" y="268" width="17" height="17" rx="2"/>
+    <rect x="106" y="268" width="17" height="17" rx="2"/><rect x="126" y="268" width="17" height="17" rx="2"/>
+    <rect x="146" y="268" width="17" height="17" rx="2"/><rect x="166" y="268" width="17" height="17" rx="2"/>
+    <rect x="186" y="268" width="17" height="17" rx="2"/><rect x="206" y="268" width="17" height="17" rx="2"/>
+  </g>
+
+  <!-- C++ broker process -->
+  <rect x="300" y="88" width="190" height="312" rx="8" fill="#fdf3e3" stroke="#b7791f" stroke-width="1.5"/>
+  <text class="t" x="395" y="112">C++ ZMQ broker</text>
+  <circle cx="312" cy="132" r="10" fill="#1f2933"/><text class="n" x="312" y="136.5">4</text>
+  <text x="328" y="136">one thread, one loop</text>
+  <circle cx="312" cy="164" r="10" fill="#1f2933"/><text class="n" x="312" y="168.5">1</text>
+  <rect x="330" y="152" width="146" height="24" rx="12" fill="#ffffff" stroke="#b7791f" stroke-width="1"/>
+  <text x="340" y="168.5">zmq_poll loop</text><text class="tag" x="468" y="168.5" style="fill:#9c6516">FIFO 70</text>
+  <text class="c" x="395" y="206">copies each DL block</text>
+  <text class="c m" x="395" y="222">into one queue per UE</text>
+  <text class="c" x="395" y="252">UL: Σ y<tspan dy="3" style="font-size:10px">i</tspan><tspan dy="-3">[k] + n[k]</tspan></text>
+  <circle cx="312" cy="282" r="10" fill="#1f2933"/><text class="n" x="312" y="286.5">2</text>
+  <text x="328" y="286">paces DL at 23.04 MS/s,</text>
+  <text class="m" x="328" y="302">5 ms credit</text>
+
+  <!-- UE processes -->
+  <rect x="554" y="88" width="210" height="312" rx="8" fill="#f3f8f3" stroke="#4f8a55" stroke-width="1.5"/>
+  <text class="t" x="659" y="112">N Duranta OAI UEs</text>
+  <text class="c m" x="659" y="129">one process per UE, own netns</text>
+  <rect x="574" y="150" width="180" height="240" rx="7" fill="#ffffff" stroke="#4f8a55" stroke-width="0.8"/>
+  <rect x="570" y="146" width="180" height="240" rx="7" fill="#ffffff" stroke="#4f8a55" stroke-width="0.8"/>
+  <rect x="566" y="142" width="180" height="240" rx="7" fill="#ffffff" stroke="#4f8a55" stroke-width="1.2"/>
+  <text class="h" x="656" y="162">nr-UE i</text>
+  <rect x="592" y="174" width="146" height="24" rx="12" fill="#f3f8f3" stroke="#4f8a55" stroke-width="1"/>
+  <text x="602" y="190.5">RX thread</text>
+  <circle cx="579" cy="216" r="10" fill="#1f2933"/><text class="n" x="579" y="220.5">0</text>
+  <rect x="592" y="204" width="146" height="24" rx="12" fill="#f3f8f3" stroke="#4f8a55" stroke-width="1"/>
+  <text x="602" y="220.5">TX waits on its queue</text>
+  <circle cx="579" cy="261" r="10" fill="#6b4fa3"/><text class="n" x="579" y="265.5">C</text>
+  <rect x="592" y="234" width="146" height="24" rx="12" fill="#fde8e1" stroke="#c0533b" stroke-width="1"/>
+  <text x="602" y="250.5">channel per block</text>
+  <rect x="592" y="264" width="146" height="24" rx="12" fill="#f1ecfa" stroke="#6b4fa3" stroke-width="1"/>
+  <text x="602" y="280.5">traces: side thread</text>
+  <text class="c m" x="656" y="322">radio threads keep OAI's</text>
+  <text class="c m" x="656" y="338">real-time priorities</text>
+
+  <!-- gNB <-> broker -->
+  <line class="link" x1="238" y1="330" x2="298" y2="330" marker-end="url(#ru-a)"/>
+  <line class="link" x1="298" y1="372" x2="238" y2="372" marker-end="url(#ru-a)"/>
+  <text class="c m" x="268" y="322">DL</text>
+  <circle cx="268" cy="351" r="10" fill="#1f2933"/><text class="n" x="268" y="355.5">5</text>
+  <text class="c m" x="268" y="390">UL</text>
+  <text class="c" x="268" y="410" style="font-size:12px">ipc://</text>
+
+  <!-- broker <-> UEs -->
+  <line class="link" x1="492" y1="330" x2="552" y2="330" marker-end="url(#ru-a)"/>
+  <line class="link" x1="552" y1="372" x2="492" y2="372" marker-end="url(#ru-a)"/>
+  <text class="c m" x="522" y="322">DL</text>
+  <circle cx="522" cy="351" r="10" fill="#1f2933"/><text class="n" x="522" y="355.5">3</text>
+  <text class="c m" x="522" y="390">UL</text>
+  <text class="c" x="522" y="410" style="font-size:12px">ipc://</text>
+</svg>

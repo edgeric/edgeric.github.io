@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 206" width="800" height="206" role="img" aria-labelledby="bl-title bl-desc">
+  <title id="bl-title">One pass of the C++ broker's loop</title>
+  <desc id="bl-desc">Request: ask the gNB for a block if a UE's DL queue holds less than 1 ms, and ask every UE for UL. Wait: zmq_poll on all 2 + 2N sockets. Receive: copy each gNB block into every UE's DL queue, and append each UE block to its UL queue. Sum the UL over all UEs and add n[k]. Reply: up to one slot to each pending request. Then the next pass.</desc>
+  <defs>
+    <marker id="bl-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3e4c59"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #3e4c59; font-size: 12.5px; text-anchor: middle; }
+    .h { font-size: 14px; font-weight: 700; fill: #1f2933; }
+    .m { fill: #616e7c; font-size: 12px; }
+    .box { fill: #fdf3e3; stroke: #b7791f; stroke-width: 1.4; }
+    .link { stroke: #3e4c59; stroke-width: 1.6; fill: none; }
+  </style>
+
+  <rect width="800" height="206" fill="#ffffff"/>
+  <text x="16" y="24" style="text-anchor:start;font-size:14px;font-weight:700;fill:#1f2933">C++ ZMQ broker: one pass of its single-threaded loop</text>
+
+  <rect class="box" x="16" y="40" width="140" height="96" rx="8"/>
+  <text class="h" x="86" y="62">Request</text>
+  <text x="86" y="82">the gNB, if a UE's</text>
+  <text x="86" y="98">DL queue &lt; 1 ms;</text>
+  <text x="86" y="114">every UE, for UL</text>
+
+  <rect class="box" x="172" y="40" width="140" height="96" rx="8"/>
+  <text class="h" x="242" y="62">Wait</text>
+  <text x="242" y="82">zmq_poll on all</text>
+  <text x="242" y="98">2 + 2N sockets</text>
+
+  <rect class="box" x="328" y="40" width="140" height="96" rx="8"/>
+  <text class="h" x="398" y="62">Receive</text>
+  <text x="398" y="82">gNB block → each</text>
+  <text x="398" y="98">UE's DL queue;</text>
+  <text x="398" y="114">UE block → UL queue</text>
+
+  <rect class="box" x="484" y="40" width="140" height="96" rx="8"/>
+  <text class="h" x="554" y="62">Sum the UL</text>
+  <text x="554" y="84" style="font-family:'Times New Roman',Times,'Liberation Serif',serif;font-style:italic;font-size:15px;fill:#1f2933">Σ y<tspan dy="3" style="font-size:11px">i</tspan><tspan dy="-3">[k] + n[k]</tspan></text>
+  <text x="554" y="104">over all UEs</text>
+
+  <rect class="box" x="640" y="40" width="140" height="96" rx="8"/>
+  <text class="h" x="710" y="62">Reply</text>
+  <text x="710" y="82">up to one slot to</text>
+  <text x="710" y="98">each pending</text>
+  <text x="710" y="114">request</text>
+
+  <line class="link" x1="157" y1="88" x2="170" y2="88" marker-end="url(#bl-a)"/>
+  <line class="link" x1="313" y1="88" x2="326" y2="88" marker-end="url(#bl-a)"/>
+  <line class="link" x1="469" y1="88" x2="482" y2="88" marker-end="url(#bl-a)"/>
+  <line class="link" x1="625" y1="88" x2="638" y2="88" marker-end="url(#bl-a)"/>
+  <polyline class="link" points="710,137 710,166 86,166 86,139" marker-end="url(#bl-a)"/>
+  <text class="m" x="398" y="186">next pass, same thread: no locks, no copies between threads</text>
+</svg>

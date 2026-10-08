@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 352" width="780" height="352" role="img">
+  <title>gNB throughput against iperf3 at the UEs</title>
+  <desc>Each bar is the gNB's throughput per air-second, split into what iperf3 received at the UEs, header and undelivered bytes, and the share lost because the chain ran below real time. Clean, 4 UEs, 100 percent: 63.2 gNB, 59.4 iperf3. Clean, 4 UEs, 88 percent: 63.4 gNB, 56.1 per wall-clock second, 52.3 iperf3. CQI walks, 4 UEs: 40.9 gNB, 37.4 iperf3. CQI walks, 2 UEs, 97 percent: 28.9 gNB, 28.1 per wall-clock second, 24.6 iperf3.</desc>
+  <style>text { font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", "DejaVu Sans", sans-serif; fill: #52606d; font-size: 13px; }</style>
+  <rect width="780" height="352" fill="#ffffff"/>
+  <text x="16.0" y="28.0" style="font-size:14px;fill:#1f2933;font-weight:700" text-anchor="start">gNB throughput vs iperf3 at the UEs</text>
+  <text x="16.0" y="46.0" style="font-size:12.5px;fill:#7b8794;font-weight:400" text-anchor="start">Bar length: gNB throughput per air-second (DRB bytes scheduled), Mbit/s</text>
+  <rect x="16" y="62" width="12" height="12" rx="2" fill="#2a78d6"/>
+  <text x="34.0" y="72.5" style="font-size:12.5px;fill:#52606d;font-weight:400" text-anchor="start">received, iperf3 (UDP)</text>
+  <rect x="218.4" y="62" width="12" height="12" rx="2" fill="#eb6834"/>
+  <text x="236.4" y="72.5" style="font-size:12.5px;fill:#52606d;font-weight:400" text-anchor="start">headers, undelivered bytes</text>
+  <rect x="449.6" y="62" width="12" height="12" rx="2" fill="#1baf7a"/>
+  <text x="467.6" y="72.5" style="font-size:12.5px;fill:#52606d;font-weight:400" text-anchor="start">chain below real time</text>
+  <line x1="214.0" y1="92" x2="214.0" y2="302" stroke="#9aa5b1" stroke-width="1"/>
+  <text x="214.0" y="320.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">0</text>
+  <line x1="284.0" y1="92" x2="284.0" y2="302" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="284.0" y="320.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">10</text>
+  <line x1="354.0" y1="92" x2="354.0" y2="302" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="354.0" y="320.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">20</text>
+  <line x1="424.0" y1="92" x2="424.0" y2="302" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="424.0" y="320.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">30</text>
+  <line x1="494.0" y1="92" x2="494.0" y2="302" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="494.0" y="320.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">40</text>
+  <line x1="564.0" y1="92" x2="564.0" y2="302" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="564.0" y="320.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">50</text>
+  <line x1="634.0" y1="92" x2="634.0" y2="302" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="634.0" y="320.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">60</text>
+  <line x1="704.0" y1="92" x2="704.0" y2="302" stroke="#e4e7eb" stroke-width="1"/>
+  <text x="704.0" y="320.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="middle">70</text>
+  <text x="704.0" y="340.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="end">Mbit/s</text>
+  <text x="16.0" y="110.0" style="font-size:13px;fill:#1f2933;font-weight:600" text-anchor="start">Clean channel, 4 UEs</text>
+  <text x="16.0" y="127.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="start">100 % real time</text>
+  <rect x="214.0" y="100.0" width="415.6" height="22" fill="#2a78d6"/>
+  <path d="M631.6,100.0 H651.8 A4,4 0 0 1 655.8,104.0 V118.0 A4,4 0 0 1 651.8,122.0 H631.6 Z" fill="#eb6834"/>
+  <text x="623.6" y="115.5" style="font-size:12.5px;fill:#ffffff;font-weight:600" text-anchor="end">59.4</text>
+  <text x="664.4" y="115.5" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="start">63.2</text>
+  <text x="16.0" y="164.0" style="font-size:13px;fill:#1f2933;font-weight:600" text-anchor="start">Clean channel, 4 UEs</text>
+  <text x="16.0" y="181.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="start">88 % real time</text>
+  <rect x="214.0" y="154.0" width="366.1" height="22" fill="#2a78d6"/>
+  <rect x="582.1" y="154.0" width="24.2" height="22" fill="#eb6834"/>
+  <path d="M608.4,154.0 H653.7 A4,4 0 0 1 657.7,158.0 V172.0 A4,4 0 0 1 653.7,176.0 H608.4 Z" fill="#1baf7a"/>
+  <text x="574.1" y="169.5" style="font-size:12.5px;fill:#ffffff;font-weight:600" text-anchor="end">52.3</text>
+  <text x="633.0" y="169.5" style="font-size:12px;fill:#1f2933;font-weight:600" text-anchor="middle">7.3</text>
+  <text x="665.7" y="169.5" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="start">63.4</text>
+  <text x="16.0" y="218.0" style="font-size:13px;fill:#1f2933;font-weight:600" text-anchor="start">CQI walks, 4 UEs</text>
+  <text x="16.0" y="235.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="start">100 % real time</text>
+  <rect x="214.0" y="208.0" width="261.9" height="22" fill="#2a78d6"/>
+  <path d="M477.9,208.0 H496.3 A4,4 0 0 1 500.3,212.0 V226.0 A4,4 0 0 1 496.3,230.0 H477.9 Z" fill="#eb6834"/>
+  <text x="469.9" y="223.5" style="font-size:12.5px;fill:#ffffff;font-weight:600" text-anchor="end">37.4</text>
+  <text x="508.4" y="223.5" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="start">40.9</text>
+  <text x="16.0" y="272.0" style="font-size:13px;fill:#1f2933;font-weight:600" text-anchor="start">CQI walks, 2 UEs</text>
+  <text x="16.0" y="289.0" style="font-size:12px;fill:#7b8794;font-weight:400" text-anchor="start">97 % real time</text>
+  <rect x="214.0" y="262.0" width="172.3" height="22" fill="#2a78d6"/>
+  <rect x="388.3" y="262.0" width="22.0" height="22" fill="#eb6834"/>
+  <path d="M412.4,262.0 H414.2 A1.8700000000000045,1.8700000000000045 0 0 1 416.1,263.9 V282.1 A1.8700000000000045,1.8700000000000045 0 0 1 414.2,284.0 H412.4 Z" fill="#1baf7a"/>
+  <text x="380.3" y="277.5" style="font-size:12.5px;fill:#ffffff;font-weight:600" text-anchor="end">24.6</text>
+  <text x="424.1" y="277.5" style="font-size:12.5px;fill:#1f2933;font-weight:600" text-anchor="start">28.9</text>
+</svg>
