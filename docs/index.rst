@@ -6,10 +6,6 @@
 EdgeRIC: Enabling Real-Time AI-on-RAN systems
 ========================================================================
 
-.. image:: pics/edgeric-intro.png
-  :width: 800
-  :alt: sample text
-
 .. NextG cellular networks must support a wide variety of applications that require radio access with latency, 
 .. throughput and reliability guarantees hitherto unavailable. Simultaneously, the environment is becoming in-
 .. creasingly dynamic over diverse spectrum bands, user mobility patterns and variable traffic patterns. Com-
@@ -19,13 +15,7 @@ EdgeRIC: Enabling Real-Time AI-on-RAN systems
 
 .. - EdgeRIC is a platform for **real-time AI-in-the-loop** for decision and control in cellular networks. It is designed to access network and application-level information to execute AI-optimized and other policies in real-time (sub-millisecond) .
 
-EdgeRIC: **Real-Time AI-in-the-Loop** decision making and control in cellular networks.  
-
 .. Our goal is to build an intelligent RAN stack capable of real-time decision making by integrating:
-
-- **Next-generation Fine-Grained Telemetry** for deep network observability
-- **Reasoning over Network Dynamics** for adaptive control
-- **Experience-Aware Cellular** for satisfying user experience over cellular networks
 
 
 .. .. raw:: html
@@ -57,37 +47,24 @@ EdgeRIC: **Real-Time AI-in-the-Loop** decision making and control in cellular ne
    .. include:: news.md
 
 
-.. _our-projects:
-
 .. raw:: html
 
    <div id="open-source-repositories"></div>
-   <div class="repo-list">
-     <div class="repo-card">
-       <h3>srsRAN-5G (25.10) + EdgeRIC</h3>
-       <p class="repo-meta"><strong>Release Date:</strong> 25.10</p>
-       <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 25.10 release</p>
-       <a href="https://github.com/ushasigh/EdgeRIC-srsRAN-25.10/tree/main" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-     <div class="repo-card">
-       <h3>srsRAN-5G (2024) + EdgeRIC</h3>
-       <p class="repo-meta"><strong>Release Date:</strong> 2024</p>
-       <p><strong>Description:</strong> EdgeRIC on srsRAN 5G 2024 release</p>
-       <a href="https://github.com/ucsdwcsng/EdgeRIC-on-5G" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-     <div class="repo-card">
-       <h3>srsRAN-4G + EdgeRIC</h3>
-       <p class="repo-meta"><strong>Release Date:</strong> TBD</p>
-       <p><strong>Description:</strong> EdgeRIC integrated with srsRAN 4G</p>
-       <a href="https://github.com/ucsdwcsng/EdgeRIC-A-real-time-RIC/tree/oaic-workshop" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
-     <div class="repo-card">
-       <h3>OAI + EdgeRIC</h3>
-       <p class="repo-meta"><strong>Release Date:</strong> Oct 01, 2025</p>
-       <p><strong>Description:</strong> EdgeRIC integrated with OpenAirInterface</p>
-       <a href="https://github.com/ucsdwcsng/EdgeRIC-5G-OAI" class="repo-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-     </div>
+   <div class="repo-banner">
+     <span class="repo-banner-title">EdgeRIC with OCUDU-jbpf</span>
+     <span class="repo-banner-links">
+       <a href="https://github.com/ucsdwcsng/edgeric-ocudu-jbpf" class="repo-banner-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+       <a href="edgeric-ocudu-jbpf.html" class="repo-banner-link">System Design</a>
+     </span>
    </div>
+
+.. toctree::
+   :maxdepth: 1
+   :caption: EdgeRIC with OCUDU-jbpf
+
+   edgeric-ocudu-jbpf
+
+.. _our-projects:
 
 Our Projects
 ------------------------
@@ -95,23 +72,23 @@ Our Projects
 .. raw:: html
 
    <div class="project-grid">
-     <a href="projects/cloud-gaming.html" class="project-card" id="card-cloud-gaming">
-       <h3>Cloud Gaming via 5G</h3>
+     <a href="projects/qoe-networking.html" class="project-card" id="card-qoe">
+       <h3>AI-driven muApp for RAN Scheduling</h3>
      </a>
-     <a href="projects/multimodal-sensing.html" class="project-card" id="card-multimodal">
-       <h3>mmsRAN: Multi-Modal Sensing</h3>
+     <a href="projects/tiny-twin.html" class="project-card" id="card-tiny-twin">
+       <h3>Cellular Digital Twins: Plug and Play Channels</h3>
      </a>
      <a href="projects/telemetry.html" class="project-card" id="card-telemetry">
        <h3>SCOUT: Packet Centric Telemetry</h3>
      </a>
-     <a href="projects/qoe-networking.html" class="project-card" id="card-qoe">
-       <h3>QoE-aware Networking</h3>
+     <a href="projects/multimodal-sensing.html" class="project-card" id="card-multimodal">
+       <h3>mmsRAN: Multimodal Uplink for Physical AI</h3>
      </a>
-     <a href="projects/tiny-twin.html" class="project-card" id="card-tiny-twin">
-       <h3>Cellular Digital Twins</h3>
+     <a href="projects/robonest.html" class="project-card" id="card-robonest">
+       <h3>RoboNEST: Edge Driven Robotics</h3>
      </a>
-     <a href="projects/prism.html" class="project-card" id="card-muapps">
-       <h3>PRISM: 5G log Analysis</h3>
+     <a href="projects/lens.html" class="project-card" id="card-lens">
+       <h3>LENS: Log Analysis Framework</h3>
      </a>
    </div>
 
@@ -119,11 +96,12 @@ Our Projects
    :maxdepth: 1
    :caption: Our Projects
 
-   projects/cloud-gaming
-   projects/multimodal-sensing
-   projects/telemetry
    projects/qoe-networking
-   projects/tiny-twin
+   Cellular Digital Twins: Plug and Play Channels <projects/tiny-twin>
+   SCOUT: Packet Centric Telemetry <projects/telemetry>
+   mmsRAN: Multimodal Uplink for Physical AI <projects/multimodal-sensing>
+   projects/robonest
+   projects/lens
    projects/other-muapps
   
 
@@ -329,12 +307,35 @@ Events
    :maxdepth: 2
    :caption: EdgeRIC Events
 
+   Open AI-RAN Tutorial <open-ai-ran-tutorial>
    oaic-workshop-2024
    srsran-2024-workshop
 
 .. raw:: html
 
    <div class="event-grid">
+     <div class="event-tile event-tile-cover">
+       <div class="event-cover">
+         <span class="event-cover-title">OCUDU Workshop 2026</span>
+       </div>
+       <div class="event-tile-footer">
+         <span class="event-badge">2026</span>
+         <h3 class="event-tile-title">OCUDU Workshop 2026</h3>
+       </div>
+     </div>
+     <div class="event-tile event-tile-cover">
+       <a class="event-cover-link" href="open-ai-ran-tutorial.html">
+         <div class="event-cover">
+           <span class="event-cover-title">Open AI-RAN Tutorial<br>MobiCom 2026</span>
+         </div>
+       </a>
+       <div class="event-tile-footer">
+         <span class="event-badge">2026</span>
+         <h3 class="event-tile-title">Open AI-RAN Tutorial, MobiCom 2026</h3>
+         <p class="event-tile-desc">In-RAN telemetry and control with jbpf codelets</p>
+         <a href="open-ai-ran-tutorial.html" class="event-tile-cta">View details</a>
+       </div>
+     </div>
      <div class="event-tile">
        <div class="event-video-wrap">
          <iframe src="https://www.youtube.com/embed/BNcryaZDQfU" title="srsRAN Workshop 2024" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -452,48 +453,6 @@ Events
 
 
 
-
-
-
-.. _edgeric-architecture:
-
-EdgeRIC Core Architecture
-------------------------
-
-.. toctree::
-   :maxdepth: 2
-   :caption: EdgeRIC Architecture
-
-   edgeric-architecture
-
-.. raw:: html
-
-   <div class="arch-section-list">
-     <a class="arch-section" href="edgeric-architecture.html">
-       <div class="arch-section-title">RT-E2 interface (Real time E2 interface)</div>
-       <div class="arch-section-desc">Messaging framework between the RAN stack and EdgeRIC, built on ZMQ and protobuf, with TTI-level synchronization.</div>
-     </a>
-     <a class="arch-section" href="edgeric-architecture.html">
-       <div class="arch-section-title">RT-E2 Report Message</div>
-       <div class="arch-section-desc">Per-UE KPI report structure (cqi, buffers, TBS, rates) sent every TTI from the RAN to EdgeRIC.</div>
-     </a>
-     <a class="arch-section" href="edgeric-architecture.html">
-       <div class="arch-section-title">RT-E2 Policy Message</div>
-       <div class="arch-section-desc">Control-action messages from μApps back to the RAN, including scheduling weights and blanking decisions.</div>
-     </a>
-     <a class="arch-section" href="edgeric-architecture.html">
-       <div class="arch-section-title">REDIS database</div>
-       <div class="arch-section-desc">How Redis is used for model storage, μApp lifecycle management, and dynamic configuration.</div>
-     </a>
-     <a class="arch-section" href="edgeric-architecture.html">
-       <div class="arch-section-title">μApps – EdgeRIC microservices</div>
-       <div class="arch-section-desc">How μApps subscribe to metrics, compute policies, and send control via the EdgeRIC messenger.</div>
-     </a>
-     <a class="arch-section" href="edgeric-architecture.html">
-       <div class="arch-section-title">Some Example μApps </div>
-       <div class="arch-section-desc">Available suite of muApps for different use cases.</div>
-     </a>
-   </div>
 
 
 
