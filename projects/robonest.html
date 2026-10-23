@@ -3,14 +3,14 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="LENS: Log Analysis Framework" href="lens.html"><link rel="prev" title="MultiModal Sensing" href="multimodal-sensing.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="LENS: Log Analysis Framework" href="lens.html"><link rel="prev" title="mmsRAN: Multimodal Cellular Uplink for Physical AI" href="multimodal-sensing.html">
 
     <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
         <title>RoboNEST: Edge Driven Robotics - EdgeRIC</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=5817fbd0" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=25d849e0" />
     <link rel="stylesheet" type="text/css" href="../_static/news.css?v=0615dc85" />
     
     
@@ -183,7 +183,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
@@ -300,14 +300,144 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
           <section id="robonest-edge-driven-robotics">
 <h1>RoboNEST: Edge Driven Robotics<a class="headerlink" href="#robonest-edge-driven-robotics" title="Link to this heading">¶</a></h1>
-<p>Details coming soon.</p>
+<p>RoboNEST, the <strong>Robotics Networked Edge Systems Testbed for Physical AI</strong>, brings real robots,
+wireless networks, and edge compute into one experimental platform. It supports closed-loop
+perception, planning, and vision-language-action (VLA) inference, with visibility into the
+complete path from sensing to action.</p>
+<p><strong>Team:</strong> Sreevatsank Kadaveru, Ushasi Ghosh, and Dinesh Bharadia, UC San Diego.</p>
+<section id="why-an-end-to-end-testbed">
+<h2>Why an End-to-End Testbed?<a class="headerlink" href="#why-an-end-to-end-testbed" title="Link to this heading">¶</a></h2>
+<p>Offloading robotic workloads to an edge server puts network transport and GPU inference
+directly in the control loop. Network capacity, scheduling, and compute availability can all
+affect when a robot receives its next action.</p>
+<p>RoboNEST makes these interactions observable in real tasks. Researchers can change the access
+network or compute platform and correlate application events with network, modem, GPU, and
+robot telemetry.</p>
+</section>
+<section id="testbed-design">
+<h2>Testbed Design<a class="headerlink" href="#testbed-design" title="Link to this heading">¶</a></h2>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/testbed-overview.png"><img alt="RoboNEST combines SO-101 and xArm7 manipulation platforms and a TurtleBot with Ethernet, Wi-Fi, and private 5G access, plus onboard and edge compute options." src="../_images/testbed-overview.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">The RoboNEST platform connects robotics, interchangeable access networks, and compute.</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<section id="robotics-and-multimodal-streaming">
+<h3>Robotics and Multimodal Streaming<a class="headerlink" href="#robotics-and-multimodal-streaming" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Manipulation:</strong> two xArm7 7-DoF arms and two SO-101 leader-follower pairs, with wrist and
+ego cameras and joint and gripper telemetry. Tasks include pick-and-place, cube stacking,
+sorting, object passing, and cloth folding. Arms can operate individually or together.</p></li>
+<li><p><strong>Navigation and perception:</strong> a TurtleBot with four RGB cameras, a 2D LiDAR, an Intel
+RealSense depth camera, an IMU, and odometry supports collision avoidance, mapping, and SLAM.</p></li>
+<li><p><strong>Teleoperation:</strong> Meta Quest 3 VR and physical leader-follower control for SO-101 support
+human-operated experiments alongside policy-driven execution.</p></li>
+</ul>
+<p>Each platform uses a Raspberry Pi, Jetson, or laptop to interface with sensors and actuators.
+It encodes sensor observations, streams them to the edge, and executes the returned actions.</p>
+</section>
+<section id="interchangeable-access-networks">
+<h3>Interchangeable Access Networks<a class="headerlink" href="#interchangeable-access-networks" title="Link to this heading">¶</a></h3>
+<p>Robots can connect to the edge through three access technologies:</p>
+<ul class="simple">
+<li><p><strong>Ethernet:</strong> switched 1 GbE provides a low-latency reference for isolating compute effects.</p></li>
+<li><p><strong>Wi-Fi:</strong> an 802.11ax access point uses a dedicated 5 GHz SSID and 40 MHz bandwidth.</p></li>
+<li><p><strong>Private 5G:</strong> Quectel RM500, RM502, RM520, and RM530 modems connect to a gNB operating in
+band n78 with 40 MHz bandwidth and an Open5GS core. EdgeRIC exposes RAN state and enables
+network control at TTI/slot granularity.</p></li>
+</ul>
+</section>
+<section id="edge-compute">
+<h3>Edge Compute<a class="headerlink" href="#edge-compute" title="Link to this heading">¶</a></h3>
+<p>The edge infrastructure spans six GPU hosts with 12 A10 GPUs, two A100 GPUs with 40 GB each,
+a GB10 with 128 GB, and two RTX 6000 GPUs. Containerized services share available accelerators.
+The 5G RAN, core, and EdgeRIC are co-located with this infrastructure, enabling joint control
+of network and compute resources.</p>
+</section>
+</section>
+<section id="multi-user-experiments-and-observability">
+<h2>Multi-User Experiments and Observability<a class="headerlink" href="#multi-user-experiments-and-observability" title="Link to this heading">¶</a></h2>
+<p>RoboNEST can connect four robotic-arm UEs and one mobile TurtleBot UE concurrently, alongside
+Pixel 9 UEs generating background enhanced mobile broadband (eMBB) traffic.</p>
+<p>Hosts synchronize clocks using NTP through chrony, achieving approximately <strong>200 microseconds
+of synchronization accuracy</strong> for aligning timestamps across nodes. Automated logging
+correlates application events with RAN state, modem diagnostics, GPU inference, and robot
+execution. The Qualcomm Unified Tools Service (QUTS) API streams per-UE modem logs over USB/IP
+to server-side QXDM for diagnosis.</p>
+</section>
+<section id="achieving-real-time-operation">
+<h2>Achieving Real-Time Operation<a class="headerlink" href="#achieving-real-time-operation" title="Link to this heading">¶</a></h2>
+<p>The platform reduces overhead throughout the sensing-to-action pipeline:</p>
+<ul class="simple">
+<li><p><strong>VLA inference:</strong> model quantization, execution compilation, CUDA graph optimizations,
+and CPU/GPU clock pinning reduce inference latency.</p></li>
+<li><p><strong>Sensor processing:</strong> camera-native hardware encoding and GPU decoding avoid intermediate
+transcoding, while efficient CPU-GPU memory transfers reduce processing overhead.</p></li>
+<li><p><strong>Network transport:</strong> the 5G stack is configured for uplink-heavy traffic and low latency.</p></li>
+</ul>
+</section>
+<section id="glass-to-action-latency">
+<h2>Glass-to-Action Latency<a class="headerlink" href="#glass-to-action-latency" title="Link to this heading">¶</a></h2>
+<p>The evaluation runs an <strong>SO-101 closed-loop manipulation task</strong> with the <span class="math notranslate nohighlight">\(\pi_{0.5}\)</span> VLA policy at
+1080p, 720p, 600p, and 480p. Synchronized timestamps separate VLA compute, Pi encoding, GPU
+decoding, uplink, and downlink contributions to end-to-end latency.</p>
+<section id="compute-comparison-over-5g">
+<h3>Compute Comparison over 5G<a class="headerlink" href="#compute-comparison-over-5g" title="Link to this heading">¶</a></h3>
+<p>With the network fixed to 5G, the 1080p task has <strong>111 ms</strong> glass-to-action latency on an
+RTX 6000, compared with <strong>179 ms</strong> on an A10, a <strong>38% reduction</strong>. The comparison also includes
+A100 and GB10 platforms.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/compute-latency.png"><img alt="Stacked glass-to-action latency bars over 5G for A10, A100, GB10, and RTX 6000 GPUs at four image resolutions. At 1080p, latency is 179, 171, 161, and 111 milliseconds, respectively. Diamond markers show p95 latency." src="../_images/compute-latency.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Compute comparison with the access network fixed to 5G. Bars show the latency breakdown,
+and diamond markers indicate p95.</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="network-comparison-on-rtx-6000">
+<h3>Network Comparison on RTX 6000<a class="headerlink" href="#network-comparison-on-rtx-6000" title="Link to this heading">¶</a></h3>
+<p>With compute fixed to an RTX 6000, glass-to-action latency at <strong>1080p</strong> is <strong>111 ms over 5G,
+77 ms over Wi-Fi, and 68 ms over Ethernet</strong>. At <strong>480p</strong>, these values fall to <strong>100 ms,
+64 ms, and 58 ms</strong>, respectively.</p>
+<p>Higher image resolution primarily increases the uplink contribution, while VLA compute
+remains nearly constant. Larger encoded frames require more bytes to cross the uplink and
+can add queueing delay as offered load approaches available capacity.</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/network-latency.png"><img alt="Glass-to-action latency on RTX 6000 across 5G, Wi-Fi, and wired Ethernet at four image resolutions. At 1080p the totals are 111, 77, and 68 milliseconds. At 480p they are 100, 64, and 58 milliseconds. Diamond markers show p95 latency." src="../_images/network-latency.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Network comparison with compute fixed to an RTX 6000. The measurements cover the full
+sensing-to-action path, including compute and sensor processing.</span><a class="headerlink" href="#id3" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="mobicom-2026-demonstration">
+<h2>MobiCom 2026 Demonstration<a class="headerlink" href="#mobicom-2026-demonstration" title="Link to this heading">¶</a></h2>
+<p>The planned demonstration uses a remotely operated SO-101 manipulation setup over private 5G
+in two modes:</p>
+<ul class="simple">
+<li><p><strong>Teleoperated pick-and-place:</strong> an operator at the remote testbed controls the robot while
+attendees watch a live video stream over 5G.</p></li>
+<li><p><strong>Autonomous pick-and-place:</strong> a VLA policy hosted at the edge generates the robot’s actions.</p></li>
+</ul>
+<p>Experiments will be launched and controlled live from laptops. A dashboard will display
+end-to-end latency and network throughput during task execution.</p>
+</section>
+<section id="publication">
+<h2>Publication<a class="headerlink" href="#publication" title="Link to this heading">¶</a></h2>
+<p><strong>Demo: RoboNEST: Robotics Networked Edge Systems Testbed for Physical AI</strong></p>
+<p><a class="reference external" href="https://doi.org/10.1145/3795866.3848480">Demo&#64;MobiCom’26</a></p>
+</section>
 </section>
 
         </article>
@@ -331,7 +461,7 @@
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">MultiModal Sensing</div>
+                <div class="title">mmsRAN: Multimodal Cellular Uplink for Physical AI</div>
                 
               </div>
             </a>
@@ -353,8 +483,42 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">RoboNEST: Edge Driven Robotics</a><ul>
+<li><a class="reference internal" href="#why-an-end-to-end-testbed">Why an End-to-End Testbed?</a></li>
+<li><a class="reference internal" href="#testbed-design">Testbed Design</a><ul>
+<li><a class="reference internal" href="#robotics-and-multimodal-streaming">Robotics and Multimodal Streaming</a></li>
+<li><a class="reference internal" href="#interchangeable-access-networks">Interchangeable Access Networks</a></li>
+<li><a class="reference internal" href="#edge-compute">Edge Compute</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multi-user-experiments-and-observability">Multi-User Experiments and Observability</a></li>
+<li><a class="reference internal" href="#achieving-real-time-operation">Achieving Real-Time Operation</a></li>
+<li><a class="reference internal" href="#glass-to-action-latency">Glass-to-Action Latency</a><ul>
+<li><a class="reference internal" href="#compute-comparison-over-5g">Compute Comparison over 5G</a></li>
+<li><a class="reference internal" href="#network-comparison-on-rtx-6000">Network Comparison on RTX 6000</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mobicom-2026-demonstration">MobiCom 2026 Demonstration</a></li>
+<li><a class="reference internal" href="#publication">Publication</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -363,6 +527,7 @@
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="../_static/sidebar-brand-logos.js?v=577991cb"></script>
     <script src="../_static/news-sidebar.js?v=394020a7"></script>
     <script src="../_static/demo-video.js?v=f940bad2"></script>

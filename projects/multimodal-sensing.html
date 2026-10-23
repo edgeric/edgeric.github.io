@@ -6,11 +6,11 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="RoboNEST: Edge Driven Robotics" href="robonest.html"><link rel="prev" title="Telemetry: Packet Centric" href="telemetry.html">
 
     <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
-        <title>MultiModal Sensing - EdgeRIC</title>
+        <title>mmsRAN: Multimodal Cellular Uplink for Physical AI - EdgeRIC</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=5817fbd0" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=25d849e0" />
     <link rel="stylesheet" type="text/css" href="../_static/news.css?v=0615dc85" />
     
     
@@ -305,49 +305,130 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="multimodal-sensing">
-<h1>MultiModal Sensing<a class="headerlink" href="#multimodal-sensing" title="Link to this heading">¶</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p>MultiModal sensing leverages diverse data sources—RF signals, video, audio, and environmental sensors—to enable richer context-aware networking decisions.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This project investigates how EdgeRIC can integrate multi-modal sensor data for intelligent network control.</p>
-</div>
+          <section id="mmsran-multimodal-cellular-uplink-for-physical-ai">
+<h1>mmsRAN: Multimodal Cellular Uplink for Physical AI<a class="headerlink" href="#mmsran-multimodal-cellular-uplink-for-physical-ai" title="Link to this heading">¶</a></h1>
+<p>mmsRAN investigates how cellular uplink scheduling can deliver a robot’s multimodal sensor
+streams together, in time for each step of its control loop. The goal is to synchronize
+sensor-frame delivery within a user and across users so that an edge application can act on
+relevant observations.</p>
+<p><strong>Team:</strong> Ushasi Ghosh, Sreevatsank Kadaveru, Srinivas Shakkottai, and Dinesh Bharadia.</p>
+<section id="why-physical-ai-needs-synchronized-uplink">
+<h2>Why Physical AI Needs Synchronized Uplink<a class="headerlink" href="#why-physical-ai-needs-synchronized-uplink" title="Link to this heading">¶</a></h2>
+<p>A robot sends multiple sensor streams, such as LiDAR, camera, and inertial measurements, to an
+application at the edge. This creates uplink-heavy traffic. The feedback control loop operates
+in discrete timesteps, and all sensor streams for a timestep must arrive within that timestep
+to remain relevant to the next action.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/physical-ai-control-loop.png"><img alt="LiDAR, inertial, and camera streams travel over the cellular uplink to an edge application, which combines the observations and returns an action to the robot." src="../_images/physical-ai-control-loop.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Multimodal sensing and the feedback control loop. Different sensors generate different
+amounts of traffic for each timestep.</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
 </section>
-<section id="key-capabilities">
-<h2>Key Capabilities<a class="headerlink" href="#key-capabilities" title="Link to this heading">¶</a></h2>
+<section id="the-challenge-access-latency-and-frame-misalignment">
+<h2>The Challenge: Access Latency and Frame Misalignment<a class="headerlink" href="#the-challenge-access-latency-and-frame-misalignment" title="Link to this heading">¶</a></h2>
+<p>Cellular uplink access latency includes both <strong>protocol overheads</strong> and <strong>scheduling delays</strong>.
+For multimodal applications, the arrival time of the complete observation also matters:</p>
 <ul class="simple">
-<li><p><strong>RF Sensing</strong>: Extract environmental information from wireless signals</p></li>
-<li><p><strong>Cross-Modal Fusion</strong>: Combine multiple sensor modalities for robust inference</p></li>
-<li><p><strong>Real-time Processing</strong>: Process sensor data at RAN timescales</p></li>
+<li><p><strong>Inter-sensor skew:</strong> streams from the same user arrive at different times. The application
+waits for the last required sensor frame before it has a complete observation.</p></li>
+<li><p><strong>Inter-user frame misalignment:</strong> a user with a good channel can deliver newer frames while
+another user’s earlier frame is still incomplete.</p></li>
+</ul>
+<p>The complete frame’s latency is the first sensor frame’s arrival latency plus the skew to the
+last required sensor frame. Our multi-user measurements show approximately <strong>13 ms
+of additional latency from skew</strong>.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/inter-sensor-skew.png"><img alt="Sensor frames from one timestep reach the edge at different times. A measured trace shows inter-sensor skew and approximately 13 milliseconds of additional latency in a multi-user scenario." src="../_images/inter-sensor-skew.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Delivering one sensor stream early does not complete the multimodal observation. The
+remaining streams determine when the application can use the full frame.</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="design-multimodal-flow-synchronization">
+<h2>Design: Multimodal Flow Synchronization<a class="headerlink" href="#design-multimodal-flow-synchronization" title="Link to this heading">¶</a></h2>
+<p>mmsRAN explores <strong>coflow-inspired scheduling</strong>: treating the sensor streams needed for a
+control timestep as a group whose completion matters to the application. The research goal
+is to synchronize these streams for real-time robotic control.</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/flow-synchronization.png"><img alt="Two users send LiDAR, inertial, and camera streams. An edge application supplies future sensing decisions to an EdgeRIC scheduling app, which assigns uplink resources to users on each RAN slot to coordinate frame delivery." src="../_images/flow-synchronization.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Proposed scheduling loop. The edge application provides information about future sensing
+decisions, and the EdgeRIC app makes uplink resource-allocation decisions per RAN slot.</span><a class="headerlink" href="#id3" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>The design combines two mechanisms:</p>
+<ul class="simple">
+<li><p><strong>Pre-emptive user scheduling:</strong> proactively allocate uplink resources to reduce the latency
+of acquiring a grant.</p></li>
+<li><p><strong>Application-aware data radio bearers (DRBs):</strong> use per-modality quality-of-service (QoS)
+flows to enable independent queueing and prioritization at the user equipment (UE).</p></li>
 </ul>
 </section>
-<section id="applications">
-<h2>Applications<a class="headerlink" href="#applications" title="Link to this heading">¶</a></h2>
+<section id="network-testbed">
+<h2>Network Testbed<a class="headerlink" href="#network-testbed" title="Link to this heading">¶</a></h2>
+<p>The over-the-air 5G testbed connects a robot UE to an application server at the edge:</p>
 <ul class="simple">
-<li><p>Human activity recognition for adaptive resource allocation</p></li>
-<li><p>Environmental monitoring and anomaly detection</p></li>
-<li><p>Enhanced localization and tracking</p></li>
+<li><p><strong>5G network:</strong> a USRP X410 radio unit using Split 8, with the distributed unit (DU), central
+unit (CU), core network (CN), and EdgeRIC on the network side.</p></li>
+<li><p><strong>Robot UE:</strong> a Quectel 5G modem, four cameras, LiDAR, a depth camera, and an inertial
+measurement unit (IMU), with a laptop running ROS and a battery.</p></li>
+<li><p><strong>Access configuration:</strong> fine-tuned 5G settings and scheduling-request-free (SR-free)
+access to reduce latency.</p></li>
 </ul>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="../_images/testbed.png"><img alt="Annotated photographs of the 5G network with a USRP X410, EdgeRIC, and an edge server, alongside the robot UE with cameras, LiDAR, a depth camera, an IMU, a ROS laptop, and a Quectel 5G modem." src="../_images/testbed.png" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Network and robot hardware used in the over-the-air testbed.</span><a class="headerlink" href="#id4" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
 </section>
-<section id="architecture">
-<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading">¶</a></h2>
-<p>The multimodal sensing pipeline integrates with EdgeRIC’s μApp framework:</p>
-<ol class="arabic simple">
-<li><p>Sensor data collection and preprocessing</p></li>
-<li><p>Feature extraction and fusion</p></li>
-<li><p>Real-time inference engine</p></li>
-<li><p>Policy adaptation based on sensing outputs</p></li>
-</ol>
+<section id="preliminary-results">
+<h2>Preliminary Results<a class="headerlink" href="#preliminary-results" title="Link to this heading">¶</a></h2>
+<section id="network-configuration">
+<h3>Network Configuration<a class="headerlink" href="#network-configuration" title="Link to this heading">¶</a></h3>
+<p>With <strong>four concurrent sensor streams</strong>, fine-tuning the network configuration reduces median
+sensor-frame latency from <strong>30.4 ms to 18.9 ms</strong>. Ping is a separate network benchmark from
+sensor-frame delivery.</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="../_images/latency-benchmarks.png"><img alt="Cumulative distributions of sensor-frame latency and ping for default and fine-tuned configurations. Median sensor-frame latency falls from 30.4 to 18.9 milliseconds, and median ping falls from 19.4 to 14.7 milliseconds." src="../_images/latency-benchmarks.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Latency distributions for the default and fine-tuned network configurations.</span><a class="headerlink" href="#id5" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
 </section>
-<section id="results">
-<h2>Results<a class="headerlink" href="#results" title="Link to this heading">¶</a></h2>
-<p><em>Coming soon</em></p>
+<section id="prioritization-across-sensor-streams">
+<h3>Prioritization Across Sensor Streams<a class="headerlink" href="#prioritization-across-sensor-streams" title="Link to this heading">¶</a></h3>
+<p>In a separate experiment with three sensor streams, <strong>DRB-based prioritization</strong> reduces the
+high-priority stream’s median sensor-frame latency from <strong>29.4 ms to 13.4 ms</strong>, approximately
+a <strong>2× reduction</strong>, without starving the other flows. Their median latencies change from
+25.0 to 26.9 ms and from 25.5 to 28.0 ms, respectively.</p>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="../_images/drb-prioritization.png"><img alt="Before-and-after latency traces for three sensor streams. With DRB prioritization, sensor 0's median latency drops from 29.4 to 13.4 milliseconds, while the other streams continue to receive service with medians of 26.9 and 28.0 milliseconds." src="../_images/drb-prioritization.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Per-stream latency before (left) and with (right) DRB-based prioritization.</span><a class="headerlink" href="#id6" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>These measurements demonstrate network tuning and per-stream prioritization. Synchronizing
+complete multimodal observations across users remains the broader research goal.</p>
 </section>
-<section id="related-publications">
-<h2>Related Publications<a class="headerlink" href="#related-publications" title="Link to this heading">¶</a></h2>
-<p><em>Coming soon</em></p>
+</section>
+<section id="publication">
+<h2>Publication<a class="headerlink" href="#publication" title="Link to this heading">¶</a></h2>
+<p><strong>WiP: mmsRAN: Multimodal Cellular Uplink for Physical AI</strong></p>
+<p><a class="reference external" href="https://doi.org/10.1145/3795866.3844782">Publication DOI: 10.1145/3795866.3844782</a></p>
+</section>
+<section id="acknowledgement">
+<h2>Acknowledgement<a class="headerlink" href="#acknowledgement" title="Link to this heading">¶</a></h2>
+<p>This work was recognized for the <strong>Qualcomm Innovation Fellowship 2026</strong>.</p>
 </section>
 </section>
 
@@ -406,13 +487,18 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">MultiModal Sensing</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a></li>
-<li><a class="reference internal" href="#key-capabilities">Key Capabilities</a></li>
-<li><a class="reference internal" href="#applications">Applications</a></li>
-<li><a class="reference internal" href="#architecture">Architecture</a></li>
-<li><a class="reference internal" href="#results">Results</a></li>
-<li><a class="reference internal" href="#related-publications">Related Publications</a></li>
+<li><a class="reference internal" href="#">mmsRAN: Multimodal Cellular Uplink for Physical AI</a><ul>
+<li><a class="reference internal" href="#why-physical-ai-needs-synchronized-uplink">Why Physical AI Needs Synchronized Uplink</a></li>
+<li><a class="reference internal" href="#the-challenge-access-latency-and-frame-misalignment">The Challenge: Access Latency and Frame Misalignment</a></li>
+<li><a class="reference internal" href="#design-multimodal-flow-synchronization">Design: Multimodal Flow Synchronization</a></li>
+<li><a class="reference internal" href="#network-testbed">Network Testbed</a></li>
+<li><a class="reference internal" href="#preliminary-results">Preliminary Results</a><ul>
+<li><a class="reference internal" href="#network-configuration">Network Configuration</a></li>
+<li><a class="reference internal" href="#prioritization-across-sensor-streams">Prioritization Across Sensor Streams</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#publication">Publication</a></li>
+<li><a class="reference internal" href="#acknowledgement">Acknowledgement</a></li>
 </ul>
 </li>
 </ul>

@@ -321,6 +321,11 @@
     background-image: url('Ushasi.jpg');
 }
 
+#photo-sreevatsank {
+    background-image: url('Sreevatsank.jpg');
+    background-position: center 35%;
+}
+
 #photo-sushila {
     background-image: url('Sushila.jpg');
 }

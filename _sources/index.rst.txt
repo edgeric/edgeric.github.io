@@ -179,6 +179,14 @@ Team
        <a href="mailto:ughosh@ucsd.edu" class="team-email">ughosh@ucsd.edu</a>
      </div>
      <div class="team-card">
+       <a href="https://www.linkedin.com/in/sreevatsank-k/" class="team-link">
+         <div class="team-photo" id="photo-sreevatsank" role="img" aria-label="Sreevatsank Kadaveru"></div>
+         <h4>Sreevatsank Kadaveru</h4>
+       </a>
+       <p>PhD Student, UCSD</p>
+       <a href="mailto:skadaveru@ucsd.edu" class="team-email">skadaveru@ucsd.edu</a>
+     </div>
+     <div class="team-card">
        <a href="https://www.linkedin.com/in/sushilaseshasayee/" class="team-link">
          <div class="team-photo" id="photo-sushila"></div>
          <h4>Sushila Seshasayee</h4>
@@ -470,6 +478,20 @@ Publications & Tutorials
 .. raw:: html
 
    <div class="publication-grid">
+     <div class="publication-card">
+       <h3>WiP: mmsRAN: Multimodal Cellular Uplink for Physical AI</h3>
+       <div class="publication-buttons">
+         <a href="https://doi.org/10.1145/3795866.3844782" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">WiP@MobiCom'26</a>
+         <a href="projects/multimodal-sensing.html" class="pub-btn pub-btn-web">Project Website</a>
+       </div>
+     </div>
+     <div class="publication-card">
+       <h3>Demo: RoboNEST: Robotics Networked Edge Systems Testbed for Physical AI</h3>
+       <div class="publication-buttons">
+         <a href="https://doi.org/10.1145/3795866.3848480" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@MobiCom'26</a>
+         <a href="projects/robonest.html" class="pub-btn pub-btn-web">Project Website</a>
+       </div>
+     </div>
      <div class="publication-card">
        <h3>EdgeRIC: Empowering Real-time Intelligent Optimization and Control in NextG Cellular Networks.</h3>
        <div class="publication-buttons">
