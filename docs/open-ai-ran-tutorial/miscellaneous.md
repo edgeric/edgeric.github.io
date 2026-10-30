@@ -224,6 +224,8 @@ The repository is [ucsdwcsng/open-ai-ran-tutorial](https://github.com/ucsdwcsng/
 | `buffer-control-experiments/` | buffer-cap scripts, traffic and dashboards (Demo 3) |
 | `telemetry/` | VictoriaMetrics and Grafana stack, dashboard JSON, forwarder, TCP probe |
 | `scripts/` | bring-up, traffic, trace control and demo scripts |
+| `ota/` | the over-the-air gNB image, its gNB and radio-unit configs, and the COTS SIM table |
+| `docs/` | reference: EdgeRIC-RT, the control hooks and the `rlc_dl_ctrl` API, codelet deployment, and the ZMQ and over-the-air runs |
 
 ## Further reading
 
