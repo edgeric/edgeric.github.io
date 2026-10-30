@@ -9,7 +9,7 @@ climbs to hundreds of milliseconds while the download gains nothing. A control c
   [builds the codelets](../open-ai-ran-tutorial.md#build-the-codelets) this demo loads: `upt`, `bufctl`
   and `bufcap`.
 - **Design:** {doc}`../edgeric-ocudu-jbpf` (the hooks and jrtc), and
-  [Hooks and Codelets](hooks-and-codelets.md) for how a codelet is written.
+  [Hooks, Codelets and muApps](hooks-and-codelets.md) for how a codelet is written.
 - **Runtime:** about 25 minutes.
 ```
 
@@ -512,7 +512,7 @@ stack on the UPF.
 The dashboard's RLC panels come from the `upt` codelets that `--telemetry` loads: queuing latency from
 `rlc_dl_sdu_send_started`, and buffer occupancy from `rlc_dl_new_sdu` and `rlc_dl_sdu_send_completed`.
 Each codelet adds up its packets in 134 ms buckets, per UE and bearer, and sends one message per bucket.
-[Hooks and Codelets](hooks-and-codelets.md) shows how to write a codelet like these.
+[Hooks, Codelets and muApps](hooks-and-codelets.md) shows how to write a codelet like these.
 
 ### Notes
 

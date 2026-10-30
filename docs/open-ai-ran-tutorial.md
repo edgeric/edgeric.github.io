@@ -13,7 +13,7 @@ the RAN datapath, and unloaded again, with no recompile or restart. Codelets run
 | [Demo 1: Cellular Digital Twin](open-ai-ran-tutorial/demo1-plug-and-play-channels.md) | Per-UE channels replayed from SNR traces and switched while the cell carries traffic |
 | [Demo 2: AI-Driven Scheduling](open-ai-ran-tutorial/demo2-ai-scheduling.md) | EdgeRIC-RT: a scheduler muApp in the loop every TTI, including a PPO policy trained online |
 | [Demo 3: TCP flow optimization with real-time buffer management](open-ai-ran-tutorial/demo3-buffer-management.md) | RLC buffer control from a codelet, cell-wide and per UE, to remove bufferbloat |
-| [Hooks and Codelets](open-ai-ran-tutorial/hooks-and-codelets.md) | Add a hook to the gNB, then write, build and load your own telemetry and control codelets |
+| [Hooks, Codelets and muApps](open-ai-ran-tutorial/hooks-and-codelets.md) | Add a hook to the gNB, write your own telemetry and control codelets, and write a scheduler muApp for EdgeRIC |
 
 ```{note}
 Do Parts 1 and 2 first; every demo builds on them. Part 4 moves the cell onto a USRP to run over the air.
@@ -205,7 +205,7 @@ bash buffer-control-experiments/bufcap.sh build
 
 Each codelet prints its verifier result. `Program terminates within N instructions` means the jbpf
 verifier accepted it; `Failed verification` means it will not load, and
-[Hooks and Codelets](open-ai-ran-tutorial/hooks-and-codelets.md#what-the-verifier-checks) covers the usual causes.
+[Hooks, Codelets and muApps](open-ai-ran-tutorial/hooks-and-codelets.md#what-the-verifier-checks) covers the usual causes.
 The `grep` keeps only these lines; drop it to see the full build log. Abridged:
 
 ```text
@@ -404,7 +404,7 @@ k3d cluster stop "$CLUSTER"            # optional; resume from "Start the cluste
 1. [Demo 1: Cellular Digital Twin](open-ai-ran-tutorial/demo1-plug-and-play-channels.md)
 2. [Demo 2: AI-Driven Scheduling](open-ai-ran-tutorial/demo2-ai-scheduling.md)
 3. [Demo 3: TCP Flow Optimization with Real-Time Buffer Management](open-ai-ran-tutorial/demo3-buffer-management.md)
-4. [Hooks and Codelets](open-ai-ran-tutorial/hooks-and-codelets.md): write and load your own codelets
+4. [Hooks, Codelets and muApps](open-ai-ran-tutorial/hooks-and-codelets.md): write your own codelets and muApps
 
 Loading codelets by hand, Grafana, the hooks and the repository layout are on
 [Miscellaneous](open-ai-ran-tutorial/miscellaneous.md).
