@@ -734,7 +734,7 @@ bash<span class="w"> </span>scripts/stop_demo.sh
 == [5/5] stop the broker (multi-UE runs: Python or C++) ==
   broker stopped
 
-STOPPED. Bring it back with:  bash scripts/restart_demo.sh
+STOPPED. Bring it back with:  bash scripts/setup_zmq_chan_demo.sh N [--telemetry]
 </pre></div>
 </div>
 <p>Then press Ctrl-C in Terminal 1.</p>
@@ -1282,7 +1282,8 @@ at once:</p>
 </div>
 <p>The hook fires once per downlink SDU on each RLC AM data bearer, before the enqueue decision. The gNB
 clamps a byte limit to [one maximum PDCP PDU, the configured queue bytes] and an SDU limit to [1, the
-configured queue size]. The hook’s API is in <code class="docutils literal notranslate"><span class="pre">docs/scout/rlc-buffer-control-hook.md</span></code>.</p>
+configured queue size]. The hook’s API is in
+<a class="reference external" href="https://github.com/ucsdwcsng/open-ai-ran-tutorial/blob/main/docs/rlc-buffer-control-hook.md"><code class="docutils literal notranslate"><span class="pre">docs/rlc-buffer-control-hook.md</span></code></a>.</p>
 <p>The context struct is the wire contract between the gNB and the codelet. Codelets compile against the SDK
 image’s headers, not the gNB tree, so each declares the struct locally, and it must match
 <code class="docutils literal notranslate"><span class="pre">include/srsran/jbpf/jbpf_srsran_contexts.h</span></code> in <code class="docutils literal notranslate"><span class="pre">ocudu-jbpf</span></code>. If the two drift, the codelet writes into

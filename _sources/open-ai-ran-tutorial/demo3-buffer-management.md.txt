@@ -464,7 +464,7 @@ stopped. live iperf3 -- ue container: 0 upf: 0
 == [5/5] stop the broker (multi-UE runs: Python or C++) ==
   broker stopped
 
-STOPPED. Bring it back with:  bash scripts/restart_demo.sh
+STOPPED. Bring it back with:  bash scripts/setup_zmq_chan_demo.sh N [--telemetry]
 ```
 
 Then press Ctrl-C in Terminal 1.
@@ -1003,7 +1003,8 @@ at once:
 
 The hook fires once per downlink SDU on each RLC AM data bearer, before the enqueue decision. The gNB
 clamps a byte limit to [one maximum PDCP PDU, the configured queue bytes] and an SDU limit to [1, the
-configured queue size]. The hook's API is in `docs/scout/rlc-buffer-control-hook.md`.
+configured queue size]. The hook's API is in
+[`docs/rlc-buffer-control-hook.md`](https://github.com/ucsdwcsng/open-ai-ran-tutorial/blob/main/docs/rlc-buffer-control-hook.md).
 
 The context struct is the wire contract between the gNB and the codelet. Codelets compile against the SDK
 image's headers, not the gNB tree, so each declares the struct locally, and it must match
