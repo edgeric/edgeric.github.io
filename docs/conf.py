@@ -67,7 +67,7 @@ html_theme_options = {
     "sidebar_hide_name": False,
     "navigation_with_keys": True,
     "top_of_page_buttons": ["view", "edit"],
-    "source_repository": "https://github.com/yourusername/edgeric",
+    "source_repository": "https://github.com/edgeric/edgeric.github.io",
     "source_branch": "main",
     "source_directory": "docs/",
 }
