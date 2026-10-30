@@ -231,7 +231,7 @@
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html">Hooks and Codelets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html">Hooks, Codelets and muApps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/miscellaneous.html">Miscellaneous</a></li>
 </ul>
 </li>
@@ -256,7 +256,7 @@
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html">Hooks and Codelets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html">Hooks, Codelets and muApps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/miscellaneous.html">Miscellaneous</a></li>
 </ul>
 </li>
@@ -332,8 +332,8 @@ the RAN datapath, and unloaded again, with no recompile or restart. Codelets run
 <tr class="row-even"><td><p><a class="reference internal" href="open-ai-ran-tutorial/demo3-buffer-management.html"><span class="std std-doc">Demo 3: TCP flow optimization with real-time buffer management</span></a></p></td>
 <td><p>RLC buffer control from a codelet, cell-wide and per UE, to remove bufferbloat</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html"><span class="std std-doc">Hooks and Codelets</span></a></p></td>
-<td><p>Add a hook to the gNB, then write, build and load your own telemetry and control codelets</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html"><span class="std std-doc">Hooks, Codelets and muApps</span></a></p></td>
+<td><p>Add a hook to the gNB, write your own telemetry and control codelets, and write a scheduler muApp for EdgeRIC</p></td>
 </tr>
 </tbody>
 </table>
@@ -552,7 +552,7 @@ bash<span class="w"> </span>buffer-control-experiments/bufcap.sh<span class="w">
 </div>
 <p>Each codelet prints its verifier result. <code class="docutils literal notranslate"><span class="pre">Program</span> <span class="pre">terminates</span> <span class="pre">within</span> <span class="pre">N</span> <span class="pre">instructions</span></code> means the jbpf
 verifier accepted it; <code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">verification</span></code> means it will not load, and
-<a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html#what-the-verifier-checks"><span class="std std-ref">Hooks and Codelets</span></a> covers the usual causes.
+<a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html#what-the-verifier-checks"><span class="std std-ref">Hooks, Codelets and muApps</span></a> covers the usual causes.
 The <code class="docutils literal notranslate"><span class="pre">grep</span></code> keeps only these lines; drop it to see the full build log. Abridged:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Building ue_contexts
 --------- cucp_uemgr_ue_add.cpp ----------------------------------------------
@@ -766,7 +766,7 @@ k3d<span class="w"> </span>cluster<span class="w"> </span>stop<span class="w"> <
 <li><p><a class="reference internal" href="open-ai-ran-tutorial/demo1-plug-and-play-channels.html"><span class="std std-doc">Demo 1: Cellular Digital Twin</span></a></p></li>
 <li><p><a class="reference internal" href="open-ai-ran-tutorial/demo2-ai-scheduling.html"><span class="std std-doc">Demo 2: AI-Driven Scheduling</span></a></p></li>
 <li><p><a class="reference internal" href="open-ai-ran-tutorial/demo3-buffer-management.html"><span class="std std-doc">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</span></a></p></li>
-<li><p><a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html"><span class="std std-doc">Hooks and Codelets</span></a>: write and load your own codelets</p></li>
+<li><p><a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html"><span class="std std-doc">Hooks, Codelets and muApps</span></a>: write your own codelets and muApps</p></li>
 </ol>
 <p>Loading codelets by hand, Grafana, the hooks and the repository layout are on
 <a class="reference internal" href="open-ai-ran-tutorial/miscellaneous.html"><span class="std std-doc">Miscellaneous</span></a>.</p>

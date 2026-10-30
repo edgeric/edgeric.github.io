@@ -149,7 +149,7 @@ Avoid loading and unloading in a tight loop: it can wedge the app loader.
 `--telemetry` loads two xApps into `jrtc-0`:
 
 - **`upt_app`** (`jrtc_apps/upt`): per-packet user-plane telemetry. Per-UE downlink GTP arrival rate,
-  RLC queuing latency and RLC buffer occupancy in 134 ms buckets. [Hooks and Codelets](hooks-and-codelets.md)
+  RLC queuing latency and RLC buffer occupancy in 134 ms buckets. [Hooks, Codelets and muApps](hooks-and-codelets.md)
   shows how to write a codelet like these.
 - **The dashboard xApp** (`jrtc_apps/dashboard`): per-layer, per-UE MAC, RLC, PDCP, RRC and NGAP
   statistics as JSON in the `jrtc-0` log, plus per-UE DL CQI, UL SNR, DL MCS, DL MAC throughput and

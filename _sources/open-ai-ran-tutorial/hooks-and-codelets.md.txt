@@ -1,39 +1,45 @@
-# Hooks and Codelets
+# Hooks, Codelets and muApps
 
-Every demo in this tutorial runs on codelets: small eBPF programs that you load into the running gNB
-at a hook, and unload again, with no rebuild and no restart. This page shows how to add a hook to the
-gNB, then how to write, build and load your own codelets. It walks through two examples from the
-repository: a telemetry codelet that reports each UE's downlink traffic, and the control codelet behind
-Demo 3's buffer caps.
+Everything you ran in the three demos is built from three kinds of programs. Codelets are small eBPF
+programs that we load into the running gNB, at hooks in its code. xApps run in `jrtc-0`: they receive what
+the codelets send, or send them settings. muApps belong to EdgeRIC; they run in `edgeric-0` and make a
+decision every TTI.
 
-## How the Pieces Fit
+This page shows how to write each of them. We start by adding a hook to the gNB, using `rlc_dl_ctrl` from
+Demo 3. Then come three examples from the repository: `dl_sdu_count`, a telemetry codelet with an xApp
+that prints what it sends; `bufcap`, the control codelet behind Demo 3's buffer caps; and `longestq`, a
+scheduler muApp for EdgeRIC that you add yourself.
 
-- A **hook** is a call in the gNB's source where codelets can run. With no codelet loaded, the call
-  does nothing.
-- A **monitor hook** gives the codelet a read-only context, such as the UE, the bearer and a packet
-  size. The codelet measures and sends results on an **output channel**. An xApp in `jrtc-0` receives
-  them.
-- A **control hook** gives the codelet a struct that the gNB reads back after the call. What the codelet
-  writes there, the gNB applies. An xApp can send it settings on an **input channel**.
-- jbpf's verifier checks every codelet, so a codelet cannot crash the gNB or loop forever.
+## Where Things Live
+
+A hook is a function call we placed in the gNB's code. With no codelet attached, the call returns right
+away. A monitor hook gives its codelet a read-only view (the UE, the bearer, the packet length), and the
+codelet sends what it measured on an output channel. A control hook passes a struct that the gNB reads
+back after the codelet returns, so a value the codelet writes there takes effect, for example a new queue
+limit. The jbpf verifier checks every codelet before the gNB accepts it, so a broken codelet is rejected
+instead of taking the cell down.
 
 | What | Where |
 |---|---|
 | hook declarations | `ocudu-jbpf/srsran_jbpf/verifier/specs/jbpf_srsran_hooks.h` |
 | hook contexts | `ocudu-jbpf/include/srsran/jbpf/jbpf_srsran_contexts.h` |
-| codelets | `jrtc-apps/codelets/<name>/`: source, messages, `Makefile`, codeletset YAML |
-| xApps | `jrtc-apps/jrtc_apps/<name>/`: Python app and deployment YAML |
+| codelets | `jrtc-apps/codelets/<name>/`: source, protobuf messages, `Makefile`, codeletset YAML |
+| xApps | `jrtc-apps/jrtc_apps/<name>/`: the Python app and its deployment YAML |
+| muApps | `edgeric-rt/muapps/`, with the schedulers in `edgeric-rt/edgeric_rt/policies.py` |
 
-[Miscellaneous](miscellaneous.md#hooks-used-in-this-tutorial) lists the hooks this tutorial uses.
+The pods mount these folders from your clone. `jrtc-0` has `jrtc-apps/jrtc_apps` at `/apps` and
+`jrtc-apps/codelets` at `/codelets`, and `edgeric-0` has `edgeric-rt` at `/edgeric`, so you can change
+code and reload it without rebuilding an image. [Miscellaneous](miscellaneous.md#hooks-used-in-this-tutorial)
+lists every hook the tutorial uses.
 
-## Add a Hook to the gNB
+## Adding a Hook to the gNB
 
-Skip this part if an existing hook already fires where you need it. The steps below are the ones that
-added `rlc_dl_ctrl`, the control hook of Example 2. It fires for every downlink SDU on an RLC AM data
-bearer, before the gNB decides whether the SDU fits in the queue.
+You only need this when no existing hook fires where your code has to run. We'll go through
+`rlc_dl_ctrl`, the control hook Demo 3 uses. The gNB calls it for every downlink SDU on an RLC AM data
+bearer, just before it decides whether the SDU still fits in the queue.
 
-**1. Define the context** in `include/srsran/jbpf/jbpf_srsran_contexts.h`. For a control hook, say which
-fields the codelet writes:
+**1. The context.** The struct goes in `include/srsran/jbpf/jbpf_srsran_contexts.h`. For a control hook,
+mark which fields the gNB fills in and which ones the codelet writes back:
 
 ```c
 struct jbpf_rlc_ctrl_info {
@@ -49,8 +55,8 @@ struct jbpf_rlc_ctrl_info {
 };
 ```
 
-**2. Declare the hook** in `srsran_jbpf/verifier/specs/jbpf_srsran_hooks.h`. `HOOK_ASSIGN` points the
-generic context the codelet receives at your struct:
+**2. The declaration.** `srsran_jbpf/verifier/specs/jbpf_srsran_hooks.h` declares the hook. In
+`HOOK_ASSIGN`, the generic context that every codelet receives is pointed at your struct:
 
 ```c
 DECLARE_JBPF_HOOK(rlc_dl_ctrl,
@@ -65,13 +71,13 @@ DECLARE_JBPF_HOOK(rlc_dl_ctrl,
 )
 ```
 
-A hook can also pass a few numbers in `srs_meta_data1` to `srs_meta_data4`. The monitor hook
-`rlc_dl_new_sdu`, used in Example 1, packs the SDU length and PDCP sequence number this way:
+A hook can also hand over a few plain numbers in `srs_meta_data1` to `srs_meta_data4`. `rlc_dl_new_sdu`,
+which Example 1 uses, packs the SDU length and the PDCP sequence number into the first one:
 `ctx.srs_meta_data1 = (uint64_t)sdu_length << 32 | pdcp_sn;`.
 
-**3. Define and call the hook** in the source file where it fires. `DEFINE_JBPF_CTRL_HOOK` creates a
-control hook and `DEFINE_JBPF_HOOK` a monitor hook. Keep the code inside `#ifdef JBPF_ENABLED`. From
-`lib/rlc/rlc_tx_am_entity.cpp`, trimmed:
+**3. The call.** In the file where the hook should fire, `DEFINE_JBPF_CTRL_HOOK` creates a control hook
+(`DEFINE_JBPF_HOOK` creates a monitor hook), and the gNB calls it like a function. Keep it all inside
+`#ifdef JBPF_ENABLED`. From `lib/rlc/rlc_tx_am_entity.cpp`, trimmed:
 
 ```cpp
 DEFINE_JBPF_CTRL_HOOK(rlc_dl_ctrl);
@@ -109,10 +115,10 @@ void rlc_tx_am_entity::handle_sdu(byte_buffer sdu_buf, bool is_retx)
   ...
 ```
 
-The gNB clamps the requested limit before it applies it, so a codelet cannot shrink a queue below one
-maximum-size PDCP PDU or grow it past the configured size.
+The gNB clamps whatever the codelet asks for. A queue can't shrink below one maximum-size PDCP PDU
+(9,007 bytes) or grow past its configured size.
 
-**4. Rebuild the gNB image** and put it in the pod, as in Part 1 and Part 2 of the
+**4. The image.** Rebuild the gNB image and recreate the gNB pod, as in Parts 1 and 2 of the
 [tutorial](../open-ai-ran-tutorial.md):
 
 ```bash
@@ -122,17 +128,14 @@ k3d image import ocudu-gnb-jbpf:ipc -c "$CLUSTER"
 # then recreate the gNB pod with its containers (Part 2)
 ```
 
-Codelets compile against the jbpf SDK image, and its headers do not have the hooks added here. A
-codelet for a new hook therefore keeps its own copy of the context struct, field for field. Example 2
-does this.
+One thing to watch for: codelets compile against the headers in the jbpf SDK image, and those don't know
+about hooks you add yourself. A codelet for a new hook keeps its own copy of the context struct, field
+for field. Example 2 does this.
 
 ## Example 1: A Telemetry Codelet
 
-`dl_sdu_count` runs on the `rlc_dl_new_sdu` monitor hook, which fires for every downlink SDU that enters
-RLC. It counts SDUs and bytes per UE and, about once a second, sends one message per active UE. An xApp
-prints them.
-
-The files:
+`dl_sdu_count` counts the downlink SDUs and bytes that enter RLC, per UE, and sends the totals about once
+a second. It runs on the `rlc_dl_new_sdu` monitor hook, and a short xApp prints its messages. The files:
 
 ```text
 jrtc-apps/codelets/dl_sdu_count/      dl_sdu_count.proto  dl_sdu_count.cpp  Makefile  dl_sdu_count.yaml
@@ -141,8 +144,8 @@ jrtc-apps/jrtc_apps/dl_sdu_count/     dl_sdu_count_app.py  deployment.yaml
 
 ### The message
 
-`dl_sdu_count.proto` defines what the codelet sends. The build turns it into a C struct for the codelet,
-a serializer for the gNB and a Python class for the xApp.
+We describe what the codelet sends in a protobuf file. From it, the build makes a C struct for the
+codelet, a serializer that the gNB loads, and a Python class for the xApp.
 
 ```proto
 syntax = "proto2";
@@ -157,8 +160,6 @@ message dl_sdu_count {
 ```
 
 ### The codelet
-
-`dl_sdu_count.cpp`:
 
 ```cpp
 // dl_sdu_count: count the downlink SDUs and bytes that enter RLC, per UE, and report them
@@ -241,24 +242,25 @@ uint64_t jbpf_main(void* state)
 }
 ```
 
-Codelets keep their state in maps. `counts` holds each UE's totals and the period they belong to. A
-UE's counts go out with its first SDU of the next period, so a UE without traffic stays quiet.
-`out_counts` is the output channel, holding up to 64 messages on their way to the xApp.
+The codelet keeps its state in maps. `counts` holds each UE's running totals and the period they belong
+to. When a UE's first SDU of a new period comes in, the codelet sends the totals of the period that just
+ended and starts over, so a UE without traffic sends nothing. `out_counts` is the output channel; it
+holds up to 64 messages on their way to the xApp.
 
 ### What the verifier checks
 
-The verifier rejects a codelet that it cannot prove safe. The rules you will meet first:
+The gNB only loads a codelet that the verifier can prove safe. These are the rules we ran into first:
 
-- Check `ctx->data` against `ctx->data_end` before reading the context.
-- Bound every loop. `#pragma unroll` over a constant count works.
-- Avoid 64-bit division; shift instead, as `PERIOD_SHIFT` does.
-- Avoid `static const` tables. The loader cannot place them, and the verifier then reports
-  0 instructions. Use a `switch` that returns the value.
-- Send one message per call. When a codelet sent several in one call, only the first reached the
-  xApp.
-- After editing a header, delete the directory's `.o` files: `make` does not track headers.
+- Check `ctx->data` against `ctx->data_end` before you read the context.
+- Give every loop a bound. `#pragma unroll` over a constant count works.
+- Shift instead of dividing 64-bit numbers, as `PERIOD_SHIFT` does.
+- Avoid `static const` tables. The loader can't place them and the verifier reports 0 instructions; a
+  `switch` that returns the value works.
+- Send one message per call. Our first version of this codelet sent one per UE in the same call, and
+  only the first one reached the xApp.
+- `make` doesn't track headers. After you edit one, delete the `.o` files in that directory.
 
-### Build
+### Building it
 
 The `Makefile` lists each message as `<proto file>^<message>`:
 
@@ -275,7 +277,7 @@ cd ~/open-ai-ran-tutorial/jrtc-apps/codelets
 ./make.sh -d dl_sdu_count
 ```
 
-The build runs in the jbpf SDK container and ends with the verifier's result:
+The build runs in the jbpf SDK container and ends with the verifier's verdict:
 
 ```text
 Building dl_sdu_count
@@ -285,7 +287,7 @@ Program terminates within 115 instructions
 
 ### The codeletset
 
-`dl_sdu_count.yaml` attaches the codelet to its hook and names its output channel and message:
+`dl_sdu_count.yaml` puts the codelet on its hook and names the output channel and the message on it:
 
 ```yaml
 codeletset_id: dl_sdu_count
@@ -307,7 +309,7 @@ codelet_descriptor:
 
 ### The xApp
 
-`dl_sdu_count_app.py` subscribes to the output channel and prints each message. The stream name is
+The xApp subscribes to the output channel and prints each message. Stream names follow
 `<deployment>://jbpf_agent/<codeletset>/<codelet>`.
 
 ```python
@@ -364,7 +366,7 @@ def jrtc_start_app(capsule):
     jrtc_app_destroy(state.app)
 ```
 
-`deployment.yaml` loads the xApp and the codeletset together:
+`deployment.yaml` loads the xApp and the codeletset with one command:
 
 ```yaml
 name: dl_sdu_count
@@ -393,12 +395,12 @@ jbpf:
       config: ${JBPF_CODELETS}/dl_sdu_count/dl_sdu_count.yaml
 ```
 
-### Run it
+### Running it
 
-Bring the RAN up with `--telemetry`, which starts the forwarder that `jrtc-ctl` needs, and start
-traffic (Part 2). Then copy the codelet directory into the gNB container, where the gNB's jbpf agent
-loads the serializer from, and load the deployment. `jrtc-0` reads the codelets and xApps from your
-clone.
+Bring the RAN up with `--telemetry`, which starts the forwarder that `jrtc-ctl` needs, and start some
+traffic, as in Part 2. Then copy the codelet directory into the gNB container, because the gNB's jbpf
+agent loads the serializer from there, and load the deployment. `jrtc-0` reads the codelets and the
+xApps from your clone.
 
 ```bash
 cd ~/open-ai-ran-tutorial
@@ -410,8 +412,8 @@ JRTC 'load -c /apps/dl_sdu_count/deployment.yaml'
 kubectl logs -n ran jrtc-0 -c jrtc -f | grep dl_sdu_count
 ```
 
-The gNB log shows `Registered codelet dl_sdu_count to hook rlc_dl_new_sdu`, and the xApp prints one line
-per UE about once a second. With two UEs downloading at about 30 Mbit/s each:
+In the gNB log you should see `Registered codelet dl_sdu_count to hook rlc_dl_new_sdu`, and the xApp
+prints one line per UE about once a second. With two UEs downloading at about 30 Mbit/s each:
 
 ```text
 [dl_sdu_count] ue 1: 2788 SDUs, 31.2 Mbit/s
@@ -420,22 +422,23 @@ per UE about once a second. With two UEs downloading at about 30 Mbit/s each:
 [dl_sdu_count] ue 1: 2766 SDUs, 31.0 Mbit/s
 ```
 
-The counts include RLC retransmissions, so they read a little above the goodput the UEs measure.
+An RLC SDU is a whole IP packet plus its PDCP header, so these rates come out a few percent above the
+goodput that iperf3 reports at the UEs.
 
-Unload it with the same file:
+To unload it, pass the same file:
 
 ```bash
 JRTC 'unload -c /apps/dl_sdu_count/deployment.yaml'
 ```
 
-To chart the counts in Grafana, have the xApp write them to VictoriaMetrics, as
-`jrtc_apps/upt/upt_app.py` does in its `_emit` function.
+If you want the counts in Grafana, have the xApp write them to VictoriaMetrics, as the `_emit` function in
+`jrtc_apps/upt/upt_app.py` does.
 
 ## Example 2: A Control Codelet
 
-`bufcap` is the codelet behind Demo 3's buffer caps. It runs on the `rlc_dl_ctrl` control hook and sets
-the same byte limit on every UE's data bearers, so the RLC queue drops packets once it holds that many
-bytes. It needs no xApp: the limit is built in.
+`bufcap` is the codelet behind Demo 3's buffer caps. It runs on `rlc_dl_ctrl` and gives the data bearers
+of every UE the same byte limit, so the RLC queue drops packets once it holds that many bytes. The limit
+is compiled in, so there is no xApp.
 
 ```text
 jrtc-apps/codelets/bufcap/                 bufcap.cpp  Makefile
@@ -444,7 +447,7 @@ buffer-control-experiments/bufcap.sh       builds, loads and unloads it
 
 ### The codelet
 
-`bufcap.cpp` copies the hook's context struct from the gNB, then writes the limit on each call:
+`bufcap.cpp` carries its own copy of the hook's context struct and writes the limit on every call:
 
 ```cpp
 // Copyright (c) Microsoft Corporation. Licensed under the MIT license.
@@ -516,10 +519,10 @@ uint64_t jbpf_main(void* state)
 }
 ```
 
-### Build
+### Building it
 
-Each limit is its own object. The `Makefile`'s `one` target compiles `bufcap.cpp` with
-`-DCAP_BYTES=<bytes>` and runs the verifier on the result:
+Every limit is a separate object, built from the same source. The `one` target in the `Makefile`
+compiles `bufcap.cpp` with `-DCAP_BYTES=<bytes>` and runs the verifier on the result:
 
 ```make
 one:
@@ -530,8 +533,8 @@ one:
 		|| { echo "verifier: FAILED -- the gNB would reject bufcap_$(NAME).o"; rm -f bufcap_$(NAME).o; exit 1; }
 ```
 
-`bufcap.sh build` runs that target in the jbpf SDK container, then writes the codeletset and the
-deployment for each size:
+`bufcap.sh build` runs that target in the SDK container, then writes a codeletset and a deployment for
+each size:
 
 ```bash
 cd ~/open-ai-ran-tutorial
@@ -544,7 +547,7 @@ bash buffer-control-experiments/bufcap.sh build 64k
   built bufcap_64k (65536 bytes)
 ```
 
-`jrtc-apps/codelets/bufcap/bufcap_64k.yaml` attaches the object to the hook:
+`jrtc-apps/codelets/bufcap/bufcap_64k.yaml` puts the object on the hook:
 
 ```yaml
 # generated by buffer-control-experiments/bufcap.sh -- fixed RLC DL buffer cap (64k = 65536 bytes; 0 = restore config)
@@ -556,7 +559,7 @@ codelet_descriptor:
     priority: 1
 ```
 
-`jrtc-apps/jrtc_apps/bufcap/deployment_64k.yaml` loads it, with no xApp:
+and `jrtc-apps/jrtc_apps/bufcap/deployment_64k.yaml` loads it:
 
 ```yaml
 # generated by buffer-control-experiments/bufcap.sh
@@ -571,11 +574,11 @@ jbpf:
       config: ${JBPF_CODELETS}/bufcap/bufcap_64k.yaml
 ```
 
-### Run it
+### Running it
 
-With the RAN and the UEs up as in [Demo 3](demo3-buffer-management.md), start its traffic: a 2 Mbit/s
-video call and a download, both to UE 1. Then copy the object into the gNB container and load the
-deployment with the `JRTC` function from Example 1. `jrtc-ctl` prints nothing when the load works.
+Bring the RAN and the UEs up as in [Demo 3](demo3-buffer-management.md) and start its traffic, a
+2 Mbit/s video call plus a download, both to UE 1. Then copy the object into the gNB container and load
+the deployment, with the `JRTC` function from Example 1. When the load works, `jrtc-ctl` prints nothing.
 
 ```bash
 cd ~/open-ai-ran-tutorial
@@ -586,8 +589,8 @@ kubectl cp jrtc-apps/codelets/bufcap/bufcap_64k.o ran/srs-gnb-du1-0:/codelets/bu
 JRTC 'load -c /apps/bufcap/deployment_64k.yaml'
 ```
 
-The gNB log shows `Registered codelet bufcap to hook rlc_dl_ctrl`. Watch UE 1 in the gNB console
-(`bash scripts/gnb_console.sh`). Before the load, UE 1 receives 63 Mbit/s with about 2 MB queued
+The gNB log should show `Registered codelet bufcap to hook rlc_dl_ctrl`. Watch UE 1 in the gNB console
+(`bash scripts/gnb_console.sh`). Before the load, it received 63 Mbit/s and had about 2 MB queued
 (`dl_bs`):
 
 ```text
@@ -596,8 +599,8 @@ The gNB log shows `Registered codelet bufcap to hook rlc_dl_ctrl`. Watch UE 1 in
    1 4601 |  15 1.0   27    63M 1400    0   0%     2M
 ```
 
-From the next downlink SDU on, the gNB drops any SDU that would take UE 1's queue past 64 KiB. The
-queue drains and the rate falls:
+From the next downlink SDU on, the gNB drops every SDU that would push UE 1's queue past 64 KiB. The
+queue drains and the rate drops:
 
 ```text
  pci rnti | cqi  ri  mcs  brate   ok  nok  (%)  dl_bs
@@ -605,24 +608,22 @@ queue drains and the rate falls:
    1 4601 |  15 1.0   26    18M  467    0   0%  1.51k
 ```
 
-`/tmp/gnb.log` in the gNB container records each drop:
+The gNB logs each drop to `/tmp/gnb.log` in its container:
 
 ```text
 [RLC     ] [W] du=0 ue=0 DRB1 DL: Dropped SDU. sdu_len=1503 pdcp_sn=66478 is_retx=false queued_sdus=43 queued_bytes=64629
 ```
 
-[Demo 3](demo3-buffer-management.md) measures what each cap size does to the call's RTT and the
-download's throughput.
-
-Unload the codelet with the same file:
+[Demo 3](demo3-buffer-management.md) goes through what each cap size does to the call's RTT and to the
+download. To unload the codelet, pass the same file:
 
 ```bash
 JRTC 'unload -c /apps/bufcap/deployment_64k.yaml'
 ```
 
-The gNB keeps the last limit after the codelet is gone, and UE 1 stays near 16 Mbit/s. To
-restore the configured queue, load `bufcap_off`, which writes `cfg_byte_limit` back, until the next
-downlink packet has passed, then unload it. `bufcap.sh off` does both:
+Unloading doesn't undo the cap. The gNB keeps the last limit it was given, and UE 1 stays near
+16 Mbit/s. To get the configured queue back, load `bufcap_off`, which writes `cfg_byte_limit` back, wait
+for the next downlink packet, then unload it. `bufcap.sh off` does all three:
 
 ```bash
 bash buffer-control-experiments/bufcap.sh off
@@ -633,13 +634,14 @@ bash buffer-control-experiments/bufcap.sh off
   configured buffer restored; bufcap unloaded
 ```
 
-UE 1 is back at 63 Mbit/s, with 1.5 to 3 MB queued.
+After that, UE 1 is back at 63 Mbit/s with 1.5 to 3 MB queued.
 
-### Set the limit from an xApp
+### Changing the limit from an xApp
 
-To change the limit while the gNB runs, give the codelet an input channel:
+`bufcap` can't change its limit while it runs. A codelet that takes settings at run time needs an input
+channel:
 
-- In the codelet, declare the channel and drain it on each call:
+- In the codelet, declare the channel and read it on every call:
   `jbpf_control_input_map(ctrl_in, struct my_cmd, 32);` and
   `jbpf_control_input_receive(&ctrl_in, &cmd, sizeof(cmd))`.
 - In the codeletset YAML, add `in_io_channel:` with `- name: ctrl_in`.
@@ -647,5 +649,159 @@ To change the limit while the gNB runs, give the codelet an input channel:
   (`JrtcStreamIdCfg_t(JRTC_ROUTER_REQ_DEST_NONE, 1, ...)`), then send with
   `jrtc_app_router_channel_send_input_msg(app, stream_idx, msg, len(msg))`.
 
-`codelets/bufctl/rlc_ctrl.cpp` and its xApp in `jrtc_apps/bufctl` set a limit per UE and bearer this
-way, from the CLI in [Demo 3](demo3-buffer-management.md).
+`codelets/bufctl/rlc_ctrl.cpp` and the xApp in `jrtc_apps/bufctl` work this way; the CLI in
+[Demo 3](demo3-buffer-management.md) talks to them. EdgeRIC's `rt_ctrl` codelet gets its actions the
+same way, as the next example shows.
+
+## Example 3: An EdgeRIC muApp
+
+A muApp is a plain Python process in pod `edgeric-0`. It sits in the gNB's scheduling loop and decides
+something every TTI. [Demo 2](demo2-ai-scheduling.md) runs the scheduler muApps that come with the
+repository; here we look at how they work, then write a new scheduler.
+
+### The loop
+
+Two codelets on the MAC scheduler connect the gNB to the muApp. After every slot, `rt_report` on the
+`mac_sched_slot_report` hook sends out the state of every UE. At the start of every slot, `rt_ctrl` on
+`mac_sched_slot_ctrl` looks for an action meant for that slot. In between, the `rt_bridge` xApp in
+`jrtc-0` passes the reports to the muApp and the actions back, over Unix sockets:
+
+```text
+gNB, MAC scheduler                      jrtc-0                         edgeric-0
+rt_report  (mac_sched_slot_report) -->  rt_bridge_app.py --> muapp.sock  --> sched_muapp.py
+rt_ctrl    (mac_sched_slot_ctrl)   <--  rt_act_in        <-- bridge.sock <-- weights + target TTI
+```
+
+Each report is 1,080 bytes, stamped with the slot's RANtime. The muApp gets it as a numpy record, and a
+scheduler mostly needs these fields:
+
+| Field | What it holds |
+|---|---|
+| `ran_tti` | RANtime, the gNB's slot counter |
+| `dl_mask` | which of the next slots are downlink |
+| `ue_count`, `ue` | the UEs: the first `ue_count` entries of `ue` are valid |
+| `ue[i]["du_ue_index"]`, `ue[i]["rnti"]` | which UE |
+| `ue[i]["cqi"]` | its last wideband CQI |
+| `ue[i]["dl_pending_bytes"]` | its downlink backlog |
+| `ue[i]["dl_prbs"]`, `ue[i]["dl_mcs"]` | what it got in this slot |
+| `ue[i]["drb_bytes"]` | the bytes scheduled for it in this slot, the reward when you train with RL |
+| `act_status`, `act_seq` | which action ran in this slot, if any |
+
+The muApp answers with a weight per UE, tagged with the RANtime of the slot it is for and a sequence
+number. `rt_ctrl` applies it only in that exact slot; we call that a HIT. A late action is dropped, and
+a slot without an action runs the gNB's own scheduler. The report of the slot echoes the sequence number,
+so the muApp knows which of its actions ran. By default the UE with the highest weight gets the whole
+slot, and a tie goes to the UE that was served least recently.
+
+`muapps/sched_muapp.py` runs the loop. Without the logging and the live controls, it comes down to this:
+
+```python
+rt = rte2.RtE2(lead=args.lead)                       # reports in, actions out
+pol = policies.make(args.scheduler, args, ue_map)    # the scheduler, by name
+sel = policies.SlotSelector()
+
+while True:
+    reps = rt.poll(timeout=0.5)       # every report newer than the last one, oldest first
+    if not reps:
+        continue                      # no new slot yet
+    for r in reps:
+        pol.observe(r)                # e.g. the averages in proportional fair
+
+    newest = reps[-1]                 # act on the newest report only
+    w = pol.weights(newest)           # {du_ue_index: weight}, or None
+    if w is not None:
+        target = rt.target_tti(newest)                # the next downlink slot
+        u = sel.pick(target, w, pol.single_mode) if target is not None else None
+        if u is not None:
+            rt.send(newest, {u: 1})   # tagged with the target TTI and a sequence number
+```
+
+`poll()` waits for reports newer than the newest one it has seen. If several arrived while the muApp
+was busy, it returns all of them, and the muApp acts on the newest. Every report still goes through
+`observe()`, so a policy that keeps averages sees every slot. The action goes out before any bookkeeping,
+because it has to reach the gNB within the slot.
+
+### Writing a scheduler
+
+So a scheduler is a class with a `weights()` method: given a report, it returns a weight per UE, or
+`None` to leave the slot to the gNB. The ones Demo 2 uses (`rr`, `pf`, `maxcqi`, `maxweight`, `rl` and a
+few more) live in `edgeric-rt/edgeric_rt/policies.py`, and most are a few lines long. Max-weight:
+
+```python
+class MaxWeight(Policy):
+    name = "maxweight"
+
+    def weights(self, rep):
+        return {int(u["du_ue_index"]): float(u["cqi"]) * float(u["dl_pending_bytes"]) for u in _with_data(rep)}
+```
+
+Let's add longest-queue-first, which serves the UE with the most bytes waiting. Put the class in
+`policies.py`, after `MaxWeight`:
+
+```python
+class LongestQueue(Policy):
+    """Serve the UE with the most bytes queued."""
+
+    name = "longestq"
+
+    def weights(self, rep):
+        return {int(u["du_ue_index"]): float(u["dl_pending_bytes"]) for u in _with_data(rep)}
+```
+
+Then register its name in `make()`, just before the `raise` at the end:
+
+```python
+    if name == "longestq":
+        return LongestQueue()
+```
+
+`edgeric-0` runs the muApps from your clone, so there is nothing to rebuild. With Demo 2's setup running
+(the RAN with `--edgeric`, four UEs on CQI walks and full-buffer UDP), start it and follow its log:
+
+```bash
+cd ~/open-ai-ran-tutorial
+bash scripts/edgeric_muapp.sh start sched --scheduler longestq --tag longestq
+bash scripts/edgeric_muapp.sh logs sched
+```
+
+```text
+started sched (pid 17)
+[sched] longestq | alloc single | lead 1 | strict | hold 0 | min-share 0.02 | reports from /apps/edgeric_rt/run/muapp.sock | run longestq
+[sched longestq] tti=87022 |   8.7 Mbps (ue1   2.2 ue2   1.7 ue3   1.2 ue4   3.6) | DL HIT  99.7% of 7001 | report->action p50 114 p99 206 us | slack p1 70 us | RB use 1.03 | lazy-RIC 36 lost 6
+[sched longestq] tti=97022 |   6.4 Mbps (ue1   1.8 ue2   1.3 ue3   0.9 ue4   2.4) | DL HIT  99.8% of 7000 | report->action p50 116 p99 211 us | slack p1 63 us | RB use 1.02 | lazy-RIC 49 lost 6
+[sched longestq] tti=107023 |   9.0 Mbps (ue1   2.6 ue2   2.5 ue3   1.3 ue4   2.6) | DL HIT  99.7% of 7001 | report->action p50 115 p99 222 us | slack p1 64 us | RB use 1.04 | lazy-RIC 62 lost 6
+```
+
+The muApp is in the loop: 99.7 % of the downlink slots ran its action in exactly the TTI it targeted,
+about 115 µs after the report. The cell, though, carries only 6 to 13 Mbit/s, split almost evenly
+between the four UEs. Press Ctrl-C to leave the log, then switch the same muApp to round robin and to
+max-weight, about half a minute apart:
+
+```bash
+bash scripts/edgeric_muapp.sh ctl "scheduler rr"
+bash scripts/edgeric_muapp.sh ctl "scheduler maxweight"
+```
+
+```text
+[sched rr] tti=216666 |  26.8 Mbps (ue1  11.4 ue2   2.8 ue3   8.0 ue4   4.6) | DL HIT  99.8% of 7000 | report->action p50 114 p99 212 us | slack p1 56 us | RB use 1.03 | lazy-RIC 287 lost 333
+[sched rr] tti=226667 |  32.2 Mbps (ue1  12.7 ue2   0.9 ue3   9.0 ue4   9.5) | DL HIT  99.8% of 7001 | report->action p50 116 p99 197 us | slack p1 55 us | RB use 1.02 | lazy-RIC 302 lost 333
+[sched maxweight] tti=306612 |  44.8 Mbps (ue1  15.3 ue2   0.0 ue3  29.5 ue4   0.0) | DL HIT  99.7% of 6960 | report->action p50 127 p99 241 us | slack p1 51 us | RB use 1.04 | lazy-RIC 446 lost 533
+[sched maxweight] tti=316581 |  42.2 Mbps (ue1  31.9 ue2   0.0 ue3  10.3 ue4   0.0) | DL HIT  99.2% of 6962 | report->action p50 125 p99 411 us | slack p1 51 us | RB use 1.03 | lazy-RIC 469 lost 560
+```
+
+Round robin gives each UE a quarter of the slots, so each UE's rate follows its channel, 15 to
+32 Mbit/s in total over the run. Max-weight reached 33 to 45. Longest-queue-first does worse than both,
+and the reason is what its weight measures. With full-buffer UDP every queue sits at the RLC limit,
+about 6.17 MB. A UE on a good channel takes more bytes off its queue in each slot it gets, so its queue
+stays furthest below the limit, and the next slot goes to a UE on a weak channel whose queue has already
+filled back up. The muApp saves every TTI to `edgeric-rt/runs/longestq/ttis.npz`, and in this run the UE
+with the worst CQI won 53 % of the slots and the one with the best CQI 5 %. Max-weight multiplies the
+same backlog by the CQI; with it, the best-CQI UE won 88 % of the slots.
+
+Which UEs starve depends on the weight. Longest-queue-first holds back the strong channels, and
+max-weight leaves the weak ones with nothing for seconds at a time (`ue2` and `ue4` above). Stop the
+muApp with `bash scripts/edgeric_muapp.sh stop sched`.
+
+A muApp doesn't have to be a scheduler. Any script under `edgeric-rt/` can read the reports with `RtE2`
+from `edgeric_rt/rte2.py`, and `bash scripts/edgeric_muapp.sh run <script.py>` runs it in `edgeric-0`.
+The bridge feeds one muApp at a time, so stop `sched` first.

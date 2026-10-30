@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Hooks and Codelets" href="hooks-and-codelets.html"><link rel="prev" title="Demo 2: AI-Driven Scheduling" href="demo2-ai-scheduling.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Hooks, Codelets and muApps" href="hooks-and-codelets.html"><link rel="prev" title="Demo 2: AI-Driven Scheduling" href="demo2-ai-scheduling.html">
 
     <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
         <title>Demo 3: TCP Flow Optimization with Real-Time Buffer Management - EdgeRIC</title>
@@ -231,7 +231,7 @@
 <li class="toctree-l2"><a class="reference internal" href="demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hooks-and-codelets.html">Hooks and Codelets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks-and-codelets.html">Hooks, Codelets and muApps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
 </ul>
 </li>
@@ -256,7 +256,7 @@
 <li class="toctree-l2"><a class="reference internal" href="demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hooks-and-codelets.html">Hooks and Codelets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks-and-codelets.html">Hooks, Codelets and muApps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
 </ul>
 </li>
@@ -318,7 +318,7 @@ climbs to hundreds of milliseconds while the download gains nothing. A control c
 <a class="reference internal" href="../open-ai-ran-tutorial.html#build-the-codelets"><span class="std std-ref">builds the codelets</span></a> this demo loads: <code class="docutils literal notranslate"><span class="pre">upt</span></code>, <code class="docutils literal notranslate"><span class="pre">bufctl</span></code>
 and <code class="docutils literal notranslate"><span class="pre">bufcap</span></code>.</p></li>
 <li><p><strong>Design:</strong> <a class="reference internal" href="../edgeric-ocudu-jbpf.html"><span class="doc">EdgeRIC with OCUDU-jbpf: System Design</span></a> (the hooks and jrtc), and
-<a class="reference internal" href="hooks-and-codelets.html"><span class="std std-doc">Hooks and Codelets</span></a> for how a codelet is written.</p></li>
+<a class="reference internal" href="hooks-and-codelets.html"><span class="std std-doc">Hooks, Codelets and muApps</span></a> for how a codelet is written.</p></li>
 <li><p><strong>Runtime:</strong> about 25 minutes.</p></li>
 </ul>
 </div>
@@ -820,7 +820,7 @@ stack on the UPF.</p>
 <p>The dashboard’s RLC panels come from the <code class="docutils literal notranslate"><span class="pre">upt</span></code> codelets that <code class="docutils literal notranslate"><span class="pre">--telemetry</span></code> loads: queuing latency from
 <code class="docutils literal notranslate"><span class="pre">rlc_dl_sdu_send_started</span></code>, and buffer occupancy from <code class="docutils literal notranslate"><span class="pre">rlc_dl_new_sdu</span></code> and <code class="docutils literal notranslate"><span class="pre">rlc_dl_sdu_send_completed</span></code>.
 Each codelet adds up its packets in 134 ms buckets, per UE and bearer, and sends one message per bucket.
-<a class="reference internal" href="hooks-and-codelets.html"><span class="std std-doc">Hooks and Codelets</span></a> shows how to write a codelet like these.</p>
+<a class="reference internal" href="hooks-and-codelets.html"><span class="std std-doc">Hooks, Codelets and muApps</span></a> shows how to write a codelet like these.</p>
 </section>
 <section id="notes">
 <h3>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h3>
@@ -879,7 +879,7 @@ clone that the RAN pods mount.</p></li>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Hooks and Codelets</div>
+                <div class="title">Hooks, Codelets and muApps</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

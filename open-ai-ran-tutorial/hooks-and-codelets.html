@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Miscellaneous" href="miscellaneous.html"><link rel="prev" title="Demo 3: TCP Flow Optimization with Real-Time Buffer Management" href="demo3-buffer-management.html">
 
     <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
-        <title>Hooks and Codelets - EdgeRIC</title>
+        <title>Hooks, Codelets and muApps - EdgeRIC</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -231,7 +231,7 @@
 <li class="toctree-l2"><a class="reference internal" href="demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Hooks and Codelets</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Hooks, Codelets and muApps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
 </ul>
 </li>
@@ -256,7 +256,7 @@
 <li class="toctree-l2"><a class="reference internal" href="demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Hooks and Codelets</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Hooks, Codelets and muApps</a></li>
 <li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
 </ul>
 </li>
@@ -307,25 +307,24 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="hooks-and-codelets">
-<h1>Hooks and Codelets<a class="headerlink" href="#hooks-and-codelets" title="Link to this heading">¶</a></h1>
-<p>Every demo in this tutorial runs on codelets: small eBPF programs that you load into the running gNB
-at a hook, and unload again, with no rebuild and no restart. This page shows how to add a hook to the
-gNB, then how to write, build and load your own codelets. It walks through two examples from the
-repository: a telemetry codelet that reports each UE’s downlink traffic, and the control codelet behind
-Demo 3’s buffer caps.</p>
-<section id="how-the-pieces-fit">
-<h2>How the Pieces Fit<a class="headerlink" href="#how-the-pieces-fit" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>A <strong>hook</strong> is a call in the gNB’s source where codelets can run. With no codelet loaded, the call
-does nothing.</p></li>
-<li><p>A <strong>monitor hook</strong> gives the codelet a read-only context, such as the UE, the bearer and a packet
-size. The codelet measures and sends results on an <strong>output channel</strong>. An xApp in <code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code> receives
-them.</p></li>
-<li><p>A <strong>control hook</strong> gives the codelet a struct that the gNB reads back after the call. What the codelet
-writes there, the gNB applies. An xApp can send it settings on an <strong>input channel</strong>.</p></li>
-<li><p>jbpf’s verifier checks every codelet, so a codelet cannot crash the gNB or loop forever.</p></li>
-</ul>
+          <section id="hooks-codelets-and-muapps">
+<h1>Hooks, Codelets and muApps<a class="headerlink" href="#hooks-codelets-and-muapps" title="Link to this heading">¶</a></h1>
+<p>Everything you ran in the three demos is built from three kinds of programs. Codelets are small eBPF
+programs that we load into the running gNB, at hooks in its code. xApps run in <code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code>: they receive what
+the codelets send, or send them settings. muApps belong to EdgeRIC; they run in <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code> and make a
+decision every TTI.</p>
+<p>This page shows how to write each of them. We start by adding a hook to the gNB, using <code class="docutils literal notranslate"><span class="pre">rlc_dl_ctrl</span></code> from
+Demo 3. Then come three examples from the repository: <code class="docutils literal notranslate"><span class="pre">dl_sdu_count</span></code>, a telemetry codelet with an xApp
+that prints what it sends; <code class="docutils literal notranslate"><span class="pre">bufcap</span></code>, the control codelet behind Demo 3’s buffer caps; and <code class="docutils literal notranslate"><span class="pre">longestq</span></code>, a
+scheduler muApp for EdgeRIC that you add yourself.</p>
+<section id="where-things-live">
+<h2>Where Things Live<a class="headerlink" href="#where-things-live" title="Link to this heading">¶</a></h2>
+<p>A hook is a function call we placed in the gNB’s code. With no codelet attached, the call returns right
+away. A monitor hook gives its codelet a read-only view (the UE, the bearer, the packet length), and the
+codelet sends what it measured on an output channel. A control hook passes a struct that the gNB reads
+back after the codelet returns, so a value the codelet writes there takes effect, for example a new queue
+limit. The jbpf verifier checks every codelet before the gNB accepts it, so a broken codelet is rejected
+instead of taking the cell down.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -341,23 +340,29 @@ writes there, the gNB applies. An xApp can send it settings on an <strong>input 
 <td><p><code class="docutils literal notranslate"><span class="pre">ocudu-jbpf/include/srsran/jbpf/jbpf_srsran_contexts.h</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>codelets</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">jrtc-apps/codelets/&lt;name&gt;/</span></code>: source, messages, <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>, codeletset YAML</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jrtc-apps/codelets/&lt;name&gt;/</span></code>: source, protobuf messages, <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>, codeletset YAML</p></td>
 </tr>
 <tr class="row-odd"><td><p>xApps</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">jrtc-apps/jrtc_apps/&lt;name&gt;/</span></code>: Python app and deployment YAML</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jrtc-apps/jrtc_apps/&lt;name&gt;/</span></code>: the Python app and its deployment YAML</p></td>
+</tr>
+<tr class="row-even"><td><p>muApps</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">edgeric-rt/muapps/</span></code>, with the schedulers in <code class="docutils literal notranslate"><span class="pre">edgeric-rt/edgeric_rt/policies.py</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p><a class="reference internal" href="miscellaneous.html#hooks-used-in-this-tutorial"><span class="std std-ref">Miscellaneous</span></a> lists the hooks this tutorial uses.</p>
+<p>The pods mount these folders from your clone. <code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code> has <code class="docutils literal notranslate"><span class="pre">jrtc-apps/jrtc_apps</span></code> at <code class="docutils literal notranslate"><span class="pre">/apps</span></code> and
+<code class="docutils literal notranslate"><span class="pre">jrtc-apps/codelets</span></code> at <code class="docutils literal notranslate"><span class="pre">/codelets</span></code>, and <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code> has <code class="docutils literal notranslate"><span class="pre">edgeric-rt</span></code> at <code class="docutils literal notranslate"><span class="pre">/edgeric</span></code>, so you can change
+code and reload it without rebuilding an image. <a class="reference internal" href="miscellaneous.html#hooks-used-in-this-tutorial"><span class="std std-ref">Miscellaneous</span></a>
+lists every hook the tutorial uses.</p>
 </section>
-<section id="add-a-hook-to-the-gnb">
-<h2>Add a Hook to the gNB<a class="headerlink" href="#add-a-hook-to-the-gnb" title="Link to this heading">¶</a></h2>
-<p>Skip this part if an existing hook already fires where you need it. The steps below are the ones that
-added <code class="docutils literal notranslate"><span class="pre">rlc_dl_ctrl</span></code>, the control hook of Example 2. It fires for every downlink SDU on an RLC AM data
-bearer, before the gNB decides whether the SDU fits in the queue.</p>
-<p><strong>1. Define the context</strong> in <code class="docutils literal notranslate"><span class="pre">include/srsran/jbpf/jbpf_srsran_contexts.h</span></code>. For a control hook, say which
-fields the codelet writes:</p>
+<section id="adding-a-hook-to-the-gnb">
+<h2>Adding a Hook to the gNB<a class="headerlink" href="#adding-a-hook-to-the-gnb" title="Link to this heading">¶</a></h2>
+<p>You only need this when no existing hook fires where your code has to run. We’ll go through
+<code class="docutils literal notranslate"><span class="pre">rlc_dl_ctrl</span></code>, the control hook Demo 3 uses. The gNB calls it for every downlink SDU on an RLC AM data
+bearer, just before it decides whether the SDU still fits in the queue.</p>
+<p><strong>1. The context.</strong> The struct goes in <code class="docutils literal notranslate"><span class="pre">include/srsran/jbpf/jbpf_srsran_contexts.h</span></code>. For a control hook,
+mark which fields the gNB fills in and which ones the codelet writes back:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctrl_info</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">du_ue_index</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">is_srb</span><span class="p">;</span><span class="w">   </span><span class="cm">/* always 0 (kept for layout compatibility) */</span>
@@ -371,8 +376,8 @@ fields the codelet writes:</p>
 <span class="p">};</span>
 </pre></div>
 </div>
-<p><strong>2. Declare the hook</strong> in <code class="docutils literal notranslate"><span class="pre">srsran_jbpf/verifier/specs/jbpf_srsran_hooks.h</span></code>. <code class="docutils literal notranslate"><span class="pre">HOOK_ASSIGN</span></code> points the
-generic context the codelet receives at your struct:</p>
+<p><strong>2. The declaration.</strong> <code class="docutils literal notranslate"><span class="pre">srsran_jbpf/verifier/specs/jbpf_srsran_hooks.h</span></code> declares the hook. In
+<code class="docutils literal notranslate"><span class="pre">HOOK_ASSIGN</span></code>, the generic context that every codelet receives is pointed at your struct:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">DECLARE_JBPF_HOOK</span><span class="p">(</span><span class="n">rlc_dl_ctrl</span><span class="p">,</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_ran_generic_ctx</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span>
 <span class="w">    </span><span class="n">ctx</span><span class="p">,</span>
@@ -385,12 +390,12 @@ generic context the codelet receives at your struct:</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>A hook can also pass a few numbers in <code class="docutils literal notranslate"><span class="pre">srs_meta_data1</span></code> to <code class="docutils literal notranslate"><span class="pre">srs_meta_data4</span></code>. The monitor hook
-<code class="docutils literal notranslate"><span class="pre">rlc_dl_new_sdu</span></code>, used in Example 1, packs the SDU length and PDCP sequence number this way:
+<p>A hook can also hand over a few plain numbers in <code class="docutils literal notranslate"><span class="pre">srs_meta_data1</span></code> to <code class="docutils literal notranslate"><span class="pre">srs_meta_data4</span></code>. <code class="docutils literal notranslate"><span class="pre">rlc_dl_new_sdu</span></code>,
+which Example 1 uses, packs the SDU length and the PDCP sequence number into the first one:
 <code class="docutils literal notranslate"><span class="pre">ctx.srs_meta_data1</span> <span class="pre">=</span> <span class="pre">(uint64_t)sdu_length</span> <span class="pre">&lt;&lt;</span> <span class="pre">32</span> <span class="pre">|</span> <span class="pre">pdcp_sn;</span></code>.</p>
-<p><strong>3. Define and call the hook</strong> in the source file where it fires. <code class="docutils literal notranslate"><span class="pre">DEFINE_JBPF_CTRL_HOOK</span></code> creates a
-control hook and <code class="docutils literal notranslate"><span class="pre">DEFINE_JBPF_HOOK</span></code> a monitor hook. Keep the code inside <code class="docutils literal notranslate"><span class="pre">#ifdef</span> <span class="pre">JBPF_ENABLED</span></code>. From
-<code class="docutils literal notranslate"><span class="pre">lib/rlc/rlc_tx_am_entity.cpp</span></code>, trimmed:</p>
+<p><strong>3. The call.</strong> In the file where the hook should fire, <code class="docutils literal notranslate"><span class="pre">DEFINE_JBPF_CTRL_HOOK</span></code> creates a control hook
+(<code class="docutils literal notranslate"><span class="pre">DEFINE_JBPF_HOOK</span></code> creates a monitor hook), and the gNB calls it like a function. Keep it all inside
+<code class="docutils literal notranslate"><span class="pre">#ifdef</span> <span class="pre">JBPF_ENABLED</span></code>. From <code class="docutils literal notranslate"><span class="pre">lib/rlc/rlc_tx_am_entity.cpp</span></code>, trimmed:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">DEFINE_JBPF_CTRL_HOOK</span><span class="p">(</span><span class="n">rlc_dl_ctrl</span><span class="p">);</span>
 
 <span class="kt">void</span><span class="w"> </span><span class="nf">rlc_tx_am_entity::handle_jbpf_rlc_ctrl</span><span class="p">()</span>
@@ -426,9 +431,9 @@ control hook and <code class="docutils literal notranslate"><span class="pre">DE
 <span class="w">  </span><span class="p">...</span>
 </pre></div>
 </div>
-<p>The gNB clamps the requested limit before it applies it, so a codelet cannot shrink a queue below one
-maximum-size PDCP PDU or grow it past the configured size.</p>
-<p><strong>4. Rebuild the gNB image</strong> and put it in the pod, as in Part 1 and Part 2 of the
+<p>The gNB clamps whatever the codelet asks for. A queue can’t shrink below one maximum-size PDCP PDU
+(9,007 bytes) or grow past its configured size.</p>
+<p><strong>4. The image.</strong> Rebuild the gNB image and recreate the gNB pod, as in Parts 1 and 2 of the
 <a class="reference internal" href="../open-ai-ran-tutorial.html"><span class="std std-doc">tutorial</span></a>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>ocudu-gnb-jbpf:ipc<span class="w"> </span>-f<span class="w"> </span>ocudu-jbpf/docker/Dockerfile<span class="w"> </span>ocudu-jbpf
@@ -436,24 +441,22 @@ k3d<span class="w"> </span>image<span class="w"> </span>import<span class="w"> <
 <span class="c1"># then recreate the gNB pod with its containers (Part 2)</span>
 </pre></div>
 </div>
-<p>Codelets compile against the jbpf SDK image, and its headers do not have the hooks added here. A
-codelet for a new hook therefore keeps its own copy of the context struct, field for field. Example 2
-does this.</p>
+<p>One thing to watch for: codelets compile against the headers in the jbpf SDK image, and those don’t know
+about hooks you add yourself. A codelet for a new hook keeps its own copy of the context struct, field
+for field. Example 2 does this.</p>
 </section>
 <section id="example-1-a-telemetry-codelet">
 <h2>Example 1: A Telemetry Codelet<a class="headerlink" href="#example-1-a-telemetry-codelet" title="Link to this heading">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">dl_sdu_count</span></code> runs on the <code class="docutils literal notranslate"><span class="pre">rlc_dl_new_sdu</span></code> monitor hook, which fires for every downlink SDU that enters
-RLC. It counts SDUs and bytes per UE and, about once a second, sends one message per active UE. An xApp
-prints them.</p>
-<p>The files:</p>
+<p><code class="docutils literal notranslate"><span class="pre">dl_sdu_count</span></code> counts the downlink SDUs and bytes that enter RLC, per UE, and sends the totals about once
+a second. It runs on the <code class="docutils literal notranslate"><span class="pre">rlc_dl_new_sdu</span></code> monitor hook, and a short xApp prints its messages. The files:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>jrtc-apps/codelets/dl_sdu_count/      dl_sdu_count.proto  dl_sdu_count.cpp  Makefile  dl_sdu_count.yaml
 jrtc-apps/jrtc_apps/dl_sdu_count/     dl_sdu_count_app.py  deployment.yaml
 </pre></div>
 </div>
 <section id="the-message">
 <h3>The message<a class="headerlink" href="#the-message" title="Link to this heading">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">dl_sdu_count.proto</span></code> defines what the codelet sends. The build turns it into a C struct for the codelet,
-a serializer for the gNB and a Python class for the xApp.</p>
+<p>We describe what the codelet sends in a protobuf file. From it, the build makes a C struct for the
+codelet, a serializer that the gNB loads, and a Python class for the xApp.</p>
 <div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="k">syntax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"proto2"</span><span class="p">;</span>
 
 <span class="c1">// One message per UE per period: the downlink SDUs and bytes that entered RLC.</span>
@@ -468,7 +471,6 @@ a serializer for the gNB and a Python class for the xApp.</p>
 </section>
 <section id="the-codelet">
 <h3>The codelet<a class="headerlink" href="#the-codelet" title="Link to this heading">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">dl_sdu_count.cpp</span></code>:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// dl_sdu_count: count the downlink SDUs and bytes that enter RLC, per UE, and report them</span>
 <span class="c1">// once per period (2^30 ns, about 1.07 s).</span>
 <span class="c1">// Hook: rlc_dl_new_sdu (monitor). ctx-&gt;data is a jbpf_rlc_ctx_info, and the hook packs</span>
@@ -549,26 +551,27 @@ a serializer for the gNB and a Python class for the xApp.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Codelets keep their state in maps. <code class="docutils literal notranslate"><span class="pre">counts</span></code> holds each UE’s totals and the period they belong to. A
-UE’s counts go out with its first SDU of the next period, so a UE without traffic stays quiet.
-<code class="docutils literal notranslate"><span class="pre">out_counts</span></code> is the output channel, holding up to 64 messages on their way to the xApp.</p>
+<p>The codelet keeps its state in maps. <code class="docutils literal notranslate"><span class="pre">counts</span></code> holds each UE’s running totals and the period they belong
+to. When a UE’s first SDU of a new period comes in, the codelet sends the totals of the period that just
+ended and starts over, so a UE without traffic sends nothing. <code class="docutils literal notranslate"><span class="pre">out_counts</span></code> is the output channel; it
+holds up to 64 messages on their way to the xApp.</p>
 </section>
 <section id="what-the-verifier-checks">
 <h3>What the verifier checks<a class="headerlink" href="#what-the-verifier-checks" title="Link to this heading">¶</a></h3>
-<p>The verifier rejects a codelet that it cannot prove safe. The rules you will meet first:</p>
+<p>The gNB only loads a codelet that the verifier can prove safe. These are the rules we ran into first:</p>
 <ul class="simple">
-<li><p>Check <code class="docutils literal notranslate"><span class="pre">ctx-&gt;data</span></code> against <code class="docutils literal notranslate"><span class="pre">ctx-&gt;data_end</span></code> before reading the context.</p></li>
-<li><p>Bound every loop. <code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">unroll</span></code> over a constant count works.</p></li>
-<li><p>Avoid 64-bit division; shift instead, as <code class="docutils literal notranslate"><span class="pre">PERIOD_SHIFT</span></code> does.</p></li>
-<li><p>Avoid <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">const</span></code> tables. The loader cannot place them, and the verifier then reports
-0 instructions. Use a <code class="docutils literal notranslate"><span class="pre">switch</span></code> that returns the value.</p></li>
-<li><p>Send one message per call. When a codelet sent several in one call, only the first reached the
-xApp.</p></li>
-<li><p>After editing a header, delete the directory’s <code class="docutils literal notranslate"><span class="pre">.o</span></code> files: <code class="docutils literal notranslate"><span class="pre">make</span></code> does not track headers.</p></li>
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">ctx-&gt;data</span></code> against <code class="docutils literal notranslate"><span class="pre">ctx-&gt;data_end</span></code> before you read the context.</p></li>
+<li><p>Give every loop a bound. <code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">unroll</span></code> over a constant count works.</p></li>
+<li><p>Shift instead of dividing 64-bit numbers, as <code class="docutils literal notranslate"><span class="pre">PERIOD_SHIFT</span></code> does.</p></li>
+<li><p>Avoid <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">const</span></code> tables. The loader can’t place them and the verifier reports 0 instructions; a
+<code class="docutils literal notranslate"><span class="pre">switch</span></code> that returns the value works.</p></li>
+<li><p>Send one message per call. Our first version of this codelet sent one per UE in the same call, and
+only the first one reached the xApp.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span></code> doesn’t track headers. After you edit one, delete the <code class="docutils literal notranslate"><span class="pre">.o</span></code> files in that directory.</p></li>
 </ul>
 </section>
-<section id="build">
-<h3>Build<a class="headerlink" href="#build" title="Link to this heading">¶</a></h3>
+<section id="building-it">
+<h3>Building it<a class="headerlink" href="#building-it" title="Link to this heading">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> lists each message as <code class="docutils literal notranslate"><span class="pre">&lt;proto</span> <span class="pre">file&gt;^&lt;message&gt;</span></code>:</p>
 <div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nv">PROTO_AND_SCHEMA</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="se">\</span>
 <span class="w">	</span>dl_sdu_count^dl_sdu_count
@@ -581,7 +584,7 @@ xApp.</p></li>
 ./make.sh<span class="w"> </span>-d<span class="w"> </span>dl_sdu_count
 </pre></div>
 </div>
-<p>The build runs in the jbpf SDK container and ends with the verifier’s result:</p>
+<p>The build runs in the jbpf SDK container and ends with the verifier’s verdict:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Building dl_sdu_count
 --------- dl_sdu_count.cpp ----------------------------------------------
 Program terminates within 115 instructions
@@ -590,7 +593,7 @@ Program terminates within 115 instructions
 </section>
 <section id="the-codeletset">
 <h3>The codeletset<a class="headerlink" href="#the-codeletset" title="Link to this heading">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">dl_sdu_count.yaml</span></code> attaches the codelet to its hook and names its output channel and message:</p>
+<p><code class="docutils literal notranslate"><span class="pre">dl_sdu_count.yaml</span></code> puts the codelet on its hook and names the output channel and the message on it:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">codeletset_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dl_sdu_count</span>
 
 <span class="nt">codelet_descriptor</span><span class="p">:</span>
@@ -611,7 +614,7 @@ Program terminates within 115 instructions
 </section>
 <section id="the-xapp">
 <h3>The xApp<a class="headerlink" href="#the-xapp" title="Link to this heading">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">dl_sdu_count_app.py</span></code> subscribes to the output channel and prints each message. The stream name is
+<p>The xApp subscribes to the output channel and prints each message. Stream names follow
 <code class="docutils literal notranslate"><span class="pre">&lt;deployment&gt;://jbpf_agent/&lt;codeletset&gt;/&lt;codelet&gt;</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># dl_sdu_count_app: print the per-UE downlink SDU counts that the dl_sdu_count codelet sends.</span>
 
@@ -666,7 +669,7 @@ Program terminates within 115 instructions
     <span class="n">jrtc_app_destroy</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">app</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">deployment.yaml</span></code> loads the xApp and the codeletset together:</p>
+<p><code class="docutils literal notranslate"><span class="pre">deployment.yaml</span></code> loads the xApp and the codeletset with one command:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dl_sdu_count</span>
 
 <span class="nt">decoder</span><span class="p">:</span>
@@ -694,12 +697,12 @@ Program terminates within 115 instructions
 </pre></div>
 </div>
 </section>
-<section id="run-it">
-<h3>Run it<a class="headerlink" href="#run-it" title="Link to this heading">¶</a></h3>
-<p>Bring the RAN up with <code class="docutils literal notranslate"><span class="pre">--telemetry</span></code>, which starts the forwarder that <code class="docutils literal notranslate"><span class="pre">jrtc-ctl</span></code> needs, and start
-traffic (Part 2). Then copy the codelet directory into the gNB container, where the gNB’s jbpf agent
-loads the serializer from, and load the deployment. <code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code> reads the codelets and xApps from your
-clone.</p>
+<section id="running-it">
+<h3>Running it<a class="headerlink" href="#running-it" title="Link to this heading">¶</a></h3>
+<p>Bring the RAN up with <code class="docutils literal notranslate"><span class="pre">--telemetry</span></code>, which starts the forwarder that <code class="docutils literal notranslate"><span class="pre">jrtc-ctl</span></code> needs, and start some
+traffic, as in Part 2. Then copy the codelet directory into the gNB container, because the gNB’s jbpf
+agent loads the serializer from there, and load the deployment. <code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code> reads the codelets and the
+xApps from your clone.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 JRTC<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-n<span class="w"> </span>ran<span class="w"> </span>jrtc-0<span class="w"> </span>-c<span class="w"> </span>jrtc<span class="w"> </span>--<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="s2">"export JRTC_APPS=/apps JBPF_CODELETS=/codelets; /jrtc/out/bin/jrtc-ctl </span><span class="nv">$*</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
@@ -709,35 +712,36 @@ JRTC<span class="w"> </span><span class="s1">'load -c /apps/dl_sdu_count/deploym
 kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>ran<span class="w"> </span>jrtc-0<span class="w"> </span>-c<span class="w"> </span>jrtc<span class="w"> </span>-f<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>dl_sdu_count
 </pre></div>
 </div>
-<p>The gNB log shows <code class="docutils literal notranslate"><span class="pre">Registered</span> <span class="pre">codelet</span> <span class="pre">dl_sdu_count</span> <span class="pre">to</span> <span class="pre">hook</span> <span class="pre">rlc_dl_new_sdu</span></code>, and the xApp prints one line
-per UE about once a second. With two UEs downloading at about 30 Mbit/s each:</p>
+<p>In the gNB log you should see <code class="docutils literal notranslate"><span class="pre">Registered</span> <span class="pre">codelet</span> <span class="pre">dl_sdu_count</span> <span class="pre">to</span> <span class="pre">hook</span> <span class="pre">rlc_dl_new_sdu</span></code>, and the xApp
+prints one line per UE about once a second. With two UEs downloading at about 30 Mbit/s each:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[dl_sdu_count] ue 1: 2788 SDUs, 31.2 Mbit/s
 [dl_sdu_count] ue 0: 2773 SDUs, 31.1 Mbit/s
 [dl_sdu_count] ue 0: 2742 SDUs, 30.7 Mbit/s
 [dl_sdu_count] ue 1: 2766 SDUs, 31.0 Mbit/s
 </pre></div>
 </div>
-<p>The counts include RLC retransmissions, so they read a little above the goodput the UEs measure.</p>
-<p>Unload it with the same file:</p>
+<p>An RLC SDU is a whole IP packet plus its PDCP header, so these rates come out a few percent above the
+goodput that iperf3 reports at the UEs.</p>
+<p>To unload it, pass the same file:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>JRTC<span class="w"> </span><span class="s1">'unload -c /apps/dl_sdu_count/deployment.yaml'</span>
 </pre></div>
 </div>
-<p>To chart the counts in Grafana, have the xApp write them to VictoriaMetrics, as
-<code class="docutils literal notranslate"><span class="pre">jrtc_apps/upt/upt_app.py</span></code> does in its <code class="docutils literal notranslate"><span class="pre">_emit</span></code> function.</p>
+<p>If you want the counts in Grafana, have the xApp write them to VictoriaMetrics, as the <code class="docutils literal notranslate"><span class="pre">_emit</span></code> function in
+<code class="docutils literal notranslate"><span class="pre">jrtc_apps/upt/upt_app.py</span></code> does.</p>
 </section>
 </section>
 <section id="example-2-a-control-codelet">
 <h2>Example 2: A Control Codelet<a class="headerlink" href="#example-2-a-control-codelet" title="Link to this heading">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">bufcap</span></code> is the codelet behind Demo 3’s buffer caps. It runs on the <code class="docutils literal notranslate"><span class="pre">rlc_dl_ctrl</span></code> control hook and sets
-the same byte limit on every UE’s data bearers, so the RLC queue drops packets once it holds that many
-bytes. It needs no xApp: the limit is built in.</p>
+<p><code class="docutils literal notranslate"><span class="pre">bufcap</span></code> is the codelet behind Demo 3’s buffer caps. It runs on <code class="docutils literal notranslate"><span class="pre">rlc_dl_ctrl</span></code> and gives the data bearers
+of every UE the same byte limit, so the RLC queue drops packets once it holds that many bytes. The limit
+is compiled in, so there is no xApp.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>jrtc-apps/codelets/bufcap/                 bufcap.cpp  Makefile
 buffer-control-experiments/bufcap.sh       builds, loads and unloads it
 </pre></div>
 </div>
 <section id="id1">
 <h3>The codelet<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">bufcap.cpp</span></code> copies the hook’s context struct from the gNB, then writes the limit on each call:</p>
+<p><code class="docutils literal notranslate"><span class="pre">bufcap.cpp</span></code> carries its own copy of the hook’s context struct and writes the limit on every call:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Copyright (c) Microsoft Corporation. Licensed under the MIT license.</span>
 <span class="c1">//</span>
 <span class="c1">// bufcap - fixed RLC DL buffer cap, for Demo 3 of the tutorial.</span>
@@ -809,9 +813,9 @@ buffer-control-experiments/bufcap.sh       builds, loads and unloads it
 </div>
 </section>
 <section id="id2">
-<h3>Build<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
-<p>Each limit is its own object. The <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>’s <code class="docutils literal notranslate"><span class="pre">one</span></code> target compiles <code class="docutils literal notranslate"><span class="pre">bufcap.cpp</span></code> with
-<code class="docutils literal notranslate"><span class="pre">-DCAP_BYTES=&lt;bytes&gt;</span></code> and runs the verifier on the result:</p>
+<h3>Building it<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p>Every limit is a separate object, built from the same source. The <code class="docutils literal notranslate"><span class="pre">one</span></code> target in the <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>
+compiles <code class="docutils literal notranslate"><span class="pre">bufcap.cpp</span></code> with <code class="docutils literal notranslate"><span class="pre">-DCAP_BYTES=&lt;bytes&gt;</span></code> and runs the verifier on the result:</p>
 <div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nf">one</span><span class="o">:</span>
 <span class="w">	</span>@echo<span class="w"> </span><span class="s2">"--------- bufcap.cpp -&gt; bufcap_</span><span class="k">$(</span>NAME<span class="k">)</span><span class="s2">.o (CAP_BYTES=</span><span class="k">$(</span>CAP<span class="k">)</span><span class="s2">) ---------"</span>
 <span class="w">	</span>@<span class="k">$(</span>CXX<span class="k">)</span><span class="w"> </span><span class="k">$(</span>CXXFLAGS<span class="k">)</span><span class="w"> </span>-DCAP_BYTES<span class="o">=</span><span class="k">$(</span>CAP<span class="k">)</span><span class="w"> </span><span class="k">$(</span>INC<span class="k">)</span><span class="w"> </span>-c<span class="w"> </span>bufcap.cpp<span class="w"> </span>-o<span class="w"> </span>bufcap_<span class="k">$(</span>NAME<span class="k">)</span>.o
@@ -820,8 +824,8 @@ buffer-control-experiments/bufcap.sh       builds, loads and unloads it
 <span class="w">		</span><span class="o">||</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"verifier: FAILED -- the gNB would reject bufcap_</span><span class="k">$(</span>NAME<span class="k">)</span><span class="s2">.o"</span><span class="p">;</span><span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>bufcap_<span class="k">$(</span>NAME<span class="k">)</span>.o<span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">build</span></code> runs that target in the jbpf SDK container, then writes the codeletset and the
-deployment for each size:</p>
+<p><code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">build</span></code> runs that target in the SDK container, then writes a codeletset and a deployment for
+each size:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 bash<span class="w"> </span>buffer-control-experiments/bufcap.sh<span class="w"> </span>build<span class="w"> </span>64k
 </pre></div>
@@ -831,7 +835,7 @@ bash<span class="w"> </span>buffer-control-experiments/bufcap.sh<span class="w">
   built bufcap_64k (65536 bytes)
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">jrtc-apps/codelets/bufcap/bufcap_64k.yaml</span></code> attaches the object to the hook:</p>
+<p><code class="docutils literal notranslate"><span class="pre">jrtc-apps/codelets/bufcap/bufcap_64k.yaml</span></code> puts the object on the hook:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># generated by buffer-control-experiments/bufcap.sh -- fixed RLC DL buffer cap (64k = 65536 bytes; 0 = restore config)</span>
 <span class="nt">codeletset_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bufcap</span>
 <span class="nt">codelet_descriptor</span><span class="p">:</span>
@@ -841,7 +845,7 @@ bash<span class="w"> </span>buffer-control-experiments/bufcap.sh<span class="w">
 <span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">jrtc-apps/jrtc_apps/bufcap/deployment_64k.yaml</span></code> loads it, with no xApp:</p>
+<p>and <code class="docutils literal notranslate"><span class="pre">jrtc-apps/jrtc_apps/bufcap/deployment_64k.yaml</span></code> loads it:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># generated by buffer-control-experiments/bufcap.sh</span>
 <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bufcap</span>
 <span class="nt">jbpf</span><span class="p">:</span>
@@ -856,10 +860,10 @@ bash<span class="w"> </span>buffer-control-experiments/bufcap.sh<span class="w">
 </div>
 </section>
 <section id="id3">
-<h3>Run it<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
-<p>With the RAN and the UEs up as in <a class="reference internal" href="demo3-buffer-management.html"><span class="std std-doc">Demo 3</span></a>, start its traffic: a 2 Mbit/s
-video call and a download, both to UE 1. Then copy the object into the gNB container and load the
-deployment with the <code class="docutils literal notranslate"><span class="pre">JRTC</span></code> function from Example 1. <code class="docutils literal notranslate"><span class="pre">jrtc-ctl</span></code> prints nothing when the load works.</p>
+<h3>Running it<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>Bring the RAN and the UEs up as in <a class="reference internal" href="demo3-buffer-management.html"><span class="std std-doc">Demo 3</span></a> and start its traffic, a
+2 Mbit/s video call plus a download, both to UE 1. Then copy the object into the gNB container and load
+the deployment, with the <code class="docutils literal notranslate"><span class="pre">JRTC</span></code> function from Example 1. When the load works, <code class="docutils literal notranslate"><span class="pre">jrtc-ctl</span></code> prints nothing.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 bash<span class="w"> </span>buffer-control-experiments/traffic_A.sh<span class="w"> </span>start
 
@@ -868,34 +872,33 @@ kubectl<span class="w"> </span>cp<span class="w"> </span>jrtc-apps/codelets/bufc
 JRTC<span class="w"> </span><span class="s1">'load -c /apps/bufcap/deployment_64k.yaml'</span>
 </pre></div>
 </div>
-<p>The gNB log shows <code class="docutils literal notranslate"><span class="pre">Registered</span> <span class="pre">codelet</span> <span class="pre">bufcap</span> <span class="pre">to</span> <span class="pre">hook</span> <span class="pre">rlc_dl_ctrl</span></code>. Watch UE 1 in the gNB console
-(<code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/gnb_console.sh</span></code>). Before the load, UE 1 receives 63 Mbit/s with about 2 MB queued
+<p>The gNB log should show <code class="docutils literal notranslate"><span class="pre">Registered</span> <span class="pre">codelet</span> <span class="pre">bufcap</span> <span class="pre">to</span> <span class="pre">hook</span> <span class="pre">rlc_dl_ctrl</span></code>. Watch UE 1 in the gNB console
+(<code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/gnb_console.sh</span></code>). Before the load, it received 63 Mbit/s and had about 2 MB queued
 (<code class="docutils literal notranslate"><span class="pre">dl_bs</span></code>):</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> pci rnti | cqi  ri  mcs  brate   ok  nok  (%)  dl_bs
    1 4601 |  15 1.0   27    63M 1400    0   0%  1.95M
    1 4601 |  15 1.0   27    63M 1400    0   0%     2M
 </pre></div>
 </div>
-<p>From the next downlink SDU on, the gNB drops any SDU that would take UE 1’s queue past 64 KiB. The
-queue drains and the rate falls:</p>
+<p>From the next downlink SDU on, the gNB drops every SDU that would push UE 1’s queue past 64 KiB. The
+queue drains and the rate drops:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> pci rnti | cqi  ri  mcs  brate   ok  nok  (%)  dl_bs
    1 4601 |  15 1.0   26    24M  618    0   0%      0
    1 4601 |  15 1.0   26    18M  467    0   0%  1.51k
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">/tmp/gnb.log</span></code> in the gNB container records each drop:</p>
+<p>The gNB logs each drop to <code class="docutils literal notranslate"><span class="pre">/tmp/gnb.log</span></code> in its container:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[RLC     ] [W] du=0 ue=0 DRB1 DL: Dropped SDU. sdu_len=1503 pdcp_sn=66478 is_retx=false queued_sdus=43 queued_bytes=64629
 </pre></div>
 </div>
-<p><a class="reference internal" href="demo3-buffer-management.html"><span class="std std-doc">Demo 3</span></a> measures what each cap size does to the call’s RTT and the
-download’s throughput.</p>
-<p>Unload the codelet with the same file:</p>
+<p><a class="reference internal" href="demo3-buffer-management.html"><span class="std std-doc">Demo 3</span></a> goes through what each cap size does to the call’s RTT and to the
+download. To unload the codelet, pass the same file:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>JRTC<span class="w"> </span><span class="s1">'unload -c /apps/bufcap/deployment_64k.yaml'</span>
 </pre></div>
 </div>
-<p>The gNB keeps the last limit after the codelet is gone, and UE 1 stays near 16 Mbit/s. To
-restore the configured queue, load <code class="docutils literal notranslate"><span class="pre">bufcap_off</span></code>, which writes <code class="docutils literal notranslate"><span class="pre">cfg_byte_limit</span></code> back, until the next
-downlink packet has passed, then unload it. <code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">off</span></code> does both:</p>
+<p>Unloading doesn’t undo the cap. The gNB keeps the last limit it was given, and UE 1 stays near
+16 Mbit/s. To get the configured queue back, load <code class="docutils literal notranslate"><span class="pre">bufcap_off</span></code>, which writes <code class="docutils literal notranslate"><span class="pre">cfg_byte_limit</span></code> back, wait
+for the next downlink packet, then unload it. <code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">off</span></code> does all three:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>buffer-control-experiments/bufcap.sh<span class="w"> </span>off
 </pre></div>
 </div>
@@ -903,13 +906,14 @@ downlink packet has passed, then unload it. <code class="docutils literal notran
   configured buffer restored; bufcap unloaded
 </pre></div>
 </div>
-<p>UE 1 is back at 63 Mbit/s, with 1.5 to 3 MB queued.</p>
+<p>After that, UE 1 is back at 63 Mbit/s with 1.5 to 3 MB queued.</p>
 </section>
-<section id="set-the-limit-from-an-xapp">
-<h3>Set the limit from an xApp<a class="headerlink" href="#set-the-limit-from-an-xapp" title="Link to this heading">¶</a></h3>
-<p>To change the limit while the gNB runs, give the codelet an input channel:</p>
+<section id="changing-the-limit-from-an-xapp">
+<h3>Changing the limit from an xApp<a class="headerlink" href="#changing-the-limit-from-an-xapp" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">bufcap</span></code> can’t change its limit while it runs. A codelet that takes settings at run time needs an input
+channel:</p>
 <ul class="simple">
-<li><p>In the codelet, declare the channel and drain it on each call:
+<li><p>In the codelet, declare the channel and read it on every call:
 <code class="docutils literal notranslate"><span class="pre">jbpf_control_input_map(ctrl_in,</span> <span class="pre">struct</span> <span class="pre">my_cmd,</span> <span class="pre">32);</span></code> and
 <code class="docutils literal notranslate"><span class="pre">jbpf_control_input_receive(&amp;ctrl_in,</span> <span class="pre">&amp;cmd,</span> <span class="pre">sizeof(cmd))</span></code>.</p></li>
 <li><p>In the codeletset YAML, add <code class="docutils literal notranslate"><span class="pre">in_io_channel:</span></code> with <code class="docutils literal notranslate"><span class="pre">-</span> <span class="pre">name:</span> <span class="pre">ctrl_in</span></code>.</p></li>
@@ -917,8 +921,168 @@ downlink packet has passed, then unload it. <code class="docutils literal notran
 (<code class="docutils literal notranslate"><span class="pre">JrtcStreamIdCfg_t(JRTC_ROUTER_REQ_DEST_NONE,</span> <span class="pre">1,</span> <span class="pre">...)</span></code>), then send with
 <code class="docutils literal notranslate"><span class="pre">jrtc_app_router_channel_send_input_msg(app,</span> <span class="pre">stream_idx,</span> <span class="pre">msg,</span> <span class="pre">len(msg))</span></code>.</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">codelets/bufctl/rlc_ctrl.cpp</span></code> and its xApp in <code class="docutils literal notranslate"><span class="pre">jrtc_apps/bufctl</span></code> set a limit per UE and bearer this
-way, from the CLI in <a class="reference internal" href="demo3-buffer-management.html"><span class="std std-doc">Demo 3</span></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">codelets/bufctl/rlc_ctrl.cpp</span></code> and the xApp in <code class="docutils literal notranslate"><span class="pre">jrtc_apps/bufctl</span></code> work this way; the CLI in
+<a class="reference internal" href="demo3-buffer-management.html"><span class="std std-doc">Demo 3</span></a> talks to them. EdgeRIC’s <code class="docutils literal notranslate"><span class="pre">rt_ctrl</span></code> codelet gets its actions the
+same way, as the next example shows.</p>
+</section>
+</section>
+<section id="example-3-an-edgeric-muapp">
+<h2>Example 3: An EdgeRIC muApp<a class="headerlink" href="#example-3-an-edgeric-muapp" title="Link to this heading">¶</a></h2>
+<p>A muApp is a plain Python process in pod <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code>. It sits in the gNB’s scheduling loop and decides
+something every TTI. <a class="reference internal" href="demo2-ai-scheduling.html"><span class="std std-doc">Demo 2</span></a> runs the scheduler muApps that come with the
+repository; here we look at how they work, then write a new scheduler.</p>
+<section id="the-loop">
+<h3>The loop<a class="headerlink" href="#the-loop" title="Link to this heading">¶</a></h3>
+<p>Two codelets on the MAC scheduler connect the gNB to the muApp. After every slot, <code class="docutils literal notranslate"><span class="pre">rt_report</span></code> on the
+<code class="docutils literal notranslate"><span class="pre">mac_sched_slot_report</span></code> hook sends out the state of every UE. At the start of every slot, <code class="docutils literal notranslate"><span class="pre">rt_ctrl</span></code> on
+<code class="docutils literal notranslate"><span class="pre">mac_sched_slot_ctrl</span></code> looks for an action meant for that slot. In between, the <code class="docutils literal notranslate"><span class="pre">rt_bridge</span></code> xApp in
+<code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code> passes the reports to the muApp and the actions back, over Unix sockets:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gNB, MAC scheduler                      jrtc-0                         edgeric-0
+rt_report  (mac_sched_slot_report) --&gt;  rt_bridge_app.py --&gt; muapp.sock  --&gt; sched_muapp.py
+rt_ctrl    (mac_sched_slot_ctrl)   &lt;--  rt_act_in        &lt;-- bridge.sock &lt;-- weights + target TTI
+</pre></div>
+</div>
+<p>Each report is 1,080 bytes, stamped with the slot’s RANtime. The muApp gets it as a numpy record, and a
+scheduler mostly needs these fields:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>What it holds</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ran_tti</span></code></p></td>
+<td><p>RANtime, the gNB’s slot counter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dl_mask</span></code></p></td>
+<td><p>which of the next slots are downlink</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ue_count</span></code>, <code class="docutils literal notranslate"><span class="pre">ue</span></code></p></td>
+<td><p>the UEs: the first <code class="docutils literal notranslate"><span class="pre">ue_count</span></code> entries of <code class="docutils literal notranslate"><span class="pre">ue</span></code> are valid</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ue[i][&quot;du_ue_index&quot;]</span></code>, <code class="docutils literal notranslate"><span class="pre">ue[i][&quot;rnti&quot;]</span></code></p></td>
+<td><p>which UE</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ue[i][&quot;cqi&quot;]</span></code></p></td>
+<td><p>its last wideband CQI</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ue[i][&quot;dl_pending_bytes&quot;]</span></code></p></td>
+<td><p>its downlink backlog</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ue[i][&quot;dl_prbs&quot;]</span></code>, <code class="docutils literal notranslate"><span class="pre">ue[i][&quot;dl_mcs&quot;]</span></code></p></td>
+<td><p>what it got in this slot</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ue[i][&quot;drb_bytes&quot;]</span></code></p></td>
+<td><p>the bytes scheduled for it in this slot, the reward when you train with RL</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">act_status</span></code>, <code class="docutils literal notranslate"><span class="pre">act_seq</span></code></p></td>
+<td><p>which action ran in this slot, if any</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The muApp answers with a weight per UE, tagged with the RANtime of the slot it is for and a sequence
+number. <code class="docutils literal notranslate"><span class="pre">rt_ctrl</span></code> applies it only in that exact slot; we call that a HIT. A late action is dropped, and
+a slot without an action runs the gNB’s own scheduler. The report of the slot echoes the sequence number,
+so the muApp knows which of its actions ran. By default the UE with the highest weight gets the whole
+slot, and a tie goes to the UE that was served least recently.</p>
+<p><code class="docutils literal notranslate"><span class="pre">muapps/sched_muapp.py</span></code> runs the loop. Without the logging and the live controls, it comes down to this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rt</span> <span class="o">=</span> <span class="n">rte2</span><span class="o">.</span><span class="n">RtE2</span><span class="p">(</span><span class="n">lead</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">lead</span><span class="p">)</span>                       <span class="c1"># reports in, actions out</span>
+<span class="n">pol</span> <span class="o">=</span> <span class="n">policies</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">scheduler</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">ue_map</span><span class="p">)</span>    <span class="c1"># the scheduler, by name</span>
+<span class="n">sel</span> <span class="o">=</span> <span class="n">policies</span><span class="o">.</span><span class="n">SlotSelector</span><span class="p">()</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">reps</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>       <span class="c1"># every report newer than the last one, oldest first</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">reps</span><span class="p">:</span>
+        <span class="k">continue</span>                      <span class="c1"># no new slot yet</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reps</span><span class="p">:</span>
+        <span class="n">pol</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>                <span class="c1"># e.g. the averages in proportional fair</span>
+
+    <span class="n">newest</span> <span class="o">=</span> <span class="n">reps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>                 <span class="c1"># act on the newest report only</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">pol</span><span class="o">.</span><span class="n">weights</span><span class="p">(</span><span class="n">newest</span><span class="p">)</span>           <span class="c1"># {du_ue_index: weight}, or None</span>
+    <span class="k">if</span> <span class="n">w</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">target_tti</span><span class="p">(</span><span class="n">newest</span><span class="p">)</span>                <span class="c1"># the next downlink slot</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">sel</span><span class="o">.</span><span class="n">pick</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">pol</span><span class="o">.</span><span class="n">single_mode</span><span class="p">)</span> <span class="k">if</span> <span class="n">target</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">u</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rt</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">newest</span><span class="p">,</span> <span class="p">{</span><span class="n">u</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>   <span class="c1"># tagged with the target TTI and a sequence number</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">poll()</span></code> waits for reports newer than the newest one it has seen. If several arrived while the muApp
+was busy, it returns all of them, and the muApp acts on the newest. Every report still goes through
+<code class="docutils literal notranslate"><span class="pre">observe()</span></code>, so a policy that keeps averages sees every slot. The action goes out before any bookkeeping,
+because it has to reach the gNB within the slot.</p>
+</section>
+<section id="writing-a-scheduler">
+<h3>Writing a scheduler<a class="headerlink" href="#writing-a-scheduler" title="Link to this heading">¶</a></h3>
+<p>So a scheduler is a class with a <code class="docutils literal notranslate"><span class="pre">weights()</span></code> method: given a report, it returns a weight per UE, or
+<code class="docutils literal notranslate"><span class="pre">None</span></code> to leave the slot to the gNB. The ones Demo 2 uses (<code class="docutils literal notranslate"><span class="pre">rr</span></code>, <code class="docutils literal notranslate"><span class="pre">pf</span></code>, <code class="docutils literal notranslate"><span class="pre">maxcqi</span></code>, <code class="docutils literal notranslate"><span class="pre">maxweight</span></code>, <code class="docutils literal notranslate"><span class="pre">rl</span></code> and a
+few more) live in <code class="docutils literal notranslate"><span class="pre">edgeric-rt/edgeric_rt/policies.py</span></code>, and most are a few lines long. Max-weight:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MaxWeight</span><span class="p">(</span><span class="n">Policy</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">"maxweight"</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rep</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="s2">"du_ue_index"</span><span class="p">]):</span> <span class="nb">float</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="s2">"cqi"</span><span class="p">])</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="s2">"dl_pending_bytes"</span><span class="p">])</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">_with_data</span><span class="p">(</span><span class="n">rep</span><span class="p">)}</span>
+</pre></div>
+</div>
+<p>Let’s add longest-queue-first, which serves the UE with the most bytes waiting. Put the class in
+<code class="docutils literal notranslate"><span class="pre">policies.py</span></code>, after <code class="docutils literal notranslate"><span class="pre">MaxWeight</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">LongestQueue</span><span class="p">(</span><span class="n">Policy</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Serve the UE with the most bytes queued."""</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">"longestq"</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rep</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="s2">"du_ue_index"</span><span class="p">]):</span> <span class="nb">float</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="s2">"dl_pending_bytes"</span><span class="p">])</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">_with_data</span><span class="p">(</span><span class="n">rep</span><span class="p">)}</span>
+</pre></div>
+</div>
+<p>Then register its name in <code class="docutils literal notranslate"><span class="pre">make()</span></code>, just before the <code class="docutils literal notranslate"><span class="pre">raise</span></code> at the end:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"longestq"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">LongestQueue</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code> runs the muApps from your clone, so there is nothing to rebuild. With Demo 2’s setup running
+(the RAN with <code class="docutils literal notranslate"><span class="pre">--edgeric</span></code>, four UEs on CQI walks and full-buffer UDP), start it and follow its log:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
+bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>start<span class="w"> </span>sched<span class="w"> </span>--scheduler<span class="w"> </span>longestq<span class="w"> </span>--tag<span class="w"> </span>longestq
+bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>logs<span class="w"> </span>sched
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>started sched (pid 17)
+[sched] longestq | alloc single | lead 1 | strict | hold 0 | min-share 0.02 | reports from /apps/edgeric_rt/run/muapp.sock | run longestq
+[sched longestq] tti=87022 |   8.7 Mbps (ue1   2.2 ue2   1.7 ue3   1.2 ue4   3.6) | DL HIT  99.7% of 7001 | report-&gt;action p50 114 p99 206 us | slack p1 70 us | RB use 1.03 | lazy-RIC 36 lost 6
+[sched longestq] tti=97022 |   6.4 Mbps (ue1   1.8 ue2   1.3 ue3   0.9 ue4   2.4) | DL HIT  99.8% of 7000 | report-&gt;action p50 116 p99 211 us | slack p1 63 us | RB use 1.02 | lazy-RIC 49 lost 6
+[sched longestq] tti=107023 |   9.0 Mbps (ue1   2.6 ue2   2.5 ue3   1.3 ue4   2.6) | DL HIT  99.7% of 7001 | report-&gt;action p50 115 p99 222 us | slack p1 64 us | RB use 1.04 | lazy-RIC 62 lost 6
+</pre></div>
+</div>
+<p>The muApp is in the loop: 99.7 % of the downlink slots ran its action in exactly the TTI it targeted,
+about 115 µs after the report. The cell, though, carries only 6 to 13 Mbit/s, split almost evenly
+between the four UEs. Press Ctrl-C to leave the log, then switch the same muApp to round robin and to
+max-weight, about half a minute apart:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>ctl<span class="w"> </span><span class="s2">"scheduler rr"</span>
+bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>ctl<span class="w"> </span><span class="s2">"scheduler maxweight"</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[sched rr] tti=216666 |  26.8 Mbps (ue1  11.4 ue2   2.8 ue3   8.0 ue4   4.6) | DL HIT  99.8% of 7000 | report-&gt;action p50 114 p99 212 us | slack p1 56 us | RB use 1.03 | lazy-RIC 287 lost 333
+[sched rr] tti=226667 |  32.2 Mbps (ue1  12.7 ue2   0.9 ue3   9.0 ue4   9.5) | DL HIT  99.8% of 7001 | report-&gt;action p50 116 p99 197 us | slack p1 55 us | RB use 1.02 | lazy-RIC 302 lost 333
+[sched maxweight] tti=306612 |  44.8 Mbps (ue1  15.3 ue2   0.0 ue3  29.5 ue4   0.0) | DL HIT  99.7% of 6960 | report-&gt;action p50 127 p99 241 us | slack p1 51 us | RB use 1.04 | lazy-RIC 446 lost 533
+[sched maxweight] tti=316581 |  42.2 Mbps (ue1  31.9 ue2   0.0 ue3  10.3 ue4   0.0) | DL HIT  99.2% of 6962 | report-&gt;action p50 125 p99 411 us | slack p1 51 us | RB use 1.03 | lazy-RIC 469 lost 560
+</pre></div>
+</div>
+<p>Round robin gives each UE a quarter of the slots, so each UE’s rate follows its channel, 15 to
+32 Mbit/s in total over the run. Max-weight reached 33 to 45. Longest-queue-first does worse than both,
+and the reason is what its weight measures. With full-buffer UDP every queue sits at the RLC limit,
+about 6.17 MB. A UE on a good channel takes more bytes off its queue in each slot it gets, so its queue
+stays furthest below the limit, and the next slot goes to a UE on a weak channel whose queue has already
+filled back up. The muApp saves every TTI to <code class="docutils literal notranslate"><span class="pre">edgeric-rt/runs/longestq/ttis.npz</span></code>, and in this run the UE
+with the worst CQI won 53 % of the slots and the one with the best CQI 5 %. Max-weight multiplies the
+same backlog by the CQI; with it, the best-CQI UE won 88 % of the slots.</p>
+<p>Which UEs starve depends on the weight. Longest-queue-first holds back the strong channels, and
+max-weight leaves the weak ones with nothing for seconds at a time (<code class="docutils literal notranslate"><span class="pre">ue2</span></code> and <code class="docutils literal notranslate"><span class="pre">ue4</span></code> above). Stop the
+muApp with <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/edgeric_muapp.sh</span> <span class="pre">stop</span> <span class="pre">sched</span></code>.</p>
+<p>A muApp doesn’t have to be a scheduler. Any script under <code class="docutils literal notranslate"><span class="pre">edgeric-rt/</span></code> can read the reports with <code class="docutils literal notranslate"><span class="pre">RtE2</span></code>
+from <code class="docutils literal notranslate"><span class="pre">edgeric_rt/rte2.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/edgeric_muapp.sh</span> <span class="pre">run</span> <span class="pre">&lt;script.py&gt;</span></code> runs it in <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code>.
+The bridge feeds one muApp at a time, so stop <code class="docutils literal notranslate"><span class="pre">sched</span></code> first.</p>
 </section>
 </section>
 </section>
@@ -978,24 +1142,29 @@ way, from the CLI in <a class="reference internal" href="demo3-buffer-management
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Hooks and Codelets</a><ul>
-<li><a class="reference internal" href="#how-the-pieces-fit">How the Pieces Fit</a></li>
-<li><a class="reference internal" href="#add-a-hook-to-the-gnb">Add a Hook to the gNB</a></li>
+<li><a class="reference internal" href="#">Hooks, Codelets and muApps</a><ul>
+<li><a class="reference internal" href="#where-things-live">Where Things Live</a></li>
+<li><a class="reference internal" href="#adding-a-hook-to-the-gnb">Adding a Hook to the gNB</a></li>
 <li><a class="reference internal" href="#example-1-a-telemetry-codelet">Example 1: A Telemetry Codelet</a><ul>
 <li><a class="reference internal" href="#the-message">The message</a></li>
 <li><a class="reference internal" href="#the-codelet">The codelet</a></li>
 <li><a class="reference internal" href="#what-the-verifier-checks">What the verifier checks</a></li>
-<li><a class="reference internal" href="#build">Build</a></li>
+<li><a class="reference internal" href="#building-it">Building it</a></li>
 <li><a class="reference internal" href="#the-codeletset">The codeletset</a></li>
 <li><a class="reference internal" href="#the-xapp">The xApp</a></li>
-<li><a class="reference internal" href="#run-it">Run it</a></li>
+<li><a class="reference internal" href="#running-it">Running it</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#example-2-a-control-codelet">Example 2: A Control Codelet</a><ul>
 <li><a class="reference internal" href="#id1">The codelet</a></li>
-<li><a class="reference internal" href="#id2">Build</a></li>
-<li><a class="reference internal" href="#id3">Run it</a></li>
-<li><a class="reference internal" href="#set-the-limit-from-an-xapp">Set the limit from an xApp</a></li>
+<li><a class="reference internal" href="#id2">Building it</a></li>
+<li><a class="reference internal" href="#id3">Running it</a></li>
+<li><a class="reference internal" href="#changing-the-limit-from-an-xapp">Changing the limit from an xApp</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example-3-an-edgeric-muapp">Example 3: An EdgeRIC muApp</a><ul>
+<li><a class="reference internal" href="#the-loop">The loop</a></li>
+<li><a class="reference internal" href="#writing-a-scheduler">Writing a scheduler</a></li>
 </ul>
 </li>
 </ul>

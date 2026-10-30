@@ -6,7 +6,8 @@ while you watch Grafana, then train a PPO scheduler online.
 ```{container} info-box
 - **Before you start:** Parts 1 and 2 of the [tutorial](../open-ai-ran-tutorial.md).
 - **Design:** {doc}`../edgeric-ocudu-jbpf` (the hooks, jrtc and the TTI timeline) and
-  {doc}`../projects/qoe-networking` (the scheduling loop and the policies).
+  {doc}`../projects/qoe-networking` (the scheduling loop and the policies). To write your own
+  scheduler, see [Hooks, Codelets and muApps](hooks-and-codelets.md#example-3-an-edgeric-muapp).
 - **Runtime:** about 20 minutes.
 ```
 
@@ -453,6 +454,8 @@ bash scripts/stop_demo.sh
 
 By default a scheduler gives each slot to one UE (`--alloc single`), as the gNB's own scheduler does
 with full buffers. Model paths are relative to `edgeric-rt/`, which is `/edgeric` in `edgeric-0`.
+Each scheduler is a class in `edgeric-rt/edgeric_rt/policies.py`, and
+[Hooks, Codelets and muApps](hooks-and-codelets.md#writing-a-scheduler) shows how to add one.
 `edgeric-rt/models/` has a trained model for each scenario: `ppo_walk4`, `ppo_walk2` and
 `ppo_load8844`.
 
