@@ -344,7 +344,7 @@ random walks <code class="docutils literal notranslate"><span class="pre">trace_
 <p>Open four terminals on the testbed host.</p>
 <section id="terminal-1-ran">
 <h3>Terminal 1: RAN<a class="headerlink" href="#terminal-1-ran" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 bash<span class="w"> </span>scripts/setup_zmq_chan_demo.sh<span class="w"> </span><span class="m">4</span><span class="w"> </span>--ran<span class="w"> </span>--telemetry
 </pre></div>
@@ -395,7 +395,7 @@ running:</p>
 </section>
 <section id="terminal-2-ues">
 <h3>Terminal 2: UEs<a class="headerlink" href="#terminal-2-ues" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 bash<span class="w"> </span>scripts/setup_zmq_chan_demo.sh<span class="w"> </span><span class="m">4</span><span class="w"> </span>--ues<span class="w"> </span>--traces<span class="w"> </span>duranta-oai-ue/ue_traces_4ue.conf
 </pre></div>
@@ -431,7 +431,7 @@ SETUP DONE. 4 UE(s) attached.
 </section>
 <section id="terminal-3-traffic">
 <h3>Terminal 3: Traffic<a class="headerlink" href="#terminal-3-traffic" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 bash<span class="w"> </span>scripts/traffic_nue.sh<span class="w"> </span>start
 watch<span class="w"> </span>-n<span class="w"> </span><span class="m">2</span><span class="w"> </span>bash<span class="w"> </span>scripts/traffic_nue.sh<span class="w"> </span>status
@@ -455,7 +455,7 @@ ue4: DL started  UPF -&gt; 10.45.0.77:5204  (cc=cubic rate=unlimited, 3600s)
 </section>
 <section id="terminal-4-grafana">
 <h3>Terminal 4: Grafana<a class="headerlink" href="#terminal-4-grafana" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 bash<span class="w"> </span>scripts/tcp_probe.sh
 </pre></div>

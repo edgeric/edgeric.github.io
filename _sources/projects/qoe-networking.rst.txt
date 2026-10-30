@@ -6,9 +6,8 @@ of every UE. The muApp answers with an action for the next downlink slot, and th
 exactly that slot. The muApp runs a PPO policy trained online against the live gNB, or a classic
 scheduler such as max-weight or proportional fair.
 
-**Code:** `edgeric-ocudu-jbpf <https://github.com/ucsdwcsng/edgeric-ocudu-jbpf/tree/open-ai-ran-tutorial>`_
-(branch ``open-ai-ran-tutorial``). Full guide:
-`edgeric-rt.md <https://github.com/ucsdwcsng/edgeric-ocudu-jbpf/blob/open-ai-ran-tutorial/docs/edgeric-rt.md>`_.
+**Code:** `open-ai-ran-tutorial <https://github.com/ucsdwcsng/open-ai-ran-tutorial>`_. Full guide:
+`edgeric-rt.md <https://github.com/ucsdwcsng/open-ai-ran-tutorial/blob/main/docs/edgeric-rt.md>`_.
 
 EdgeRIC-RT Scheduling Loop
 --------------------------

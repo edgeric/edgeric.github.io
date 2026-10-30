@@ -209,11 +209,13 @@ curl -s http://localhost:30491/api/v1/label/__name__/values
 
 ## Repository layout
 
+The repository is [ucsdwcsng/open-ai-ran-tutorial](https://github.com/ucsdwcsng/open-ai-ran-tutorial).
+
 | Path | What |
 |---|---|
-| `ocudu-jbpf/` (submodule) | jbpf-enabled OCUDU gNB source, `build.sh`, `deploy/` (gNB configs, ephemeral-container patch) |
+| `ocudu-jbpf/` (submodule, [open-ai-ran-ocudu-jbpf](https://github.com/ucsdwcsng/open-ai-ran-ocudu-jbpf)) | jbpf-enabled OCUDU gNB source, `build.sh`, `deploy/` (gNB configs, ephemeral-container patch) |
 | `duranta-oai-ue/` | the UE image, the C++ broker (`broker_cpp/`), channel and trace tables, `traces/` (SNR trace library and generator) |
-| `duranta-oai-ue/duranta-ue/` (submodule) | Duranta OAI `nr-UE` source: ZMQ radio with a per-UE channel model and trace replay |
+| `duranta-oai-ue/duranta-ue/` (submodule, [open-ai-ran-duranta-ue](https://github.com/ucsdwcsng/open-ai-ran-duranta-ue)) | Duranta OAI `nr-UE` source: ZMQ radio with a per-UE channel model and trace replay |
 | `broker/` | the broker container image |
 | `open5gs/` | Open5GS 5G core Helm chart |
 | `jrtc-apps/codelets/` | codelets, one directory per layer or feature |

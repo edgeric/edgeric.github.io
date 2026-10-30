@@ -53,7 +53,7 @@ EdgeRIC: Enabling Real-Time AI-on-RAN systems
    <div class="repo-banner">
      <span class="repo-banner-title">EdgeRIC with OCUDU-jbpf</span>
      <span class="repo-banner-links">
-       <a href="https://github.com/ucsdwcsng/edgeric-ocudu-jbpf" class="repo-banner-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+       <a href="https://github.com/ucsdwcsng/open-ai-ran-tutorial" class="repo-banner-link" target="_blank" rel="noopener noreferrer">GitHub</a>
        <a href="edgeric-ocudu-jbpf.html" class="repo-banner-link">System Design</a>
      </span>
    </div>

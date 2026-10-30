@@ -44,7 +44,6 @@ open-ai-ran-tutorial/miscellaneous
 - One Linux host with `docker`, `k3d` (v5+), `kubectl`, `helm` (v3+) and `git`, and your user in the
   `docker` group.
 - At least 8 CPU cores. The ZMQ chain runs in real time; our server has 2 × Xeon Gold 5218.
-- An SSH key with access to `edgeric-ocudu-jbpf`, `ocudu-jbpf` and `duranta-ue`: the submodules clone over SSH.
 
 To install the tools on Ubuntu 24.04 (x86_64), the OS of our server, at the versions we use:
 
@@ -95,20 +94,23 @@ git version 2.43.0
 
 ### Clone the repository
 
+The code is public: [ucsdwcsng/open-ai-ran-tutorial](https://github.com/ucsdwcsng/open-ai-ran-tutorial), with the gNB and the UE as submodules.
+Everything clones over HTTPS, with no GitHub account or SSH key.
+
 ```bash
-git clone -b open-ai-ran-tutorial git@github.com:ucsdwcsng/edgeric-ocudu-jbpf.git
-cd edgeric-ocudu-jbpf
+git clone https://github.com/ucsdwcsng/open-ai-ran-tutorial.git ~/open-ai-ran-tutorial
+cd ~/open-ai-ran-tutorial
 git submodule update --init --recursive   # ocudu-jbpf (gNB), duranta-ue (UE), jbpf_protobuf (SDK)
 
 export REPO_ROOT="$(pwd)"
 export CLUSTER=janus-cluster
 ```
 
-| Submodule | What it is |
-|---|---|
-| `ocudu-jbpf` | the jbpf-instrumented OCUDU gNB, with the control hooks used in the demos |
-| `duranta-oai-ue/duranta-ue` | the Duranta OAI `nr-UE`, with the ZMQ real-time fix, the per-UE channel model and trace replay |
-| `jrtc-apps/jbpf_protobuf` | the jbpf protobuf and serializer SDK |
+| Submodule | Repository | What it is |
+|---|---|---|
+| `ocudu-jbpf` | [open-ai-ran-ocudu-jbpf](https://github.com/ucsdwcsng/open-ai-ran-ocudu-jbpf) | the jbpf-instrumented OCUDU gNB, with the control hooks used in the demos |
+| `duranta-oai-ue/duranta-ue` | [open-ai-ran-duranta-ue](https://github.com/ucsdwcsng/open-ai-ran-duranta-ue) | the Duranta OAI `nr-UE`, with the ZMQ real-time fix, the per-UE channel model and trace replay |
+| `jrtc-apps/jbpf_protobuf` | [microsoft/jbpf-protobuf](https://github.com/microsoft/jbpf-protobuf) | the jbpf protobuf and serializer SDK |
 
 ### Create the cluster
 
@@ -132,6 +134,7 @@ checkout. k3d publishes ports `30400-30500` on the host, which is how you reach 
 ```bash
 kubectl create namespace open5gs
 helm install open5gs "$REPO_ROOT/open5gs" -n open5gs -f "$REPO_ROOT/open5gs/values-5g.yaml"
+until kubectl get pod -n open5gs -l app.kubernetes.io/name=mongodb -o name | grep -q .; do sleep 2; done
 kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=mongodb -n open5gs --timeout=180s
 
 # pcf/udr start before mongodb is ready: restart them once
@@ -281,7 +284,7 @@ floor.
 In every new terminal, as your own user (not `sudo`):
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export REPO_ROOT="$(pwd)" CLUSTER=janus-cluster
 export PATH="$HOME/.local/bin:$PATH"
 export KUBECONFIG="$(k3d kubeconfig write "$CLUSTER")"

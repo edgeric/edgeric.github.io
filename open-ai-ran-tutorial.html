@@ -355,7 +355,6 @@ the RAN datapath, and unloaded again, with no recompile or restart. Codelets run
 <li><p>One Linux host with <code class="docutils literal notranslate"><span class="pre">docker</span></code>, <code class="docutils literal notranslate"><span class="pre">k3d</span></code> (v5+), <code class="docutils literal notranslate"><span class="pre">kubectl</span></code>, <code class="docutils literal notranslate"><span class="pre">helm</span></code> (v3+) and <code class="docutils literal notranslate"><span class="pre">git</span></code>, and your user in the
 <code class="docutils literal notranslate"><span class="pre">docker</span></code> group.</p></li>
 <li><p>At least 8 CPU cores. The ZMQ chain runs in real time; our server has 2 × Xeon Gold 5218.</p></li>
-<li><p>An SSH key with access to <code class="docutils literal notranslate"><span class="pre">edgeric-ocudu-jbpf</span></code>, <code class="docutils literal notranslate"><span class="pre">ocudu-jbpf</span></code> and <code class="docutils literal notranslate"><span class="pre">duranta-ue</span></code>: the submodules clone over SSH.</p></li>
 </ul>
 <p>To install the tools on Ubuntu 24.04 (x86_64), the OS of our server, at the versions we use:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># git, curl, python3 (the scripts run it on the host) and Docker</span>
@@ -403,8 +402,10 @@ k3d<span class="w"> </span>version<span class="w"> </span><span class="o">&amp;&
 </section>
 <section id="clone-the-repository">
 <h3>Clone the repository<a class="headerlink" href="#clone-the-repository" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>open-ai-ran-tutorial<span class="w"> </span>git@github.com:ucsdwcsng/edgeric-ocudu-jbpf.git
-<span class="nb">cd</span><span class="w"> </span>edgeric-ocudu-jbpf
+<p>The code is public: <a class="reference external" href="https://github.com/ucsdwcsng/open-ai-ran-tutorial">ucsdwcsng/open-ai-ran-tutorial</a>, with the gNB and the UE as submodules.
+Everything clones over HTTPS, with no GitHub account or SSH key.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ucsdwcsng/open-ai-ran-tutorial.git<span class="w"> </span>~/open-ai-ran-tutorial
+<span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--recursive<span class="w">   </span><span class="c1"># ocudu-jbpf (gNB), duranta-ue (UE), jbpf_protobuf (SDK)</span>
 
 <span class="nb">export</span><span class="w"> </span><span class="nv">REPO_ROOT</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span>
@@ -415,17 +416,21 @@ git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Submodule</p></th>
+<th class="head"><p>Repository</p></th>
 <th class="head"><p>What it is</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ocudu-jbpf</span></code></p></td>
+<td><p><a class="reference external" href="https://github.com/ucsdwcsng/open-ai-ran-ocudu-jbpf">open-ai-ran-ocudu-jbpf</a></p></td>
 <td><p>the jbpf-instrumented OCUDU gNB, with the control hooks used in the demos</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">duranta-oai-ue/duranta-ue</span></code></p></td>
+<td><p><a class="reference external" href="https://github.com/ucsdwcsng/open-ai-ran-duranta-ue">open-ai-ran-duranta-ue</a></p></td>
 <td><p>the Duranta OAI <code class="docutils literal notranslate"><span class="pre">nr-UE</span></code>, with the ZMQ real-time fix, the per-UE channel model and trace replay</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">jrtc-apps/jbpf_protobuf</span></code></p></td>
+<td><p><a class="reference external" href="https://github.com/microsoft/jbpf-protobuf">microsoft/jbpf-protobuf</a></p></td>
 <td><p>the jbpf protobuf and serializer SDK</p></td>
 </tr>
 </tbody>
@@ -452,6 +457,7 @@ checkout. k3d publishes ports <code class="docutils literal notranslate"><span c
 <h3>Deploy the 5G core and the subscribers<a class="headerlink" href="#deploy-the-5g-core-and-the-subscribers" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>open5gs
 helm<span class="w"> </span>install<span class="w"> </span>open5gs<span class="w"> </span><span class="s2">"</span><span class="nv">$REPO_ROOT</span><span class="s2">/open5gs"</span><span class="w"> </span>-n<span class="w"> </span>open5gs<span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$REPO_ROOT</span><span class="s2">/open5gs/values-5g.yaml"</span>
+<span class="k">until</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>open5gs<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>mongodb<span class="w"> </span>-o<span class="w"> </span>name<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span>.<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>sleep<span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
 kubectl<span class="w"> </span><span class="nb">wait</span><span class="w"> </span>--for<span class="o">=</span><span class="nv">condition</span><span class="o">=</span>ready<span class="w"> </span>pod<span class="w"> </span>-l<span class="w"> </span>app.kubernetes.io/name<span class="o">=</span>mongodb<span class="w"> </span>-n<span class="w"> </span>open5gs<span class="w"> </span>--timeout<span class="o">=</span>180s
 
 <span class="c1"># pcf/udr start before mongodb is ready: restart them once</span>
@@ -612,7 +618,7 @@ floor.</p>
 <section id="shell-setup">
 <h3>Shell setup<a class="headerlink" href="#shell-setup" title="Link to this heading">¶</a></h3>
 <p>In every new terminal, as your own user (not <code class="docutils literal notranslate"><span class="pre">sudo</span></code>):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">REPO_ROOT</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="nv">CLUSTER</span><span class="o">=</span>janus-cluster
 <span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.local/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span><span class="s2">"</span><span class="nv">$CLUSTER</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>

@@ -331,7 +331,7 @@ codelets in the <a class="reference internal" href="#reference-to-be-updated">Re
 while UE 2 stays idle; in Section 3, each UE runs one download. Open four terminals on the testbed host.</p>
 <section id="terminal-1-ran">
 <h3>Terminal 1: RAN<a class="headerlink" href="#terminal-1-ran" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 bash<span class="w"> </span>scripts/setup_zmq_chan_demo.sh<span class="w"> </span><span class="m">2</span><span class="w"> </span>--ran<span class="w"> </span>--telemetry
 </pre></div>
@@ -404,7 +404,7 @@ queued for it (<code class="docutils literal notranslate"><span class="pre">dl_b
 </section>
 <section id="terminal-2-ues">
 <h3>Terminal 2: UEs<a class="headerlink" href="#terminal-2-ues" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 bash<span class="w"> </span>scripts/setup_zmq_chan_demo.sh<span class="w"> </span><span class="m">2</span><span class="w"> </span>--ues
 </pre></div>
@@ -435,7 +435,7 @@ SETUP DONE. 2 UE(s) attached.
 </section>
 <section id="terminal-3-traffic">
 <h3>Terminal 3: Traffic<a class="headerlink" href="#terminal-3-traffic" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 bash<span class="w"> </span>buffer-control-experiments/traffic_A.sh<span class="w"> </span>start
 </pre></div>
@@ -457,7 +457,7 @@ bash<span class="w"> </span>buffer-control-experiments/traffic_A.sh<span class="
 </section>
 <section id="terminal-4-grafana">
 <h3>Terminal 4: Grafana<a class="headerlink" href="#terminal-4-grafana" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 python3<span class="w"> </span>buffer-control-experiments/make_dashboard.py<span class="w">     </span><span class="c1"># once per Grafana install</span>
 bash<span class="w"> </span>scripts/tcp_probe.sh
@@ -500,7 +500,7 @@ about 6 MB.</p></li>
 <h3>Terminal 5: Buffer Cap<a class="headerlink" href="#terminal-5-buffer-cap" title="Link to this heading">¶</a></h3>
 <p>Open a fifth terminal. The <code class="docutils literal notranslate"><span class="pre">bufcap</span></code> codelet holds one limit on every UE’s queue. Step it down, about a
 minute per size, then remove it:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 bash<span class="w"> </span>buffer-control-experiments/bufcap.sh<span class="w"> </span>load<span class="w"> </span>256k
 bash<span class="w"> </span>buffer-control-experiments/bufcap.sh<span class="w"> </span>load<span class="w"> </span>128k
@@ -539,7 +539,7 @@ first 10 s after each change are skipped):</p>
    261-337    64k                  30.6/163.7        1.99             26.7/76.7       14.46
    337-416    16k                  51.5/125.5        0.93            48.3/127.5        0.96
    416-492    no cap              295.4/426.2        2.03           288.1/430.4       56.28
-  plot: &lt;your clone of edgeric-ocudu-jbpf&gt;/buffer-control-experiments/results/session_20261008_004540/timeline.png
+  plot: ~/open-ai-ran-tutorial/buffer-control-experiments/results/session_20261008_004540/timeline.png
 </pre></div>
 </div>
 <figure class="align-default" id="id3">
@@ -613,7 +613,7 @@ bash<span class="w"> </span>scripts/traffic_2ue.sh<span class="w"> </span>start<
 <section id="terminal-6-bufctl-cli">
 <h3>Terminal 6: bufctl CLI<a class="headerlink" href="#terminal-6-bufctl-cli" title="Link to this heading">¶</a></h3>
 <p>Open a sixth terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 python3<span class="w"> </span>jrtc-apps/jrtc_apps/bufctl/bufctl_cli.py
 </pre></div>

@@ -326,7 +326,7 @@ while you watch Grafana, then train a PPO scheduler online.</p>
 <p>Open four terminals on the testbed host.</p>
 <section id="terminal-1-ran">
 <h3>Terminal 1: RAN<a class="headerlink" href="#terminal-1-ran" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 bash<span class="w"> </span>scripts/setup_zmq_chan_demo.sh<span class="w"> </span><span class="m">4</span><span class="w"> </span>--ran<span class="w"> </span>--edgeric
 </pre></div>
@@ -410,7 +410,7 @@ every second: on the DL side the CQI, MCS, bit rate (<code class="docutils liter
 </section>
 <section id="terminal-2-ues">
 <h3>Terminal 2: UEs<a class="headerlink" href="#terminal-2-ues" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 bash<span class="w"> </span>scripts/setup_zmq_chan_demo.sh<span class="w"> </span><span class="m">4</span><span class="w"> </span>--ues<span class="w"> </span>--traces<span class="w"> </span>duranta-oai-ue/ue_traces_cqi_4ue.conf
 bash<span class="w"> </span>scripts/ue_rnti_map.sh<span class="w"> </span><span class="m">4</span>
@@ -467,13 +467,13 @@ ue1 0x4601
 ue2 0x4602
 ue3 0x4603
 ue4 0x4604
-wrote &lt;your clone of edgeric-ocudu-jbpf&gt;/jrtc-apps/jrtc_apps/edgeric_rt/run/ue_map.txt
+wrote ~/open-ai-ran-tutorial/jrtc-apps/jrtc_apps/edgeric_rt/run/ue_map.txt
 </pre></div>
 </div>
 </section>
 <section id="terminal-3-traffic">
 <h3>Terminal 3: Traffic<a class="headerlink" href="#terminal-3-traffic" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 bash<span class="w"> </span>scripts/traffic_nue.sh<span class="w"> </span>start<span class="w"> </span>--udp<span class="w"> </span>100M
 watch<span class="w"> </span>-n<span class="w"> </span><span class="m">2</span><span class="w"> </span>bash<span class="w"> </span>scripts/traffic_nue.sh<span class="w"> </span>status
@@ -495,7 +495,7 @@ Give TCP ~10 s to ramp, then: bash scripts/traffic_nue.sh status
 </section>
 <section id="terminal-4-grafana">
 <h3>Terminal 4: Grafana<a class="headerlink" href="#terminal-4-grafana" title="Link to this heading">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 bash<span class="w"> </span>scripts/dashboard_realtime_scheduling.sh<span class="w"> </span>load
 </pre></div>
@@ -512,7 +512,7 @@ bash<span class="w"> </span>scripts/dashboard_realtime_scheduling.sh<span class=
   ue2 0x4602
   ue3 0x4603
   ue4 0x4604
-  wrote &lt;your clone of edgeric-ocudu-jbpf&gt;/jrtc-apps/jrtc_apps/edgeric_rt/run/ue_map.txt
+  wrote ~/open-ai-ran-tutorial/jrtc-apps/jrtc_apps/edgeric_rt/run/ue_map.txt
   UE 1  IMSI 999700000000001  IP 10.45.0.74   RAN_UE_NGAP_ID 0  AMF_UE_NGAP_ID 72
   UE 2  IMSI 999700000000002  IP 10.45.0.76   RAN_UE_NGAP_ID 2  AMF_UE_NGAP_ID 74
   UE 3  IMSI 999700000000003  IP 10.45.0.73   RAN_UE_NGAP_ID 1  AMF_UE_NGAP_ID 73
@@ -552,7 +552,7 @@ gNB. The thick gray line is the mean under the gNB’s own scheduler.</p></li>
 <p>Open a fifth terminal, and keep Terminal 2 free for channel changes
 (<a class="reference internal" href="demo1-plug-and-play-channels.html"><span class="std std-doc">Demo 1</span></a>’s <code class="docutils literal notranslate"><span class="pre">trace_ctl.sh</span></code>). The muApp runs in pod <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code>: start
 a scheduler, follow its log, then switch it live while you watch Grafana.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>start<span class="w"> </span>sched<span class="w"> </span>--scheduler<span class="w"> </span>maxweight<span class="w"> </span>--tag<span class="w"> </span>demo2-sched
 bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>logs<span class="w"> </span>sched<span class="w">      </span><span class="c1"># Ctrl-C stops following; the muApp keeps running</span>
@@ -621,7 +621,7 @@ max-CQI 28, round robin 20, proportional fair 17, and the gNB’s own scheduler 
 <h3>Terminal 6: Training<a class="headerlink" href="#terminal-6-training" title="Link to this heading">¶</a></h3>
 <p>Open a sixth terminal. PPO learns which UE should get each slot, online against the live gNB. The
 bridge feeds one muApp at a time, so stop the scheduler first.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;your<span class="w"> </span>clone<span class="w"> </span>of<span class="w"> </span>edgeric-ocudu-jbpf&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBECONFIG</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>k3d<span class="w"> </span>kubeconfig<span class="w"> </span>write<span class="w"> </span>janus-cluster<span class="k">)</span><span class="s2">"</span>
 bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>stop<span class="w"> </span>sched
 bash<span class="w"> </span>scripts/edgeric_muapp.sh<span class="w"> </span>start<span class="w"> </span>train<span class="w"> </span>--ues<span class="w"> </span><span class="m">4</span><span class="w"> </span>--iters<span class="w"> </span><span class="m">30</span><span class="w"> </span>--tag<span class="w"> </span>demo2_ppo

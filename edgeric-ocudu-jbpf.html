@@ -311,10 +311,12 @@
 gNB instrumented with jbpf. Every slot, two jbpf hooks in the MAC scheduler carry the state of every UE
 out and the muApp’s action back in. jrt-controller (jrtc) moves them between the gNB and the muApps.
 The whole system runs on one server as a k3d (Kubernetes) cluster.</p>
-<p><strong>Code:</strong> <a class="reference external" href="https://github.com/ucsdwcsng/edgeric-ocudu-jbpf">edgeric-ocudu-jbpf</a> (branch <code class="docutils literal notranslate"><span class="pre">open-ai-ran-tutorial</span></code>).
-Guides: <a class="reference external" href="https://github.com/ucsdwcsng/edgeric-ocudu-jbpf/blob/open-ai-ran-tutorial/README.md">README</a> (build
+<p><strong>Code:</strong> <a class="reference external" href="https://github.com/ucsdwcsng/open-ai-ran-tutorial">open-ai-ran-tutorial</a>, with the gNB
+(<a class="reference external" href="https://github.com/ucsdwcsng/open-ai-ran-ocudu-jbpf">open-ai-ran-ocudu-jbpf</a>) and the UE
+(<a class="reference external" href="https://github.com/ucsdwcsng/open-ai-ran-duranta-ue">open-ai-ran-duranta-ue</a>) as submodules.
+Guides: <a class="reference external" href="https://github.com/ucsdwcsng/open-ai-ran-tutorial/blob/main/README.md">README</a> (build
 and deploy) and
-<a class="reference external" href="https://github.com/ucsdwcsng/edgeric-ocudu-jbpf/blob/open-ai-ran-tutorial/docs/edgeric-rt.md">edgeric-rt.md</a>
+<a class="reference external" href="https://github.com/ucsdwcsng/open-ai-ran-tutorial/blob/main/docs/edgeric-rt.md">edgeric-rt.md</a>
 (the loop and the muApps).</p>
 <section id="end-to-end-deployment-on-k3d">
 <h2>End-to-End Deployment on k3d<a class="headerlink" href="#end-to-end-deployment-on-k3d" title="Link to this heading">¶</a></h2>
