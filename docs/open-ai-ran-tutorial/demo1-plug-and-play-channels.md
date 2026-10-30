@@ -41,7 +41,7 @@ Open four terminals on the testbed host.
 ### Terminal 1: RAN
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 bash scripts/setup_zmq_chan_demo.sh 4 --ran --telemetry
 ```
@@ -98,7 +98,7 @@ Ctrl-C leaves the console and the RAN keeps running; `bash scripts/gnb_console.s
 ### Terminal 2: UEs
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 bash scripts/setup_zmq_chan_demo.sh 4 --ues --traces duranta-oai-ue/ue_traces_4ue.conf
 ```
@@ -137,7 +137,7 @@ Keep this terminal for Section 4.
 ### Terminal 3: Traffic
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 bash scripts/traffic_nue.sh start
 watch -n 2 bash scripts/traffic_nue.sh status
@@ -165,7 +165,7 @@ ue4: DL started  UPF -> 10.45.0.77:5204  (cc=cubic rate=unlimited, 3600s)
 ### Terminal 4: Grafana
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 bash scripts/tcp_probe.sh
 ```

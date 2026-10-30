@@ -27,7 +27,7 @@ while UE 2 stays idle; in Section 3, each UE runs one download. Open four termin
 ### Terminal 1: RAN
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 bash scripts/setup_zmq_chan_demo.sh 2 --ran --telemetry
 ```
@@ -105,7 +105,7 @@ Ctrl-C leaves the console and the RAN keeps running; `bash scripts/gnb_console.s
 ### Terminal 2: UEs
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 bash scripts/setup_zmq_chan_demo.sh 2 --ues
 ```
@@ -138,7 +138,7 @@ SETUP DONE. 2 UE(s) attached.
 ### Terminal 3: Traffic
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 bash buffer-control-experiments/traffic_A.sh start
 ```
@@ -163,7 +163,7 @@ bash buffer-control-experiments/traffic_A.sh video-only              # or bulk-o
 ### Terminal 4: Grafana
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 python3 buffer-control-experiments/make_dashboard.py     # once per Grafana install
 bash scripts/tcp_probe.sh
@@ -208,7 +208,7 @@ Open a fifth terminal. The `bufcap` codelet holds one limit on every UE's queue.
 minute per size, then remove it:
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 bash buffer-control-experiments/bufcap.sh load 256k
 bash buffer-control-experiments/bufcap.sh load 128k
@@ -252,7 +252,7 @@ python3 buffer-control-experiments/snapshot.py --minutes 8.2
    261-337    64k                  30.6/163.7        1.99             26.7/76.7       14.46
    337-416    16k                  51.5/125.5        0.93            48.3/127.5        0.96
    416-492    no cap              295.4/426.2        2.03           288.1/430.4       56.28
-  plot: <your clone of edgeric-ocudu-jbpf>/buffer-control-experiments/results/session_20261008_004540/timeline.png
+  plot: ~/open-ai-ran-tutorial/buffer-control-experiments/results/session_20261008_004540/timeline.png
 ```
 
 ```{figure} demo3/grafana-cap.png
@@ -335,7 +335,7 @@ Open the user-plane dashboard, <http://localhost:30490/d/upt-userplane>, and set
 Open a sixth terminal:
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 python3 jrtc-apps/jrtc_apps/bufctl/bufctl_cli.py
 ```

@@ -22,7 +22,7 @@ Open four terminals on the testbed host.
 ### Terminal 1: RAN
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 bash scripts/setup_zmq_chan_demo.sh 4 --ran --edgeric
 ```
@@ -111,7 +111,7 @@ Ctrl-C leaves the console and the RAN keeps running; `bash scripts/gnb_console.s
 ### Terminal 2: UEs
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 bash scripts/setup_zmq_chan_demo.sh 4 --ues --traces duranta-oai-ue/ue_traces_cqi_4ue.conf
 bash scripts/ue_rnti_map.sh 4
@@ -170,13 +170,13 @@ ue1 0x4601
 ue2 0x4602
 ue3 0x4603
 ue4 0x4604
-wrote <your clone of edgeric-ocudu-jbpf>/jrtc-apps/jrtc_apps/edgeric_rt/run/ue_map.txt
+wrote ~/open-ai-ran-tutorial/jrtc-apps/jrtc_apps/edgeric_rt/run/ue_map.txt
 ```
 
 ### Terminal 3: Traffic
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 bash scripts/traffic_nue.sh start --udp 100M
 watch -n 2 bash scripts/traffic_nue.sh status
@@ -199,7 +199,7 @@ Give TCP ~10 s to ramp, then: bash scripts/traffic_nue.sh status
 ### Terminal 4: Grafana
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 bash scripts/dashboard_realtime_scheduling.sh load
 ```
@@ -217,7 +217,7 @@ bash scripts/dashboard_realtime_scheduling.sh load
   ue2 0x4602
   ue3 0x4603
   ue4 0x4604
-  wrote <your clone of edgeric-ocudu-jbpf>/jrtc-apps/jrtc_apps/edgeric_rt/run/ue_map.txt
+  wrote ~/open-ai-ran-tutorial/jrtc-apps/jrtc_apps/edgeric_rt/run/ue_map.txt
   UE 1  IMSI 999700000000001  IP 10.45.0.74   RAN_UE_NGAP_ID 0  AMF_UE_NGAP_ID 72
   UE 2  IMSI 999700000000002  IP 10.45.0.76   RAN_UE_NGAP_ID 2  AMF_UE_NGAP_ID 74
   UE 3  IMSI 999700000000003  IP 10.45.0.73   RAN_UE_NGAP_ID 1  AMF_UE_NGAP_ID 73
@@ -258,7 +258,7 @@ Open a fifth terminal, and keep Terminal 2 free for channel changes
 a scheduler, follow its log, then switch it live while you watch Grafana.
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 bash scripts/edgeric_muapp.sh start sched --scheduler maxweight --tag demo2-sched
 bash scripts/edgeric_muapp.sh logs sched      # Ctrl-C stops following; the muApp keeps running
@@ -335,7 +335,7 @@ Open a sixth terminal. PPO learns which UE should get each slot, online against 
 bridge feeds one muApp at a time, so stop the scheduler first.
 
 ```bash
-cd <your clone of edgeric-ocudu-jbpf>
+cd ~/open-ai-ran-tutorial
 export KUBECONFIG="$(k3d kubeconfig write janus-cluster)"
 bash scripts/edgeric_muapp.sh stop sched
 bash scripts/edgeric_muapp.sh start train --ues 4 --iters 30 --tag demo2_ppo
