@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Miscellaneous" href="miscellaneous.html"><link rel="prev" title="Demo 2: AI-Driven Scheduling" href="demo2-ai-scheduling.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Hooks and Codelets" href="hooks-and-codelets.html"><link rel="prev" title="Demo 2: AI-Driven Scheduling" href="demo2-ai-scheduling.html">
 
     <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
         <title>Demo 3: TCP Flow Optimization with Real-Time Buffer Management - EdgeRIC</title>
@@ -231,6 +231,7 @@
 <li class="toctree-l2"><a class="reference internal" href="demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks-and-codelets.html">Hooks and Codelets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
 </ul>
 </li>
@@ -255,6 +256,7 @@
 <li class="toctree-l2"><a class="reference internal" href="demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks-and-codelets.html">Hooks and Codelets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
 </ul>
 </li>
@@ -283,12 +285,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/yourusername/edgeric/blob/main/docs/open-ai-ran-tutorial/demo3-buffer-management.md?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/edgeric/edgeric.github.io/blob/main/docs/open-ai-ran-tutorial/demo3-buffer-management.md?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/yourusername/edgeric/edit/main/docs/open-ai-ran-tutorial/demo3-buffer-management.md" rel="edit" title="Edit this page">
+  <a class="muted-link" href="https://github.com/edgeric/edgeric.github.io/edit/main/docs/open-ai-ran-tutorial/demo3-buffer-management.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -315,9 +317,8 @@ climbs to hundreds of milliseconds while the download gains nothing. A control c
 <li><p><strong>Before you start:</strong> Parts 1 and 2 of the <a class="reference internal" href="../open-ai-ran-tutorial.html"><span class="std std-doc">tutorial</span></a>. Part 1
 <a class="reference internal" href="../open-ai-ran-tutorial.html#build-the-codelets"><span class="std std-ref">builds the codelets</span></a> this demo loads: <code class="docutils literal notranslate"><span class="pre">upt</span></code>, <code class="docutils literal notranslate"><span class="pre">bufctl</span></code>
 and <code class="docutils literal notranslate"><span class="pre">bufcap</span></code>.</p></li>
-<li><p><strong>Design:</strong> <a class="reference internal" href="../edgeric-ocudu-jbpf.html"><span class="doc">EdgeRIC with OCUDU-jbpf: System Design</span></a> (the hooks and jrtc), and the
-<a class="reference internal" href="#telemetry-codelets-for-the-rlc-queue">telemetry</a> and <a class="reference internal" href="#control-codelets-for-the-rlc-queue">control</a>
-codelets in the <a class="reference internal" href="#reference-to-be-updated">Reference</a>.</p></li>
+<li><p><strong>Design:</strong> <a class="reference internal" href="../edgeric-ocudu-jbpf.html"><span class="doc">EdgeRIC with OCUDU-jbpf: System Design</span></a> (the hooks and jrtc), and
+<a class="reference internal" href="hooks-and-codelets.html"><span class="std std-doc">Hooks and Codelets</span></a> for how a codelet is written.</p></li>
 <li><p><strong>Runtime:</strong> about 25 minutes.</p></li>
 </ul>
 </div>
@@ -463,8 +464,8 @@ python3<span class="w"> </span>buffer-control-experiments/make_dashboard.py<span
 bash<span class="w"> </span>scripts/tcp_probe.sh
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{'folderUid': '', 'id': 3, 'slug': 'exp-a-b3a-buffer-knob-and-bad-channel', 'status': 'success', 'uid': 'expA-bufcap', 'url': '/d/expA-bufcap/exp-a-b3a-buffer-knob-and-bad-channel', 'version': 3}
--&gt; http://localhost:30490/d/expA-bufcap
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{'folderUid': '', 'id': 2, 'slug': 'demo-33a-rlc-buffer-cap', 'status': 'success', 'uid': 'demo3-bufcap', 'url': '/d/demo3-bufcap/demo-33a-rlc-buffer-cap', 'version': 1}
+-&gt; http://localhost:30490/d/demo3-bufcap
 Dashboard: http://localhost:30490/d/upt-userplane   (Ctrl-C stops the TCP row)
 [tcp_probe] UE map: {'10.45.0.85': 1, '10.45.0.86': 2}
 [tcp_probe] writing to http://localhost:30491/write
@@ -474,21 +475,21 @@ Dashboard: http://localhost:30490/d/upt-userplane   (Ctrl-C stops the TCP row)
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">make_dashboard.py</span></code> creates the experiment dashboard for Section 2. <code class="docutils literal notranslate"><span class="pre">tcp_probe.sh</span></code> captures on the UPF
 and feeds the TCP row of the user-plane dashboard for Section 3; it runs in the foreground until Ctrl-C.
-Open <a class="reference external" href="http://localhost:30490/d/expA-bufcap">http://localhost:30490/d/expA-bufcap</a>. From a laptop, forward the port first:
+Open <a class="reference external" href="http://localhost:30490/d/demo3-bufcap">http://localhost:30490/d/demo3-bufcap</a>. From a laptop, forward the port first:
 <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-N</span> <span class="pre">-L</span> <span class="pre">30490:localhost:30490</span> <span class="pre">&lt;user&gt;&#64;&lt;testbed-host&gt;</span></code>.</p>
 <figure class="align-default" id="id2">
-<a class="reference external image-reference" href="../_images/grafana-baseline.png"><img alt="The experiment dashboard before any cap. The video call's and the download's RTT rise and fall in a sawtooth between about 150 and 500 ms, averaging about 300 ms, with the gNB's queuing delay just below them; the download takes about 57 Mbit/s and the call 2 Mbit/s; the RLC queue holds about 2 MiB against the 6 MiB configured limit" src="../_images/grafana-baseline.png" style="width: 100%;" />
+<a class="reference external image-reference" href="../_images/grafana-baseline.png"><img alt="The experiment dashboard before any cap. The video call's and the download's RTT rise and fall in a sawtooth between about 150 and 480 ms, averaging about 300 ms, with the gNB's queuing delay just below them; the download takes about 56 Mbit/s and the call 2 Mbit/s; the RLC queue holds about 2 MiB against the 6 MiB configured limit" src="../_images/grafana-baseline.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">The experiment dashboard before any cap.</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p><strong>Top row:</strong> the call’s RTT now, the download’s throughput, the cap in force (none yet: the gNB’s
-configured queue, 6 MiB) and the channel (MCS 28, a clean channel).</p></li>
+<li><p><strong>Top row:</strong> the call’s RTT now, the download’s throughput and the cap in force (none yet: the
+gNB’s configured queue, 6 MiB).</p></li>
 <li><p><strong>Latency:</strong> the call’s RTT (blue) and the download’s (orange) average about 300 ms, in a CUBIC sawtooth
-that peaks near 500 ms. The gNB’s queuing delay (dotted) tracks them: the queue is the RTT.</p></li>
-<li><p><strong>Throughput and RLC buffer:</strong> the download takes about 57 Mbit/s and keeps about 2 MB queued; the
+that peaks near 480 ms. The gNB’s queuing delay (dotted) tracks them: the queue is the RTT.</p></li>
+<li><p><strong>Throughput and RLC buffer:</strong> the download takes about 56 Mbit/s and keeps about 2 MB queued; the
 call holds its 2 Mbit/s. The black line is the cap in force: with no cap, the gNB’s configured queue,
 about 6 MB.</p></li>
 </ul>
@@ -514,6 +515,9 @@ bash<span class="w"> </span>buffer-control-experiments/bufcap.sh<span class="w">
 use. <code class="docutils literal notranslate"><span class="pre">off</span></code> loads <code class="docutils literal notranslate"><span class="pre">bufcap_off</span></code> until the next downlink packet has restored the configured limit, then
 unloads it:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  loaded bufcap_256k
+  --------- bufcap.cpp -&gt; bufcap_128k.o (CAP_BYTES=131072) ---------
+  verifier: OK
+  built bufcap_128k (131072 bytes)
   unloaded bufcap_256k
   loaded bufcap_128k
   unloaded bufcap_128k
@@ -529,31 +533,31 @@ unloads it:</p>
 </div>
 <p>Every cap change draws a dashed line on the dashboard. Then print the run, one row per setting (the
 first 10 s after each change are skipped):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>buffer-control-experiments/snapshot.py<span class="w"> </span>--minutes<span class="w"> </span><span class="m">8</span>.2
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>buffer-control-experiments/snapshot.py<span class="w"> </span>--minutes<span class="w"> </span><span class="m">8</span>.5
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  time (s)    cap           video RTT p50/p95  video Mb/s      bulk RTT p50/p95   bulk Mb/s
-     0-108    no cap              303.8/424.3        2.01           304.3/422.1       56.54
-   108-184    256k                  47.6/78.4        1.97             39.1/55.2       52.43
-   184-261    128k                 31.0/181.7        1.96             24.9/91.2        39.5
-   261-337    64k                  30.6/163.7        1.99             26.7/76.7       14.46
-   337-416    16k                  51.5/125.5        0.93            48.3/127.5        0.96
-   416-492    no cap              295.4/426.2        2.03           288.1/430.4       56.28
-  plot: ~/open-ai-ran-tutorial/buffer-control-experiments/results/session_20261008_004540/timeline.png
+     0-125    no cap              295.0/403.9        2.05           285.5/414.1        56.3
+   125-202    256k                  46.7/81.4        1.95             36.2/51.3       52.12
+   202-279    128k                 31.3/105.2        2.04             24.9/86.7       42.45
+   279-355    64k                  27.8/109.4         2.0             26.6/91.1       14.93
+   355-434    16k                  60.7/135.1        0.86            56.7/139.3        0.91
+   434-510    no cap              296.9/414.8        1.97           290.9/400.0       56.05
+  plot: ~/open-ai-ran-tutorial/buffer-control-experiments/results/session_20261029_234443/timeline.png
 </pre></div>
 </div>
 <figure class="align-default" id="id3">
-<a class="reference external image-reference" href="../_images/grafana-cap.png"><img alt="The experiment dashboard over Section 2. With no cap the call's and the download's RTT average about 300 ms and the RLC queue holds about 2 MiB. From the 256k cap on, the RTTs fall to tens of milliseconds and the queue to almost nothing; the download keeps 52 Mbit/s at 256k, falls to 14 at 64k and collapses at 16k. With the cap removed the bloat returns" src="../_images/grafana-cap.png" style="width: 100%;" />
+<a class="reference external image-reference" href="../_images/grafana-cap.png"><img alt="The experiment dashboard over Section 2. With no cap the call's and the download's RTT average about 300 ms and the RLC queue holds about 2 MiB. From the 256k cap on, the RTTs fall to tens of milliseconds and the queue to almost nothing; the download keeps 52 Mbit/s at 256k, falls to 15 at 64k and collapses at 16k. With the cap removed the bloat returns" src="../_images/grafana-cap.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text">Section 2: no cap, then 256k, 128k, 64k and 16k, then no cap again.</span><a class="headerlink" href="#id3" title="Link to this image">¶</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p><strong>Latency:</strong> each dashed line is a cap change. At 256k the call’s median RTT drops from 304 ms to
-48 ms, and at 128k and 64k to about 31.</p></li>
+<li><p><strong>Latency:</strong> each dashed line is a cap change. At 256k the call’s median RTT drops from 295 ms to
+47 ms, and at 128k and 64k to about 30.</p></li>
 <li><p><strong>Throughput:</strong> the download keeps 52 Mbit/s at 256k, then loses rate as the cap drops below the
-bandwidth-delay product: 40 at 128k and 14 at 64k. At 16k both flows collapse to under 1 Mbit/s. The
+bandwidth-delay product: 42 at 128k and 15 at 64k. At 16k both flows collapse to under 1 Mbit/s. The
 call holds its 2 Mbit/s until 16k.</p></li>
 <li><p><strong>RLC buffer:</strong> about 2 MB queued with no cap, almost nothing under any cap. The black line steps down
 with each cap and returns to the configured 6 MB after <code class="docutils literal notranslate"><span class="pre">off</span></code>.</p></li>
@@ -739,860 +743,95 @@ STOPPED. Bring it back with:  bash scripts/setup_zmq_chan_demo.sh N [--telemetry
 </div>
 <p>Then press Ctrl-C in Terminal 1.</p>
 </section>
-<section id="reference-to-be-updated">
-<h2>Reference [To be updated]<a class="headerlink" href="#reference-to-be-updated" title="Link to this heading">¶</a></h2>
-<section id="telemetry-codelets-for-the-rlc-queue">
-<h3>Telemetry Codelets for the RLC Queue<a class="headerlink" href="#telemetry-codelets-for-the-rlc-queue" title="Link to this heading">¶</a></h3>
-<p>The <a class="reference internal" href="miscellaneous.html#telemetry-with-codelets"><span class="std std-ref">Miscellaneous</span></a> page loads codelets somebody else wrote. Now we write our own, and we pick a measurement that the
-standard per-layer counters cannot give: <strong>where does a downlink packet actually spend its time, and
-how deep is the queue it waits in?</strong></p>
-<p>Three codelets, all downlink, all per UE per radio bearer:</p>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">¶</a></h2>
+<section id="buffer-caps-bufcap">
+<h3>Buffer caps: bufcap<a class="headerlink" href="#buffer-caps-bufcap" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">bufcap.sh</span></code> loads <code class="docutils literal notranslate"><span class="pre">codelets/bufcap/bufcap.cpp</span></code> on the <code class="docutils literal notranslate"><span class="pre">rlc_dl_ctrl</span></code> control hook. The codelet holds one
+byte limit on every data bearer of every UE. Each size is its own object, built from the same source.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>Codelet</p></th>
-<th class="head"><p>Hook</p></th>
-<th class="head"><p>Measures</p></th>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Effect</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gtp_arrival</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">pdcp_dl_new_sdu</span></code></p></td>
-<td><p>DL arrival rate into the RAN</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">build</span> <span class="pre">[SIZE</span> <span class="pre">...]</span></code></p></td>
+<td><p>build caps, by default <code class="docutils literal notranslate"><span class="pre">off</span> <span class="pre">16k</span> <span class="pre">64k</span> <span class="pre">256k</span> <span class="pre">1m</span></code>; <code class="docutils literal notranslate"><span class="pre">load</span></code> builds any other size on first use</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong><code class="docutils literal notranslate"><span class="pre">rlc_queueing</span></code></strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">rlc_dl_sdu_send_started</span></code></p></td>
-<td><p><strong>RLC queuing latency</strong> (SDU arrival → start of transmission)</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">load</span> <span class="pre">SIZE</span></code></p></td>
+<td><p>load a cap in place of the current one: <code class="docutils literal notranslate"><span class="pre">64k</span></code>, <code class="docutils literal notranslate"><span class="pre">1m</span></code> or a byte count</p></td>
 </tr>
-<tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">rlc_buffer_enq</span></code> / <code class="docutils literal notranslate"><span class="pre">_deq</span></code></strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">rlc_dl_new_sdu</span></code> / <code class="docutils literal notranslate"><span class="pre">rlc_dl_sdu_send_completed</span></code></p></td>
-<td><p><strong>RLC buffer occupancy</strong> (bytes and packets in the SDU queue)</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">status</span></code></p></td>
+<td><p>the cap in force</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">off</span></code></p></td>
+<td><p>restore the configured limits, then unload; needs downlink traffic</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">unload</span></code></p></td>
+<td><p>unload only, so the last cap stays in force</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>They live in <code class="docutils literal notranslate"><span class="pre">jrtc-apps/codelets/upt/</span></code> (upt = user-plane telemetry) and are deployed by
-<code class="docutils literal notranslate"><span class="pre">jrtc_apps/upt/deployment_fixed.yaml</span></code>.</p>
-<blockquote>
-<div><p>Terminal 1 loads the <code class="docutils literal notranslate"><span class="pre">upt</span></code> codeletset with <code class="docutils literal notranslate"><span class="pre">--telemetry</span></code>. Unload it with the deployment that loaded
-it (<code class="docutils literal notranslate"><span class="pre">deployment_demo.yaml</span></code>) before loading your own build.</p>
-</div></blockquote>
-<section id="anatomy-of-a-codelet">
-<h4>Anatomy of a codelet<a class="headerlink" href="#anatomy-of-a-codelet" title="Link to this heading">¶</a></h4>
-<p>Every codelet is one <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> with a single <code class="docutils literal notranslate"><span class="pre">jbpf_main</span></code>, compiled to BPF and verified:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linux/bpf.h&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">"jbpf_srsran_contexts.h"</span><span class="w">          </span><span class="c1">// the RAN context structs</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">"../utils/misc_utils.h"</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">"../utils/hashmap_utils.h"</span>
-<span class="cp">#define SEC(NAME) __attribute__((section(NAME), used))</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">"jbpf_defs.h"</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">"jbpf_helper.h"</span>
-
-<span class="c1">// output channel: a ring buffer typed by the protobuf message</span>
-<span class="n">jbpf_ringbuf_map</span><span class="p">(</span><span class="n">out_channel</span><span class="p">,</span><span class="w"> </span><span class="n">my_stats</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span>
-
-<span class="k">extern</span><span class="w"> </span><span class="s">"C"</span><span class="w"> </span><span class="n">SEC</span><span class="p">(</span><span class="s">"jbpf_srsran_generic"</span><span class="p">)</span>
-<span class="kt">uint64_t</span><span class="w"> </span><span class="n">jbpf_main</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">state</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_ran_generic_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">jbpf_ran_generic_ctx</span><span class="o">*</span><span class="p">)</span><span class="n">state</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// 1. cast ctx-&gt;data to the layer's context struct</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">jbpf_rlc_ctx_info</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rlc_ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">jbpf_rlc_ctx_info</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// 2. MANDATORY bounds check - the verifier rejects the program without it</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rlc_ctx</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">jbpf_rlc_ctx_info</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span>
-<span class="w">        </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">data_end</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">JBPF_CODELET_FAILURE</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// 3. do the work: accumulate into maps, or emit</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">JBPF_CODELET_SUCCESS</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Rules the verifier enforces, and the ones that will actually bite you:</p>
-<ul class="simple">
-<li><p><strong>Bounds-check <code class="docutils literal notranslate"><span class="pre">ctx-&gt;data</span></code> against <code class="docutils literal notranslate"><span class="pre">ctx-&gt;data_end</span></code></strong> before touching it. Always.</p></li>
-<li><p><strong>Loops must be bounded</strong> and provably terminating (<code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">unroll</span></code> with a constant bound).</p></li>
-<li><p><strong>No 64-bit division.</strong> Use shifts. This is why the bucketing below uses a power of two.</p></li>
-<li><p><strong>No <code class="docutils literal notranslate"><span class="pre">.rodata</span></code>.</strong> A file-scope <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">const</span> <span class="pre">uint32_t</span> <span class="pre">TABLE[8]</span></code> makes the loader emit a <code class="docutils literal notranslate"><span class="pre">.rodata</span></code>
-section it does not relocate, and the verifier then reports <em>0 instructions</em>. Use a <code class="docutils literal notranslate"><span class="pre">switch</span></code>
-that returns the value instead. (The control codelets below hit this.)</p></li>
-<li><p>Every array access is masked (<code class="docutils literal notranslate"><span class="pre">arr[i</span> <span class="pre">%</span> <span class="pre">N]</span></code>) so the verifier can prove it is in range.</p></li>
-</ul>
 </section>
-<section id="the-design-decision-bucket-inside-the-codelet">
-<h4>The design decision: bucket inside the codelet<a class="headerlink" href="#the-design-decision-bucket-inside-the-codelet" title="Link to this heading">¶</a></h4>
-<p>The naive design streams one IO message per packet. At 50 Mbps a single UE produces ~4167 pkt/s,
-which is ~130 MB/s of IO per UE; the jbpf IO mempool is exhausted and <code class="docutils literal notranslate"><span class="pre">jbpf_mbuf_alloc</span></code> starts
-failing with <em>“error dequeuing memory from the mempool”</em>.</p>
-<p>So these codelets <strong>aggregate per-packet events into fixed time buckets inside the codelet</strong> and emit
-one protobuf message per bucket per stream. Per-packet <em>accuracy</em> is retained — every packet still
-updates the accumulators — but the <em>output rate becomes independent of the traffic rate</em>
-(~7.45 msg/s per stream at any load).</p>
-<p><code class="docutils literal notranslate"><span class="pre">codelets/upt/upt_helpers.h</span></code>:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Bucket width as a power-of-two shift on the ns timestamp.</span>
-<span class="c1">// A shift, not a division: 64-bit division is awkward for the eBPF verifier.</span>
-<span class="c1">// 1 &lt;&lt; 27 ns = 134.217728 ms</span>
-<span class="cp">#define UPT_BUCKET_SHIFT (27)</span>
-<span class="cp">#define UPT_BUCKET_NS    (1ULL &lt;&lt; UPT_BUCKET_SHIFT)</span>
-
-<span class="c1">// Max (UE, radio-bearer) pairs tracked per bucket.</span>
-<span class="c1">// MUST equal max_count in the .options files.</span>
-<span class="cp">#define UPT_MAX_UE_RB (16)</span>
-
-<span class="c1">// SRBs and DRBs share the small rb_id space; fold is_srb into the key so</span>
-<span class="c1">// SRB1 and DRB1 land in distinct slots.</span>
-<span class="cp">#define RBID_2_EXPLICIT(__is_srb, __rb_id) ((__is_srb) ? (__rb_id) : ((__rb_id) + 8))</span>
-</pre></div>
-</div>
-<p>The rollover logic is identical in all three codelets:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">now</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">jbpf_time_get_ns</span><span class="p">();</span>
-<span class="kt">uint64_t</span><span class="w"> </span><span class="n">bucket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">UPT_BUCKET_SHIFT</span><span class="p">;</span>
-
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">last_bucket</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">bucket</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">                     </span><span class="c1">// the bucket just closed</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">last_bucket</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">stats_count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">now</span><span class="p">;</span>
-<span class="w">        </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">bucket_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">last_bucket</span><span class="p">;</span>
-<span class="w">        </span><span class="n">jbpf_ringbuf_output</span><span class="p">(</span><span class="o">&amp;</span><span class="n">out_channel</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">out</span><span class="p">));</span><span class="w">   </span><span class="c1">// emit it</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="n">JBPF_HASHMAP_CLEAR</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hash</span><span class="p">);</span>
-<span class="w">    </span><span class="n">jbpf_map_clear</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stats_map</span><span class="p">);</span>
-<span class="w">    </span><span class="o">*</span><span class="n">last_bucket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bucket</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="c1">// ... then accumulate this event into out-&gt;stats[ind]</span>
-</pre></div>
-</div>
-<p>Per-(UE, bearer) slotting uses the shared protohash helper:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">new_val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="kt">uint32_t</span><span class="w"> </span><span class="n">ind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JBPF_PROTOHASH_LOOKUP_ELEM_64</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">stats</span><span class="p">,</span><span class="w"> </span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="n">ue_index</span><span class="p">,</span><span class="w"> </span><span class="n">rb_id</span><span class="p">,</span><span class="w"> </span><span class="n">new_val</span><span class="p">);</span>
-<span class="c1">// every access is out-&gt;stats[ind % UPT_MAX_UE_RB]</span>
-</pre></div>
-</div>
-</section>
-<section id="codelet-1-rlc-queuing-latency">
-<h4>Codelet 1: RLC queuing latency<a class="headerlink" href="#codelet-1-rlc-queuing-latency" title="Link to this heading">¶</a></h4>
-<p><strong>The measurement.</strong> srsRAN stamps <code class="docutils literal notranslate"><span class="pre">time_of_arrival</span></code> on every SDU when it enters RLC
-(<code class="docutils literal notranslate"><span class="pre">rlc_tx_am_entity::handle_sdu</span></code>), and just before it starts building the PDU it computes the elapsed
-time and passes it to the hook:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// srsRAN: lib/rlc/rlc_tx_am_entity.cpp</span>
-<span class="k">auto</span><span class="w"> </span><span class="n">latency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">nanoseconds</span><span class="o">&gt;</span><span class="p">(</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">sdu_info</span><span class="p">.</span><span class="n">time_of_arrival</span><span class="p">);</span>
-<span class="n">CALL_JBPF_HOOK</span><span class="p">(</span><span class="n">hook_rlc_dl_sdu_send_started</span><span class="p">,</span>
-<span class="w">               </span><span class="n">sdu_info</span><span class="p">.</span><span class="n">pdcp_sn</span><span class="p">.</span><span class="n">value</span><span class="p">(),</span><span class="w"> </span><span class="n">sdu_info</span><span class="p">.</span><span class="n">is_retx</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">uint64_t</span><span class="p">)</span><span class="n">latency</span><span class="p">.</span><span class="n">count</span><span class="p">());</span>
-</pre></div>
-</div>
-<p>So <code class="docutils literal notranslate"><span class="pre">latency_ns</span> <span class="pre">=</span> <span class="pre">(start</span> <span class="pre">of</span> <span class="pre">PDU</span> <span class="pre">build)</span> <span class="pre">−</span> <span class="pre">(SDU</span> <span class="pre">arrival</span> <span class="pre">at</span> <span class="pre">RLC)</span></code> — a <strong>queuing</strong> delay, not an
-over-the-air delay. The codelet does not compute it; it only <em>reduces</em> it.</p>
-<blockquote>
-<div><p>This is why there is no PDCP-SN → enqueue-timestamp shared map here. The classic design (an
-enqueue codelet writes a map keyed by PDCP SN, a dequeue codelet looks it up and subtracts) exists
-only because some forks do not expose <code class="docutils literal notranslate"><span class="pre">latency_ns</span></code>. Reading it directly removes a per-packet map
-insert + lookup + delete from the datapath, and removes the map-pressure failure mode entirely.</p>
-</div></blockquote>
-<p><strong>Step 1 — the wire format.</strong> <code class="docutils literal notranslate"><span class="pre">codelets/upt/rlc_queue_stats.proto</span></code>:</p>
-<div class="highlight-protobuf notranslate"><div class="highlight"><pre><span></span><span class="k">syntax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"proto2"</span><span class="p">;</span>
-
-<span class="kd">message</span><span class="w"> </span><span class="nc">t_rlc_queue_item</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="k">required</span><span class="w"> </span><span class="kt">uint32</span><span class="w"> </span><span class="na">du_ue_index</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">   </span><span class="k">required</span><span class="w"> </span><span class="kt">uint32</span><span class="w"> </span><span class="na">is_srb</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
-<span class="w">   </span><span class="k">required</span><span class="w"> </span><span class="kt">uint32</span><span class="w"> </span><span class="na">rb_id</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<span class="w">   </span><span class="k">required</span><span class="w"> </span><span class="kt">uint32</span><span class="w"> </span><span class="na">count</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">   </span><span class="c1">// SDUs measured in this bucket</span>
-<span class="w">   </span><span class="k">required</span><span class="w"> </span><span class="kt">uint64</span><span class="w"> </span><span class="na">latency_sum_ns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
-<span class="w">   </span><span class="k">required</span><span class="w"> </span><span class="kt">uint64</span><span class="w"> </span><span class="na">latency_min_ns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
-<span class="w">   </span><span class="k">required</span><span class="w"> </span><span class="kt">uint64</span><span class="w"> </span><span class="na">latency_max_ns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
-<span class="w">   </span><span class="k">required</span><span class="w"> </span><span class="kt">uint32</span><span class="w"> </span><span class="na">retx_count</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kd">message</span><span class="w"> </span><span class="nc">rlc_queue_stats</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="k">required</span><span class="w"> </span><span class="kt">uint64</span><span class="w"> </span><span class="na">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">   </span><span class="k">required</span><span class="w"> </span><span class="kt">uint64</span><span class="w"> </span><span class="na">bucket_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
-<span class="w">   </span><span class="k">repeated</span><span class="w"> </span><span class="n">t_rlc_queue_item</span><span class="w"> </span><span class="na">stats</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>and <code class="docutils literal notranslate"><span class="pre">rlc_queue_stats.options</span></code> — <strong>this number must equal <code class="docutils literal notranslate"><span class="pre">UPT_MAX_UE_RB</span></code></strong>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>rlc_queue_stats.stats max_count:16
-</pre></div>
-</div>
-<p><strong>Step 2 — the accumulator.</strong> <code class="docutils literal notranslate"><span class="pre">stats_utils.h</span></code>’s <code class="docutils literal notranslate"><span class="pre">STATS_UPDATE</span></code> is 32-bit and these latencies exceed
-4.29 s under bufferbloat, so <code class="docutils literal notranslate"><span class="pre">upt_helpers.h</span></code> adds a 64-bit one:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define UPT_LAT_UPDATE(__d, __v)            \</span>
-<span class="cp">    do {                                    \</span>
-<span class="cp">        __d.count++;                        \</span>
-<span class="cp">        __d.latency_sum_ns += (__v);        \</span>
-<span class="cp">        if ((__v) &lt; __d.latency_min_ns) { __d.latency_min_ns = (__v); } \</span>
-<span class="cp">        if ((__v) &gt; __d.latency_max_ns) { __d.latency_max_ns = (__v); } \</span>
-<span class="cp">    } while (0)</span>
-</pre></div>
-</div>
-<p><strong>Step 3 — the codelet.</strong> <code class="docutils literal notranslate"><span class="pre">codelets/upt/rlc_queueing.cpp</span></code>, the part after the boilerplate:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">jbpf_ringbuf_map</span><span class="p">(</span><span class="n">out_rlc_queue</span><span class="p">,</span><span class="w"> </span><span class="n">rlc_queue_stats</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span>
-<span class="n">UPT_DEFINE_STATS_MAP</span><span class="p">(</span><span class="n">rlcq_stats_map</span><span class="p">,</span><span class="w"> </span><span class="n">rlc_queue_stats</span><span class="p">)</span>
-<span class="n">UPT_DEFINE_BUCKET_MAP</span><span class="p">(</span><span class="n">rlcq_bucket_map</span><span class="p">)</span>
-<span class="n">DEFINE_PROTOHASH_64</span><span class="p">(</span><span class="n">rlcq_hash</span><span class="p">,</span><span class="w"> </span><span class="n">UPT_MAX_UE_RB</span><span class="p">)</span>
-
-<span class="k">extern</span><span class="w"> </span><span class="s">"C"</span><span class="w"> </span><span class="n">SEC</span><span class="p">(</span><span class="s">"jbpf_srsran_generic"</span><span class="p">)</span>
-<span class="kt">uint64_t</span><span class="w"> </span><span class="n">jbpf_main</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">state</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="cm">/* ... ctx cast + bounds check + map lookups + bucket rollover ... */</span>
-
-<span class="w">    </span><span class="c1">// srs_meta_data1 = pdcp_sn &lt;&lt; 32 | is_retx ;  srs_meta_data2 = latency_ns</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">is_retx</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">srs_meta_data1</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFFFFFFFF</span><span class="p">);</span>
-<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">latency_ns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">srs_meta_data2</span><span class="p">;</span><span class="w">            </span><span class="c1">// &lt;- the measurement</span>
-
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rb_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RBID_2_EXPLICIT</span><span class="p">(</span><span class="n">rlc_ctx</span><span class="p">.</span><span class="n">is_srb</span><span class="p">,</span><span class="w"> </span><span class="n">rlc_ctx</span><span class="p">.</span><span class="n">rb_id</span><span class="p">);</span>
-
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">new_val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JBPF_PROTOHASH_LOOKUP_ELEM_64</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">stats</span><span class="p">,</span><span class="w"> </span><span class="n">rlcq_hash</span><span class="p">,</span>
-<span class="w">                                                 </span><span class="n">rlc_ctx</span><span class="p">.</span><span class="n">du_ue_index</span><span class="p">,</span><span class="w"> </span><span class="n">rb_id</span><span class="p">,</span><span class="w"> </span><span class="n">new_val</span><span class="p">);</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">new_val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">stats</span><span class="p">[</span><span class="n">ind</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">UPT_MAX_UE_RB</span><span class="p">].</span><span class="n">du_ue_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rlc_ctx</span><span class="p">.</span><span class="n">du_ue_index</span><span class="p">;</span>
-<span class="w">        </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">stats</span><span class="p">[</span><span class="n">ind</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">UPT_MAX_UE_RB</span><span class="p">].</span><span class="n">is_srb</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">rlc_ctx</span><span class="p">.</span><span class="n">is_srb</span><span class="p">;</span>
-<span class="w">        </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">stats</span><span class="p">[</span><span class="n">ind</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">UPT_MAX_UE_RB</span><span class="p">].</span><span class="n">rb_id</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">rlc_ctx</span><span class="p">.</span><span class="n">rb_id</span><span class="p">;</span>
-<span class="w">        </span><span class="n">UPT_LAT_INIT</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">stats</span><span class="p">[</span><span class="n">ind</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">UPT_MAX_UE_RB</span><span class="p">]);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="n">UPT_LAT_UPDATE</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">stats</span><span class="p">[</span><span class="n">ind</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">UPT_MAX_UE_RB</span><span class="p">],</span><span class="w"> </span><span class="n">latency_ns</span><span class="p">);</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_retx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">stats</span><span class="p">[</span><span class="n">ind</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">UPT_MAX_UE_RB</span><span class="p">].</span><span class="n">retx_count</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">JBPF_CODELET_SUCCESS</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>That is the whole thing: ~40 lines of logic, verified at <strong>411 instructions</strong>.</p>
-</section>
-<section id="codelet-2-rlc-buffer-occupancy">
-<h4>Codelet 2: RLC buffer occupancy<a class="headerlink" href="#codelet-2-rlc-buffer-occupancy" title="Link to this heading">¶</a></h4>
-<p>Occupancy needs two hooks, because the queue both grows and drains:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">rlc_dl_new_sdu</span></code> → <strong><code class="docutils literal notranslate"><span class="pre">rlc_buffer_enq</span></code></strong> (grows; <strong>owns the output channel</strong> and flushes)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rlc_dl_sdu_send_completed</span></code> → <strong><code class="docutils literal notranslate"><span class="pre">rlc_buffer_deq</span></code></strong> (drains; accumulates only)</p></li>
-</ul>
-<p><strong>Where the number comes from.</strong> srsRAN’s own <code class="docutils literal notranslate"><span class="pre">CALL_JBPF_HOOK</span></code> macro attaches the live queue depth
-to <em>every</em> RLC hook invocation:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">jbpf_ctx</span><span class="p">.</span><span class="n">u</span><span class="p">.</span><span class="n">am_tx</span><span class="p">.</span><span class="n">sdu_queue_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span>
-<span class="w">                                    </span><span class="n">sdu_queue</span><span class="p">.</span><span class="n">get_state</span><span class="p">().</span><span class="n">n_sdus</span><span class="p">,</span><span class="w">     </span><span class="cm">/* num_pkts  */</span>
-<span class="w">                                    </span><span class="n">sdu_queue</span><span class="p">.</span><span class="n">get_state</span><span class="p">().</span><span class="n">n_bytes</span><span class="w"> </span><span class="p">};</span><span class="w">  </span><span class="cm">/* num_bytes */</span>
-</pre></div>
-</div>
-<p>so the codelet <strong>samples occupancy directly</strong> rather than integrating (enqueued − dequeued):</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// rlc_buffer_common.h - pick the mode-specific union arm</span>
-<span class="cp">#define UPT_RLCB_GET_QUEUE(__rlc_ctx, __qi)                          \</span>
-<span class="cp">    do {                                                             \</span>
-<span class="cp">        __qi = NULL;                                                 \</span>
-<span class="cp">        if ((__rlc_ctx.rlc_mode == JBPF_RLC_MODE_AM) &amp;&amp;              \</span>
-<span class="cp">            (__rlc_ctx.u.am_tx.sdu_queue_info.used)) {               \</span>
-<span class="cp">            __qi = &amp;__rlc_ctx.u.am_tx.sdu_queue_info;                \</span>
-<span class="cp">        } else if (</span><span class="cm">/* UM */</span><span class="cp">) { ... } else if (</span><span class="cm">/* TM */</span><span class="cp">) { ... }      \</span>
-<span class="cp">    } while (0)</span>
-
-<span class="cp">#define UPT_RLCB_SAMPLE(__d, __qi)                                   \</span>
-<span class="cp">    do {                                                             \</span>
-<span class="cp">        __d.samples++;                                               \</span>
-<span class="cp">        __d.queue_bytes_last = __qi-&gt;num_bytes;                      \</span>
-<span class="cp">        __d.queue_pkts_last  = __qi-&gt;num_pkts;                       \</span>
-<span class="cp">        __d.queue_bytes_sum += __qi-&gt;num_bytes;                      \</span>
-<span class="cp">        if (__qi-&gt;num_bytes &gt; __d.queue_bytes_max) { __d.queue_bytes_max = __qi-&gt;num_bytes; } \</span>
-<span class="cp">        if (__qi-&gt;num_pkts  &gt; __d.queue_pkts_max)  { __d.queue_pkts_max  = __qi-&gt;num_pkts;  } \</span>
-<span class="cp">    } while (0)</span>
-</pre></div>
-</div>
-<blockquote>
-<div><p><strong>Why sample rather than integrate.</strong> An integrated <code class="docutils literal notranslate"><span class="pre">enq</span> <span class="pre">−</span> <span class="pre">deq</span></code> counter drifts <strong>permanently</strong> if a
-single event is missed, a bearer is re-established, or the codelet is loaded mid-flow. A direct
-sample is self-correcting. <code class="docutils literal notranslate"><span class="pre">enq_pkts</span></code> / <code class="docutils literal notranslate"><span class="pre">deq_pkts</span></code> are still reported per bucket, so the integrated
-view remains reconstructable if you want it.</p>
-</div></blockquote>
-<p><strong>Sharing state between two codelets.</strong> The two halves must accumulate into the <em>same</em> message. That
-is what <code class="docutils literal notranslate"><span class="pre">linked_maps</span></code> is for — in <code class="docutils literal notranslate"><span class="pre">codelets/upt/upt.yaml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">codelet_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlc_buffer_enq</span>
-<span class="w">    </span><span class="nt">codelet_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/upt/rlc_buffer_enq.o</span>
-<span class="w">    </span><span class="nt">hook_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlc_dl_new_sdu</span>
-<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="w">    </span><span class="nt">out_io_channel</span><span class="p">:</span><span class="w">                      </span><span class="c1"># &lt;- only enq owns the output</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">out_rlc_buffer</span>
-<span class="w">        </span><span class="nt">forward_destination</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DestinationNone</span>
-<span class="w">        </span><span class="nt">serde</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">file_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/upt/rlc_buffer_stats:rlc_buffer_stats_serializer.so</span>
-<span class="w">          </span><span class="nt">protobuf</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">package_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/upt/rlc_buffer_stats.pb</span>
-<span class="w">            </span><span class="nt">msg_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlc_buffer_stats</span>
-
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">codelet_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlc_buffer_deq</span>
-<span class="w">    </span><span class="nt">codelet_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/upt/rlc_buffer_deq.o</span>
-<span class="w">    </span><span class="nt">hook_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlc_dl_sdu_send_completed</span>
-<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
-<span class="w">    </span><span class="nt">linked_maps</span><span class="p">:</span><span class="w">                         </span><span class="c1"># &lt;- deq borrows enq's state</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">map_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlcb_stats_map</span>
-<span class="w">        </span><span class="nt">linked_codelet_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlc_buffer_enq</span>
-<span class="w">        </span><span class="nt">linked_map_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlcb_stats_map</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">map_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlcb_bucket_map</span>
-<span class="w">        </span><span class="nt">linked_codelet_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlc_buffer_enq</span>
-<span class="w">        </span><span class="nt">linked_map_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlcb_bucket_map</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">map_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlcb_hash</span>
-<span class="w">        </span><span class="nt">linked_codelet_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlc_buffer_enq</span>
-<span class="w">        </span><span class="nt">linked_map_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlcb_hash</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">rlc_buffer_deq.cpp</span></code> declares the same three maps and the same protohash, and its rollover branch
-<strong>resets but never emits</strong> — only the enqueue side flushes.</p>
-</section>
-<section id="advanced-lossless-per-packet-records">
-<h4>Advanced: lossless per-packet records<a class="headerlink" href="#advanced-lossless-per-packet-records" title="Link to this heading">¶</a></h4>
-<p>The bucketed codelets measure per packet but export ~134 ms summaries, discarding the PDCP SN and the
-latency <em>distribution</em>. <code class="docutils literal notranslate"><span class="pre">rlc_pkt_record.cpp</span></code> keeps <strong>one record per packet</strong> and batches them:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define UPT_PKT_BATCH (64)     </span><span class="c1">// MUST equal max_count in rlc_pkt_records.options</span>
-
-<span class="kt">bool</span><span class="w"> </span><span class="n">bucket_rolled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">last_bucket</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">last_bucket</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">bucket</span><span class="p">);</span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">pkts_count</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">UPT_PKT_BATCH</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">bucket_rolled</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">pkts_count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">now</span><span class="p">;</span>
-<span class="w">        </span><span class="n">jbpf_ringbuf_output</span><span class="p">(</span><span class="o">&amp;</span><span class="n">out_rlc_pkts</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">out</span><span class="p">));</span>
-<span class="w">        </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">pkts_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Flush on <strong>full OR bucket boundary</strong> — the boundary bounds staleness to one bucket under light load,
-which matters when this stream is the sensor for a control loop (below). Each record is
-<code class="docutils literal notranslate"><span class="pre">{du_ue_index,</span> <span class="pre">is_srb,</span> <span class="pre">rb_id,</span> <span class="pre">pdcp_sn,</span> <span class="pre">latency_ns,</span> <span class="pre">is_retx,</span> <span class="pre">queue_bytes}</span></code>.</p>
-<p>Measured: <strong>18011 packets in 474 batches</strong> (~38 records/message, ~38× fewer IO operations) over a
-25 s 2-UE DL run, lossless. The percentiles it enables are the point — p50 ≈ 5.6/6.2 s but
-<strong>p99 ≈ 6.7/7.4 s</strong>, a ~1 s tail the aggregate mean hid completely.</p>
-</section>
-<section id="build-deploy-observe">
-<h4>Build, deploy, observe<a class="headerlink" href="#build-deploy-observe" title="Link to this heading">¶</a></h4>
-<p><strong>Register the protos in the Makefile</strong> — <code class="docutils literal notranslate"><span class="pre">codelets/upt/Makefile</span></code>:</p>
-<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nv">PROTO_AND_SCHEMA</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="se">\</span>
-<span class="w">	</span>gtp_arrival_stats^gtp_arrival_stats<span class="w"> </span><span class="se">\</span>
-<span class="w">	</span>rlc_queue_stats^rlc_queue_stats<span class="w"> </span><span class="se">\</span>
-<span class="w">	</span>rlc_buffer_stats^rlc_buffer_stats<span class="w"> </span><span class="se">\</span>
-<span class="w">	</span>rlc_pkt_records^rlc_pkt_records
-
-<span class="cp">include ../Makefile.defs</span>
-<span class="cp">include ../Makefile.common</span>
-</pre></div>
-</div>
-<p>Each entry generates the nanopb <code class="docutils literal notranslate"><span class="pre">.pb</span></code>/<code class="docutils literal notranslate"><span class="pre">.pb.h</span></code>, the <code class="docutils literal notranslate"><span class="pre">*_serializer.so</span></code> used by the jbpf agent, and —
-when <code class="docutils literal notranslate"><span class="pre">USE_JRTC=1</span></code> — the ctypes <code class="docutils literal notranslate"><span class="pre">.py</span></code> binding the xApp imports.</p>
-<p><strong>Build:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="nv">$REPO_ROOT</span><span class="s2">/jrtc-apps/codelets"</span>
-rm<span class="w"> </span>-f<span class="w"> </span>upt/*.o<span class="w">          </span><span class="c1"># make does NOT track header dependencies - see the traps below</span>
-./make.sh<span class="w"> </span>-d<span class="w"> </span>upt
-</pre></div>
-</div>
-<p>Look for the verifier line on each codelet:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--------- rlc_queueing.cpp ----------------------------------------------
-clang++ -O2 -target bpf ... -c rlc_queueing.cpp -o rlc_queueing.o
-Program terminates within 411 instructions
-</pre></div>
-</div>
-<p>Reference counts: <code class="docutils literal notranslate"><span class="pre">gtp_arrival</span></code> 348, <code class="docutils literal notranslate"><span class="pre">rlc_queueing</span></code> 411, <code class="docutils literal notranslate"><span class="pre">rlc_buffer_enq</span></code> 450, <code class="docutils literal notranslate"><span class="pre">rlc_buffer_deq</span></code> 419.</p>
-<p><strong>Deploy.</strong> <code class="docutils literal notranslate"><span class="pre">jrtc_apps/upt/deployment_fixed.yaml</span></code> pairs the codeletset with the consumer xApp:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">upt</span>
-
-<span class="nt">decoder</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decodergrpc</span>
-<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jrtc-decoder.ran.svc.cluster.local</span>
-<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20789</span>
-
-<span class="nt">app</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">upt_app</span>
-<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JRTC_APPS}/upt/upt_app.py</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
-<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jrtc-service.ran.svc.cluster.local</span>
-<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3001</span>
-<span class="w">    </span><span class="nt">modules</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/upt/gtp_arrival_stats.py</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/upt/rlc_queue_stats.py</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/upt/rlc_buffer_stats.py</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/upt/rlc_pkt_records.py</span>
-
-<span class="nt">jbpf</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">device</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">srs-gnb-du1-proxy.ran.svc.cluster.local</span>
-<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30450</span>
-
-<span class="w">  </span><span class="nt">codelet_set</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">device</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/upt/upt.yaml</span>
-</pre></div>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>cp<span class="w"> </span><span class="s2">"</span><span class="nv">$REPO_ROOT</span><span class="s2">/jrtc-apps/codelets/upt"</span><span class="w"> </span>ran/srs-gnb-du1-0:/codelets/<span class="w"> </span>-c<span class="w"> </span>ocudujbpf
-JRTC<span class="w"> </span><span class="s1">'load -c /apps/upt/deployment_fixed.yaml'</span>
-</pre></div>
-</div>
-<p><strong>The xApp side.</strong> An xApp subscribes to streams by name and gets the decoded struct. Subscription
-(<code class="docutils literal notranslate"><span class="pre">upt_app.py</span></code>):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">streams</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">JrtcStreamCfg_t</span><span class="p">(</span>
-        <span class="n">JrtcStreamIdCfg_t</span><span class="p">(</span><span class="n">JRTC_ROUTER_REQ_DEST_ANY</span><span class="p">,</span> <span class="n">JRTC_ROUTER_REQ_DEVICE_ID_ANY</span><span class="p">,</span>
-                          <span class="sa">b</span><span class="s2">"upt://jbpf_agent/upt/rlc_queueing"</span><span class="p">,</span> <span class="sa">b</span><span class="s2">"out_rlc_queue"</span><span class="p">),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-    <span class="n">JrtcStreamCfg_t</span><span class="p">(</span>
-        <span class="n">JrtcStreamIdCfg_t</span><span class="p">(</span><span class="n">JRTC_ROUTER_REQ_DEST_ANY</span><span class="p">,</span> <span class="n">JRTC_ROUTER_REQ_DEVICE_ID_ANY</span><span class="p">,</span>
-                          <span class="sa">b</span><span class="s2">"upt://jbpf_agent/upt/rlc_buffer_enq"</span><span class="p">,</span> <span class="sa">b</span><span class="s2">"out_rlc_buffer"</span><span class="p">),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="p">]</span>
-</pre></div>
-</div>
-<p>and the handler turns a bucket into a sample:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">handle_rlc_queue</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-    <span class="n">ts_ns</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">data</span><span class="o">.</span><span class="n">bucket_id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">UPT_BUCKET_NS</span><span class="p">)</span>     <span class="c1"># stamp at bucket CLOSE</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">stats_count</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">continue</span>
-        <span class="n">avg_ms</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">latency_sum_ns</span> <span class="o">/</span> <span class="n">s</span><span class="o">.</span><span class="n">count</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e6</span>
-        <span class="n">_emit</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="s2">"upt_rlc_queue"</span><span class="p">,</span>
-              <span class="p">{</span><span class="s2">"ue"</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">du_ue_index</span><span class="p">,</span> <span class="s2">"bearer"</span><span class="p">:</span> <span class="n">_bearer</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">is_srb</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">rb_id</span><span class="p">)},</span>
-              <span class="p">{</span><span class="s2">"latency_ms"</span><span class="p">:</span>     <span class="nb">round</span><span class="p">(</span><span class="n">avg_ms</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-               <span class="s2">"latency_min_ms"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">latency_min_ns</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-               <span class="s2">"latency_max_ms"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">latency_max_ns</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-               <span class="s2">"sdus"</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="s2">"retx"</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">retx_count</span><span class="p">},</span>
-              <span class="n">ts_ns</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">handle_rlc_buffer</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-    <span class="n">ts_ns</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">data</span><span class="o">.</span><span class="n">bucket_id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">UPT_BUCKET_NS</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">stats_count</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">avg_bytes</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">queue_bytes_sum</span> <span class="o">/</span> <span class="n">s</span><span class="o">.</span><span class="n">samples</span><span class="p">)</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">samples</span> <span class="k">else</span> <span class="mi">0</span>
-        <span class="n">_emit</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="s2">"upt_rlc_buffer"</span><span class="p">,</span>
-              <span class="p">{</span><span class="s2">"ue"</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">du_ue_index</span><span class="p">,</span> <span class="s2">"bearer"</span><span class="p">:</span> <span class="n">_bearer</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">is_srb</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">rb_id</span><span class="p">)},</span>
-              <span class="p">{</span><span class="s2">"bytes"</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">queue_bytes_last</span><span class="p">,</span> <span class="s2">"bytes_max"</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">queue_bytes_max</span><span class="p">,</span>
-               <span class="s2">"bytes_avg"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">avg_bytes</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-               <span class="s2">"enq_pkts"</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">enq_pkts</span><span class="p">,</span> <span class="s2">"deq_pkts"</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">deq_pkts</span><span class="p">},</span>
-              <span class="n">ts_ns</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">bucket_id</span></code> is <code class="docutils literal notranslate"><span class="pre">jbpf_time_get_ns()</span> <span class="pre">&gt;&gt;</span> <span class="pre">27</span></code>, i.e. absolute epoch-ns, so these series line up
-sample-for-sample with anything else timestamped on the same host (e.g. a tcpdump-derived TCP RTT
-series) with no clock translation.</p>
-<p><strong>Observe.</strong> Run DL traffic and open Grafana (<code class="docutils literal notranslate"><span class="pre">:30490</span></code>, dashboard <code class="docutils literal notranslate"><span class="pre">upt-userplane</span></code>). VictoriaMetrics
-maps line protocol <code class="docutils literal notranslate"><span class="pre">measurement,tags</span> <span class="pre">field=value</span></code> to <code class="docutils literal notranslate"><span class="pre">{measurement}_{field}</span></code>:</p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Panel</p></th>
-<th class="head"><p>PromQL</p></th>
-<th class="head"><p>Unit</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>GTP Arrival Rate</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">upt_gtp_arrival_mbps{bearer=~&quot;$bearer&quot;}</span></code></p></td>
-<td><p>Mbit/s</p></td>
-</tr>
-<tr class="row-odd"><td><p>RLC Queuing Latency</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">upt_rlc_queue_latency_ms</span></code> (avg) + <code class="docutils literal notranslate"><span class="pre">upt_rlc_queue_latency_max_ms</span></code> (max, dashed)</p></td>
-<td><p>ms</p></td>
-</tr>
-<tr class="row-even"><td><p>RLC Buffer Occupancy</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">upt_rlc_buffer_bytes_avg</span></code> (avg) + <code class="docutils literal notranslate"><span class="pre">upt_rlc_buffer_bytes_max</span></code> (max, dashed)</p></td>
-<td><p>bytes</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Or, without Grafana:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-s<span class="w"> </span><span class="s1">'http://localhost:30491/api/v1/query?query=upt_rlc_queue_latency_ms'</span>
-curl<span class="w"> </span>-s<span class="w"> </span><span class="s1">'http://localhost:30491/api/v1/query?query=upt_rlc_buffer_bytes_max'</span>
-</pre></div>
-</div>
-</section>
-<section id="sanity-check-the-measurement">
-<h4>Sanity-check the measurement<a class="headerlink" href="#sanity-check-the-measurement" title="Link to this heading">¶</a></h4>
-<p>The buffer and latency codelets are independent — different hooks, different maps — so their
-agreement is real evidence. With DL-only iperf3 on 2 UEs we measured:</p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Quantity</p></th>
-<th class="head"><p>UE0</p></th>
-<th class="head"><p>UE1</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>GTP arrival, peak</p></td>
-<td><p>54.2 Mbps</p></td>
-<td><p>31.5 Mbps</p></td>
-</tr>
-<tr class="row-odd"><td><p>Sustained DL goodput (iperf3)</p></td>
-<td><p>3.61 Mbps</p></td>
-<td><p>2.89 Mbps</p></td>
-</tr>
-<tr class="row-even"><td><p>RLC buffer, peak</p></td>
-<td><p>2.74 MB</p></td>
-<td><p>2.87 MB</p></td>
-</tr>
-<tr class="row-odd"><td><p>RLC queuing latency, peak</p></td>
-<td><p>5.64 s</p></td>
-<td><p>5.99 s</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Little’s law cross-check: <code class="docutils literal notranslate"><span class="pre">2.74</span> <span class="pre">MB</span> <span class="pre">×</span> <span class="pre">8</span> <span class="pre">/</span> <span class="pre">3.61</span> <span class="pre">Mbps</span> <span class="pre">≈</span> <span class="pre">6.1</span> <span class="pre">s</span></code> against <strong>5.64 s</strong> measured — agreement
-to ~10% from two independent code paths.</p>
-<p>And these numbers are <strong>not</strong> anomalies. The gNB’s configured limit is
-<code class="docutils literal notranslate"><span class="pre">rlc_queue_bytes_limit</span> <span class="pre">=</span> <span class="pre">6172672</span></code> (~6 MB), so a ~2.7 MB standing queue drained at ~3.6 Mbps <em>is</em>
-multi-second bufferbloat. <strong>That is the problem the control codelets below fix.</strong></p>
-</section>
-<section id="traps-hit-during-development">
-<h4>Traps hit during development<a class="headerlink" href="#traps-hit-during-development" title="Link to this heading">¶</a></h4>
-<ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">max_count</span></code> in the <code class="docutils literal notranslate"><span class="pre">.options</span></code> file must equal <code class="docutils literal notranslate"><span class="pre">UPT_MAX_UE_RB</span></code></strong> (and <code class="docutils literal notranslate"><span class="pre">UPT_PKT_BATCH</span></code> for the
-per-packet records). An oversized proto plus a deep ringbuf makes the codeletset descriptor large
-enough that the LCM IPC load times out and <strong>kills the gNB’s jbpf agent</strong>; every subsequent load
-then fails with <code class="docutils literal notranslate"><span class="pre">Error</span> <span class="pre">connecting</span> <span class="pre">to</span> <span class="pre">/tmp/jbpf/jbpf_lcm_ipc:</span> <span class="pre">Connection</span> <span class="pre">refused</span></code> until the <strong>gNB is
-restarted</strong>.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">make</span></code> does not track header dependencies.</strong> After editing <code class="docutils literal notranslate"><span class="pre">upt_helpers.h</span></code>, <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-f</span> <span class="pre">upt/*.o</span></code> —
-otherwise codelets link shared maps of mismatched size.</p></li>
-<li><p><strong>Never start a thread in a jrtc python xApp.</strong> jrtc runs apps in python sub-interpreters and calls
-<code class="docutils literal notranslate"><span class="pre">Py_EndInterpreter</span></code> on unload, which aborts the process
-(<code class="docutils literal notranslate"><span class="pre">Fatal</span> <span class="pre">Python</span> <span class="pre">error:</span> <span class="pre">Py_EndInterpreter:</span> <span class="pre">not</span> <span class="pre">the</span> <span class="pre">last</span> <span class="pre">thread</span></code>) if any other thread is alive.
-<code class="docutils literal notranslate"><span class="pre">upt_app.py</span></code> is single-threaded by necessity and flushes on the timeout callback.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">UPT_BUCKET_SHIFT</span></code> is duplicated</strong> in <code class="docutils literal notranslate"><span class="pre">codelets/upt/upt_helpers.h</span></code> and <code class="docutils literal notranslate"><span class="pre">jrtc_apps/upt/upt_app.py</span></code>.
-Change one without the other and every rate and timestamp is silently wrong by a power of two.</p></li>
-<li><p><strong>UE index spaces differ across layers.</strong> RLC codelets report <code class="docutils literal notranslate"><span class="pre">du_ue_index</span></code>; PDCP codelets report
-<code class="docutils literal notranslate"><span class="pre">cu_ue_index</span></code>. These are <em>different</em> index spaces (DU-side vs CU-side). They happen to line up with
-2 UEs, but that is not guaranteed — for a rigorous mapping, load the <code class="docutils literal notranslate"><span class="pre">ue_contexts</span></code> codeletset and
-resolve with <code class="docutils literal notranslate"><span class="pre">jrtc_apps/libs/ue_contexts_map.py</span></code>.</p></li>
-</ul>
-</section>
-</section>
-<section id="control-codelets-for-the-rlc-queue">
-<h3>Control Codelets for the RLC Queue<a class="headerlink" href="#control-codelets-for-the-rlc-queue" title="Link to this heading">¶</a></h3>
-<p>The telemetry codelets only read. A control codelet writes: it changes a bearer’s RLC downlink limit at
-run time, so the queue depth becomes a knob a policy can turn.</p>
-<section id="monitor-hooks-and-control-hooks">
-<h4>Monitor hooks and control hooks<a class="headerlink" href="#monitor-hooks-and-control-hooks" title="Link to this heading">¶</a></h4>
-<p>A monitor hook (<code class="docutils literal notranslate"><span class="pre">DEFINE_JBPF_HOOK</span></code>) hands the codelet a read-only snapshot. A control hook
-(<code class="docutils literal notranslate"><span class="pre">DEFINE_JBPF_CTRL_HOOK</span></code>) hands it a pointer to a struct the gNB owns, and the gNB reads the struct back
-after the hook returns. Writing through <code class="docutils literal notranslate"><span class="pre">ctx-&gt;data</span></code> therefore writes the gNB’s memory and takes effect
-at once:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> codelet writes ci-&gt;new_byte_limit / ci-&gt;new_sdu_limit  through ctx-&gt;data
-      │
-      ▼
- hook_rlc_dl_ctrl(&amp;ci)   in rlc_tx_am_entity::handle_sdu   (before the tail-drop test)
-      │  the gNB reads the new limits back, clamps them and applies them
-      ▼
- the RLC SDU queue's byte and SDU limits
-</pre></div>
-</div>
-<p>The hook fires once per downlink SDU on each RLC AM data bearer, before the enqueue decision. The gNB
-clamps a byte limit to [one maximum PDCP PDU, the configured queue bytes] and an SDU limit to [1, the
-configured queue size]. The hook’s API is in
+<section id="per-bearer-limits-bufctl">
+<h3>Per-bearer limits: bufctl<a class="headerlink" href="#per-bearer-limits-bufctl" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">bufctl_cli.py</span></code> loads <code class="docutils literal notranslate"><span class="pre">codelets/bufctl/rlc_ctrl.cpp</span></code> on the same hook, together with the <code class="docutils literal notranslate"><span class="pre">bufctl</span></code> xApp.
+The CLI hands each command to the xApp, the xApp passes it to the codelet on a control-input channel,
+and the codelet applies it on that bearer’s next downlink SDU. The gNB clamps every byte limit to the
+range from one maximum-size PDCP PDU (9,007 bytes) to the configured queue. The hook’s API is in
 <a class="reference external" href="https://github.com/ucsdwcsng/open-ai-ran-tutorial/blob/main/docs/rlc-buffer-control-hook.md"><code class="docutils literal notranslate"><span class="pre">docs/rlc-buffer-control-hook.md</span></code></a>.</p>
-<p>The context struct is the wire contract between the gNB and the codelet. Codelets compile against the SDK
-image’s headers, not the gNB tree, so each declares the struct locally, and it must match
-<code class="docutils literal notranslate"><span class="pre">include/srsran/jbpf/jbpf_srsran_contexts.h</span></code> in <code class="docutils literal notranslate"><span class="pre">ocudu-jbpf</span></code>. If the two drift, the codelet writes into
-the wrong offset of the gNB’s memory.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctrl_info</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">du_ue_index</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">is_srb</span><span class="p">;</span><span class="w">           </span><span class="c1">// always 0: the hook only fires for DRBs</span>
-<span class="w">    </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">rb_id</span><span class="p">;</span><span class="w">            </span><span class="c1">// DRB id</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cur_byte_limit</span><span class="p">;</span><span class="w">   </span><span class="c1">// gNB -&gt; codelet</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">new_byte_limit</span><span class="p">;</span><span class="w">   </span><span class="c1">// codelet -&gt; gNB (0 = leave unchanged)</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cur_sdu_limit</span><span class="p">;</span><span class="w">    </span><span class="c1">// gNB -&gt; codelet</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">new_sdu_limit</span><span class="p">;</span><span class="w">    </span><span class="c1">// codelet -&gt; gNB (0 = leave unchanged)</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cfg_byte_limit</span><span class="p">;</span><span class="w">   </span><span class="c1">// gNB -&gt; codelet: configured byte limit</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cfg_sdu_limit</span><span class="p">;</span><span class="w">    </span><span class="c1">// gNB -&gt; codelet: configured SDU limit</span>
-<span class="p">};</span>
-</pre></div>
-</div>
-<p>Only one codelet can hold a control hook at a time, so <code class="docutils literal notranslate"><span class="pre">bufcap</span></code> and <code class="docutils literal notranslate"><span class="pre">bufctl</span></code> exclude each other. The gNB
-keeps the last limit after a control codelet unloads.</p>
+</section>
+<section id="traffic">
+<h3>Traffic<a class="headerlink" href="#traffic" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>Writable hook</p></th>
-<th class="head"><p>What it actuates</p></th>
-<th class="head"><p>Codelet</p></th>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Flows</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">rlc_dl_ctrl</span></code></strong></p></td>
-<td><p><strong>RLC DL byte and SDU limits</strong></p></td>
-<td><p><strong><code class="docutils literal notranslate"><span class="pre">bufcap</span></code>, <code class="docutils literal notranslate"><span class="pre">bufctl</span></code></strong></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">traffic_A.sh</span> <span class="pre">start</span></code></p></td>
+<td><p>on UE 1: a 2 Mbit/s “video call” (port 5202) and a CUBIC download (port 5201)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mac_sched_slot_ctrl</span></code></p></td>
-<td><p>per-slot DL scheduling weights (EdgeRIC-RT)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">rt_ctrl</span></code> (<a class="reference internal" href="demo2-ai-scheduling.html"><span class="std std-doc">Demo 2</span></a>)</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">traffic_A.sh</span> <span class="pre">start</span> <span class="pre">--cc</span> <span class="pre">bbr</span></code>, <code class="docutils literal notranslate"><span class="pre">--video-rate</span> <span class="pre">4M</span></code>, <code class="docutils literal notranslate"><span class="pre">--ue</span> <span class="pre">N</span></code></p></td>
+<td><p>the same with another congestion control, call rate or UE</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mac_sched_dl_ctrl</span></code></p></td>
-<td><p>DL PRB share per UE</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">dl_sched</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">traffic_A.sh</span> <span class="pre">video-only</span></code>, <code class="docutils literal notranslate"><span class="pre">bulk-only</span></code></p></td>
+<td><p>one of the two flows</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mac_sched_dl_mcs_ctrl</span></code></p></td>
-<td><p>DL MCS override per UE</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">dl_mcs</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">traffic_2ue.sh</span> <span class="pre">start</span></code></p></td>
+<td><p>one download per UE: BBR on UE 1, CUBIC on UE 2</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pdcp_dl_sdu_segment</span></code></p></td>
-<td><p>in-place L4S ECN marking</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">l4span_mark</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">traffic_2ue.sh</span> <span class="pre">start</span> <span class="pre">--cc</span> <span class="pre">cubic</span></code>, <code class="docutils literal notranslate"><span class="pre">--cc1</span> <span class="pre">cubic</span> <span class="pre">--cc2</span> <span class="pre">bbr</span></code>, <code class="docutils literal notranslate"><span class="pre">--ue</span> <span class="pre">1</span> <span class="pre">--rate</span> <span class="pre">2M</span></code></p></td>
+<td><p>other mixes</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">traffic_A.sh</span></code> also starts <code class="docutils literal notranslate"><span class="pre">flowmon</span></code>, which reads each flow’s RTT and throughput from the sender’s TCP
+stack on the UPF.</p>
 </section>
-<section id="a-fixed-cap-bufcap">
-<h4>A fixed cap: bufcap<a class="headerlink" href="#a-fixed-cap-bufcap" title="Link to this heading">¶</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">codelets/bufcap/bufcap.cpp</span></code> holds one limit on every data bearer of every UE:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">extern</span><span class="w"> </span><span class="s">"C"</span><span class="w"> </span><span class="n">SEC</span><span class="p">(</span><span class="s">"jbpf_srsran_generic"</span><span class="p">)</span>
-<span class="kt">uint64_t</span><span class="w"> </span><span class="n">jbpf_main</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">state</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_ran_generic_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">jbpf_ran_generic_ctx</span><span class="o">*</span><span class="p">)</span><span class="n">state</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctrl_info</span><span class="o">*</span><span class="w"> </span><span class="n">ci</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctrl_info</span><span class="o">*</span><span class="p">)</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">ci</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctrl_info</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span>
-<span class="w">        </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">data_end</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">JBPF_CODELET_FAILURE</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ci</span><span class="o">-&gt;</span><span class="n">is_srb</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">JBPF_CODELET_SUCCESS</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="cp">#if CAP_BYTES == 0</span>
-<span class="w">    </span><span class="n">ci</span><span class="o">-&gt;</span><span class="n">new_byte_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ci</span><span class="o">-&gt;</span><span class="n">cfg_byte_limit</span><span class="p">;</span><span class="w">   </span><span class="c1">// bufcap_off: restore the configured limits</span>
-<span class="w">    </span><span class="n">ci</span><span class="o">-&gt;</span><span class="n">new_sdu_limit</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">ci</span><span class="o">-&gt;</span><span class="n">cfg_sdu_limit</span><span class="p">;</span>
-<span class="cp">#else</span>
-<span class="w">    </span><span class="n">ci</span><span class="o">-&gt;</span><span class="n">new_byte_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAP_BYTES</span><span class="p">;</span><span class="w">            </span><span class="c1">// tail-drop once the queue holds CAP_BYTES</span>
-<span class="cp">#endif</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">JBPF_CODELET_SUCCESS</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>The bounds check is what the jbpf verifier requires before the codelet may dereference <code class="docutils literal notranslate"><span class="pre">ctx-&gt;data</span></code>.
-<code class="docutils literal notranslate"><span class="pre">CAP_BYTES</span></code> is a compile-time constant, so one source yields one object per size: <code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">build</span> <span class="pre">256k</span></code>
-runs <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">one</span> <span class="pre">NAME=256k</span> <span class="pre">CAP=262144</span></code> in <code class="docutils literal notranslate"><span class="pre">codelets/bufcap/</span></code> and verifies <code class="docutils literal notranslate"><span class="pre">bufcap_256k.o</span></code>. A pure actuator
-has no output, so its codeletset and deployment are short:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># codelets/bufcap/bufcap_256k.yaml</span>
-<span class="nt">codeletset_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bufcap</span>
-<span class="nt">codelet_descriptor</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">codelet_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bufcap</span>
-<span class="w">    </span><span class="nt">codelet_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/bufcap/bufcap_256k.o</span>
-<span class="w">    </span><span class="nt">hook_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlc_dl_ctrl</span>
-<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-</pre></div>
-</div>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># jrtc_apps/bufcap/deployment_256k.yaml</span>
-<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bufcap</span>
-<span class="nt">jbpf</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">device</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">srs-gnb-du1-proxy.ran.svc.cluster.local</span>
-<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30450</span>
-<span class="w">  </span><span class="nt">codelet_set</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">device</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/bufcap/bufcap_256k.yaml</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">load</span> <span class="pre">256k</span></code> unloads any cap in force and loads this one. Because the gNB keeps the last limit
-after an unload, <code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">off</span></code> loads <code class="docutils literal notranslate"><span class="pre">bufcap_off</span></code> (<code class="docutils literal notranslate"><span class="pre">CAP_BYTES=0</span></code>), which writes the configured limits
-back, waits for a downlink packet to carry them, then unloads. <code class="docutils literal notranslate"><span class="pre">off</span></code> therefore needs traffic to take
-effect.</p>
-<p>Check that a cap binds: the gNB tail-drops at the setpoint.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-n<span class="w"> </span>ran<span class="w"> </span>srs-gnb-du1-0<span class="w"> </span>-c<span class="w"> </span>ocudujbpf<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">'grep "Dropped SDU" /tmp/gnb.log | grep -o "queued_bytes=[0-9]*" | sort | uniq -c | sort -rn | head'</span>
-</pre></div>
-</div>
-<p>In a 150 KB-setpoint run the gNB logged 13,924 <code class="docutils literal notranslate"><span class="pre">Dropped</span> <span class="pre">SDU</span> <span class="pre">…</span> <span class="pre">queued_bytes=148797</span></code>, and none at the
-6 MB setting.</p>
-<p><code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">load</span> <span class="pre">dyn</span></code> loads a dynamic variant instead. <code class="docutils literal notranslate"><span class="pre">bufdyn_obs</span></code> records each UE’s DL MCS on the
-<code class="docutils literal notranslate"><span class="pre">mac_sched_harq_dl</span></code> hook, and <code class="docutils literal notranslate"><span class="pre">bufdyn_ctl</span></code> sets the cap from that MCS and a target queuing delay, 50 ms
-by default (<code class="docutils literal notranslate"><span class="pre">codelets/bufcap/bufdyn_ctl.cpp</span></code>).</p>
+<section id="telemetry">
+<h3>Telemetry<a class="headerlink" href="#telemetry" title="Link to this heading">¶</a></h3>
+<p>The dashboard’s RLC panels come from the <code class="docutils literal notranslate"><span class="pre">upt</span></code> codelets that <code class="docutils literal notranslate"><span class="pre">--telemetry</span></code> loads: queuing latency from
+<code class="docutils literal notranslate"><span class="pre">rlc_dl_sdu_send_started</span></code>, and buffer occupancy from <code class="docutils literal notranslate"><span class="pre">rlc_dl_new_sdu</span></code> and <code class="docutils literal notranslate"><span class="pre">rlc_dl_sdu_send_completed</span></code>.
+Each codelet adds up its packets in 134 ms buckets, per UE and bearer, and sends one message per bucket.
+<a class="reference internal" href="hooks-and-codelets.html"><span class="std std-doc">Hooks and Codelets</span></a> shows how to write a codelet like these.</p>
 </section>
-<section id="what-the-control-buys-you">
-<h4>What the control buys you<a class="headerlink" href="#what-the-control-buys-you" title="Link to this heading">¶</a></h4>
-<p>Sweeping the RLC byte limit on <strong>one</strong> UE while a second UE runs unmodified separates cause from
-effect cleanly. Queuing latency on the swept UE collapses as the cap tightens, while the baseline UE
-is untouched:</p>
-<p><img alt="RLC queuing latency vs buffer limit" src="../_images/rlc_latency_vs_buffer.png" /></p>
-<p>…and the cost is throughput on that UE — which the other UE picks up:</p>
-<p><img alt="DL goodput vs buffer limit" src="../_images/goodput_vs_buffer.png" /></p>
-<p>Read together, these two plots are the whole lesson. There is a <strong>knee</strong>. Below it you have bought
-latency with throughput you did not want to spend; above it you are paying latency for buffer you do
-not need. Measured end to end against TCP (2 UEs, DL iperf3, RAN metrics from jbpf vs. TCP metrics
-from tcpdump on the UPF):</p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>RLC byte-limit setpoint</p></th>
-<th class="head"><p>RLC buf_max</p></th>
-<th class="head"><p>RLC latency</p></th>
-<th class="head"><p>TCP RTT</p></th>
-<th class="head"><p>TCP throughput</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>6.2 MB (srsRAN default)</p></td>
-<td><p>1.93 MB</p></td>
-<td><p>2831 ms</p></td>
-<td><p><strong>3019 ms</strong></p></td>
-<td><p>4.17 Mbps</p></td>
-</tr>
-<tr class="row-odd"><td><p>2.0 MB</p></td>
-<td><p>296 KB</p></td>
-<td><p>527 ms</p></td>
-<td><p><strong>519 ms</strong></p></td>
-<td><p><strong>7.51 Mbps</strong></p></td>
-</tr>
-<tr class="row-even"><td><p>500 KB</p></td>
-<td><p>303 KB</p></td>
-<td><p>750 ms</p></td>
-<td><p>~0</p></td>
-<td><p>~0</p></td>
-</tr>
-<tr class="row-odd"><td><p>150 KB</p></td>
-<td><p>108 KB</p></td>
-<td><p>590 ms</p></td>
-<td><p>~0</p></td>
-<td><p>~0</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Three things to take from this table:</p>
-<ol class="arabic simple">
-<li><p><strong>TCP RTT ≈ RLC queuing latency</strong> (3019 ≈ 2831; 519 ≈ 527), from two completely independent
-measurement paths. The RLC buffer <em>is</em> the dominant end-to-end RTT term.</p></li>
-<li><p><strong>6.2 MB → 2 MB cut TCP RTT ~5.8× and <em>raised</em> throughput</strong> (4.17 → 7.51 Mbps). Textbook
-bufferbloat: the oversized default buffer was hurting both latency and goodput.</p></li>
-<li><p><strong>Too tight (≤500 KB) collapses CUBIC.</strong> ~14k drops exceed what CUBIC tolerates and goodput
-craters.</p></li>
-</ol>
-<section id="the-setpoint-ladder">
-<h5>The setpoint ladder<a class="headerlink" href="#the-setpoint-ladder" title="Link to this heading">¶</a></h5>
-<p>Sweeping the cap as a clean ladder — one setpoint per run, single UE, DL iperf3, cap expressed in
-SDUs rather than bytes — puts the knee on one screen:</p>
-<p><img alt="Buffer-size characterization: setpoint vs latency and throughput" src="../_images/summary-plots.png" /></p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>setpoint</p></th>
-<th class="head"><p>measured occupancy</p></th>
-<th class="head"><p>RLC buffer (KB)</p></th>
-<th class="head"><p>latency mean (ms)</p></th>
-<th class="head"><p>latency p95 (ms)</p></th>
-<th class="head"><p>throughput (Mbps)</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>256 SDU</p></td>
-<td><p>255 SDU</p></td>
-<td><p>383</p></td>
-<td><p><strong>49</strong></p></td>
-<td><p><strong>222</strong></p></td>
-<td><p>37.7</p></td>
-</tr>
-<tr class="row-odd"><td><p>512 SDU</p></td>
-<td><p>510 SDU</p></td>
-<td><p>766</p></td>
-<td><p>118</p></td>
-<td><p>1053</p></td>
-<td><p><strong>38.8</strong></p></td>
-</tr>
-<tr class="row-even"><td><p>1024 SDU</p></td>
-<td><p>1021 SDU</p></td>
-<td><p>1534</p></td>
-<td><p>255</p></td>
-<td><p>1358</p></td>
-<td><p><strong>38.8</strong></p></td>
-</tr>
-<tr class="row-odd"><td><p>2048 SDU</p></td>
-<td><p>1996 SDU</p></td>
-<td><p>2999</p></td>
-<td><p>524</p></td>
-<td><p>854</p></td>
-<td><p>28.3</p></td>
-</tr>
-<tr class="row-even"><td><p>4096 SDU</p></td>
-<td><p>2088 SDU</p></td>
-<td><p>3137</p></td>
-<td><p>578</p></td>
-<td><p>915</p></td>
-<td><p>36.7</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Mean latency is almost exactly linear in the setpoint — 49 → 118 → 255 → 524 ms, doubling with the
-cap — while throughput is flat at ~37–39 Mbps from 256 SDU all the way up. <strong>The top four-fifths of
-the buffer buys nothing but delay.</strong> 256 SDU is the knee: an 11× latency reduction against the
-4096 SDU setpoint for ~3% of throughput.</p>
-<p>The occupancy column is the sanity check that the actuator did what it was told:</p>
-<p><img alt="Measured occupancy per setpoint" src="../_images/summary-table.png" /></p>
-<p>Occupancy sits within a few SDUs of the cap at every step up to 2048 — the queue is saturated, the
-cap is binding, and the codelet is the thing setting the queue depth. At 4096 it flattens at
-2088 SDU: the offered load can no longer fill the buffer, so the setpoint stops being the control
-variable and the extra headroom does nothing except widen the tail. That is where a fixed cap stops
-being a controller at all, and where per-bearer control from an xApp comes in.</p>
-</section>
-</section>
-<section id="per-bearer-control-from-an-xapp-bufctl">
-<h4>Per-bearer control from an xApp: bufctl<a class="headerlink" href="#per-bearer-control-from-an-xapp-bufctl" title="Link to this heading">¶</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">bufcap</span></code> applies one limit everywhere. <code class="docutils literal notranslate"><span class="pre">codelets/bufctl/rlc_ctrl.cpp</span></code> takes per-bearer commands from an
-xApp instead. The xApp decides which bearer and what limit; the codelet stores the command and applies
-it on that bearer’s next downlink SDU; the gNB clamps and applies the limit.</p>
-<p>Commands arrive on a control-input channel, the jbpf path from an xApp into a codelet:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Control message from the xApp: 5 little-endian uint32 fields, 20 bytes.</span>
-<span class="k">struct</span><span class="w"> </span><span class="nc">rlc_ctrl_msg</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">du_ue_index</span><span class="p">;</span><span class="w">  </span><span class="c1">// target UE</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">op</span><span class="p">;</span><span class="w">           </span><span class="c1">// SET (0) / RESET (1) / GET (2)</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">rb_id</span><span class="p">;</span><span class="w">        </span><span class="c1">// target DRB id</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">byte_limit</span><span class="p">;</span><span class="w">   </span><span class="c1">// SET only; 0 = keep the stored value</span>
-<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">sdu_limit</span><span class="p">;</span><span class="w">    </span><span class="c1">// SET only; 0 = keep the stored value</span>
-<span class="p">};</span>
-</pre></div>
-</div>
-<p>On every invocation the codelet drains up to eight pending commands into a per-(UE, DRB) map. The loop
-is bounded because the verifier requires it:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma unroll</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">jbpf_control_input_receive</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctrl_in</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">break</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="c1">// SET stores the limits, RESET restores the configured ones, GET asks for a report</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>The codeletset declares the channel as an input, next to the report output:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">codeletset_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bufctl</span>
-<span class="nt">codelet_descriptor</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">codelet_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlc_ctrl</span>
-<span class="w">    </span><span class="nt">codelet_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/bufctl/rlc_ctrl.o</span>
-<span class="w">    </span><span class="nt">hook_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlc_dl_ctrl</span>
-<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="w">    </span><span class="nt">in_io_channel</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ctrl_in</span>
-<span class="w">    </span><span class="nt">out_io_channel</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">out_rlc_ctrl</span>
-<span class="w">        </span><span class="c1"># serializer for rlc_ctrl_report</span>
-</pre></div>
-</div>
-<p>The codelet reports a bearer when a GET asks, when a RESET applies, or when the limits in force change,
-which is how the xApp confirms a SET. <code class="docutils literal notranslate"><span class="pre">jrtc_apps/bufctl/bufctl_app.py</span></code> relays between the operator and
-the codelet: <code class="docutils literal notranslate"><span class="pre">bufctl_cli.py</span></code> appends commands to <code class="docutils literal notranslate"><span class="pre">commands.jsonl</span></code> in <code class="docutils literal notranslate"><span class="pre">jrtc_apps/bufctl/</span></code> (mounted in
-<code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code> as <code class="docutils literal notranslate"><span class="pre">/apps/bufctl</span></code>), the xApp sends each one on <code class="docutils literal notranslate"><span class="pre">ctrl_in</span></code>, and it writes the reports to
-<code class="docutils literal notranslate"><span class="pre">state.json</span></code>, which the CLI reads. An automatic policy replaces the file interface with its own logic,
-for example one that reads queuing latency from the telemetry codelets and sets a limit from it.</p>
-<p>While <code class="docutils literal notranslate"><span class="pre">bufctl</span></code> is loaded its hook runs on every downlink packet, so load it only while you command;
-<code class="docutils literal notranslate"><span class="pre">bufctl_cli.py</span></code> loads it on start and unloads it on quit.</p>
-</section>
-</section>
-<section id="gotchas">
-<h3>Gotchas<a class="headerlink" href="#gotchas" title="Link to this heading">¶</a></h3>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">off</span></code> and <code class="docutils literal notranslate"><span class="pre">unload</span></code> differ.</strong> The gNB keeps the last limit after a control codelet unloads.
-<code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">unload</span></code> leaves the cap in force; <code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">off</span></code> restores the configured limits and needs
-downlink traffic to do it. With <code class="docutils literal notranslate"><span class="pre">bufctl</span></code>, <code class="docutils literal notranslate"><span class="pre">reset</span></code> each bearer before <code class="docutils literal notranslate"><span class="pre">quit</span></code>.</p></li>
-<li><p><strong>One codelet per control hook.</strong> <code class="docutils literal notranslate"><span class="pre">bufcap</span></code> and <code class="docutils literal notranslate"><span class="pre">bufctl</span></code> both attach to <code class="docutils literal notranslate"><span class="pre">rlc_dl_ctrl</span></code>. Run
-<code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">off</span></code> before starting the <code class="docutils literal notranslate"><span class="pre">bufctl</span></code> CLI.</p></li>
-<li><p><strong>The CLI runs from the tree the RAN pods mount.</strong> It talks to the xApp through files under
-<code class="docutils literal notranslate"><span class="pre">jrtc-apps/jrtc_apps/bufctl/</span></code>, which <code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code> reaches through the path the Helm release was installed
-with. The CLI detects a mismatch and says so.</p></li>
-<li><p><strong>Telemetry is packet-driven.</strong> A bearer that has carried no downlink packet does not report, so start
-traffic before <code class="docutils literal notranslate"><span class="pre">scan</span></code>, and before expecting its panel.</p></li>
+<li><p>The gNB keeps the last limit after a control codelet unloads. <code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">off</span></code> restores the configured
+limits; with <code class="docutils literal notranslate"><span class="pre">bufctl</span></code>, <code class="docutils literal notranslate"><span class="pre">reset</span></code> each bearer before <code class="docutils literal notranslate"><span class="pre">quit</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bufcap</span></code> and <code class="docutils literal notranslate"><span class="pre">bufctl</span></code> share <code class="docutils literal notranslate"><span class="pre">rlc_dl_ctrl</span></code>, and a control hook takes one codelet at a time. Run
+<code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">off</span></code> before you start <code class="docutils literal notranslate"><span class="pre">bufctl_cli.py</span></code>.</p></li>
+<li><p>A bearer reports nothing until it carries downlink traffic, so start traffic before <code class="docutils literal notranslate"><span class="pre">scan</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bufctl_cli.py</span></code> talks to its xApp through files under <code class="docutils literal notranslate"><span class="pre">jrtc-apps/jrtc_apps/bufctl/</span></code>, so run it from the
+clone that the RAN pods mount.</p></li>
 </ul>
 </section>
 <section id="troubleshooting">
@@ -1606,10 +845,10 @@ traffic before <code class="docutils literal notranslate"><span class="pre">scan
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UE</span> <span class="pre">did</span> <span class="pre">not</span> <span class="pre">attach</span></code>, or one of two UEs missing</p></td>
-<td><p>restart Terminal 1, then Terminal 2: <code class="docutils literal notranslate"><span class="pre">--ran</span></code> restarts the gNB every time</p></td>
+<td><p>restart Terminal 1, then Terminal 2</p></td>
 </tr>
 <tr class="row-odd"><td><p>attached, but no data</p></td>
-<td><p>re-point the SMF at the UPF (<a class="reference internal" href="../open-ai-ran-tutorial.html#re-point-the-smf-at-the-upf"><span class="std std-ref">tutorial Part 2</span></a>)</p></td>
+<td><p>re-point the SMF at the UPF (<a class="reference internal" href="../open-ai-ran-tutorial.html#re-point-the-smf-at-the-upf"><span class="std std-ref">Part 2</span></a>)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">UPF</span> <span class="pre">pod</span> <span class="pre">found</span></code></p></td>
 <td><p>a stale <code class="docutils literal notranslate"><span class="pre">KUBECONFIG</span></code>: redo the shell setup</p></td>
@@ -1617,11 +856,11 @@ traffic before <code class="docutils literal notranslate"><span class="pre">scan
 <tr class="row-odd"><td><p>Grafana panels empty with traffic flowing</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">curl</span> <span class="pre">-s</span> <span class="pre">http://localhost:30491/api/v1/label/__name__/values</span></code> should list <code class="docutils literal notranslate"><span class="pre">upt_*</span></code>; if not, the <code class="docutils literal notranslate"><span class="pre">upt</span></code> codeletset is not reporting</p></td>
 </tr>
-<tr class="row-even"><td><p>panels frozen mid-run</p></td>
+<tr class="row-even"><td><p>panels freeze mid-run</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code> restarted and the gNB holds stale jbpf IPC channels: restart Terminal 1, then Terminal 2</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bufctl</span></code> commands do nothing</p></td>
-<td><p>check that the xApp is loaded (<code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">exec</span> <span class="pre">-n</span> <span class="pre">ran</span> <span class="pre">jrtc-0</span> <span class="pre">-c</span> <span class="pre">jrtc</span> <span class="pre">--</span> <span class="pre">curl</span> <span class="pre">-s</span> <span class="pre">http://127.0.0.1:3001/app</span></code>) and that the bearer appears in <code class="docutils literal notranslate"><span class="pre">scan</span></code></p></td>
+<td><p>check that the xApp is loaded (<code class="docutils literal notranslate"><span class="pre">kubectl</span> <span class="pre">exec</span> <span class="pre">-n</span> <span class="pre">ran</span> <span class="pre">jrtc-0</span> <span class="pre">-c</span> <span class="pre">jrtc</span> <span class="pre">--</span> <span class="pre">curl</span> <span class="pre">-s</span> <span class="pre">http://127.0.0.1:3001/app</span></code>) and that <code class="docutils literal notranslate"><span class="pre">scan</span></code> lists the bearer</p></td>
 </tr>
 </tbody>
 </table>
@@ -1635,12 +874,12 @@ traffic before <code class="docutils literal notranslate"><span class="pre">scan
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="miscellaneous.html">
+          <a class="next-page" href="hooks-and-codelets.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Miscellaneous</div>
+                <div class="title">Hooks and Codelets</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -1703,29 +942,12 @@ traffic before <code class="docutils literal notranslate"><span class="pre">scan
 </ul>
 </li>
 <li><a class="reference internal" href="#stop">4. Stop</a></li>
-<li><a class="reference internal" href="#reference-to-be-updated">Reference [To be updated]</a><ul>
-<li><a class="reference internal" href="#telemetry-codelets-for-the-rlc-queue">Telemetry Codelets for the RLC Queue</a><ul>
-<li><a class="reference internal" href="#anatomy-of-a-codelet">Anatomy of a codelet</a></li>
-<li><a class="reference internal" href="#the-design-decision-bucket-inside-the-codelet">The design decision: bucket inside the codelet</a></li>
-<li><a class="reference internal" href="#codelet-1-rlc-queuing-latency">Codelet 1: RLC queuing latency</a></li>
-<li><a class="reference internal" href="#codelet-2-rlc-buffer-occupancy">Codelet 2: RLC buffer occupancy</a></li>
-<li><a class="reference internal" href="#advanced-lossless-per-packet-records">Advanced: lossless per-packet records</a></li>
-<li><a class="reference internal" href="#build-deploy-observe">Build, deploy, observe</a></li>
-<li><a class="reference internal" href="#sanity-check-the-measurement">Sanity-check the measurement</a></li>
-<li><a class="reference internal" href="#traps-hit-during-development">Traps hit during development</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#control-codelets-for-the-rlc-queue">Control Codelets for the RLC Queue</a><ul>
-<li><a class="reference internal" href="#monitor-hooks-and-control-hooks">Monitor hooks and control hooks</a></li>
-<li><a class="reference internal" href="#a-fixed-cap-bufcap">A fixed cap: bufcap</a></li>
-<li><a class="reference internal" href="#what-the-control-buys-you">What the control buys you</a><ul>
-<li><a class="reference internal" href="#the-setpoint-ladder">The setpoint ladder</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#per-bearer-control-from-an-xapp-bufctl">Per-bearer control from an xApp: bufctl</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#gotchas">Gotchas</a></li>
+<li><a class="reference internal" href="#reference">Reference</a><ul>
+<li><a class="reference internal" href="#buffer-caps-bufcap">Buffer caps: bufcap</a></li>
+<li><a class="reference internal" href="#per-bearer-limits-bufctl">Per-bearer limits: bufctl</a></li>
+<li><a class="reference internal" href="#traffic">Traffic</a></li>
+<li><a class="reference internal" href="#telemetry">Telemetry</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
 <li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>

@@ -324,7 +324,7 @@ Six schedulers, 75 s each, after the gNB's own scheduler (gray, left).
   max-CQI 28, round robin 20, proportional fair 17, and the gNB's own scheduler 14.
 
 Each scheduler saw a different stretch of the CQI walks, so for a controlled comparison use
-`edgeric_eval.sh`. It is in the [Reference](#reference-to-be-updated), with the schedulers and the options of
+`edgeric_eval.sh`. It is in the [Reference](#reference), with the schedulers and the options of
 `start sched`.
 
 ## 3. Training the RL Policy
@@ -436,98 +436,76 @@ bash scripts/traffic_nue.sh stop
 bash scripts/stop_demo.sh
 ```
 
-## Reference [To be updated]
+## Reference
 
 ### Schedulers
 
 | Scheduler | Policy |
 |---|---|
-| `stock` | none: the gNB's own scheduler |
-| `fixed --weights ue1=0.2,ue2=0.2,ue3=0.2,ue4=0.4` | share: 20/20/20/40 % of the slots |
-| `rr` | metric, all equal: the UEs with data in turn |
-| `pf` | metric CQI / EWMA(CQI), proportional fair |
-| `maxcqi` | metric CQI |
-| `bestcqi` | metric CQI, always one UE per slot (the full-buffer throughput optimum) |
-| `maxweight` | metric CQI × backlog |
-| `rl --model models/ppo_walk4/last.npz` | a trained PPO policy: its top UE gets the slot (`--rl-pick share` for slot shares) |
+| `stock` | the gNB's own scheduler |
+| `fixed --weights ue1=0.2,ue2=0.2,ue3=0.2,ue4=0.4` | fixed shares of the slots, here 20/20/20/40 % |
+| `rr` | round robin over the UEs with data |
+| `pf` | proportional fair: CQI / EWMA(CQI) |
+| `maxcqi` | highest CQI |
+| `bestcqi` | highest CQI, always one UE per slot |
+| `maxweight` | CQI × backlog |
+| `rl --model models/ppo_walk4/last.npz` | a trained PPO policy; its top UE gets the slot |
 
-By default each scheduler gives one UE the whole slot (`--alloc single`), as the gNB's own scheduler
-does with full buffers. Metric policies give the slot to the UE with the highest metric; share policies
-hand out whole slots in proportion to their weights. Model paths are relative to `edgeric-rt/`, which
-is `/edgeric` in the `edgeric-0` container; trained models for the three scenarios ship in
-`edgeric-rt/models/` (`ppo_walk4`, `ppo_walk2`, `ppo_load8844`).
+By default a scheduler gives each slot to one UE (`--alloc single`), as the gNB's own scheduler does
+with full buffers. Model paths are relative to `edgeric-rt/`, which is `/edgeric` in `edgeric-0`.
+`edgeric-rt/models/` has a trained model for each scenario: `ppo_walk4`, `ppo_walk2` and
+`ppo_load8844`.
 
 | Option | Effect |
 |---|---|
-| `--alloc shared` | split each slot's RBs by weight among the weighted UEs (slows the ZMQ chain to about 88 % of real time with 4 UEs) |
-| `--lead N` | target the first DL slot at least N TTIs ahead; about 30 emulates a near-RT RIC |
-| `--work-conserving` | give RBs a UE cannot use to the UEs that can |
+| `--alloc shared` | split each slot's RBs by weight (slows the ZMQ chain to about 88 % of real time with 4 UEs) |
+| `--lead N` | act on a DL slot at least N TTIs ahead; about 30 behaves like a near-RT RIC |
+| `--work-conserving` | give the RBs a UE cannot use to the UEs that can |
 | `--duration S`, `--tag NAME` | run length and output name |
 
-Each run saves every TTI to `edgeric-rt/runs/<tag>/ttis.npz` with a `summary.json`, and pushes 10 Hz
-aggregates to VictoriaMetrics.
+Each run saves every TTI to `edgeric-rt/runs/<tag>/ttis.npz` with a `summary.json`, and pushes
+10 Hz aggregates to VictoriaMetrics.
 
 ### Channel scenarios
 
 | Table | Scenario |
 |---|---|
-| `duranta-oai-ue/ue_traces_cqi_4ue.conf` | 4 UEs on independent CQI walks (this demo, and the RL scenario) |
-| `duranta-oai-ue/ue_traces_cqi_4ue_mob.conf` | 2 cars and 2 drones, from the EdgeRIC over-the-air recordings |
+| `duranta-oai-ue/ue_traces_cqi_4ue.conf` | 4 UEs on independent CQI walks (this demo) |
+| `duranta-oai-ue/ue_traces_cqi_4ue_mob.conf` | 2 cars and 2 drones, from EdgeRIC's over-the-air recordings |
 | `duranta-oai-ue/ue_traces_cqi_s1.conf` | 2 UEs on CQI walks |
-| `duranta-oai-ue/ue_traces_cqi_s2.conf` | 2 UEs, one good and one bad channel |
-| `duranta-oai-ue/ue_traces_cqi_s3.conf` | 2 UEs, CQI drawn at random |
+| `duranta-oai-ue/ue_traces_cqi_s2.conf` | 2 UEs, one good channel and one bad |
+| `duranta-oai-ue/ue_traces_cqi_s3.conf` | 2 UEs, random CQI |
 
-Switch scenarios on the running UEs with `bash scripts/trace_ctl.sh apply <table>`
-([Demo 1](demo1-plug-and-play-channels.md)).
+Switch the running UEs to another table with `bash scripts/trace_ctl.sh apply <table>`.
 
-### Compare schedulers on the same channel
+### Compare schedulers
 
 ```bash
 bash scripts/edgeric_eval.sh --duration 60 \
   rl:models/ppo_walk4/last.npz bestcqi maxcqi maxweight pf rr fixed:0.25,0.25,0.25,0.25 stock
 ```
 
-Before each run the script re-applies the trace table, so every scheduler sees the same channel from
-t = 0. It ends with a table per scheduler: throughput per air time, total and per UE, Jain fairness, the
-share of DL slots applied in their exact TTI (DL HIT %), and report-to-action latency. Measured with
-four UEs on CQI walks, full-buffer UDP:
-
-| Scheduler | gNB Mbit/s | UDP Mbit/s |
-|---|---|---|
-| bestcqi | 41.54 | 37.85 |
-| maxweight | 40.91 | 37.42 |
-| PPO | 40.80 | 36.89 |
-| rr | 19.83 | 18.70 |
-| pf | 17.33 | 16.01 |
-| stock (the gNB's own) | 15.49 | 14.76 |
-
-For finite, unequal loads, `edgeric_eval.sh --loads 8,8,4,4` drives one plain UDP flow per UE at those
+The script replays the same channel for every scheduler, then prints one row each: throughput in total
+and per UE, Jain fairness, the share of DL slots applied in their exact TTI (DL HIT %), and the
+report-to-action latency. `--loads 8,8,4,4` swaps full-buffer traffic for one UDP flow per UE at those
 rates.
 
-### Measure the bare loop
+### Measure the loop without a muApp
 
 ```bash
 bash scripts/edgeric_rt.sh load --inline fixed:0.2,0.2,0.2,0.4
 kubectl exec -n ran jrtc-0 -c jrtc -- tail /tmp/edgeric_rt_bridge.log
 ```
 
-In inline mode the bridge acts on every report by itself, without a muApp. Its log gives the DL HIT %
-and the report-to-action latency inside jrtc. Measured with four UEs:
-
-| Path | DL slots applied in their exact TTI | Report to action, p50 / p99 |
-|---|---|---|
-| bridge acting inline (jbpf and jrtc only) | 99.9–100 % | 51 / 90 µs |
-| muApp in `edgeric-0`, classic schedulers | 99.8–99.9 % | 110 / 180–210 µs |
-| muApp in `edgeric-0`, PPO | 98.1–98.5 % | 250 / 390–430 µs |
+In inline mode the bridge in `jrtc-0` answers each report itself, so its log gives the DL HIT % and the
+latency of jbpf and jrtc alone.
 
 ### Notes
 
-- **One report consumer.** The bridge sends reports to one muApp socket: stop `sched` before `train`,
-  and the reverse.
-- **Keep jrtc light.** Start the RAN with `--edgeric` and without `--telemetry`, so heavy Python xApps
-  do not share the bridge's GIL. The real-time scheduling dashboard is light enough to run beside it.
-- **One scheduler controller.** Unload the older `edgeric_sched` and `edgeric_mcs` sets while
-  `edgeric_rt` is loaded; they act on the same scheduler.
-- **PPO is slower than the classic schedulers** (p50 about 250 µs against 110 µs), so 1.5–1.9 % of its
-  DL slots miss their TTI and run the gNB's own scheduler.
-
+- The bridge feeds one muApp: stop `sched` before you start `train`, and the other way round.
+- Start the RAN with `--edgeric` and without `--telemetry`, so the heavier telemetry xApps stay out of
+  `jrtc-0`. The real-time scheduling dashboard is light enough to run beside the bridge.
+- Unload the older `edgeric_sched` and `edgeric_mcs` sets while `edgeric_rt` is loaded. They act on
+  the same scheduler.
+- PPO needs about 250 µs per decision at the median, against 110 µs for the classic schedulers, so
+  1.5 to 1.9 % of its DL slots miss their TTI and run the gNB's own scheduler.

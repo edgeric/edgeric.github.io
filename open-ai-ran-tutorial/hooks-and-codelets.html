@@ -1,0 +1,1022 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Miscellaneous" href="miscellaneous.html"><link rel="prev" title="Demo 3: TCP Flow Optimization with Real-Time Buffer Management" href="demo3-buffer-management.html">
+
+    <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+        <title>Hooks and Codelets - EdgeRIC</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=25d849e0" />
+    <link rel="stylesheet" type="text/css" href="../_static/news.css?v=0615dc85" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #0066cc;
+  --color-brand-content: #0066cc;
+  --color-admonition-background: rgba(0, 102, 204, 0.1);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #4da6ff;
+  --color-brand-content: #4da6ff;
+  --color-admonition-background: rgba(77, 166, 255, 0.1);
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #4da6ff;
+  --color-brand-content: #4da6ff;
+  --color-admonition-background: rgba(77, 166, 255, 0.1);
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">EdgeRIC</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky">
+<div class="sidebar-brand">
+  <div class="sidebar-school-logos">
+    <img data-src="all_logos.png" alt="Partner Universities" class="sidebar-school-logo sidebar-school-logo-single">
+  </div>
+  <a href="../index.html" class="sidebar-brand-text">EdgeRIC</a>
+</div><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">EdgeRIC with OCUDU-jbpf</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../edgeric-ocudu-jbpf.html">EdgeRIC with OCUDU-jbpf: System Design</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Our Projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../projects/qoe-networking.html">AI-driven muApp for RAN Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/tiny-twin.html">Cellular Digital Twins: Plug and Play Channels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/telemetry.html">SCOUT: Packet Centric Telemetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/multimodal-sensing.html">mmsRAN: Multimodal Uplink for Physical AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/robonest.html">RoboNEST: Edge Driven Robotics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/lens.html">LENS: Log Analysis Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects/other-muapps.html">Other μApps</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Team</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../team.html">Team</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Demos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../demo.html">Demo</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">EdgeRIC Events</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../open-ai-ran-tutorial.html">Open AI-RAN Tutorial</a><input aria-label="Toggle navigation of Open AI-RAN Tutorial" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Hooks and Codelets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../oaic-workshop-2024.html">OAIC-EdgeRIC Workshop ‘24</a><input aria-label="Toggle navigation of OAIC-EdgeRIC Workshop ‘24" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../edgeric-workshop-tutorial.html">EdgeRIC tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../srsran-2024-workshop.html">srsRAN Workshop ‘24</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">5G Testbed</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../5g-testbed.html">5G Testbed</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Publications &amp; Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../edgeric.html">EdgeRIC main paper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../beamarmor.html">BeamArmor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tiny-twin.html">Tiny Twin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../windex.html">Windex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sparc.html">SPARC</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../open-ai-ran-tutorial.html">Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets</a><input aria-label="Toggle navigation of Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Hooks and Codelets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Datasets</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dataset_page/edgeric-datasets.html">EdgeRIC Main Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dataset_page/scout-dataset.html">Scout Dataset</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/edgeric/edgeric.github.io/blob/main/docs/open-ai-ran-tutorial/hooks-and-codelets.md?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/edgeric/edgeric.github.io/edit/main/docs/open-ai-ran-tutorial/hooks-and-codelets.md" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="hooks-and-codelets">
+<h1>Hooks and Codelets<a class="headerlink" href="#hooks-and-codelets" title="Link to this heading">¶</a></h1>
+<p>Every demo in this tutorial runs on codelets: small eBPF programs that you load into the running gNB
+at a hook, and unload again, with no rebuild and no restart. This page shows how to add a hook to the
+gNB, then how to write, build and load your own codelets. It walks through two examples from the
+repository: a telemetry codelet that reports each UE’s downlink traffic, and the control codelet behind
+Demo 3’s buffer caps.</p>
+<section id="how-the-pieces-fit">
+<h2>How the Pieces Fit<a class="headerlink" href="#how-the-pieces-fit" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>A <strong>hook</strong> is a call in the gNB’s source where codelets can run. With no codelet loaded, the call
+does nothing.</p></li>
+<li><p>A <strong>monitor hook</strong> gives the codelet a read-only context, such as the UE, the bearer and a packet
+size. The codelet measures and sends results on an <strong>output channel</strong>. An xApp in <code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code> receives
+them.</p></li>
+<li><p>A <strong>control hook</strong> gives the codelet a struct that the gNB reads back after the call. What the codelet
+writes there, the gNB applies. An xApp can send it settings on an <strong>input channel</strong>.</p></li>
+<li><p>jbpf’s verifier checks every codelet, so a codelet cannot crash the gNB or loop forever.</p></li>
+</ul>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>What</p></th>
+<th class="head"><p>Where</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>hook declarations</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ocudu-jbpf/srsran_jbpf/verifier/specs/jbpf_srsran_hooks.h</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>hook contexts</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ocudu-jbpf/include/srsran/jbpf/jbpf_srsran_contexts.h</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>codelets</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jrtc-apps/codelets/&lt;name&gt;/</span></code>: source, messages, <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>, codeletset YAML</p></td>
+</tr>
+<tr class="row-odd"><td><p>xApps</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">jrtc-apps/jrtc_apps/&lt;name&gt;/</span></code>: Python app and deployment YAML</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a class="reference internal" href="miscellaneous.html#hooks-used-in-this-tutorial"><span class="std std-ref">Miscellaneous</span></a> lists the hooks this tutorial uses.</p>
+</section>
+<section id="add-a-hook-to-the-gnb">
+<h2>Add a Hook to the gNB<a class="headerlink" href="#add-a-hook-to-the-gnb" title="Link to this heading">¶</a></h2>
+<p>Skip this part if an existing hook already fires where you need it. The steps below are the ones that
+added <code class="docutils literal notranslate"><span class="pre">rlc_dl_ctrl</span></code>, the control hook of Example 2. It fires for every downlink SDU on an RLC AM data
+bearer, before the gNB decides whether the SDU fits in the queue.</p>
+<p><strong>1. Define the context</strong> in <code class="docutils literal notranslate"><span class="pre">include/srsran/jbpf/jbpf_srsran_contexts.h</span></code>. For a control hook, say which
+fields the codelet writes:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctrl_info</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">du_ue_index</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">is_srb</span><span class="p">;</span><span class="w">   </span><span class="cm">/* always 0 (kept for layout compatibility) */</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">rb_id</span><span class="p">;</span><span class="w">    </span><span class="cm">/* DRB id */</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cur_byte_limit</span><span class="p">;</span><span class="w">   </span><span class="cm">/* srsRAN -&gt; codelet: the queue's current byte limit */</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">new_byte_limit</span><span class="p">;</span><span class="w">   </span><span class="cm">/* codelet -&gt; srsRAN: desired byte limit (0 = leave unchanged) */</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cur_sdu_limit</span><span class="p">;</span><span class="w">    </span><span class="cm">/* srsRAN -&gt; codelet: the queue's current SDU-count limit */</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">new_sdu_limit</span><span class="p">;</span><span class="w">    </span><span class="cm">/* codelet -&gt; srsRAN: desired SDU-count limit (0 = leave unchanged) */</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cfg_byte_limit</span><span class="p">;</span><span class="w">   </span><span class="cm">/* srsRAN -&gt; codelet: CONFIGURED byte limit (queue-bytes); write it back to reset */</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cfg_sdu_limit</span><span class="p">;</span><span class="w">    </span><span class="cm">/* srsRAN -&gt; codelet: CONFIGURED SDU limit (queue-size = queue capacity) */</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p><strong>2. Declare the hook</strong> in <code class="docutils literal notranslate"><span class="pre">srsran_jbpf/verifier/specs/jbpf_srsran_hooks.h</span></code>. <code class="docutils literal notranslate"><span class="pre">HOOK_ASSIGN</span></code> points the
+generic context the codelet receives at your struct:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">DECLARE_JBPF_HOOK</span><span class="p">(</span><span class="n">rlc_dl_ctrl</span><span class="p">,</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_ran_generic_ctx</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ctx</span><span class="p">,</span>
+<span class="w">    </span><span class="n">HOOK_PROTO</span><span class="p">(</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctrl_info</span><span class="w"> </span><span class="o">*</span><span class="n">info</span><span class="p">),</span>
+<span class="w">    </span><span class="n">HOOK_ASSIGN</span><span class="p">(</span>
+<span class="w">        </span><span class="n">ctx</span><span class="p">.</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint64_t</span><span class="p">)</span><span class="n">info</span><span class="p">;</span>
+<span class="w">        </span><span class="n">ctx</span><span class="p">.</span><span class="n">data_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint64_t</span><span class="p">)</span><span class="w"> </span><span class="p">((</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">info</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctrl_info</span><span class="p">));</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>A hook can also pass a few numbers in <code class="docutils literal notranslate"><span class="pre">srs_meta_data1</span></code> to <code class="docutils literal notranslate"><span class="pre">srs_meta_data4</span></code>. The monitor hook
+<code class="docutils literal notranslate"><span class="pre">rlc_dl_new_sdu</span></code>, used in Example 1, packs the SDU length and PDCP sequence number this way:
+<code class="docutils literal notranslate"><span class="pre">ctx.srs_meta_data1</span> <span class="pre">=</span> <span class="pre">(uint64_t)sdu_length</span> <span class="pre">&lt;&lt;</span> <span class="pre">32</span> <span class="pre">|</span> <span class="pre">pdcp_sn;</span></code>.</p>
+<p><strong>3. Define and call the hook</strong> in the source file where it fires. <code class="docutils literal notranslate"><span class="pre">DEFINE_JBPF_CTRL_HOOK</span></code> creates a
+control hook and <code class="docutils literal notranslate"><span class="pre">DEFINE_JBPF_HOOK</span></code> a monitor hook. Keep the code inside <code class="docutils literal notranslate"><span class="pre">#ifdef</span> <span class="pre">JBPF_ENABLED</span></code>. From
+<code class="docutils literal notranslate"><span class="pre">lib/rlc/rlc_tx_am_entity.cpp</span></code>, trimmed:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">DEFINE_JBPF_CTRL_HOOK</span><span class="p">(</span><span class="n">rlc_dl_ctrl</span><span class="p">);</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">rlc_tx_am_entity::handle_jbpf_rlc_ctrl</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctrl_info</span><span class="w"> </span><span class="n">ci</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="w">  </span><span class="n">ci</span><span class="p">.</span><span class="n">du_ue_index</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">ue_index</span><span class="p">;</span>
+<span class="w">  </span><span class="n">ci</span><span class="p">.</span><span class="n">is_srb</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="n">ci</span><span class="p">.</span><span class="n">rb_id</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="n">drb_id_to_uint</span><span class="p">(</span><span class="n">rb_id</span><span class="p">.</span><span class="n">get_drb_id</span><span class="p">());</span>
+<span class="w">  </span><span class="n">ci</span><span class="p">.</span><span class="n">cur_byte_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sdu_queue</span><span class="p">.</span><span class="n">get_byte_limit</span><span class="p">();</span>
+<span class="w">  </span><span class="n">ci</span><span class="p">.</span><span class="n">cur_sdu_limit</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">sdu_queue</span><span class="p">.</span><span class="n">get_sdu_limit</span><span class="p">();</span>
+<span class="w">  </span><span class="n">ci</span><span class="p">.</span><span class="n">cfg_byte_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sdu_queue</span><span class="p">.</span><span class="n">get_cfg_byte_limit</span><span class="p">();</span>
+<span class="w">  </span><span class="n">ci</span><span class="p">.</span><span class="n">cfg_sdu_limit</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">sdu_queue</span><span class="p">.</span><span class="n">get_capacity</span><span class="p">();</span>
+<span class="w">  </span><span class="n">hook_rlc_dl_ctrl</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ci</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ci</span><span class="p">.</span><span class="n">new_byte_limit</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">old_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sdu_queue</span><span class="p">.</span><span class="n">get_byte_limit</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">new_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sdu_queue</span><span class="p">.</span><span class="n">clamp_byte_limit</span><span class="p">(</span><span class="n">ci</span><span class="p">.</span><span class="n">new_byte_limit</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">new_limit</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">old_limit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">sdu_queue</span><span class="p">.</span><span class="n">set_byte_limit</span><span class="p">(</span><span class="n">new_limit</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// ... the same for new_sdu_limit</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">rlc_tx_am_entity::handle_sdu</span><span class="p">(</span><span class="n">byte_buffer</span><span class="w"> </span><span class="n">sdu_buf</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">is_retx</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="p">...</span>
+<span class="cp">#ifdef JBPF_ENABLED</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">not</span><span class="w"> </span><span class="n">rb_id</span><span class="p">.</span><span class="n">is_srb</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">handle_jbpf_rlc_ctrl</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="cp">#endif</span>
+<span class="w">  </span><span class="p">...</span>
+</pre></div>
+</div>
+<p>The gNB clamps the requested limit before it applies it, so a codelet cannot shrink a queue below one
+maximum-size PDCP PDU or grow it past the configured size.</p>
+<p><strong>4. Rebuild the gNB image</strong> and put it in the pod, as in Part 1 and Part 2 of the
+<a class="reference internal" href="../open-ai-ran-tutorial.html"><span class="std std-doc">tutorial</span></a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>ocudu-gnb-jbpf:ipc<span class="w"> </span>-f<span class="w"> </span>ocudu-jbpf/docker/Dockerfile<span class="w"> </span>ocudu-jbpf
+k3d<span class="w"> </span>image<span class="w"> </span>import<span class="w"> </span>ocudu-gnb-jbpf:ipc<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span><span class="nv">$CLUSTER</span><span class="s2">"</span>
+<span class="c1"># then recreate the gNB pod with its containers (Part 2)</span>
+</pre></div>
+</div>
+<p>Codelets compile against the jbpf SDK image, and its headers do not have the hooks added here. A
+codelet for a new hook therefore keeps its own copy of the context struct, field for field. Example 2
+does this.</p>
+</section>
+<section id="example-1-a-telemetry-codelet">
+<h2>Example 1: A Telemetry Codelet<a class="headerlink" href="#example-1-a-telemetry-codelet" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">dl_sdu_count</span></code> runs on the <code class="docutils literal notranslate"><span class="pre">rlc_dl_new_sdu</span></code> monitor hook, which fires for every downlink SDU that enters
+RLC. It counts SDUs and bytes per UE and, about once a second, sends one message per active UE. An xApp
+prints them.</p>
+<p>The files:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>jrtc-apps/codelets/dl_sdu_count/      dl_sdu_count.proto  dl_sdu_count.cpp  Makefile  dl_sdu_count.yaml
+jrtc-apps/jrtc_apps/dl_sdu_count/     dl_sdu_count_app.py  deployment.yaml
+</pre></div>
+</div>
+<section id="the-message">
+<h3>The message<a class="headerlink" href="#the-message" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">dl_sdu_count.proto</span></code> defines what the codelet sends. The build turns it into a C struct for the codelet,
+a serializer for the gNB and a Python class for the xApp.</p>
+<div class="highlight-proto notranslate"><div class="highlight"><pre><span></span><span class="k">syntax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"proto2"</span><span class="p">;</span>
+
+<span class="c1">// One message per UE per period: the downlink SDUs and bytes that entered RLC.</span>
+<span class="kd">message</span><span class="w"> </span><span class="nc">dl_sdu_count</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">required</span><span class="w"> </span><span class="kt">uint64</span><span class="w"> </span><span class="na">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="k">required</span><span class="w"> </span><span class="kt">uint32</span><span class="w"> </span><span class="na">du_ue_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="k">required</span><span class="w"> </span><span class="kt">uint32</span><span class="w"> </span><span class="na">sdus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">  </span><span class="k">required</span><span class="w"> </span><span class="kt">uint64</span><span class="w"> </span><span class="kt">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="the-codelet">
+<h3>The codelet<a class="headerlink" href="#the-codelet" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">dl_sdu_count.cpp</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// dl_sdu_count: count the downlink SDUs and bytes that enter RLC, per UE, and report them</span>
+<span class="c1">// once per period (2^30 ns, about 1.07 s).</span>
+<span class="c1">// Hook: rlc_dl_new_sdu (monitor). ctx-&gt;data is a jbpf_rlc_ctx_info, and the hook packs</span>
+<span class="c1">// sdu_length &lt;&lt; 32 | pdcp_sn into srs_meta_data1.</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linux/bpf.h&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"jbpf_srsran_contexts.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"dl_sdu_count.pb.h"</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"../utils/misc_utils.h"</span><span class="w">   </span><span class="c1">// JBPF_CODELET_SUCCESS, JBPF_CODELET_FAILURE</span>
+
+<span class="cp">#define SEC(NAME) __attribute__((section(NAME), used))</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"jbpf_defs.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"jbpf_helper.h"</span>
+
+<span class="cp">#define MAX_UE       16</span>
+<span class="cp">#define PERIOD_SHIFT 30</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">ue_count</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">period</span><span class="p">;</span><span class="w">   </span><span class="c1">// the period these counts belong to</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">bytes</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">sdus</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Per-UE counters, indexed by du_ue_index.</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_load_map_def</span><span class="w"> </span><span class="n">SEC</span><span class="p">(</span><span class="s">"maps"</span><span class="p">)</span><span class="w"> </span><span class="n">counts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">type</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">JBPF_MAP_TYPE_ARRAY</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">key_size</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">value_size</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ue_count</span><span class="p">),</span>
+<span class="w">    </span><span class="p">.</span><span class="n">max_entries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MAX_UE</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// Output channel to the xApp, one dl_sdu_count message per entry.</span>
+<span class="n">jbpf_ringbuf_map</span><span class="p">(</span><span class="n">out_counts</span><span class="p">,</span><span class="w"> </span><span class="n">dl_sdu_count</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">);</span>
+
+<span class="k">extern</span><span class="w"> </span><span class="s">"C"</span><span class="w"> </span><span class="n">SEC</span><span class="p">(</span><span class="s">"jbpf_srsran_generic"</span><span class="p">)</span>
+<span class="kt">uint64_t</span><span class="w"> </span><span class="n">jbpf_main</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">state</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_ran_generic_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_ran_generic_ctx</span><span class="o">*</span><span class="p">)</span><span class="n">state</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctx_info</span><span class="o">*</span><span class="w"> </span><span class="n">rlc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctx_info</span><span class="o">*</span><span class="p">)</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// The verifier rejects any read of ctx-&gt;data without this check.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">rlc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">rlc</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">data_end</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">JBPF_CODELET_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Count data bearers only.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rlc</span><span class="o">-&gt;</span><span class="n">is_srb</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">JBPF_CODELET_SUCCESS</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rlc</span><span class="o">-&gt;</span><span class="n">du_ue_index</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">MAX_UE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">ue_count</span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ue_count</span><span class="o">*</span><span class="p">)</span><span class="n">jbpf_map_lookup_elem</span><span class="p">(</span><span class="o">&amp;</span><span class="n">counts</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ue</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">JBPF_CODELET_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// This UE's first SDU in a new period: send the last period's counts, then start over.</span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">period</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jbpf_time_get_ns</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">PERIOD_SHIFT</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">period</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">period</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">sdus</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">dl_sdu_count</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">            </span><span class="n">msg</span><span class="p">.</span><span class="n">timestamp</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">period</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PERIOD_SHIFT</span><span class="p">;</span>
+<span class="w">            </span><span class="n">msg</span><span class="p">.</span><span class="n">du_ue_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ue</span><span class="p">;</span>
+<span class="w">            </span><span class="n">msg</span><span class="p">.</span><span class="n">sdus</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">-&gt;</span><span class="n">sdus</span><span class="p">;</span>
+<span class="w">            </span><span class="n">msg</span><span class="p">.</span><span class="n">bytes</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">-&gt;</span><span class="n">bytes</span><span class="p">;</span>
+<span class="w">            </span><span class="n">jbpf_ringbuf_output</span><span class="p">(</span><span class="o">&amp;</span><span class="n">out_counts</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">msg</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">c</span><span class="o">-&gt;</span><span class="n">period</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">period</span><span class="p">;</span>
+<span class="w">        </span><span class="n">c</span><span class="o">-&gt;</span><span class="n">sdus</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">c</span><span class="o">-&gt;</span><span class="n">bytes</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">c</span><span class="o">-&gt;</span><span class="n">sdus</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">c</span><span class="o">-&gt;</span><span class="n">bytes</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">srs_meta_data1</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">JBPF_CODELET_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Codelets keep their state in maps. <code class="docutils literal notranslate"><span class="pre">counts</span></code> holds each UE’s totals and the period they belong to. A
+UE’s counts go out with its first SDU of the next period, so a UE without traffic stays quiet.
+<code class="docutils literal notranslate"><span class="pre">out_counts</span></code> is the output channel, holding up to 64 messages on their way to the xApp.</p>
+</section>
+<section id="what-the-verifier-checks">
+<h3>What the verifier checks<a class="headerlink" href="#what-the-verifier-checks" title="Link to this heading">¶</a></h3>
+<p>The verifier rejects a codelet that it cannot prove safe. The rules you will meet first:</p>
+<ul class="simple">
+<li><p>Check <code class="docutils literal notranslate"><span class="pre">ctx-&gt;data</span></code> against <code class="docutils literal notranslate"><span class="pre">ctx-&gt;data_end</span></code> before reading the context.</p></li>
+<li><p>Bound every loop. <code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">unroll</span></code> over a constant count works.</p></li>
+<li><p>Avoid 64-bit division; shift instead, as <code class="docutils literal notranslate"><span class="pre">PERIOD_SHIFT</span></code> does.</p></li>
+<li><p>Avoid <code class="docutils literal notranslate"><span class="pre">static</span> <span class="pre">const</span></code> tables. The loader cannot place them, and the verifier then reports
+0 instructions. Use a <code class="docutils literal notranslate"><span class="pre">switch</span></code> that returns the value.</p></li>
+<li><p>Send one message per call. When a codelet sent several in one call, only the first reached the
+xApp.</p></li>
+<li><p>After editing a header, delete the directory’s <code class="docutils literal notranslate"><span class="pre">.o</span></code> files: <code class="docutils literal notranslate"><span class="pre">make</span></code> does not track headers.</p></li>
+</ul>
+</section>
+<section id="build">
+<h3>Build<a class="headerlink" href="#build" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> lists each message as <code class="docutils literal notranslate"><span class="pre">&lt;proto</span> <span class="pre">file&gt;^&lt;message&gt;</span></code>:</p>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nv">PROTO_AND_SCHEMA</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="se">\</span>
+<span class="w">	</span>dl_sdu_count^dl_sdu_count
+
+<span class="cp">include ../Makefile.defs</span>
+<span class="cp">include ../Makefile.common</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial/jrtc-apps/codelets
+./make.sh<span class="w"> </span>-d<span class="w"> </span>dl_sdu_count
+</pre></div>
+</div>
+<p>The build runs in the jbpf SDK container and ends with the verifier’s result:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Building dl_sdu_count
+--------- dl_sdu_count.cpp ----------------------------------------------
+Program terminates within 115 instructions
+</pre></div>
+</div>
+</section>
+<section id="the-codeletset">
+<h3>The codeletset<a class="headerlink" href="#the-codeletset" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">dl_sdu_count.yaml</span></code> attaches the codelet to its hook and names its output channel and message:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">codeletset_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dl_sdu_count</span>
+
+<span class="nt">codelet_descriptor</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">codelet_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dl_sdu_count</span>
+<span class="w">    </span><span class="nt">codelet_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/dl_sdu_count/dl_sdu_count.o</span>
+<span class="w">    </span><span class="nt">hook_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlc_dl_new_sdu</span>
+<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="nt">out_io_channel</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">out_counts</span>
+<span class="w">        </span><span class="nt">forward_destination</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DestinationNone</span>
+<span class="w">        </span><span class="nt">serde</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">file_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/dl_sdu_count/dl_sdu_count:dl_sdu_count_serializer.so</span>
+<span class="w">          </span><span class="nt">protobuf</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">package_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/dl_sdu_count/dl_sdu_count.pb</span>
+<span class="w">            </span><span class="nt">msg_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dl_sdu_count</span>
+</pre></div>
+</div>
+</section>
+<section id="the-xapp">
+<h3>The xApp<a class="headerlink" href="#the-xapp" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">dl_sdu_count_app.py</span></code> subscribes to the output channel and prints each message. The stream name is
+<code class="docutils literal notranslate"><span class="pre">&lt;deployment&gt;://jbpf_agent/&lt;codeletset&gt;/&lt;codelet&gt;</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># dl_sdu_count_app: print the per-UE downlink SDU counts that the dl_sdu_count codelet sends.</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">ctypes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"JRTC_APP_PATH"</span><span class="p">])</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jrtc_app</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dl_sdu_count</span><span class="w"> </span><span class="kn">import</span> <span class="n">struct__dl_sdu_count</span>  <span class="c1"># generated from dl_sdu_count.proto</span>
+
+<span class="n">PERIOD_S</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">30</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e9</span>  <span class="c1"># the codelet's report period</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AppState</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">JrtcApp</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">app_handler</span><span class="p">(</span><span class="n">timeout</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">stream_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data_entry</span><span class="p">:</span> <span class="n">struct_jrtc_router_data_entry</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">AppState</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">timeout</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">data_entry</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">struct__dl_sdu_count</span><span class="p">))</span><span class="o">.</span><span class="n">contents</span>
+    <span class="n">mbps</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">bytes</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">/</span> <span class="n">PERIOD_S</span> <span class="o">/</span> <span class="mf">1e6</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[dl_sdu_count] ue </span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">du_ue_index</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">sdus</span><span class="si">}</span><span class="s2"> SDUs, </span><span class="si">{</span><span class="n">mbps</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> Mbit/s"</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">jrtc_start_app</span><span class="p">(</span><span class="n">capsule</span><span class="p">):</span>
+    <span class="n">streams</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">JrtcStreamCfg_t</span><span class="p">(</span>
+            <span class="n">JrtcStreamIdCfg_t</span><span class="p">(</span>
+                <span class="n">JRTC_ROUTER_REQ_DEST_ANY</span><span class="p">,</span>
+                <span class="n">JRTC_ROUTER_REQ_DEVICE_ID_ANY</span><span class="p">,</span>
+                <span class="sa">b</span><span class="s2">"dl_sdu_count://jbpf_agent/dl_sdu_count/dl_sdu_count"</span><span class="p">,</span>  <span class="c1"># deployment://jbpf_agent/codeletset/codelet</span>
+                <span class="sa">b</span><span class="s2">"out_counts"</span><span class="p">),</span>                                          <span class="c1"># the codelet's output channel</span>
+            <span class="kc">True</span><span class="p">,</span>   <span class="c1"># receive</span>
+            <span class="kc">None</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">JrtcAppCfg_t</span><span class="p">(</span>
+        <span class="sa">b</span><span class="s2">"dl_sdu_count"</span><span class="p">,</span>                              <span class="c1"># context</span>
+        <span class="mi">100</span><span class="p">,</span>                                          <span class="c1"># queue size</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">streams</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">JrtcStreamCfg_t</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">streams</span><span class="p">))(</span><span class="o">*</span><span class="n">streams</span><span class="p">),</span>
+        <span class="mf">10.0</span><span class="p">,</span>                                         <span class="c1"># initialization timeout, s</span>
+        <span class="mf">0.25</span><span class="p">,</span>                                         <span class="c1"># sleep timeout, s</span>
+        <span class="mf">2.0</span><span class="p">)</span>                                          <span class="c1"># inactivity timeout, s</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">AppState</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">jrtc_app_create</span><span class="p">(</span><span class="n">capsule</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">app_handler</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">jrtc_app_run</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">app</span><span class="p">)</span>
+    <span class="n">jrtc_app_destroy</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">app</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">deployment.yaml</span></code> loads the xApp and the codeletset together:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dl_sdu_count</span>
+
+<span class="nt">decoder</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">decodergrpc</span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jrtc-decoder.ran.svc.cluster.local</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20789</span>
+
+<span class="nt">app</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dl_sdu_count_app</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JRTC_APPS}/dl_sdu_count/dl_sdu_count_app.py</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python</span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jrtc-service.ran.svc.cluster.local</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3001</span>
+<span class="w">    </span><span class="nt">modules</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/dl_sdu_count/dl_sdu_count.py</span>
+
+<span class="nt">jbpf</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">device</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">srs-gnb-du1-proxy.ran.svc.cluster.local</span>
+<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30450</span>
+<span class="w">  </span><span class="nt">codelet_set</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">device</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/dl_sdu_count/dl_sdu_count.yaml</span>
+</pre></div>
+</div>
+</section>
+<section id="run-it">
+<h3>Run it<a class="headerlink" href="#run-it" title="Link to this heading">¶</a></h3>
+<p>Bring the RAN up with <code class="docutils literal notranslate"><span class="pre">--telemetry</span></code>, which starts the forwarder that <code class="docutils literal notranslate"><span class="pre">jrtc-ctl</span></code> needs, and start
+traffic (Part 2). Then copy the codelet directory into the gNB container, where the gNB’s jbpf agent
+loads the serializer from, and load the deployment. <code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code> reads the codelets and xApps from your
+clone.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
+JRTC<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-n<span class="w"> </span>ran<span class="w"> </span>jrtc-0<span class="w"> </span>-c<span class="w"> </span>jrtc<span class="w"> </span>--<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">"export JRTC_APPS=/apps JBPF_CODELETS=/codelets; /jrtc/out/bin/jrtc-ctl </span><span class="nv">$*</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+
+kubectl<span class="w"> </span>cp<span class="w"> </span>jrtc-apps/codelets/dl_sdu_count<span class="w"> </span>ran/srs-gnb-du1-0:/codelets/<span class="w"> </span>-c<span class="w"> </span>ocudujbpf
+JRTC<span class="w"> </span><span class="s1">'load -c /apps/dl_sdu_count/deployment.yaml'</span>
+kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>ran<span class="w"> </span>jrtc-0<span class="w"> </span>-c<span class="w"> </span>jrtc<span class="w"> </span>-f<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>dl_sdu_count
+</pre></div>
+</div>
+<p>The gNB log shows <code class="docutils literal notranslate"><span class="pre">Registered</span> <span class="pre">codelet</span> <span class="pre">dl_sdu_count</span> <span class="pre">to</span> <span class="pre">hook</span> <span class="pre">rlc_dl_new_sdu</span></code>, and the xApp prints one line
+per UE about once a second. With two UEs downloading at about 30 Mbit/s each:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[dl_sdu_count] ue 1: 2788 SDUs, 31.2 Mbit/s
+[dl_sdu_count] ue 0: 2773 SDUs, 31.1 Mbit/s
+[dl_sdu_count] ue 0: 2742 SDUs, 30.7 Mbit/s
+[dl_sdu_count] ue 1: 2766 SDUs, 31.0 Mbit/s
+</pre></div>
+</div>
+<p>The counts include RLC retransmissions, so they read a little above the goodput the UEs measure.</p>
+<p>Unload it with the same file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>JRTC<span class="w"> </span><span class="s1">'unload -c /apps/dl_sdu_count/deployment.yaml'</span>
+</pre></div>
+</div>
+<p>To chart the counts in Grafana, have the xApp write them to VictoriaMetrics, as
+<code class="docutils literal notranslate"><span class="pre">jrtc_apps/upt/upt_app.py</span></code> does in its <code class="docutils literal notranslate"><span class="pre">_emit</span></code> function.</p>
+</section>
+</section>
+<section id="example-2-a-control-codelet">
+<h2>Example 2: A Control Codelet<a class="headerlink" href="#example-2-a-control-codelet" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">bufcap</span></code> is the codelet behind Demo 3’s buffer caps. It runs on the <code class="docutils literal notranslate"><span class="pre">rlc_dl_ctrl</span></code> control hook and sets
+the same byte limit on every UE’s data bearers, so the RLC queue drops packets once it holds that many
+bytes. It needs no xApp: the limit is built in.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>jrtc-apps/codelets/bufcap/                 bufcap.cpp  Makefile
+buffer-control-experiments/bufcap.sh       builds, loads and unloads it
+</pre></div>
+</div>
+<section id="id1">
+<h3>The codelet<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">bufcap.cpp</span></code> copies the hook’s context struct from the gNB, then writes the limit on each call:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Copyright (c) Microsoft Corporation. Licensed under the MIT license.</span>
+<span class="c1">//</span>
+<span class="c1">// bufcap - fixed RLC DL buffer cap, for Demo 3 of the tutorial.</span>
+<span class="c1">//</span>
+<span class="c1">// HOOK: rlc_dl_ctrl (control hook in rlc_tx_am_entity::handle_sdu). Fires once per DL SDU</span>
+<span class="c1">// on each RLC AM DRB, before the enqueue/tail-drop decision.</span>
+<span class="c1">//</span>
+<span class="c1">// One source, built once per cap: -DCAP_BYTES=&lt;bytes&gt;. While loaded it asserts that byte</span>
+<span class="c1">// limit on every DRB of every UE, so the queue tail-drops once it holds CAP_BYTES.</span>
+<span class="c1">//</span>
+<span class="c1">// CAP_BYTES=0 builds "bufcap_off": it writes the bearer's CONFIGURED limits back</span>
+<span class="c1">// (cfg_* from the hook context). The gNB keeps the last limit after a codelet is</span>
+<span class="c1">// unloaded, so bufcap.sh loads bufcap_off for a moment to undo a cap.</span>
+<span class="c1">//</span>
+<span class="c1">// The gNB clamps the byte limit to [one max PDCP PDU (~9 kB), configured queue-bytes].</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linux/bpf.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"jbpf_srsran_contexts.h"</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"../utils/misc_utils.h"</span>
+
+<span class="cp">#define SEC(NAME) __attribute__((section(NAME), used))</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"jbpf_defs.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"jbpf_helper.h"</span>
+
+<span class="cp">#ifndef CAP_BYTES</span>
+<span class="cp">#define CAP_BYTES (65536)</span>
+<span class="cp">#endif</span>
+
+<span class="c1">// Layout MUST MATCH struct jbpf_rlc_ctrl_info in</span>
+<span class="c1">// ocudu-jbpf/include/srsran/jbpf/jbpf_srsran_contexts.h (see bufctl/rlc_ctrl.cpp).</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctrl_info</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">du_ue_index</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">is_srb</span><span class="p">;</span><span class="w">           </span><span class="c1">// always 0: the hook only fires for DRBs</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">rb_id</span><span class="p">;</span><span class="w">            </span><span class="c1">// DRB id</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cur_byte_limit</span><span class="p">;</span><span class="w">   </span><span class="c1">// gNB -&gt; codelet</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">new_byte_limit</span><span class="p">;</span><span class="w">   </span><span class="c1">// codelet -&gt; gNB (0 = leave unchanged)</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cur_sdu_limit</span><span class="p">;</span><span class="w">    </span><span class="c1">// gNB -&gt; codelet</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">new_sdu_limit</span><span class="p">;</span><span class="w">    </span><span class="c1">// codelet -&gt; gNB (0 = leave unchanged)</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cfg_byte_limit</span><span class="p">;</span><span class="w">   </span><span class="c1">// gNB -&gt; codelet: configured byte limit</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">cfg_sdu_limit</span><span class="p">;</span><span class="w">    </span><span class="c1">// gNB -&gt; codelet: configured SDU limit</span>
+<span class="p">};</span>
+
+<span class="k">extern</span><span class="w"> </span><span class="s">"C"</span><span class="w"> </span><span class="n">SEC</span><span class="p">(</span><span class="s">"jbpf_srsran_generic"</span><span class="p">)</span>
+<span class="kt">uint64_t</span><span class="w"> </span><span class="n">jbpf_main</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">state</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_ran_generic_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">jbpf_ran_generic_ctx</span><span class="o">*</span><span class="p">)</span><span class="n">state</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctrl_info</span><span class="o">*</span><span class="w"> </span><span class="n">ci</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctrl_info</span><span class="o">*</span><span class="p">)</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">ci</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">jbpf_rlc_ctrl_info</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span>
+<span class="w">        </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">data_end</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">JBPF_CODELET_FAILURE</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ci</span><span class="o">-&gt;</span><span class="n">is_srb</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">JBPF_CODELET_SUCCESS</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#if CAP_BYTES == 0</span>
+<span class="w">    </span><span class="n">ci</span><span class="o">-&gt;</span><span class="n">new_byte_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ci</span><span class="o">-&gt;</span><span class="n">cfg_byte_limit</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ci</span><span class="o">-&gt;</span><span class="n">new_sdu_limit</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">ci</span><span class="o">-&gt;</span><span class="n">cfg_sdu_limit</span><span class="p">;</span>
+<span class="cp">#else</span>
+<span class="w">    </span><span class="n">ci</span><span class="o">-&gt;</span><span class="n">new_byte_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAP_BYTES</span><span class="p">;</span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">JBPF_CODELET_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>Build<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p>Each limit is its own object. The <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>’s <code class="docutils literal notranslate"><span class="pre">one</span></code> target compiles <code class="docutils literal notranslate"><span class="pre">bufcap.cpp</span></code> with
+<code class="docutils literal notranslate"><span class="pre">-DCAP_BYTES=&lt;bytes&gt;</span></code> and runs the verifier on the result:</p>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nf">one</span><span class="o">:</span>
+<span class="w">	</span>@echo<span class="w"> </span><span class="s2">"--------- bufcap.cpp -&gt; bufcap_</span><span class="k">$(</span>NAME<span class="k">)</span><span class="s2">.o (CAP_BYTES=</span><span class="k">$(</span>CAP<span class="k">)</span><span class="s2">) ---------"</span>
+<span class="w">	</span>@<span class="k">$(</span>CXX<span class="k">)</span><span class="w"> </span><span class="k">$(</span>CXXFLAGS<span class="k">)</span><span class="w"> </span>-DCAP_BYTES<span class="o">=</span><span class="k">$(</span>CAP<span class="k">)</span><span class="w"> </span><span class="k">$(</span>INC<span class="k">)</span><span class="w"> </span>-c<span class="w"> </span>bufcap.cpp<span class="w"> </span>-o<span class="w"> </span>bufcap_<span class="k">$(</span>NAME<span class="k">)</span>.o
+<span class="w">	</span>@<span class="k">$(</span>VERIFIER_BIN<span class="k">)</span><span class="w"> </span>bufcap_<span class="k">$(</span>NAME<span class="k">)</span>.o<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"verifier: OK"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span><span class="o">||</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"verifier: FAILED -- the gNB would reject bufcap_</span><span class="k">$(</span>NAME<span class="k">)</span><span class="s2">.o"</span><span class="p">;</span><span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>bufcap_<span class="k">$(</span>NAME<span class="k">)</span>.o<span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">build</span></code> runs that target in the jbpf SDK container, then writes the codeletset and the
+deployment for each size:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
+bash<span class="w"> </span>buffer-control-experiments/bufcap.sh<span class="w"> </span>build<span class="w"> </span>64k
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  --------- bufcap.cpp -&gt; bufcap_64k.o (CAP_BYTES=65536) ---------
+  verifier: OK
+  built bufcap_64k (65536 bytes)
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">jrtc-apps/codelets/bufcap/bufcap_64k.yaml</span></code> attaches the object to the hook:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># generated by buffer-control-experiments/bufcap.sh -- fixed RLC DL buffer cap (64k = 65536 bytes; 0 = restore config)</span>
+<span class="nt">codeletset_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bufcap</span>
+<span class="nt">codelet_descriptor</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">codelet_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bufcap</span>
+<span class="w">    </span><span class="nt">codelet_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/bufcap/bufcap_64k.o</span>
+<span class="w">    </span><span class="nt">hook_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rlc_dl_ctrl</span>
+<span class="w">    </span><span class="nt">priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">jrtc-apps/jrtc_apps/bufcap/deployment_64k.yaml</span></code> loads it, with no xApp:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># generated by buffer-control-experiments/bufcap.sh</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bufcap</span>
+<span class="nt">jbpf</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">device</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">srs-gnb-du1-proxy.ran.svc.cluster.local</span>
+<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30450</span>
+<span class="w">  </span><span class="nt">codelet_set</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">device</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JBPF_CODELETS}/bufcap/bufcap_64k.yaml</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>Run it<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>With the RAN and the UEs up as in <a class="reference internal" href="demo3-buffer-management.html"><span class="std std-doc">Demo 3</span></a>, start its traffic: a 2 Mbit/s
+video call and a download, both to UE 1. Then copy the object into the gNB container and load the
+deployment with the <code class="docutils literal notranslate"><span class="pre">JRTC</span></code> function from Example 1. <code class="docutils literal notranslate"><span class="pre">jrtc-ctl</span></code> prints nothing when the load works.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
+bash<span class="w"> </span>buffer-control-experiments/traffic_A.sh<span class="w"> </span>start
+
+kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-n<span class="w"> </span>ran<span class="w"> </span>srs-gnb-du1-0<span class="w"> </span>-c<span class="w"> </span>ocudujbpf<span class="w"> </span>--<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/codelets/bufcap
+kubectl<span class="w"> </span>cp<span class="w"> </span>jrtc-apps/codelets/bufcap/bufcap_64k.o<span class="w"> </span>ran/srs-gnb-du1-0:/codelets/bufcap/<span class="w"> </span>-c<span class="w"> </span>ocudujbpf
+JRTC<span class="w"> </span><span class="s1">'load -c /apps/bufcap/deployment_64k.yaml'</span>
+</pre></div>
+</div>
+<p>The gNB log shows <code class="docutils literal notranslate"><span class="pre">Registered</span> <span class="pre">codelet</span> <span class="pre">bufcap</span> <span class="pre">to</span> <span class="pre">hook</span> <span class="pre">rlc_dl_ctrl</span></code>. Watch UE 1 in the gNB console
+(<code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/gnb_console.sh</span></code>). Before the load, UE 1 receives 63 Mbit/s with about 2 MB queued
+(<code class="docutils literal notranslate"><span class="pre">dl_bs</span></code>):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> pci rnti | cqi  ri  mcs  brate   ok  nok  (%)  dl_bs
+   1 4601 |  15 1.0   27    63M 1400    0   0%  1.95M
+   1 4601 |  15 1.0   27    63M 1400    0   0%     2M
+</pre></div>
+</div>
+<p>From the next downlink SDU on, the gNB drops any SDU that would take UE 1’s queue past 64 KiB. The
+queue drains and the rate falls:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> pci rnti | cqi  ri  mcs  brate   ok  nok  (%)  dl_bs
+   1 4601 |  15 1.0   26    24M  618    0   0%      0
+   1 4601 |  15 1.0   26    18M  467    0   0%  1.51k
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">/tmp/gnb.log</span></code> in the gNB container records each drop:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[RLC     ] [W] du=0 ue=0 DRB1 DL: Dropped SDU. sdu_len=1503 pdcp_sn=66478 is_retx=false queued_sdus=43 queued_bytes=64629
+</pre></div>
+</div>
+<p><a class="reference internal" href="demo3-buffer-management.html"><span class="std std-doc">Demo 3</span></a> measures what each cap size does to the call’s RTT and the
+download’s throughput.</p>
+<p>Unload the codelet with the same file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>JRTC<span class="w"> </span><span class="s1">'unload -c /apps/bufcap/deployment_64k.yaml'</span>
+</pre></div>
+</div>
+<p>The gNB keeps the last limit after the codelet is gone, and UE 1 stays near 16 Mbit/s. To
+restore the configured queue, load <code class="docutils literal notranslate"><span class="pre">bufcap_off</span></code>, which writes <code class="docutils literal notranslate"><span class="pre">cfg_byte_limit</span></code> back, until the next
+downlink packet has passed, then unload it. <code class="docutils literal notranslate"><span class="pre">bufcap.sh</span> <span class="pre">off</span></code> does both:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>buffer-control-experiments/bufcap.sh<span class="w"> </span>off
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  loaded bufcap_off
+  configured buffer restored; bufcap unloaded
+</pre></div>
+</div>
+<p>UE 1 is back at 63 Mbit/s, with 1.5 to 3 MB queued.</p>
+</section>
+<section id="set-the-limit-from-an-xapp">
+<h3>Set the limit from an xApp<a class="headerlink" href="#set-the-limit-from-an-xapp" title="Link to this heading">¶</a></h3>
+<p>To change the limit while the gNB runs, give the codelet an input channel:</p>
+<ul class="simple">
+<li><p>In the codelet, declare the channel and drain it on each call:
+<code class="docutils literal notranslate"><span class="pre">jbpf_control_input_map(ctrl_in,</span> <span class="pre">struct</span> <span class="pre">my_cmd,</span> <span class="pre">32);</span></code> and
+<code class="docutils literal notranslate"><span class="pre">jbpf_control_input_receive(&amp;ctrl_in,</span> <span class="pre">&amp;cmd,</span> <span class="pre">sizeof(cmd))</span></code>.</p></li>
+<li><p>In the codeletset YAML, add <code class="docutils literal notranslate"><span class="pre">in_io_channel:</span></code> with <code class="docutils literal notranslate"><span class="pre">-</span> <span class="pre">name:</span> <span class="pre">ctrl_in</span></code>.</p></li>
+<li><p>In the xApp, open a stream to that channel with <code class="docutils literal notranslate"><span class="pre">is_rx</span></code> set to <code class="docutils literal notranslate"><span class="pre">False</span></code> and a concrete device id
+(<code class="docutils literal notranslate"><span class="pre">JrtcStreamIdCfg_t(JRTC_ROUTER_REQ_DEST_NONE,</span> <span class="pre">1,</span> <span class="pre">...)</span></code>), then send with
+<code class="docutils literal notranslate"><span class="pre">jrtc_app_router_channel_send_input_msg(app,</span> <span class="pre">stream_idx,</span> <span class="pre">msg,</span> <span class="pre">len(msg))</span></code>.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">codelets/bufctl/rlc_ctrl.cpp</span></code> and its xApp in <code class="docutils literal notranslate"><span class="pre">jrtc_apps/bufctl</span></code> set a limit per UE and bearer this
+way, from the CLI in <a class="reference internal" href="demo3-buffer-management.html"><span class="std std-doc">Demo 3</span></a>.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="miscellaneous.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Miscellaneous</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="demo3-buffer-management.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Ushasi Ghosh
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Hooks and Codelets</a><ul>
+<li><a class="reference internal" href="#how-the-pieces-fit">How the Pieces Fit</a></li>
+<li><a class="reference internal" href="#add-a-hook-to-the-gnb">Add a Hook to the gNB</a></li>
+<li><a class="reference internal" href="#example-1-a-telemetry-codelet">Example 1: A Telemetry Codelet</a><ul>
+<li><a class="reference internal" href="#the-message">The message</a></li>
+<li><a class="reference internal" href="#the-codelet">The codelet</a></li>
+<li><a class="reference internal" href="#what-the-verifier-checks">What the verifier checks</a></li>
+<li><a class="reference internal" href="#build">Build</a></li>
+<li><a class="reference internal" href="#the-codeletset">The codeletset</a></li>
+<li><a class="reference internal" href="#the-xapp">The xApp</a></li>
+<li><a class="reference internal" href="#run-it">Run it</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example-2-a-control-codelet">Example 2: A Control Codelet</a><ul>
+<li><a class="reference internal" href="#id1">The codelet</a></li>
+<li><a class="reference internal" href="#id2">Build</a></li>
+<li><a class="reference internal" href="#id3">Run it</a></li>
+<li><a class="reference internal" href="#set-the-limit-from-an-xapp">Set the limit from an xApp</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=b32bce50"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/sidebar-brand-logos.js?v=577991cb"></script>
+    <script src="../_static/news-sidebar.js?v=394020a7"></script>
+    <script src="../_static/demo-video.js?v=f940bad2"></script>
+    <script src="../_static/sidebar-clickable-titles.js?v=92accabe"></script>
+    <script src="../_static/sidebar-expand-collapse.js?v=778dbc98"></script>
+    </body>
+</html>

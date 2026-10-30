@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="OAIC-EdgeRIC Workshop ‘24" href="../oaic-workshop-2024.html"><link rel="prev" title="Demo 3: TCP Flow Optimization with Real-Time Buffer Management" href="demo3-buffer-management.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="OAIC-EdgeRIC Workshop ‘24" href="../oaic-workshop-2024.html"><link rel="prev" title="Hooks and Codelets" href="hooks-and-codelets.html">
 
     <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
         <title>Miscellaneous - EdgeRIC</title>
@@ -231,6 +231,7 @@
 <li class="toctree-l2"><a class="reference internal" href="demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks-and-codelets.html">Hooks and Codelets</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Miscellaneous</a></li>
 </ul>
 </li>
@@ -255,6 +256,7 @@
 <li class="toctree-l2"><a class="reference internal" href="demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks-and-codelets.html">Hooks and Codelets</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Miscellaneous</a></li>
 </ul>
 </li>
@@ -283,12 +285,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/yourusername/edgeric/blob/main/docs/open-ai-ran-tutorial/miscellaneous.md?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/edgeric/edgeric.github.io/blob/main/docs/open-ai-ran-tutorial/miscellaneous.md?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/yourusername/edgeric/edit/main/docs/open-ai-ran-tutorial/miscellaneous.md" rel="edit" title="Edit this page">
+  <a class="muted-link" href="https://github.com/edgeric/edgeric.github.io/edit/main/docs/open-ai-ran-tutorial/miscellaneous.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -460,8 +462,8 @@ Registered codelet mac_sched_bsr_stats to hook mac_sched_ul_bsr_indication
 <p><code class="docutils literal notranslate"><span class="pre">--telemetry</span></code> loads two xApps into <code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code>:</p>
 <ul class="simple">
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">upt_app</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">jrtc_apps/upt</span></code>): per-packet user-plane telemetry. Per-UE downlink GTP arrival rate,
-RLC queuing latency and RLC buffer occupancy in 134 ms buckets. <a class="reference internal" href="demo3-buffer-management.html#telemetry-codelets-for-the-rlc-queue"><span class="std std-ref">Demo 3</span></a>
-shows how these codelets are written.</p></li>
+RLC queuing latency and RLC buffer occupancy in 134 ms buckets. <a class="reference internal" href="hooks-and-codelets.html"><span class="std std-doc">Hooks and Codelets</span></a>
+shows how to write a codelet like these.</p></li>
 <li><p><strong>The dashboard xApp</strong> (<code class="docutils literal notranslate"><span class="pre">jrtc_apps/dashboard</span></code>): per-layer, per-UE MAC, RLC, PDCP, RRC and NGAP
 statistics as JSON in the <code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code> log, plus per-UE DL CQI, UL SNR, DL MCS, DL MAC throughput and
 each UE’s identity chain, from IMSI and IP down to its C-RNTI.</p></li>
@@ -645,14 +647,14 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:30491/api
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="demo3-buffer-management.html">
+          <a class="prev-page" href="hooks-and-codelets.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</div>
+                <div class="title">Hooks and Codelets</div>
                 
               </div>
             </a>

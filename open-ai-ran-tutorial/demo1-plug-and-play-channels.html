@@ -231,6 +231,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks-and-codelets.html">Hooks and Codelets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
 </ul>
 </li>
@@ -255,6 +256,7 @@
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks-and-codelets.html">Hooks and Codelets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
 </ul>
 </li>
@@ -283,12 +285,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/yourusername/edgeric/blob/main/docs/open-ai-ran-tutorial/demo1-plug-and-play-channels.md?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/edgeric/edgeric.github.io/blob/main/docs/open-ai-ran-tutorial/demo1-plug-and-play-channels.md?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/yourusername/edgeric/edit/main/docs/open-ai-ran-tutorial/demo1-plug-and-play-channels.md" rel="edit" title="Edit this page">
+  <a class="muted-link" href="https://github.com/edgeric/edgeric.github.io/edit/main/docs/open-ai-ran-tutorial/demo1-plug-and-play-channels.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -548,60 +550,47 @@ bash<span class="w"> </span>scripts/stop_demo.sh<span class="w">              </
 </div>
 <p>Then press Ctrl-C in Terminals 1 and 3.</p>
 </section>
-<section id="reference-to-be-updated">
-<h2>Reference [To be updated]<a class="headerlink" href="#reference-to-be-updated" title="Link to this heading">¶</a></h2>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">¶</a></h2>
 <section id="trace-files">
 <h3>Trace files<a class="headerlink" href="#trace-files" title="Link to this heading">¶</a></h3>
-<p>A trace is a CSV with the header <code class="docutils literal notranslate"><span class="pre">t_s,dl_snr_db,ul_snr_db</span></code>; further columns are ignored. <code class="docutils literal notranslate"><span class="pre">t_s</span></code> starts
-at 0 and increases; each row holds until the next, with no interpolation; the trace loops with a period
-of its last <code class="docutils literal notranslate"><span class="pre">t_s</span></code> plus its last step; and the SNRs apply as given, with no floors. The library files
-have one row per 10 ms over 300 s.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/trace_ctl.sh<span class="w"> </span>list<span class="w">                                 </span><span class="c1"># rows, loop length, DL / UL SNR min, median, max</span>
+<p>A trace is a CSV with the header <code class="docutils literal notranslate"><span class="pre">t_s,dl_snr_db,ul_snr_db</span></code>. Each row holds until the next one, and the
+trace loops. The library in <code class="docutils literal notranslate"><span class="pre">duranta-oai-ue/traces/lib/</span></code> has one row per 10 ms over 300 s, generated
+with fixed seeds from the recipes in <code class="docutils literal notranslate"><span class="pre">duranta-oai-ue/traces/scenarios.conf</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/trace_ctl.sh<span class="w"> </span>list<span class="w">                                 </span><span class="c1"># each trace: rows, loop length, SNR range</span>
 python3<span class="w"> </span>duranta-oai-ue/traces/gen_traces.py<span class="w"> </span>--all<span class="w">              </span><span class="c1"># rebuild the library (--only NAME for one)</span>
-python3<span class="w"> </span>duranta-oai-ue/traces/gen_traces.py<span class="w"> </span>--check<span class="w"> </span>FILE.csv<span class="w">   </span><span class="c1"># what trace_ctl.sh checks before a switch</span>
-python3<span class="w"> </span>duranta-oai-ue/traces/check_parity.py<span class="w">                  </span><span class="c1"># the generator's copy of the model vs the UE's C++</span>
+python3<span class="w"> </span>duranta-oai-ue/traces/gen_traces.py<span class="w"> </span>--check<span class="w"> </span>FILE.csv<span class="w">   </span><span class="c1"># the checks trace_ctl.sh runs before a switch</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">gen_traces.py</span></code> writes the library from the recipes in <code class="docutils literal notranslate"><span class="pre">scenarios.conf</span></code> with fixed seeds. <code class="docutils literal notranslate"><span class="pre">walk</span></code>
-recipes are 2D random walks with path loss and log-normal shadowing; <code class="docutils literal notranslate"><span class="pre">bounce</span></code> recipes run the UE’s own
-channel model. To add a random walk:</p>
+<p>To add a random walk and play it on ue2:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"trace_9  walk  seed=9  speed_kmh=40  start_m=70  min_m=30  max_m=120"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>duranta-oai-ue/traces/scenarios.conf
 python3<span class="w"> </span>duranta-oai-ue/traces/gen_traces.py<span class="w"> </span>--only<span class="w"> </span>trace_9
 bash<span class="w"> </span>scripts/trace_ctl.sh<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>trace_9
 </pre></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">trace_ctl.sh</span></code> copies a trace into the UE container and writes that UE’s control file,
+<code class="docutils literal notranslate"><span class="pre">/tmp/traces/ue&lt;n&gt;.ctl</span></code>. The UE reads the file every 100 ms and switches at the air time it names.
+The channel model itself is described on <a class="reference internal" href="../projects/tiny-twin.html"><span class="doc">Cellular Digital Twins</span></a>.</p>
 </section>
-<section id="base-channel-table">
-<h3>Base channel table<a class="headerlink" href="#base-channel-table" title="Link to this heading">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">ue_channel_4ue.conf</span></code> has one line per UE: the starting distance in m, the speed in km/h (0 is static),
-the range the UE moves in, the DL and UL SNR at the starting distance, and the shadowing in rms dB.</p>
+<section id="id2">
+<h3>Base channels<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">--channel</span> <span class="pre">duranta-oai-ue/ue_channel_4ue.conf</span></code> gives each UE a channel driven by distance. Each line
+holds a UE’s starting distance, its speed (0 for a static UE), the range it moves in, the DL and UL SNR
+at the start, and the shadowing in dB. SNR falls by 37.6 dB per decade of distance. Put comments on
+their own lines: a comment after the values counts as one more column.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># ue   dist_m   speed_kmh   min_m   max_m   dl_snr_ref   ul_snr_ref   jitter_db
   4    50       30          40      140     25           25           4
 </pre></div>
 </div>
-<p>SNR falls by 37.6 dB per decade of distance, with floors of 8 dB DL and 5 dB UL. <code class="docutils literal notranslate"><span class="pre">ul_noise_dbfs</span></code> is the
-gNB noise floor, one value for the cell. Keep comments on their own lines: a comment after the values
-reads as one more column.</p>
-</section>
-<section id="how-the-ue-replays-a-trace">
-<h3>How the UE replays a trace<a class="headerlink" href="#how-the-ue-replays-a-trace" title="Link to this heading">¶</a></h3>
-<p>With <code class="docutils literal notranslate"><span class="pre">--traces</span></code>, each UE’s channel option carries a control file, <code class="docutils literal notranslate"><span class="pre">/tmp/traces/ue&lt;n&gt;.ctl</span></code> in the UE
-container. <code class="docutils literal notranslate"><span class="pre">trace_ctl.sh</span></code> validates the trace on the host, copies it to <code class="docutils literal notranslate"><span class="pre">/tmp/traces/&lt;name&gt;.csv</span></code> in the
-container, and writes each UE’s control file: <code class="docutils literal notranslate"><span class="pre">trace=</span></code>, <code class="docutils literal notranslate"><span class="pre">start=</span></code> (the air time T) and <code class="docutils literal notranslate"><span class="pre">loop=</span></code>. A
-normal-priority thread in each UE polls its control file every 100 ms and loads the trace; the radio
-threads pick up the switch at T. The channel computation itself is on
-<a class="reference internal" href="../projects/tiny-twin.html"><span class="doc">Cellular Digital Twins</span></a>.</p>
 </section>
 <section id="limits">
 <h3>Limits<a class="headerlink" href="#limits" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--traces</span></code> needs the C++ broker, which starts every UE on the same gNB sample and keeps their air
-times equal. One <code class="docutils literal notranslate"><span class="pre">ul_noise_dbfs</span></code> applies to the broker and every UE.</p></li>
-<li><p>Keep both SNRs at 0 dB or above. Below that the OAI UE misreports CQI, and a UE the gNB releases does
-not come back.</p></li>
+<li><p>Keep both SNRs at 0 dB or above. Below that the OAI UE misreports CQI, and a UE the gNB releases
+does not come back.</p></li>
 <li><p>The gNB adapts the downlink once per 20 ms CSI report, so faster SNR changes show up as block errors.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stop</span></code> returns a UE to its base channel, which keeps the broker’s noise floor. For a link with no added
-noise at all, run Terminals 1 and 2 with <code class="docutils literal notranslate"><span class="pre">--clean</span></code> and without <code class="docutils literal notranslate"><span class="pre">--traces</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trace_ctl.sh</span> <span class="pre">stop</span></code> puts a UE back on its base channel. For a link with no added noise at all, run
+both terminals with <code class="docutils literal notranslate"><span class="pre">--clean</span></code> and without <code class="docutils literal notranslate"><span class="pre">--traces</span></code>.</p></li>
 </ul>
 </section>
 <section id="troubleshooting">
@@ -618,7 +607,7 @@ noise at all, run Terminals 1 and 2 with <code class="docutils literal notransla
 <td><p>start Terminal 1 first</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UEs</span> <span class="pre">already</span> <span class="pre">joined</span> <span class="pre">this</span> <span class="pre">RAN</span></code></p></td>
-<td><p>the UEs can join a RAN once: restart Terminal 1, then Terminal 2</p></td>
+<td><p>restart Terminal 1, then Terminal 2</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">broker's</span> <span class="pre">UL</span> <span class="pre">noise</span> <span class="pre">floor</span> <span class="pre">is</span> <span class="pre">...</span></code></p></td>
 <td><p>give Terminal 1 the same <code class="docutils literal notranslate"><span class="pre">--channel</span></code> or <code class="docutils literal notranslate"><span class="pre">--traces</span></code> file as Terminal 2</p></td>
@@ -627,21 +616,21 @@ noise at all, run Terminals 1 and 2 with <code class="docutils literal notransla
 <td><p>restart Terminal 1, then Terminal 2; UE logs are in <code class="docutils literal notranslate"><span class="pre">/tmp/ues/ue&lt;i&gt;.log</span></code> in <code class="docutils literal notranslate"><span class="pre">durue1</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ue&lt;n&gt;</span> <span class="pre">runs</span> <span class="pre">without</span> <span class="pre">trace</span> <span class="pre">control</span></code></p></td>
-<td><p>Terminal 2 ran without <code class="docutils literal notranslate"><span class="pre">--traces</span></code>: restart both terminals with it</p></td>
+<td><p>restart both terminals with <code class="docutils literal notranslate"><span class="pre">--traces</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>a UE answers <code class="docutils literal notranslate"><span class="pre">...</span> <span class="pre">channel</span> <span class="pre">unchanged</span></code></p></td>
-<td><p>it rejected the control or trace file; the message says why</p></td>
+<td><p>it rejected the control or trace file, and the message says why</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rows</span> <span class="pre">with</span> <span class="pre">DL</span> <span class="pre">SNR</span> <span class="pre">&lt;</span> <span class="pre">0</span> <span class="pre">dB</span></code></p></td>
 <td><p>fix the trace, or pass <code class="docutils literal notranslate"><span class="pre">--allow-low-snr</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">this</span> <span class="pre">gNB</span> <span class="pre">build</span> <span class="pre">only</span> <span class="pre">takes</span> <span class="pre">tcp://</span></code></p></td>
-<td><p>the gNB container runs the <code class="docutils literal notranslate"><span class="pre">:local</span></code> image: import <code class="docutils literal notranslate"><span class="pre">:ipc</span></code> and recreate the gNB pod</p></td>
+<td><p>import the <code class="docutils literal notranslate"><span class="pre">:ipc</span></code> gNB image and recreate the gNB pod (Part 2)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">UE</span> <span class="pre">in</span> <span class="pre">container</span> <span class="pre">'durue1'</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">ZMQ</span> <span class="pre">channel</span> <span class="pre">support</span></code></p></td>
 <td><p>rebuild <code class="docutils literal notranslate"><span class="pre">duranta-nr-ue:local</span></code>, import it and recreate the gNB pod</p></td>
 </tr>
-<tr class="row-odd"><td><p>all UEs attached, no throughput</p></td>
+<tr class="row-odd"><td><p>UEs attached, no throughput</p></td>
 <td><p>re-point the SMF at the UPF (Part 2)</p></td>
 </tr>
 </tbody>
@@ -721,10 +710,9 @@ noise at all, run Terminals 1 and 2 with <code class="docutils literal notransla
 </ul>
 </li>
 <li><a class="reference internal" href="#stop">5. Stop</a></li>
-<li><a class="reference internal" href="#reference-to-be-updated">Reference [To be updated]</a><ul>
+<li><a class="reference internal" href="#reference">Reference</a><ul>
 <li><a class="reference internal" href="#trace-files">Trace files</a></li>
-<li><a class="reference internal" href="#base-channel-table">Base channel table</a></li>
-<li><a class="reference internal" href="#how-the-ue-replays-a-trace">How the UE replays a trace</a></li>
+<li><a class="reference internal" href="#id2">Base channels</a></li>
 <li><a class="reference internal" href="#limits">Limits</a></li>
 <li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 </ul>

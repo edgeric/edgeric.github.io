@@ -231,6 +231,7 @@
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html">Hooks and Codelets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/miscellaneous.html">Miscellaneous</a></li>
 </ul>
 </li>
@@ -255,6 +256,7 @@
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo2-ai-scheduling.html">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html">Hooks and Codelets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="open-ai-ran-tutorial/miscellaneous.html">Miscellaneous</a></li>
 </ul>
 </li>
@@ -283,12 +285,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/yourusername/edgeric/blob/main/docs/open-ai-ran-tutorial.md?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/edgeric/edgeric.github.io/blob/main/docs/open-ai-ran-tutorial.md?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/yourusername/edgeric/edit/main/docs/open-ai-ran-tutorial.md" rel="edit" title="Edit this page">
+  <a class="muted-link" href="https://github.com/edgeric/edgeric.github.io/edit/main/docs/open-ai-ran-tutorial.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -330,12 +332,15 @@ the RAN datapath, and unloaded again, with no recompile or restart. Codelets run
 <tr class="row-even"><td><p><a class="reference internal" href="open-ai-ran-tutorial/demo3-buffer-management.html"><span class="std std-doc">Demo 3: TCP flow optimization with real-time buffer management</span></a></p></td>
 <td><p>RLC buffer control from a codelet, cell-wide and per UE, to remove bufferbloat</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html"><span class="std std-doc">Hooks and Codelets</span></a></p></td>
+<td><p>Add a hook to the gNB, then write, build and load your own telemetry and control codelets</p></td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Do Parts 1 and 2 first; every demo builds on them.</p>
+<p>Do Parts 1 and 2 first; every demo builds on them. Part 4 moves the cell onto a USRP to run over the air.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -501,7 +506,7 @@ k3d<span class="w"> </span>image<span class="w"> </span>import<span class="w"> <
 <section id="build-the-codelets">
 <h3>Build the codelets<a class="headerlink" href="#build-the-codelets" title="Link to this heading">¶</a></h3>
 <p>The demos load these codelet sets into the running gNB. The <code class="docutils literal notranslate"><span class="pre">.o</span></code> files are gitignored, so a fresh clone
-has none; the build takes about a minute.</p>
+has none; the build takes a minute or two.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -519,11 +524,15 @@ has none; the build takes about a minute.</p>
 <td><p>RLC queuing latency and buffer occupancy, per UE and bearer</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">--telemetry</span></code>: Grafana, Demos 1 and 3</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">edgeric_rt</span></code>, <code class="docutils literal notranslate"><span class="pre">dashboard_realtime_scheduling</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fapi_dl_conf</span></code>, <code class="docutils literal notranslate"><span class="pre">fapi_ul_conf</span></code>, <code class="docutils literal notranslate"><span class="pre">fapi_ul_crc</span></code>, <code class="docutils literal notranslate"><span class="pre">fapi_rach</span></code>, <code class="docutils literal notranslate"><span class="pre">perf</span></code>, <code class="docutils literal notranslate"><span class="pre">xran_packets</span></code></p></td>
+<td><p>not loaded; the dashboard xApp imports the Python modules their build generates</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--telemetry</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">edgeric_rt</span></code>, <code class="docutils literal notranslate"><span class="pre">dashboard_realtime_scheduling</span></code></p></td>
 <td><p>the EdgeRIC-RT scheduling loop and its dashboard</p></td>
 <td><p>Demo 2</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bufctl</span></code>, <code class="docutils literal notranslate"><span class="pre">bufcap</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bufctl</span></code>, <code class="docutils literal notranslate"><span class="pre">bufcap</span></code></p></td>
 <td><p>RLC buffer limits, per UE and cell-wide</p></td>
 <td><p>Demo 3</p></td>
 </tr>
@@ -532,6 +541,7 @@ has none; the build takes about a minute.</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="nv">$REPO_ROOT</span><span class="s2">/jrtc-apps/codelets"</span>
 <span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span>ue_contexts<span class="w"> </span>mac<span class="w"> </span>rlc<span class="w"> </span>pdcp<span class="w"> </span>rrc<span class="w"> </span>ngap<span class="w"> </span>upt<span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>fapi_dl_conf<span class="w"> </span>fapi_ul_conf<span class="w"> </span>fapi_ul_crc<span class="w"> </span>fapi_rach<span class="w"> </span>perf<span class="w"> </span>xran_packets<span class="w"> </span><span class="se">\</span>
 <span class="w">         </span>edgeric_rt<span class="w"> </span>dashboard_realtime_scheduling<span class="w"> </span>bufctl<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">  </span>./make.sh<span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">"</span>
 <span class="k">done</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"^Building|^---|terminates|^[a-z_]+\.cpp: Failed"</span>
@@ -542,7 +552,7 @@ bash<span class="w"> </span>buffer-control-experiments/bufcap.sh<span class="w">
 </div>
 <p>Each codelet prints its verifier result. <code class="docutils literal notranslate"><span class="pre">Program</span> <span class="pre">terminates</span> <span class="pre">within</span> <span class="pre">N</span> <span class="pre">instructions</span></code> means the jbpf
 verifier accepted it; <code class="docutils literal notranslate"><span class="pre">Failed</span> <span class="pre">verification</span></code> means it will not load, and
-<a class="reference internal" href="open-ai-ran-tutorial/demo3-buffer-management.html#anatomy-of-a-codelet"><span class="std std-ref">Demo 3</span></a> covers the usual causes.
+<a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html#what-the-verifier-checks"><span class="std std-ref">Hooks and Codelets</span></a> covers the usual causes.
 The <code class="docutils literal notranslate"><span class="pre">grep</span></code> keeps only these lines; drop it to see the full build log. Abridged:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Building ue_contexts
 --------- cucp_uemgr_ue_add.cpp ----------------------------------------------
@@ -756,9 +766,140 @@ k3d<span class="w"> </span>cluster<span class="w"> </span>stop<span class="w"> <
 <li><p><a class="reference internal" href="open-ai-ran-tutorial/demo1-plug-and-play-channels.html"><span class="std std-doc">Demo 1: Cellular Digital Twin</span></a></p></li>
 <li><p><a class="reference internal" href="open-ai-ran-tutorial/demo2-ai-scheduling.html"><span class="std std-doc">Demo 2: AI-Driven Scheduling</span></a></p></li>
 <li><p><a class="reference internal" href="open-ai-ran-tutorial/demo3-buffer-management.html"><span class="std std-doc">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</span></a></p></li>
+<li><p><a class="reference internal" href="open-ai-ran-tutorial/hooks-and-codelets.html"><span class="std std-doc">Hooks and Codelets</span></a>: write and load your own codelets</p></li>
 </ol>
 <p>Loading codelets by hand, Grafana, the hooks and the repository layout are on
 <a class="reference internal" href="open-ai-ran-tutorial/miscellaneous.html"><span class="std std-doc">Miscellaneous</span></a>.</p>
+</section>
+<hr class="docutils" />
+<section id="part-4-run-over-the-air">
+<h2>Part 4: Run Over the Air<a class="headerlink" href="#part-4-run-over-the-air" title="Link to this heading">¶</a></h2>
+<p>The same gNB, core and telemetry can run a real cell. A USRP takes the place of the ZMQ radio, and
+phones or 5G modems with programmable SIMs take the place of the OAI UEs. The steps below bring up
+the network side: the image, the configs and the cell. For SIMs, UEs and traffic, follow
+<a class="reference external" href="https://github.com/ucsdwcsng/open-ai-ran-tutorial/blob/main/docs/run_ota_cots.md"><code class="docutils literal notranslate"><span class="pre">docs/run_ota_cots.md</span></code></a>
+in the repository.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The cell transmits at 3489.42 MHz, which is licensed spectrum. Go on air only under a license, such
+as an FCC experimental license, or inside a shielded enclosure. Otherwise, cable the USRP to the UE
+through 40 to 60 dB of attenuation and start with a low <code class="docutils literal notranslate"><span class="pre">tx_gain</span></code>.</p>
+</div>
+<section id="hardware">
+<h3>Hardware<a class="headerlink" href="#hardware" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>A USRP B210 on a USB 3 port of the host, or an X310 or N310 cabled to a 10 GbE port.</p></li>
+<li><p>Two antennas for 3.3 to 3.8 GHz on the first RF channel: <code class="docutils literal notranslate"><span class="pre">TX/RX</span></code> transmits and <code class="docutils literal notranslate"><span class="pre">RX2</span></code> receives.</p></li>
+<li><p>Optional: a GPSDO or a 10 MHz reference, which helps COTS UEs lock to the cell.</p></li>
+</ul>
+</section>
+<section id="configs">
+<h3>Configs<a class="headerlink" href="#configs" title="Link to this heading">¶</a></h3>
+<p>The gNB reads two files from <code class="docutils literal notranslate"><span class="pre">ota/</span></code>: the cell, then the radio. Settings in the second file, and on
+the command line, override the first.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>What it sets</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gnb_ota_tdd_n78_20mhz.yml</span></code></p></td>
+<td><p>cell, core and telemetry: band n78 at 3489.42 MHz (ARFCN 632628), 20 MHz, 30 kHz SCS, TDD 7 DL : 3 UL, PLMN 99970, TAC 1, PCI 1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ru_b210.yml</span></code>, <code class="docutils literal notranslate"><span class="pre">ru_x310.yml</span></code>, <code class="docutils literal notranslate"><span class="pre">ru_n310.yml</span></code></p></td>
+<td><p>one radio each: device arguments, sample rate, TX and RX gain, clock source</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gnb.Dockerfile</span></code></p></td>
+<td><p>the gNB image with the UHD driver</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sims.conf</span></code></p></td>
+<td><p>SIMs to add to the core, for cards that do not use the testbed’s IMSIs and keys</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>What you may need to change:</p>
+<ul class="simple">
+<li><p><strong>Gains.</strong> <code class="docutils literal notranslate"><span class="pre">tx_gain</span></code> and <code class="docutils literal notranslate"><span class="pre">rx_gain</span></code> are the USRP’s analog gains in dB. Through cables and
+attenuators, start a B210 near <code class="docutils literal notranslate"><span class="pre">tx_gain:</span> <span class="pre">50</span></code> and raise it until the UE reports a good RSRP. To try
+a value without editing the file, pass it to the gNB:
+<code class="docutils literal notranslate"><span class="pre">GNB_ARGS=&quot;ru_sdr</span> <span class="pre">--tx_gain</span> <span class="pre">60&quot;</span> <span class="pre">bash</span> <span class="pre">scripts/setup_ota.sh</span> <span class="pre">...</span></code>.</p></li>
+<li><p><strong>SDR address.</strong> The X310 file expects <code class="docutils literal notranslate"><span class="pre">192.168.40.2</span></code> and the N310 file <code class="docutils literal notranslate"><span class="pre">192.168.20.2</span></code>, the factory
+addresses. Edit <code class="docutils literal notranslate"><span class="pre">addr=</span></code> in <code class="docutils literal notranslate"><span class="pre">device_args</span></code> if yours differ.</p></li>
+<li><p><strong>Clock.</strong> With a GPSDO or an external reference fitted, uncomment <code class="docutils literal notranslate"><span class="pre">clock</span></code> and <code class="docutils literal notranslate"><span class="pre">sync</span></code> in the radio
+file.</p></li>
+<li><p><strong>Band.</strong> 3489.42 MHz is in n77 too. For a UE without n78, set <code class="docutils literal notranslate"><span class="pre">band:</span> <span class="pre">77</span></code> in
+<code class="docutils literal notranslate"><span class="pre">gnb_ota_tdd_n78_20mhz.yml</span></code>.</p></li>
+</ul>
+</section>
+<section id="build-the-uhd-gnb-image">
+<h3>Build the UHD gNB image<a class="headerlink" href="#build-the-uhd-gnb-image" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">:ipc</span></code> image from Part 1 has no UHD driver. Build the over-the-air image and import it. With
+<code class="docutils literal notranslate"><span class="pre">JOBS=16</span></code> the build takes about 6 minutes on our server:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/open-ai-ran-tutorial
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>ocudu-gnb-jbpf:uhd<span class="w"> </span>-f<span class="w"> </span>ota/gnb.Dockerfile<span class="w"> </span>--build-arg<span class="w"> </span><span class="nv">JOBS</span><span class="o">=</span><span class="m">16</span><span class="w"> </span>ocudu-jbpf
+k3d<span class="w"> </span>image<span class="w"> </span>import<span class="w"> </span>ocudu-gnb-jbpf:uhd<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span><span class="nv">$CLUSTER</span><span class="s2">"</span>
+</pre></div>
+</div>
+<p>Drop <code class="docutils literal notranslate"><span class="pre">--build-arg</span> <span class="pre">JOBS=16</span></code> to build on every core when you have the host to yourself.</p>
+</section>
+<section id="connect-the-radio">
+<h3>Connect the radio<a class="headerlink" href="#connect-the-radio" title="Link to this heading">¶</a></h3>
+<p><strong>B210.</strong> Plug it into a USB 3 port; over USB 2 it cannot keep up with 23.04 MS/s. On the host,
+<code class="docutils literal notranslate"><span class="pre">lsusb</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">-i</span> <span class="pre">ettus</span></code> should list it. The bring-up script mounts the host’s live USB devices into
+the gNB container, so a B210 plugged in after the cluster started needs no restart.</p>
+<p><strong>X310 or N310.</strong> Cable a 10 GbE port of the host to the SDR’s SFP+ port. UHD needs jumbo frames,
+which the pod network cannot carry, so the script moves that NIC into the gNB pod with MTU 9000
+(<code class="docutils literal notranslate"><span class="pre">--sdr-nic</span></code>). The NIC goes back to the host when you delete the pod. Raise the host’s socket buffers
+first:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>sysctl<span class="w"> </span>-w<span class="w"> </span>net.core.rmem_max<span class="o">=</span><span class="m">33554432</span><span class="w"> </span>net.core.wmem_max<span class="o">=</span><span class="m">33554432</span>
+</pre></div>
+</div>
+<p>On any SDR, set the CPU governor to <code class="docutils literal notranslate"><span class="pre">performance</span></code>: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">cpupower</span> <span class="pre">frequency-set</span> <span class="pre">-g</span> <span class="pre">performance</span></code>.</p>
+</section>
+<section id="put-the-gnb-container-on-the-uhd-image">
+<h3>Put the gNB container on the UHD image<a class="headerlink" href="#put-the-gnb-container-on-the-uhd-image" title="Link to this heading">¶</a></h3>
+<p>Do the shell setup and the SMF step of Part 2 first. Then recreate the gNB pod with the gNB container
+on <code class="docutils literal notranslate"><span class="pre">:uhd</span></code>. Recreating the pod stops anything running on it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>ran<span class="w"> </span>srs-gnb-du1-0
+<span class="k">until</span><span class="w"> </span>kubectl<span class="w"> </span><span class="nb">wait</span><span class="w"> </span>-n<span class="w"> </span>ran<span class="w"> </span>--for<span class="o">=</span><span class="nv">condition</span><span class="o">=</span>Ready<span class="w"> </span>pod/srs-gnb-du1-0<span class="w"> </span>--timeout<span class="o">=</span>300s<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>sleep<span class="w"> </span><span class="m">3</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+kubectl<span class="w"> </span>patch<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>ran<span class="w"> </span>srs-gnb-du1-0<span class="w"> </span>--subresource<span class="w"> </span>ephemeralcontainers<span class="w"> </span>--type<span class="w"> </span>strategic<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>sed<span class="w"> </span><span class="s1">'s/ocudu-gnb-jbpf:local/ocudu-gnb-jbpf:uhd/'</span><span class="w"> </span>ocudu-jbpf/deploy/ephem_jbpf.json<span class="k">)</span><span class="s2">"</span>
+sleep<span class="w"> </span><span class="m">15</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>ran<span class="w"> </span>srs-gnb-du1-0<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{range .status.ephemeralContainerStatuses[*]}{.name}={.state}{"\n"}{end}'</span><span class="w">   </span><span class="c1"># ocudujbpf running</span>
+</pre></div>
+</div>
+</section>
+<section id="check-the-radio">
+<h3>Check the radio<a class="headerlink" href="#check-the-radio" title="Link to this heading">¶</a></h3>
+<p>With no gNB running, probe the SDR from the gNB container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/setup_ota.sh<span class="w"> </span>--check<span class="w">                                   </span><span class="c1"># B210</span>
+bash<span class="w"> </span>scripts/setup_ota.sh<span class="w"> </span>--sdr<span class="w"> </span>x310<span class="w"> </span>--sdr-nic<span class="w"> </span>&lt;host<span class="w"> </span>NIC&gt;<span class="w"> </span>--check<span class="w">   </span><span class="c1"># X310; --sdr n310 for an N310</span>
+</pre></div>
+</div>
+<p>The check ends with <code class="docutils literal notranslate"><span class="pre">CHECK</span> <span class="pre">OK.</span></code> once the SDR answers. It stops nothing.</p>
+</section>
+<section id="bring-up-the-cell">
+<h3>Bring up the cell<a class="headerlink" href="#bring-up-the-cell" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/setup_ota.sh<span class="w"> </span>--telemetry<span class="w"> </span>--ues<span class="w"> </span><span class="m">0</span><span class="w">                                   </span><span class="c1"># B210</span>
+bash<span class="w"> </span>scripts/setup_ota.sh<span class="w"> </span>--sdr<span class="w"> </span>x310<span class="w"> </span>--sdr-nic<span class="w"> </span>&lt;host<span class="w"> </span>NIC&gt;<span class="w"> </span>--telemetry<span class="w"> </span>--ues<span class="w"> </span><span class="m">0</span><span class="w">   </span><span class="c1"># X310 or N310</span>
+</pre></div>
+</div>
+<p>The script stops any earlier run and provisions subscribers 999700000000001 to 999700000000008, plus
+any listed in a <code class="docutils literal notranslate"><span class="pre">--sims</span></code> file. With <code class="docutils literal notranslate"><span class="pre">--telemetry</span></code> it starts a fresh <code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code>. It then gives the SDR to
+the gNB container and starts the gNB on <code class="docutils literal notranslate"><span class="pre">gnb_ota_tdd_n78_20mhz.yml</span></code> and the radio file. Once the gNB
+connects to the AMF and prints <code class="docutils literal notranslate"><span class="pre">====</span> <span class="pre">gNB</span> <span class="pre">started</span> <span class="pre">===</span></code>, the script prints the cell line
+(<code class="docutils literal notranslate"><span class="pre">Cell</span> <span class="pre">pci=1,</span> <span class="pre">bw=20</span> <span class="pre">MHz,</span> <span class="pre">1T1R,</span> <span class="pre">dl_arfcn=632628</span> <span class="pre">(n78)</span> <span class="pre">...</span></code>) and loads the telemetry codelets and
+xApps. <code class="docutils literal notranslate"><span class="pre">--ues</span> <span class="pre">0</span></code> returns without waiting for UEs.</p>
+<p>The cell goes on air as soon as the gNB starts. Watch it with <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/gnb_console.sh</span></code>. Counts
+in lines such as <code class="docutils literal notranslate"><span class="pre">Late:</span> <span class="pre">3;</span> <span class="pre">Underflow:</span> <span class="pre">0;</span> <span class="pre">Overflow:</span> <span class="pre">0;</span></code> mean the host or the SDR link missed real
+time: check the CPU governor, give a B210 a USB 3 port of its own, and check the MTU and socket
+buffers for an X310 or N310.</p>
+<p><code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/stop_demo.sh</span></code> takes the cell off air. To return to the ZMQ system, recreate the gNB pod
+as in Part 2.</p>
+</section>
 </section>
 </section>
 
@@ -842,6 +983,16 @@ k3d<span class="w"> </span>cluster<span class="w"> </span>stop<span class="w"> <
 </ul>
 </li>
 <li><a class="reference internal" href="#part-3-demos">Part 3: Demos</a></li>
+<li><a class="reference internal" href="#part-4-run-over-the-air">Part 4: Run Over the Air</a><ul>
+<li><a class="reference internal" href="#hardware">Hardware</a></li>
+<li><a class="reference internal" href="#configs">Configs</a></li>
+<li><a class="reference internal" href="#build-the-uhd-gnb-image">Build the UHD gNB image</a></li>
+<li><a class="reference internal" href="#connect-the-radio">Connect the radio</a></li>
+<li><a class="reference internal" href="#put-the-gnb-container-on-the-uhd-image">Put the gNB container on the UHD image</a></li>
+<li><a class="reference internal" href="#check-the-radio">Check the radio</a></li>
+<li><a class="reference internal" href="#bring-up-the-cell">Bring up the cell</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

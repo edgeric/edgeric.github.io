@@ -231,6 +231,7 @@
 <li class="toctree-l2"><a class="reference internal" href="demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks-and-codelets.html">Hooks and Codelets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
 </ul>
 </li>
@@ -255,6 +256,7 @@
 <li class="toctree-l2"><a class="reference internal" href="demo1-plug-and-play-channels.html">Demo 1: Cellular Digital Twin</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Demo 2: AI-Driven Scheduling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="demo3-buffer-management.html">Demo 3: TCP Flow Optimization with Real-Time Buffer Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks-and-codelets.html">Hooks and Codelets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="miscellaneous.html">Miscellaneous</a></li>
 </ul>
 </li>
@@ -283,12 +285,12 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="https://github.com/yourusername/edgeric/blob/main/docs/open-ai-ran-tutorial/demo2-ai-scheduling.md?plain=true" title="View this page">
+  <a class="muted-link" href="https://github.com/edgeric/edgeric.github.io/blob/main/docs/open-ai-ran-tutorial/demo2-ai-scheduling.md?plain=true" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
 </div><div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/yourusername/edgeric/edit/main/docs/open-ai-ran-tutorial/demo2-ai-scheduling.md" rel="edit" title="Edit this page">
+  <a class="muted-link" href="https://github.com/edgeric/edgeric.github.io/edit/main/docs/open-ai-ran-tutorial/demo2-ai-scheduling.md" rel="edit" title="Edit this page">
     <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
@@ -611,7 +613,7 @@ runs every slot (DL HIT 0 %):</p>
 max-CQI 28, round robin 20, proportional fair 17, and the gNB’s own scheduler 14.</p></li>
 </ul>
 <p>Each scheduler saw a different stretch of the CQI walks, so for a controlled comparison use
-<code class="docutils literal notranslate"><span class="pre">edgeric_eval.sh</span></code>. It is in the <a class="reference internal" href="#reference-to-be-updated">Reference</a>, with the schedulers and the options of
+<code class="docutils literal notranslate"><span class="pre">edgeric_eval.sh</span></code>. It is in the <a class="reference internal" href="#reference">Reference</a>, with the schedulers and the options of
 <code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">sched</span></code>.</p>
 </section>
 </section>
@@ -732,8 +734,8 @@ bash<span class="w"> </span>scripts/stop_demo.sh
 </pre></div>
 </div>
 </section>
-<section id="reference-to-be-updated">
-<h2>Reference [To be updated]<a class="headerlink" href="#reference-to-be-updated" title="Link to this heading">¶</a></h2>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">¶</a></h2>
 <section id="schedulers">
 <h3>Schedulers<a class="headerlink" href="#schedulers" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -745,37 +747,36 @@ bash<span class="w"> </span>scripts/stop_demo.sh
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">stock</span></code></p></td>
-<td><p>none: the gNB’s own scheduler</p></td>
+<td><p>the gNB’s own scheduler</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fixed</span> <span class="pre">--weights</span> <span class="pre">ue1=0.2,ue2=0.2,ue3=0.2,ue4=0.4</span></code></p></td>
-<td><p>share: 20/20/20/40 % of the slots</p></td>
+<td><p>fixed shares of the slots, here 20/20/20/40 %</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rr</span></code></p></td>
-<td><p>metric, all equal: the UEs with data in turn</p></td>
+<td><p>round robin over the UEs with data</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pf</span></code></p></td>
-<td><p>metric CQI / EWMA(CQI), proportional fair</p></td>
+<td><p>proportional fair: CQI / EWMA(CQI)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">maxcqi</span></code></p></td>
-<td><p>metric CQI</p></td>
+<td><p>highest CQI</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bestcqi</span></code></p></td>
-<td><p>metric CQI, always one UE per slot (the full-buffer throughput optimum)</p></td>
+<td><p>highest CQI, always one UE per slot</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">maxweight</span></code></p></td>
-<td><p>metric CQI × backlog</p></td>
+<td><p>CQI × backlog</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rl</span> <span class="pre">--model</span> <span class="pre">models/ppo_walk4/last.npz</span></code></p></td>
-<td><p>a trained PPO policy: its top UE gets the slot (<code class="docutils literal notranslate"><span class="pre">--rl-pick</span> <span class="pre">share</span></code> for slot shares)</p></td>
+<td><p>a trained PPO policy; its top UE gets the slot</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>By default each scheduler gives one UE the whole slot (<code class="docutils literal notranslate"><span class="pre">--alloc</span> <span class="pre">single</span></code>), as the gNB’s own scheduler
-does with full buffers. Metric policies give the slot to the UE with the highest metric; share policies
-hand out whole slots in proportion to their weights. Model paths are relative to <code class="docutils literal notranslate"><span class="pre">edgeric-rt/</span></code>, which
-is <code class="docutils literal notranslate"><span class="pre">/edgeric</span></code> in the <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code> container; trained models for the three scenarios ship in
-<code class="docutils literal notranslate"><span class="pre">edgeric-rt/models/</span></code> (<code class="docutils literal notranslate"><span class="pre">ppo_walk4</span></code>, <code class="docutils literal notranslate"><span class="pre">ppo_walk2</span></code>, <code class="docutils literal notranslate"><span class="pre">ppo_load8844</span></code>).</p>
+<p>By default a scheduler gives each slot to one UE (<code class="docutils literal notranslate"><span class="pre">--alloc</span> <span class="pre">single</span></code>), as the gNB’s own scheduler does
+with full buffers. Model paths are relative to <code class="docutils literal notranslate"><span class="pre">edgeric-rt/</span></code>, which is <code class="docutils literal notranslate"><span class="pre">/edgeric</span></code> in <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code>.
+<code class="docutils literal notranslate"><span class="pre">edgeric-rt/models/</span></code> has a trained model for each scenario: <code class="docutils literal notranslate"><span class="pre">ppo_walk4</span></code>, <code class="docutils literal notranslate"><span class="pre">ppo_walk2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">ppo_load8844</span></code>.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -785,13 +786,13 @@ is <code class="docutils literal notranslate"><span class="pre">/edgeric</span><
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--alloc</span> <span class="pre">shared</span></code></p></td>
-<td><p>split each slot’s RBs by weight among the weighted UEs (slows the ZMQ chain to about 88 % of real time with 4 UEs)</p></td>
+<td><p>split each slot’s RBs by weight (slows the ZMQ chain to about 88 % of real time with 4 UEs)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--lead</span> <span class="pre">N</span></code></p></td>
-<td><p>target the first DL slot at least N TTIs ahead; about 30 emulates a near-RT RIC</p></td>
+<td><p>act on a DL slot at least N TTIs ahead; about 30 behaves like a near-RT RIC</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--work-conserving</span></code></p></td>
-<td><p>give RBs a UE cannot use to the UEs that can</p></td>
+<td><p>give the RBs a UE cannot use to the UEs that can</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--duration</span> <span class="pre">S</span></code>, <code class="docutils literal notranslate"><span class="pre">--tag</span> <span class="pre">NAME</span></code></p></td>
 <td><p>run length and output name</p></td>
@@ -799,8 +800,8 @@ is <code class="docutils literal notranslate"><span class="pre">/edgeric</span><
 </tbody>
 </table>
 </div>
-<p>Each run saves every TTI to <code class="docutils literal notranslate"><span class="pre">edgeric-rt/runs/&lt;tag&gt;/ttis.npz</span></code> with a <code class="docutils literal notranslate"><span class="pre">summary.json</span></code>, and pushes 10 Hz
-aggregates to VictoriaMetrics.</p>
+<p>Each run saves every TTI to <code class="docutils literal notranslate"><span class="pre">edgeric-rt/runs/&lt;tag&gt;/ttis.npz</span></code> with a <code class="docutils literal notranslate"><span class="pre">summary.json</span></code>, and pushes
+10 Hz aggregates to VictoriaMetrics.</p>
 </section>
 <section id="channel-scenarios">
 <h3>Channel scenarios<a class="headerlink" href="#channel-scenarios" title="Link to this heading">¶</a></h3>
@@ -813,119 +814,55 @@ aggregates to VictoriaMetrics.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">duranta-oai-ue/ue_traces_cqi_4ue.conf</span></code></p></td>
-<td><p>4 UEs on independent CQI walks (this demo, and the RL scenario)</p></td>
+<td><p>4 UEs on independent CQI walks (this demo)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">duranta-oai-ue/ue_traces_cqi_4ue_mob.conf</span></code></p></td>
-<td><p>2 cars and 2 drones, from the EdgeRIC over-the-air recordings</p></td>
+<td><p>2 cars and 2 drones, from EdgeRIC’s over-the-air recordings</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">duranta-oai-ue/ue_traces_cqi_s1.conf</span></code></p></td>
 <td><p>2 UEs on CQI walks</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">duranta-oai-ue/ue_traces_cqi_s2.conf</span></code></p></td>
-<td><p>2 UEs, one good and one bad channel</p></td>
+<td><p>2 UEs, one good channel and one bad</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">duranta-oai-ue/ue_traces_cqi_s3.conf</span></code></p></td>
-<td><p>2 UEs, CQI drawn at random</p></td>
+<td><p>2 UEs, random CQI</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Switch scenarios on the running UEs with <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/trace_ctl.sh</span> <span class="pre">apply</span> <span class="pre">&lt;table&gt;</span></code>
-(<a class="reference internal" href="demo1-plug-and-play-channels.html"><span class="std std-doc">Demo 1</span></a>).</p>
+<p>Switch the running UEs to another table with <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">scripts/trace_ctl.sh</span> <span class="pre">apply</span> <span class="pre">&lt;table&gt;</span></code>.</p>
 </section>
-<section id="compare-schedulers-on-the-same-channel">
-<h3>Compare schedulers on the same channel<a class="headerlink" href="#compare-schedulers-on-the-same-channel" title="Link to this heading">¶</a></h3>
+<section id="compare-schedulers">
+<h3>Compare schedulers<a class="headerlink" href="#compare-schedulers" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/edgeric_eval.sh<span class="w"> </span>--duration<span class="w"> </span><span class="m">60</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>rl:models/ppo_walk4/last.npz<span class="w"> </span>bestcqi<span class="w"> </span>maxcqi<span class="w"> </span>maxweight<span class="w"> </span>pf<span class="w"> </span>rr<span class="w"> </span>fixed:0.25,0.25,0.25,0.25<span class="w"> </span>stock
 </pre></div>
 </div>
-<p>Before each run the script re-applies the trace table, so every scheduler sees the same channel from
-t = 0. It ends with a table per scheduler: throughput per air time, total and per UE, Jain fairness, the
-share of DL slots applied in their exact TTI (DL HIT %), and report-to-action latency. Measured with
-four UEs on CQI walks, full-buffer UDP:</p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Scheduler</p></th>
-<th class="head"><p>gNB Mbit/s</p></th>
-<th class="head"><p>UDP Mbit/s</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>bestcqi</p></td>
-<td><p>41.54</p></td>
-<td><p>37.85</p></td>
-</tr>
-<tr class="row-odd"><td><p>maxweight</p></td>
-<td><p>40.91</p></td>
-<td><p>37.42</p></td>
-</tr>
-<tr class="row-even"><td><p>PPO</p></td>
-<td><p>40.80</p></td>
-<td><p>36.89</p></td>
-</tr>
-<tr class="row-odd"><td><p>rr</p></td>
-<td><p>19.83</p></td>
-<td><p>18.70</p></td>
-</tr>
-<tr class="row-even"><td><p>pf</p></td>
-<td><p>17.33</p></td>
-<td><p>16.01</p></td>
-</tr>
-<tr class="row-odd"><td><p>stock (the gNB’s own)</p></td>
-<td><p>15.49</p></td>
-<td><p>14.76</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>For finite, unequal loads, <code class="docutils literal notranslate"><span class="pre">edgeric_eval.sh</span> <span class="pre">--loads</span> <span class="pre">8,8,4,4</span></code> drives one plain UDP flow per UE at those
+<p>The script replays the same channel for every scheduler, then prints one row each: throughput in total
+and per UE, Jain fairness, the share of DL slots applied in their exact TTI (DL HIT %), and the
+report-to-action latency. <code class="docutils literal notranslate"><span class="pre">--loads</span> <span class="pre">8,8,4,4</span></code> swaps full-buffer traffic for one UDP flow per UE at those
 rates.</p>
 </section>
-<section id="measure-the-bare-loop">
-<h3>Measure the bare loop<a class="headerlink" href="#measure-the-bare-loop" title="Link to this heading">¶</a></h3>
+<section id="measure-the-loop-without-a-muapp">
+<h3>Measure the loop without a muApp<a class="headerlink" href="#measure-the-loop-without-a-muapp" title="Link to this heading">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>scripts/edgeric_rt.sh<span class="w"> </span>load<span class="w"> </span>--inline<span class="w"> </span>fixed:0.2,0.2,0.2,0.4
 kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-n<span class="w"> </span>ran<span class="w"> </span>jrtc-0<span class="w"> </span>-c<span class="w"> </span>jrtc<span class="w"> </span>--<span class="w"> </span>tail<span class="w"> </span>/tmp/edgeric_rt_bridge.log
 </pre></div>
 </div>
-<p>In inline mode the bridge acts on every report by itself, without a muApp. Its log gives the DL HIT %
-and the report-to-action latency inside jrtc. Measured with four UEs:</p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Path</p></th>
-<th class="head"><p>DL slots applied in their exact TTI</p></th>
-<th class="head"><p>Report to action, p50 / p99</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>bridge acting inline (jbpf and jrtc only)</p></td>
-<td><p>99.9–100 %</p></td>
-<td><p>51 / 90 µs</p></td>
-</tr>
-<tr class="row-odd"><td><p>muApp in <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code>, classic schedulers</p></td>
-<td><p>99.8–99.9 %</p></td>
-<td><p>110 / 180–210 µs</p></td>
-</tr>
-<tr class="row-even"><td><p>muApp in <code class="docutils literal notranslate"><span class="pre">edgeric-0</span></code>, PPO</p></td>
-<td><p>98.1–98.5 %</p></td>
-<td><p>250 / 390–430 µs</p></td>
-</tr>
-</tbody>
-</table>
-</div>
+<p>In inline mode the bridge in <code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code> answers each report itself, so its log gives the DL HIT % and the
+latency of jbpf and jrtc alone.</p>
 </section>
 <section id="notes">
 <h3>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><strong>One report consumer.</strong> The bridge sends reports to one muApp socket: stop <code class="docutils literal notranslate"><span class="pre">sched</span></code> before <code class="docutils literal notranslate"><span class="pre">train</span></code>,
-and the reverse.</p></li>
-<li><p><strong>Keep jrtc light.</strong> Start the RAN with <code class="docutils literal notranslate"><span class="pre">--edgeric</span></code> and without <code class="docutils literal notranslate"><span class="pre">--telemetry</span></code>, so heavy Python xApps
-do not share the bridge’s GIL. The real-time scheduling dashboard is light enough to run beside it.</p></li>
-<li><p><strong>One scheduler controller.</strong> Unload the older <code class="docutils literal notranslate"><span class="pre">edgeric_sched</span></code> and <code class="docutils literal notranslate"><span class="pre">edgeric_mcs</span></code> sets while
-<code class="docutils literal notranslate"><span class="pre">edgeric_rt</span></code> is loaded; they act on the same scheduler.</p></li>
-<li><p><strong>PPO is slower than the classic schedulers</strong> (p50 about 250 µs against 110 µs), so 1.5–1.9 % of its
-DL slots miss their TTI and run the gNB’s own scheduler.</p></li>
+<li><p>The bridge feeds one muApp: stop <code class="docutils literal notranslate"><span class="pre">sched</span></code> before you start <code class="docutils literal notranslate"><span class="pre">train</span></code>, and the other way round.</p></li>
+<li><p>Start the RAN with <code class="docutils literal notranslate"><span class="pre">--edgeric</span></code> and without <code class="docutils literal notranslate"><span class="pre">--telemetry</span></code>, so the heavier telemetry xApps stay out of
+<code class="docutils literal notranslate"><span class="pre">jrtc-0</span></code>. The real-time scheduling dashboard is light enough to run beside the bridge.</p></li>
+<li><p>Unload the older <code class="docutils literal notranslate"><span class="pre">edgeric_sched</span></code> and <code class="docutils literal notranslate"><span class="pre">edgeric_mcs</span></code> sets while <code class="docutils literal notranslate"><span class="pre">edgeric_rt</span></code> is loaded. They act on
+the same scheduler.</p></li>
+<li><p>PPO needs about 250 µs per decision at the median, against 110 µs for the classic schedulers, so
+1.5 to 1.9 % of its DL slots miss their TTI and run the gNB’s own scheduler.</p></li>
 </ul>
 </section>
 </section>
@@ -1003,11 +940,11 @@ DL slots miss their TTI and run the gNB’s own scheduler.</p></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#stop">4. Stop</a></li>
-<li><a class="reference internal" href="#reference-to-be-updated">Reference [To be updated]</a><ul>
+<li><a class="reference internal" href="#reference">Reference</a><ul>
 <li><a class="reference internal" href="#schedulers">Schedulers</a></li>
 <li><a class="reference internal" href="#channel-scenarios">Channel scenarios</a></li>
-<li><a class="reference internal" href="#compare-schedulers-on-the-same-channel">Compare schedulers on the same channel</a></li>
-<li><a class="reference internal" href="#measure-the-bare-loop">Measure the bare loop</a></li>
+<li><a class="reference internal" href="#compare-schedulers">Compare schedulers</a></li>
+<li><a class="reference internal" href="#measure-the-loop-without-a-muapp">Measure the loop without a muApp</a></li>
 <li><a class="reference internal" href="#notes">Notes</a></li>
 </ul>
 </li>

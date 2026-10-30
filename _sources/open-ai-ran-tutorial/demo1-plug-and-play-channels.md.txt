@@ -252,25 +252,21 @@ bash scripts/stop_demo.sh              # UEs, gNB, broker and tcp_probe
 
 Then press Ctrl-C in Terminals 1 and 3.
 
-## Reference [To be updated]
+## Reference
 
 ### Trace files
 
-A trace is a CSV with the header `t_s,dl_snr_db,ul_snr_db`; further columns are ignored. `t_s` starts
-at 0 and increases; each row holds until the next, with no interpolation; the trace loops with a period
-of its last `t_s` plus its last step; and the SNRs apply as given, with no floors. The library files
-have one row per 10 ms over 300 s.
+A trace is a CSV with the header `t_s,dl_snr_db,ul_snr_db`. Each row holds until the next one, and the
+trace loops. The library in `duranta-oai-ue/traces/lib/` has one row per 10 ms over 300 s, generated
+with fixed seeds from the recipes in `duranta-oai-ue/traces/scenarios.conf`.
 
 ```bash
-bash scripts/trace_ctl.sh list                                 # rows, loop length, DL / UL SNR min, median, max
+bash scripts/trace_ctl.sh list                                 # each trace: rows, loop length, SNR range
 python3 duranta-oai-ue/traces/gen_traces.py --all              # rebuild the library (--only NAME for one)
-python3 duranta-oai-ue/traces/gen_traces.py --check FILE.csv   # what trace_ctl.sh checks before a switch
-python3 duranta-oai-ue/traces/check_parity.py                  # the generator's copy of the model vs the UE's C++
+python3 duranta-oai-ue/traces/gen_traces.py --check FILE.csv   # the checks trace_ctl.sh runs before a switch
 ```
 
-`gen_traces.py` writes the library from the recipes in `scenarios.conf` with fixed seeds. `walk`
-recipes are 2D random walks with path loss and log-normal shadowing; `bounce` recipes run the UE's own
-channel model. To add a random walk:
+To add a random walk and play it on ue2:
 
 ```bash
 echo "trace_9  walk  seed=9  speed_kmh=40  start_m=70  min_m=30  max_m=120" >> duranta-oai-ue/traces/scenarios.conf
@@ -278,50 +274,41 @@ python3 duranta-oai-ue/traces/gen_traces.py --only trace_9
 bash scripts/trace_ctl.sh set 2 trace_9
 ```
 
-### Base channel table
+`trace_ctl.sh` copies a trace into the UE container and writes that UE's control file,
+`/tmp/traces/ue<n>.ctl`. The UE reads the file every 100 ms and switches at the air time it names.
+The channel model itself is described on {doc}`../projects/tiny-twin`.
 
-`ue_channel_4ue.conf` has one line per UE: the starting distance in m, the speed in km/h (0 is static),
-the range the UE moves in, the DL and UL SNR at the starting distance, and the shadowing in rms dB.
+### Base channels
+
+`--channel duranta-oai-ue/ue_channel_4ue.conf` gives each UE a channel driven by distance. Each line
+holds a UE's starting distance, its speed (0 for a static UE), the range it moves in, the DL and UL SNR
+at the start, and the shadowing in dB. SNR falls by 37.6 dB per decade of distance. Put comments on
+their own lines: a comment after the values counts as one more column.
 
 ```text
 # ue   dist_m   speed_kmh   min_m   max_m   dl_snr_ref   ul_snr_ref   jitter_db
   4    50       30          40      140     25           25           4
 ```
 
-SNR falls by 37.6 dB per decade of distance, with floors of 8 dB DL and 5 dB UL. `ul_noise_dbfs` is the
-gNB noise floor, one value for the cell. Keep comments on their own lines: a comment after the values
-reads as one more column.
-
-### How the UE replays a trace
-
-With `--traces`, each UE's channel option carries a control file, `/tmp/traces/ue<n>.ctl` in the UE
-container. `trace_ctl.sh` validates the trace on the host, copies it to `/tmp/traces/<name>.csv` in the
-container, and writes each UE's control file: `trace=`, `start=` (the air time T) and `loop=`. A
-normal-priority thread in each UE polls its control file every 100 ms and loads the trace; the radio
-threads pick up the switch at T. The channel computation itself is on
-{doc}`../projects/tiny-twin`.
-
 ### Limits
 
-- `--traces` needs the C++ broker, which starts every UE on the same gNB sample and keeps their air
-  times equal. One `ul_noise_dbfs` applies to the broker and every UE.
-- Keep both SNRs at 0 dB or above. Below that the OAI UE misreports CQI, and a UE the gNB releases does
-  not come back.
+- Keep both SNRs at 0 dB or above. Below that the OAI UE misreports CQI, and a UE the gNB releases
+  does not come back.
 - The gNB adapts the downlink once per 20 ms CSI report, so faster SNR changes show up as block errors.
-- `stop` returns a UE to its base channel, which keeps the broker's noise floor. For a link with no added
-  noise at all, run Terminals 1 and 2 with `--clean` and without `--traces`.
+- `trace_ctl.sh stop` puts a UE back on its base channel. For a link with no added noise at all, run
+  both terminals with `--clean` and without `--traces`.
 
 ### Troubleshooting
 
 | Symptom | Fix |
 |---|---|
 | `no broker from a --ran run` | start Terminal 1 first |
-| `UEs already joined this RAN` | the UEs can join a RAN once: restart Terminal 1, then Terminal 2 |
+| `UEs already joined this RAN` | restart Terminal 1, then Terminal 2 |
 | `the broker's UL noise floor is ...` | give Terminal 1 the same `--channel` or `--traces` file as Terminal 2 |
 | `!! 3/4 UEs attached` | restart Terminal 1, then Terminal 2; UE logs are in `/tmp/ues/ue<i>.log` in `durue1` |
-| `ue<n> runs without trace control` | Terminal 2 ran without `--traces`: restart both terminals with it |
-| a UE answers `... channel unchanged` | it rejected the control or trace file; the message says why |
+| `ue<n> runs without trace control` | restart both terminals with `--traces` |
+| a UE answers `... channel unchanged` | it rejected the control or trace file, and the message says why |
 | `rows with DL SNR < 0 dB` | fix the trace, or pass `--allow-low-snr` |
-| `this gNB build only takes tcp://` | the gNB container runs the `:local` image: import `:ipc` and recreate the gNB pod |
+| `this gNB build only takes tcp://` | import the `:ipc` gNB image and recreate the gNB pod (Part 2) |
 | `the UE in container 'durue1' has no ZMQ channel support` | rebuild `duranta-nr-ue:local`, import it and recreate the gNB pod |
-| all UEs attached, no throughput | re-point the SMF at the UPF (Part 2) |
+| UEs attached, no throughput | re-point the SMF at the UPF (Part 2) |

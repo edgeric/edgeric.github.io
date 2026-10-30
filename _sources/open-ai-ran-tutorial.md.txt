@@ -13,9 +13,10 @@ the RAN datapath, and unloaded again, with no recompile or restart. Codelets run
 | [Demo 1: Cellular Digital Twin](open-ai-ran-tutorial/demo1-plug-and-play-channels.md) | Per-UE channels replayed from SNR traces and switched while the cell carries traffic |
 | [Demo 2: AI-Driven Scheduling](open-ai-ran-tutorial/demo2-ai-scheduling.md) | EdgeRIC-RT: a scheduler muApp in the loop every TTI, including a PPO policy trained online |
 | [Demo 3: TCP flow optimization with real-time buffer management](open-ai-ran-tutorial/demo3-buffer-management.md) | RLC buffer control from a codelet, cell-wide and per UE, to remove bufferbloat |
+| [Hooks and Codelets](open-ai-ran-tutorial/hooks-and-codelets.md) | Add a hook to the gNB, then write, build and load your own telemetry and control codelets |
 
 ```{note}
-Do Parts 1 and 2 first; every demo builds on them.
+Do Parts 1 and 2 first; every demo builds on them. Part 4 moves the cell onto a USRP to run over the air.
 ```
 
 ```{toctree}
@@ -25,6 +26,7 @@ Do Parts 1 and 2 first; every demo builds on them.
 open-ai-ran-tutorial/demo1-plug-and-play-channels
 open-ai-ran-tutorial/demo2-ai-scheduling
 open-ai-ran-tutorial/demo3-buffer-management
+open-ai-ran-tutorial/hooks-and-codelets
 open-ai-ran-tutorial/miscellaneous
 ```
 
@@ -179,18 +181,20 @@ k3d image import edgeric:local -c "$CLUSTER"
 ### Build the codelets
 
 The demos load these codelet sets into the running gNB. The `.o` files are gitignored, so a fresh clone
-has none; the build takes about a minute.
+has none; the build takes a minute or two.
 
 | Codelets | What they do | Used in |
 |---|---|---|
 | `ue_contexts`, `mac`, `rlc`, `pdcp`, `rrc`, `ngap` | per-UE identities and statistics for the dashboard xApp | `--telemetry`: Grafana, Demos 1 and 3 |
 | `upt` | RLC queuing latency and buffer occupancy, per UE and bearer | `--telemetry`: Grafana, Demos 1 and 3 |
+| `fapi_dl_conf`, `fapi_ul_conf`, `fapi_ul_crc`, `fapi_rach`, `perf`, `xran_packets` | not loaded; the dashboard xApp imports the Python modules their build generates | `--telemetry` |
 | `edgeric_rt`, `dashboard_realtime_scheduling` | the EdgeRIC-RT scheduling loop and its dashboard | Demo 2 |
 | `bufctl`, `bufcap` | RLC buffer limits, per UE and cell-wide | Demo 3 |
 
 ```bash
 cd "$REPO_ROOT/jrtc-apps/codelets"
 for d in ue_contexts mac rlc pdcp rrc ngap upt \
+         fapi_dl_conf fapi_ul_conf fapi_ul_crc fapi_rach perf xran_packets \
          edgeric_rt dashboard_realtime_scheduling bufctl; do
   ./make.sh -d "$d"
 done 2>&1 | grep -E "^Building|^---|terminates|^[a-z_]+\.cpp: Failed"
@@ -201,7 +205,7 @@ bash buffer-control-experiments/bufcap.sh build
 
 Each codelet prints its verifier result. `Program terminates within N instructions` means the jbpf
 verifier accepted it; `Failed verification` means it will not load, and
-[Demo 3](open-ai-ran-tutorial/demo3-buffer-management.md#anatomy-of-a-codelet) covers the usual causes.
+[Hooks and Codelets](open-ai-ran-tutorial/hooks-and-codelets.md#what-the-verifier-checks) covers the usual causes.
 The `grep` keeps only these lines; drop it to see the full build log. Abridged:
 
 ```text
@@ -400,6 +404,131 @@ k3d cluster stop "$CLUSTER"            # optional; resume from "Start the cluste
 1. [Demo 1: Cellular Digital Twin](open-ai-ran-tutorial/demo1-plug-and-play-channels.md)
 2. [Demo 2: AI-Driven Scheduling](open-ai-ran-tutorial/demo2-ai-scheduling.md)
 3. [Demo 3: TCP Flow Optimization with Real-Time Buffer Management](open-ai-ran-tutorial/demo3-buffer-management.md)
+4. [Hooks and Codelets](open-ai-ran-tutorial/hooks-and-codelets.md): write and load your own codelets
 
 Loading codelets by hand, Grafana, the hooks and the repository layout are on
 [Miscellaneous](open-ai-ran-tutorial/miscellaneous.md).
+
+---
+
+## Part 4: Run Over the Air
+
+The same gNB, core and telemetry can run a real cell. A USRP takes the place of the ZMQ radio, and
+phones or 5G modems with programmable SIMs take the place of the OAI UEs. The steps below bring up
+the network side: the image, the configs and the cell. For SIMs, UEs and traffic, follow
+[`docs/run_ota_cots.md`](https://github.com/ucsdwcsng/open-ai-ran-tutorial/blob/main/docs/run_ota_cots.md)
+in the repository.
+
+```{warning}
+The cell transmits at 3489.42 MHz, which is licensed spectrum. Go on air only under a license, such
+as an FCC experimental license, or inside a shielded enclosure. Otherwise, cable the USRP to the UE
+through 40 to 60 dB of attenuation and start with a low `tx_gain`.
+```
+
+### Hardware
+
+- A USRP B210 on a USB 3 port of the host, or an X310 or N310 cabled to a 10 GbE port.
+- Two antennas for 3.3 to 3.8 GHz on the first RF channel: `TX/RX` transmits and `RX2` receives.
+- Optional: a GPSDO or a 10 MHz reference, which helps COTS UEs lock to the cell.
+
+### Configs
+
+The gNB reads two files from `ota/`: the cell, then the radio. Settings in the second file, and on
+the command line, override the first.
+
+| File | What it sets |
+|---|---|
+| `gnb_ota_tdd_n78_20mhz.yml` | cell, core and telemetry: band n78 at 3489.42 MHz (ARFCN 632628), 20 MHz, 30 kHz SCS, TDD 7 DL : 3 UL, PLMN 99970, TAC 1, PCI 1 |
+| `ru_b210.yml`, `ru_x310.yml`, `ru_n310.yml` | one radio each: device arguments, sample rate, TX and RX gain, clock source |
+| `gnb.Dockerfile` | the gNB image with the UHD driver |
+| `sims.conf` | SIMs to add to the core, for cards that do not use the testbed's IMSIs and keys |
+
+What you may need to change:
+
+- **Gains.** `tx_gain` and `rx_gain` are the USRP's analog gains in dB. Through cables and
+  attenuators, start a B210 near `tx_gain: 50` and raise it until the UE reports a good RSRP. To try
+  a value without editing the file, pass it to the gNB:
+  `GNB_ARGS="ru_sdr --tx_gain 60" bash scripts/setup_ota.sh ...`.
+- **SDR address.** The X310 file expects `192.168.40.2` and the N310 file `192.168.20.2`, the factory
+  addresses. Edit `addr=` in `device_args` if yours differ.
+- **Clock.** With a GPSDO or an external reference fitted, uncomment `clock` and `sync` in the radio
+  file.
+- **Band.** 3489.42 MHz is in n77 too. For a UE without n78, set `band: 77` in
+  `gnb_ota_tdd_n78_20mhz.yml`.
+
+### Build the UHD gNB image
+
+The `:ipc` image from Part 1 has no UHD driver. Build the over-the-air image and import it. With
+`JOBS=16` the build takes about 6 minutes on our server:
+
+```bash
+cd ~/open-ai-ran-tutorial
+docker build -t ocudu-gnb-jbpf:uhd -f ota/gnb.Dockerfile --build-arg JOBS=16 ocudu-jbpf
+k3d image import ocudu-gnb-jbpf:uhd -c "$CLUSTER"
+```
+
+Drop `--build-arg JOBS=16` to build on every core when you have the host to yourself.
+
+### Connect the radio
+
+**B210.** Plug it into a USB 3 port; over USB 2 it cannot keep up with 23.04 MS/s. On the host,
+`lsusb | grep -i ettus` should list it. The bring-up script mounts the host's live USB devices into
+the gNB container, so a B210 plugged in after the cluster started needs no restart.
+
+**X310 or N310.** Cable a 10 GbE port of the host to the SDR's SFP+ port. UHD needs jumbo frames,
+which the pod network cannot carry, so the script moves that NIC into the gNB pod with MTU 9000
+(`--sdr-nic`). The NIC goes back to the host when you delete the pod. Raise the host's socket buffers
+first:
+
+```bash
+sudo sysctl -w net.core.rmem_max=33554432 net.core.wmem_max=33554432
+```
+
+On any SDR, set the CPU governor to `performance`: `sudo cpupower frequency-set -g performance`.
+
+### Put the gNB container on the UHD image
+
+Do the shell setup and the SMF step of Part 2 first. Then recreate the gNB pod with the gNB container
+on `:uhd`. Recreating the pod stops anything running on it.
+
+```bash
+kubectl delete pod -n ran srs-gnb-du1-0
+until kubectl wait -n ran --for=condition=Ready pod/srs-gnb-du1-0 --timeout=300s 2>/dev/null; do sleep 3; done
+kubectl patch pod -n ran srs-gnb-du1-0 --subresource ephemeralcontainers --type strategic \
+  -p "$(sed 's/ocudu-gnb-jbpf:local/ocudu-gnb-jbpf:uhd/' ocudu-jbpf/deploy/ephem_jbpf.json)"
+sleep 15
+kubectl get pod -n ran srs-gnb-du1-0 -o jsonpath='{range .status.ephemeralContainerStatuses[*]}{.name}={.state}{"\n"}{end}'   # ocudujbpf running
+```
+
+### Check the radio
+
+With no gNB running, probe the SDR from the gNB container:
+
+```bash
+bash scripts/setup_ota.sh --check                                   # B210
+bash scripts/setup_ota.sh --sdr x310 --sdr-nic <host NIC> --check   # X310; --sdr n310 for an N310
+```
+
+The check ends with `CHECK OK.` once the SDR answers. It stops nothing.
+
+### Bring up the cell
+
+```bash
+bash scripts/setup_ota.sh --telemetry --ues 0                                   # B210
+bash scripts/setup_ota.sh --sdr x310 --sdr-nic <host NIC> --telemetry --ues 0   # X310 or N310
+```
+
+The script stops any earlier run and provisions subscribers 999700000000001 to 999700000000008, plus
+any listed in a `--sims` file. With `--telemetry` it starts a fresh `jrtc-0`. It then gives the SDR to
+the gNB container and starts the gNB on `gnb_ota_tdd_n78_20mhz.yml` and the radio file. Once the gNB
+connects to the AMF and prints `==== gNB started ===`, the script prints the cell line
+(`Cell pci=1, bw=20 MHz, 1T1R, dl_arfcn=632628 (n78) ...`) and loads the telemetry codelets and
+xApps. `--ues 0` returns without waiting for UEs.
+
+The cell goes on air as soon as the gNB starts. Watch it with `bash scripts/gnb_console.sh`. Counts
+in lines such as `Late: 3; Underflow: 0; Overflow: 0;` mean the host or the SDR link missed real
+time: check the CPU governor, give a B210 a USB 3 port of its own, and check the MTU and socket
+buffers for an X310 or N310.
+
+`bash scripts/stop_demo.sh` takes the cell off air. To return to the ZMQ system, recreate the gNB pod
+as in Part 2.
