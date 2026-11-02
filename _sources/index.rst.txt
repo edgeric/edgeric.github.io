@@ -184,7 +184,7 @@ Team
        <a href="mailto:ughosh@ucsd.edu" class="team-email">ughosh@ucsd.edu</a>
      </div>
      <div class="team-card">
-       <a href="https://www.linkedin.com/in/sreevatsank-k/" class="team-link">
+       <a href="https://sreevatsankk.github.io/" class="team-link">
          <div class="team-photo" id="photo-sreevatsank" role="img" aria-label="Sreevatsank Kadaveru"></div>
          <h4>Sreevatsank Kadaveru</h4>
        </a>
@@ -367,7 +367,7 @@ Events
        <div class="event-tile-footer">
          <span class="event-badge">2024</span>
          <h3 class="event-tile-title">srsRAN Workshop 2024</h3>
-         <p class="event-tile-desc">EdgeRIC tutorial talk: integration, experiments, and muApps deployment (Ushasi Ghosh)</p>
+         <p class="event-tile-desc">EdgeRIC tutorial talk: integration, experiments, and muApps deployment (<a href="https://ushasigh.github.io/">Ushasi Ghosh</a>)</p>
          <a href="srsran-2024-workshop.html" class="event-tile-cta">View details</a>
        </div>
      </div>
@@ -378,7 +378,7 @@ Events
        <div class="event-tile-footer">
          <span class="event-badge">2024</span>
          <h3 class="event-tile-title">OAIC Workshop 2024</h3>
-         <p class="event-tile-desc">Hand on Workshop on EdgeRIC integration and muApps deployment (Ushasi Ghosh)</p>
+         <p class="event-tile-desc">Hand on Workshop on EdgeRIC integration and muApps deployment (<a href="https://ushasigh.github.io/">Ushasi Ghosh</a>)</p>
          <a href="oaic-workshop-2024.html" class="event-tile-cta">View details</a>
        </div>
      </div>

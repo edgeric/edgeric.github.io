@@ -9,7 +9,7 @@ streams together, in time for each step of its control loop. The goal is to sync
 sensor-frame delivery within a user and across users so that an edge application can act on
 relevant observations.
 
-**Team:** Ushasi Ghosh, Sreevatsank Kadaveru, Srinivas Shakkottai, and Dinesh Bharadia.
+**Team:** `Ushasi Ghosh <https://ushasigh.github.io/>`_, `Sreevatsank Kadaveru <https://sreevatsankk.github.io/>`_, Srinivas Shakkottai, and Dinesh Bharadia.
 
 Why Physical AI Needs Synchronized Uplink
 ---------------------------------------------
