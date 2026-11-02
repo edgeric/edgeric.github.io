@@ -11,6 +11,8 @@ relevant observations.
 
 **Team:** `Ushasi Ghosh <https://ushasigh.github.io/>`_, `Sreevatsank Kadaveru <https://sreevatsankk.github.io/>`_, Srinivas Shakkottai, and Dinesh Bharadia.
 
+**More details:** `mmsRAN project page <https://sreevatsankk.github.io/research/mmsran/>`_
+
 Why Physical AI Needs Synchronized Uplink
 ---------------------------------------------
 
