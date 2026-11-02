@@ -99,8 +99,10 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 
 if [[ "$BUILD" == true ]]; then
-  echo "[1/2] Building docs with make html..."
-  make html
+  echo "[1/2] Building docs with make clean html..."
+  # Clean first: sphinx_sitemap only lists the pages written during a build,
+  # so an incremental build deploys a partial sitemap.xml.
+  make clean html
 fi
 
 if [[ ! -d "_build/html" ]]; then
