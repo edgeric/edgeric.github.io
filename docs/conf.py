@@ -83,7 +83,7 @@ html_title = "EdgeRIC: Real-Time AI-RAN and Open RAN Controller"
 # edgeric.ucsd.edu is the canonical domain; edgeric.github.io is a mirror.
 # This also adds <link rel="canonical"> to every page.
 html_baseurl = "https://edgeric.ucsd.edu/"
-html_extra_path = ["robots.txt", ".htaccess"]
+html_extra_path = ["robots.txt", ".htaccess", "google7a0c35a6b1227dc3.html"]
 
 # Sitemap
 sitemap_url_scheme = "{link}"
