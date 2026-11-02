@@ -1,3 +1,6 @@
+.. meta::
+   :description: Scout is packet-centric telemetry for the 5G user plane. It traces packets through the RAN stack to capture per-packet latency and queue dynamics.
+
 Telemetry: Packet Centric
 =================================
 

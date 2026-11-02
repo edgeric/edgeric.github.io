@@ -1568,3 +1568,11 @@ html {
         max-width: 100% !important;
     }
 }
+
+/* Keep the long site title on one line in the mobile header */
+.mobile-header .brand {
+  max-width: 60vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

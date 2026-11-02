@@ -1,7 +1,7 @@
 EdgeRIC tutorial 
 --------------------------
-| Website: https://edgeric.github.io/
-| Tutorial: https://edgeric.github.io/edgeric-workshop-tutorial.html
+| Website: https://edgeric.ucsd.edu/
+| Tutorial: https://edgeric.ucsd.edu/edgeric-workshop-tutorial.html
 
 
 In this tutorial, we will go over the EdgeRIC architecture and installation of the srsRAN network facilitated with EdgeRIC hooks. We also provide a containerized version of our codebase. We will discuss how to write μApps. As an example, we will run a real-time MAC scheduler μApp that assigns scheduling decisions per UE for each TTI. We will look at multiple scheduling algorithms with this μApp to demonstrate the system behavior: ``Max Weight``, ``Max CQI``, ``Proportional Fairness``, ``Round Robin``, and ``an RL based scheduler``.

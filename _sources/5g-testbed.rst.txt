@@ -1,3 +1,6 @@
+.. meta::
+   :robots: noindex
+
 5G Testbed
 ==========
 

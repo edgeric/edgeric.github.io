@@ -1,3 +1,6 @@
+.. meta::
+   :description: System design of EdgeRIC on the OCUDU gNB: jbpf hooks in the MAC scheduler, jrt-controller, and muApps running TTI-level control on a k3d cluster.
+
 EdgeRIC with OCUDU-jbpf: System Design
 ======================================
 

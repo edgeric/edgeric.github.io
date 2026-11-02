@@ -3,7 +3,7 @@ srsRAN Workshop '24
 
 .. image:: pics/srsran-workshop.png
   :width: 1000
-  :alt: sample text
+  :alt: EdgeRIC at the srsRAN Workshop 2024
 
 Our presence at the workshop
 ---------------------------------

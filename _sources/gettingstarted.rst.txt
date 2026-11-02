@@ -30,7 +30,7 @@ Channel Traces are collected from the over the air mobility experiments.
 
 .. image:: pics/tiny-twin.png
   :width: 600
-  :alt: sample text
+  :alt: Tiny-twin emulation module
 
 
 
@@ -46,7 +46,7 @@ Collecting channel traces - CQI based abstraction of channel
 
 .. image:: pics/ota-measurement.png
   :width: 400
-  :alt: sample text
+  :alt: Collecting CQI traces over the air
 
 We collect CQI traces for various mobility scenarios. Our dataset is elaborated in section 'Dataset'
 
@@ -55,7 +55,9 @@ Over The Air Setup
 
 .. image:: pics/ota-setup-2.png
   :width: 400
-  :alt: sample text
+  :alt: Over-the-air EdgeRIC setup
+
+To run the cell on a USRP, follow Part 4 of the :doc:`Open AI-RAN tutorial <open-ai-ran-tutorial>`.
 
 .. Github repository: https://github.com/ushasigh/EdgeRIC, branch: main
 
