@@ -1,0 +1,6 @@
+sphinx
+furo
+sphinx-tabs
+myst-parser
+sphinx-sitemap
+sphinxext-opengraph

@@ -1,3 +1,8 @@
+:og:description: EdgeRIC is an open-source real-time RIC for AI-on-RAN. It runs control loops every TTI on OCUDU with jbpf, srsRAN, and OpenAirInterface.
+
+.. meta::
+   :description: EdgeRIC is an open-source real-time RIC for AI-on-RAN. It runs control loops every TTI on OCUDU with jbpf, srsRAN, and OpenAirInterface. From UC San Diego.
+
 .. Edge_RIX documentation master file, created by
    sphinx-quickstart on Mon Nov 20 16:41:50 2023.
    You can adapt this file completely to your liking, but it should at least

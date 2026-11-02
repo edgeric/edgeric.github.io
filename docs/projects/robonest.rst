@@ -1,3 +1,6 @@
+.. meta::
+   :description: RoboNEST is a UC San Diego testbed for Physical AI. It combines real robots, wireless networks, and edge compute for closed-loop VLA inference.
+
 RoboNEST: Edge Driven Robotics
 ==================================
 

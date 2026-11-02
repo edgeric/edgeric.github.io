@@ -1,9 +1,12 @@
+.. meta::
+   :description: EdgeRIC channel traces, collected over a range of UE mobility scenarios. Use them to drive repeatable 5G experiments in emulation.
+
 EdgeRIC Main Dataset
 ===============
 
 .. image:: ../pics/experimental-setup.png
   :width: 600
-  :alt: sample text  
+  :alt: Experimental setup for collecting channel traces
 
 
 We collect a variety of Channel Traces over a wide range of UE mobility scenarios.  

@@ -14,7 +14,7 @@ import src.ModuleB
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'EdgeRIC'
-copyright = '2024, Ushasi Ghosh'
+copyright = '2024-2026, Ushasi Ghosh and WCSNG, UC San Diego'
 author = 'Ushasi Ghosh'
 release = 'v0.1'
 
@@ -28,6 +28,8 @@ extensions = [
     'sphinx_tabs.tabs',
     #'recommonmark',
     'myst_parser',
+    'sphinx_sitemap',
+    'sphinxext.opengraph',
 ]
 
 # Generate HTML anchors for markdown headings (h1-h4) so in-page links
@@ -76,5 +78,39 @@ html_theme_options = {
 # html_logo = "_static/logo.png"
 # html_favicon = "_static/favicon.ico"
 
-html_title = "EdgeRIC"
+html_title = "EdgeRIC: Real-Time AI-RAN and Open RAN Controller"
+
+# edgeric.ucsd.edu is the canonical domain; edgeric.github.io is a mirror.
+# This also adds <link rel="canonical"> to every page.
+html_baseurl = "https://edgeric.ucsd.edu/"
+html_extra_path = ["robots.txt", ".htaccess"]
+
+# Sitemap
+sitemap_url_scheme = "{link}"
+sitemap_excludes = [
+    "search.html",
+    "genindex.html",
+    "py-modindex.html",
+    "404.html",
+    "5g-testbed.html",
+    "projects/lens.html",
+    "projects/prism.html",
+    "projects/cloud-gaming.html",
+]
+
+# OpenGraph
+ogp_site_url = "https://edgeric.ucsd.edu/"
+ogp_site_name = "EdgeRIC"
+ogp_image = "https://edgeric.ucsd.edu/_static/edgeric-intro.png"
+ogp_description_length = 160
+ogp_social_cards = {"enable": False}
 html_show_sourcelink = True
+
+def _root_canonical(app, pagename, templatename, context, doctree):
+    # The homepage lives at /, not /index.html
+    if pagename == "index":
+        context["pageurl"] = html_baseurl
+
+
+def setup(app):
+    app.connect("html-page-context", _root_canonical)

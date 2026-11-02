@@ -4,7 +4,7 @@ First EdgeRIC workshop will be held in association with the *NSF open AI Cellula
 
 .. image:: pics/er-architecture.png
   :width: 600
-  :alt: sample text
+  :alt: EdgeRIC architecture
 
 **Dates:** August 6-8, 2024
 

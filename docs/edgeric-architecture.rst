@@ -1,4 +1,8 @@
 :orphan:
+:og:description: How EdgeRIC talks to the RAN: the RT-E2 interface, built on ZMQ and Protocol Buffers, carrying metrics and control actions every TTI.
+
+.. meta::
+   :description: How EdgeRIC talks to the RAN: the RT-E2 interface, built on ZMQ and Protocol Buffers, carrying metrics and control actions every TTI.
 
 .. RT-E2 interface
 .. ^^^^^^^^^^^^^^^^^
@@ -7,7 +11,7 @@ RT-E2 interface (Real time E2 interface)
 -----------------------------------------
 .. image:: pics/er-architecture.png
   :width: 600
-  :alt: sample text
+  :alt: EdgeRIC architecture: the RT-E2 agent in the RAN and the EdgeRIC messenger
 
 - RAN and EdgeRIC communication framework
    - EdgeRIC adopts a low overhead messaging framework [RT-E2]
@@ -16,7 +20,7 @@ RT-E2 interface (Real time E2 interface)
    - The RT-E2 messaging framework utilizes **Protocol Buffers (protobuf)** for defining the message schemas. Protobuf provides a platform-neutral and language-neutral way to serialize structured data. The schema is compiled into a compact binary format, which allows for efficient transmission and parsing of messages.
 - RT-E2 RAN agent
    - The ``rtagent`` class is responsible for gathering the KPIs produced every TTI and receiving the corresponding control actions  
-   - ``rtagent::send_to_er()`` function is called at the end of the TTI to pubish the collcted metrics to EdgeRIC
+   - ``rtagent::send_to_er()`` function is called at the end of the TTI to publish the collected metrics to EdgeRIC
    - ``rtagent::receive_from_er()`` function is called at the beginning of every TTI to receive the control actions from EdgeRIC and distribute it to the right network function to be utilized at that TTI
 - EdgeRIC messenger 
    - This is responsible for subscribing to the RAN metrics, which is utilized by the various μApps, and publishing the control actions. 
@@ -155,7 +159,7 @@ REDIS database
 -----------------------------
 .. image:: pics/er-messenger-extended.png
   :width: 600
-  :alt: sample text  
+  :alt: EdgeRIC RT-E2 message flow
 
 Each μApp{i} receives metrics by subscribing to the edgeric agent's ``get_metrics_multi()`` function. Based on these metrics, it computes a policy for the specific network function and sends the decisions to edgerics agent's ``send_control_μApp_i()`` function.
 

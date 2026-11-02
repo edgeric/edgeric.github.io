@@ -1,3 +1,6 @@
+.. meta::
+   :description: EdgeRIC-RT puts a muApp in the gNB scheduling loop every 0.5 ms slot, running a PPO policy trained online or a classic scheduler like proportional fair.
+
 AI-driven muApp for RAN Scheduling
 ==================================
 

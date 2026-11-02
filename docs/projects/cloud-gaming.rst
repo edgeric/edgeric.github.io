@@ -1,3 +1,6 @@
+.. meta::
+   :robots: noindex
+
 Cloud Gaming on 5G
 ==================
 

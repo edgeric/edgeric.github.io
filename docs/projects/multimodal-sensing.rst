@@ -1,3 +1,6 @@
+.. meta::
+   :description: mmsRAN schedules the cellular uplink so a robot's LiDAR, camera, and inertial streams reach the edge together, in time for each step of its control loop.
+
 mmsRAN: Multimodal Cellular Uplink for Physical AI
 ======================================================
 

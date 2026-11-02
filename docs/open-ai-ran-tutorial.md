@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    "description": "Build a 5G testbed in one k3d cluster with a jbpf-instrumented OCUDU gNB, jrtc, and Open5GS, then run three demos of RAN control with codelets."
+---
+
 # Open AI-RAN Tutorial: In-RAN Telemetry and Control with jbpf Codelets
 
 This tutorial builds a complete 5G testbed inside one k3d (Kubernetes) cluster: the jbpf-instrumented

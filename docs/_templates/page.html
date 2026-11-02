@@ -1,0 +1,43 @@
+{% extends "!page.html" %}
+{% block extrahead %}
+{{ super() }}
+{% if pagename == "index" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "EdgeRIC",
+  "description": "Open-source real-time RAN Intelligent Controller for AI-on-RAN, running on OCUDU with jbpf, srsRAN, and OpenAirInterface.",
+  "url": "https://edgeric.ucsd.edu/",
+  "codeRepository": "https://github.com/ucsdwcsng/open-ai-ran-tutorial",
+  "sameAs": [
+    "https://github.com/ucsdwcsng/EdgeRIC-A-real-time-RIC",
+    "https://github.com/ucsdwcsng/EdgeRIC-on-5G",
+    "https://github.com/ucsdwcsng/EdgeRIC-5G-OAI"
+  ],
+  "programmingLanguage": ["C++", "C", "Python"],
+  "author": {
+    "@type": "Organization",
+    "name": "WCSNG, UC San Diego",
+    "url": "https://wcsng.ucsd.edu"
+  },
+  "keywords": ["EdgeRIC", "Open RAN", "AI-RAN", "Real-Time RIC", "OCUDU", "jbpf", "srsRAN", "OpenAirInterface", "5G", "Physical AI"]
+}
+</script>
+{% elif pagename == "dataset_page/edgeric-datasets" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "EdgeRIC Channel Traces",
+  "description": "Channel traces collected over a range of UE mobility scenarios, used to drive the EdgeRIC emulation testbed.",
+  "url": "https://edgeric.ucsd.edu/dataset_page/edgeric-datasets.html",
+  "creator": {
+    "@type": "Organization",
+    "name": "WCSNG, UC San Diego",
+    "url": "https://wcsng.ucsd.edu"
+  }
+}
+</script>
+{% endif %}
+{% endblock %}

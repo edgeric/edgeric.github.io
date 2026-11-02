@@ -1,3 +1,6 @@
+.. meta::
+   :description: Run a complete 5G cell on one CPU server with Open5GS, an OCUDU gNB, and OAI UEs over ZMQ. Each UE gets its own channel for repeatable mobility tests.
+
 Cellular Digital Twins
 ======================
 
