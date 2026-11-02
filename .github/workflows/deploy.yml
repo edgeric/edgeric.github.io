@@ -30,6 +30,9 @@ jobs:
           make html
           touch _build/html/.nojekyll
 
+      - name: Redirect this copy to edgeric.ucsd.edu
+        run: python .github/scripts/redirect_stubs.py docs/_build/html
+
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:

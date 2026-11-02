@@ -1,6 +1,9 @@
 {% extends "!page.html" %}
 {% block extrahead %}
 {{ super() }}
+{% if pagename in ["genindex", "search", "team", "demo", "repo"] %}
+<meta name="robots" content="noindex">
+{% endif %}
 {% if pagename == "index" %}
 <script type="application/ld+json">
 {

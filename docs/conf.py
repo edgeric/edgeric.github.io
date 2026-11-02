@@ -93,6 +93,9 @@ sitemap_excludes = [
     "py-modindex.html",
     "404.html",
     "5g-testbed.html",
+    "team.html",
+    "demo.html",
+    "repo.html",
     "projects/lens.html",
     "projects/prism.html",
     "projects/cloud-gaming.html",
@@ -110,7 +113,22 @@ def _root_canonical(app, pagename, templatename, context, doctree):
     # The homepage lives at /, not /index.html
     if pagename == "index":
         context["pageurl"] = html_baseurl
+        context["metatags"] = context.get("metatags", "").replace(
+            html_baseurl + "index.html", html_baseurl
+        )
+
+
+def _root_in_sitemap(app, exception):
+    # sphinx_sitemap lists the homepage as /index.html
+    path = os.path.join(app.outdir, "sitemap.xml")
+    if exception is None and os.path.exists(path):
+        with open(path) as f:
+            sitemap = f.read()
+        with open(path, "w") as f:
+            f.write(sitemap.replace(html_baseurl + "index.html", html_baseurl))
 
 
 def setup(app):
-    app.connect("html-page-context", _root_canonical)
+    # Run after sphinxext-opengraph and sphinx_sitemap
+    app.connect("html-page-context", _root_canonical, priority=900)
+    app.connect("build-finished", _root_in_sitemap, priority=900)
