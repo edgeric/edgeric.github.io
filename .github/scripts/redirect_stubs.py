@@ -14,7 +14,6 @@ STUB = """<!DOCTYPE html>
 <meta charset="utf-8">
 <title>EdgeRIC has moved</title>
 <link rel="canonical" href="{url}">
-<meta name="robots" content="noindex">
 <meta http-equiv="refresh" content="0; url={url}">
 <script>location.replace({js} + location.search + location.hash);</script>
 </head>
