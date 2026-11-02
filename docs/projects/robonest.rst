@@ -11,6 +11,8 @@ complete path from sensing to action.
 
 **Team:** `Sreevatsank Kadaveru <https://sreevatsankk.github.io/>`_, `Ushasi Ghosh <https://ushasigh.github.io/>`_, and Dinesh Bharadia, UC San Diego.
 
+**More details:** `RoboNEST project page <https://sreevatsankk.github.io/research/robonest/>`_
+
 Why an End-to-End Testbed?
 ------------------------------
 
