@@ -9,7 +9,7 @@
 
 - **Mar 2026** - EdgeRIC with srsRAN 25.10 release 
 
-- **Feb 2026** - Sushila and Ushasi attended HotMobile
+- **Feb 2026** - Sushila and [Ushasi](https://ushasigh.github.io/) attended HotMobile
 
 - **April 2024** - EdgeRIC main paper presented at NSDI 2024
 

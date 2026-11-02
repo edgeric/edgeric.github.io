@@ -9,7 +9,7 @@ wireless networks, and edge compute into one experimental platform. It supports 
 perception, planning, and vision-language-action (VLA) inference, with visibility into the
 complete path from sensing to action.
 
-**Team:** Sreevatsank Kadaveru, Ushasi Ghosh, and Dinesh Bharadia, UC San Diego.
+**Team:** `Sreevatsank Kadaveru <https://sreevatsankk.github.io/>`_, `Ushasi Ghosh <https://ushasigh.github.io/>`_, and Dinesh Bharadia, UC San Diego.
 
 Why an End-to-End Testbed?
 ------------------------------
