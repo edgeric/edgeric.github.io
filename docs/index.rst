@@ -50,6 +50,7 @@ EdgeRIC: Enabling Real-Time AI-on-RAN systems
 .. container:: news-sidebar-source
 
    .. include:: news.md
+      :parser: myst_parser.sphinx_
 
 
 .. raw:: html
