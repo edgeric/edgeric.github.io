@@ -308,6 +308,20 @@ Demos
          <p>Interference-aware resource distribution across sites with Near-RT RIC</p>
        </div>
      </div>
+     <div class="video-card" id="demo-vla">
+       <div class="video-wrapper">
+         <div class="video-cover" data-poster="_static/vla_cover.jpg">
+           <button type="button" class="video-play-btn" aria-label="Play video"></button>
+         </div>
+         <video preload="metadata" data-src="_static/demo-vla.mp4">
+           Your browser does not support the video tag.
+         </video>
+       </div>
+       <div class="video-card-content">
+         <h3>VLA over Private 5G</h3>
+         <p>SmolVLA on RoboNEST picks up an orange and places it on a yellow plate (5x speed)</p>
+       </div>
+     </div>
    </div>
 
 
