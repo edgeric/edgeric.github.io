@@ -544,7 +544,7 @@ Publications & Tutorials
        </div>
      </div>
      <div class="publication-card">
-       <h3>Windex: Realtime Neural Whittle Indexing for Scalable Service Guarantees in NextG Cellular Networks.</h3>
+       <h3>Windex: Index-Driven Contextual Scheduler for Scalable Service Guarantees in NextG Cellular Networks.</h3>
        <div class="publication-buttons">
          <a href="https://arxiv.org/abs/2406.01888" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Main Paper</a>
          <a href="https://dl.acm.org/doi/10.1145/3636534.3700034" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@MobiCom'24</a>
