@@ -137,7 +137,7 @@ Team
    <div id="our-team"></div>
    <div class="team-grid">
      <div class="team-card">
-       <a href="https://www.linkedin.com/in/dinesh-bharadia-5a42a912/" class="team-link">
+       <a href="https://www.linkedin.com/in/dinesh-bharadia-5a42a912/" class="team-link" target="_blank" rel="noopener noreferrer">
          <div class="team-photo" id="photo-dinesh"></div>
          <h4>Dinesh Bharadia</h4>
        </a>
@@ -145,7 +145,7 @@ Team
        <a href="mailto:dineshb@ucsd.edu" class="team-email">dineshb@ucsd.edu</a>
      </div>
      <div class="team-card">
-       <a href="https://engineering.tamu.edu/electrical/profiles/sshakkottai.html" class="team-link">
+       <a href="https://engineering.tamu.edu/electrical/profiles/sshakkottai.html" class="team-link" target="_blank" rel="noopener noreferrer">
          <div class="team-photo" id="photo-srinivas"></div>
          <h4>Srinivas Shakkottai</h4>
        </a>
@@ -153,7 +153,7 @@ Team
        <a href="mailto:sshakkot@tamu.edu" class="team-email">sshakkot@tamu.edu</a>
      </div>
      <div class="team-card">
-       <a href="https://ishjain.github.io/" class="team-link">
+       <a href="https://ishjain.github.io/" class="team-link" target="_blank" rel="noopener noreferrer">
          <div class="team-photo" id="photo-ish"></div>
          <h4>Ish Jain</h4>
        </a>
@@ -161,7 +161,7 @@ Team
        <a href="mailto:jaini2@rpi.edu" class="team-email">jaini2@rpi.edu</a>
      </div>
      <div class="team-card">
-       <a href="https://www.ist.osaka-u.ac.jp/english/researcher/detail.php?id=105" class="team-link">
+       <a href="https://www.ist.osaka-u.ac.jp/english/researcher/detail.php?id=105" class="team-link" target="_blank" rel="noopener noreferrer">
          <div class="team-photo" id="photo-saru"></div>
          <h4>Shunsuke Saruwatari</h4>
        </a>
@@ -169,7 +169,7 @@ Team
        <a href="mailto:ssaruwatari@ucsd.edu" class="team-email">ssaruwatari@ucsd.edu</a>
      </div>
      <div class="team-card">
-       <a href="https://directory.tamu.edu/people/d7155b54fc8dda18102870ba67d388c6/?branch=people&cn=yun" class="team-link">
+       <a href="https://directory.tamu.edu/people/d7155b54fc8dda18102870ba67d388c6/?branch=people&cn=yun" class="team-link" target="_blank" rel="noopener noreferrer">
          <div class="team-photo" id="photo-Woo"></div>
          <h4>Woo Hyun Ko</h4>
        </a>
@@ -177,7 +177,7 @@ Team
        <a href="mailto:whko@tamu.edu" class="team-email">whko@tamu.edu</a>
      </div>
      <div class="team-card">
-       <a href="https://ushasigh.github.io/" class="team-link">
+       <a href="https://ushasigh.github.io/" class="team-link" target="_blank" rel="noopener noreferrer">
          <div class="team-photo" id="photo-ushasi"></div>
          <h4>Ushasi Ghosh</h4>
        </a>
@@ -185,7 +185,7 @@ Team
        <a href="mailto:ughosh@ucsd.edu" class="team-email">ughosh@ucsd.edu</a>
      </div>
      <div class="team-card">
-       <a href="https://sreevatsankk.github.io/" class="team-link">
+       <a href="https://sreevatsankk.github.io/" class="team-link" target="_blank" rel="noopener noreferrer">
          <div class="team-photo" id="photo-sreevatsank" role="img" aria-label="Sreevatsank Kadaveru"></div>
          <h4>Sreevatsank Kadaveru</h4>
        </a>
@@ -193,7 +193,7 @@ Team
        <a href="mailto:skadaveru@ucsd.edu" class="team-email">skadaveru@ucsd.edu</a>
      </div>
      <div class="team-card">
-       <a href="https://www.linkedin.com/in/sushilaseshasayee/" class="team-link">
+       <a href="https://www.linkedin.com/in/sushilaseshasayee/" class="team-link" target="_blank" rel="noopener noreferrer">
          <div class="team-photo" id="photo-sushila"></div>
          <h4>Sushila Seshasayee</h4>
        </a>
@@ -201,7 +201,7 @@ Team
        <a href="mailto:sseshasa@ucsd.edu" class="team-email">sseshasa@ucsd.edu</a>
      </div>
      <div class="team-card">
-       <a href="https://scholar.google.com/citations?user=aAP3asAAAAAJ&hl=en" class="team-link">
+       <a href="https://scholar.google.com/citations?user=aAP3asAAAAAJ&hl=en" class="team-link" target="_blank" rel="noopener noreferrer">
          <div class="team-photo" id="photo-Ali"></div>
          <h4>Ali Mamaghani</h4>
        </a>
@@ -209,7 +209,23 @@ Team
        <a href="mailto:amamaghani@ucsd.edu" class="team-email">amamaghani@ucsd.edu</a>
      </div>
      <div class="team-card">
-       <a href="https://sites.google.com/tamu.edu/archanabura/home" class="team-link">
+       <a href="https://www.linkedin.com/in/narrowendrun/" class="team-link" target="_blank" rel="noopener noreferrer">
+         <div class="team-photo" id="photo-narendran" role="img" aria-label="Narendran Srinivasan"></div>
+         <h4>Narendran Srinivasan</h4>
+       </a>
+       <p>PhD Student, TAMU</p>
+       <a href="mailto:narrow.end.run@tamu.edu" class="team-email">narrow.end.run@tamu.edu</a>
+     </div>
+     <div class="team-card">
+       <a href="https://www.linkedin.com/in/ladd-derek/" class="team-link" target="_blank" rel="noopener noreferrer">
+         <div class="team-photo" id="photo-derek" role="img" aria-label="Derek Ladd"></div>
+         <h4>Derek Ladd</h4>
+       </a>
+       <p>PhD Student, TAMU</p>
+       <a href="mailto:derek.ladd@tamu.edu" class="team-email">derek.ladd@tamu.edu</a>
+     </div>
+     <div class="team-card">
+       <a href="https://sites.google.com/tamu.edu/archanabura/home" class="team-link" target="_blank" rel="noopener noreferrer">
          <div class="team-photo" id="photo-archana"></div>
          <h4>Archana Bura</h4>
        </a>
@@ -217,7 +233,7 @@ Team
        <a href="mailto:archanabura@tamu.edu" class="team-email">archanabura@tamu.edu</a>
      </div>
      <div class="team-card">
-       <a href="https://www.linkedin.com/in/qiz066/" class="team-link">
+       <a href="https://www.linkedin.com/in/qiz066/" class="team-link" target="_blank" rel="noopener noreferrer">
          <div class="team-photo" id="photo-qingyuan"></div>
          <h4>Qingyuan Zheng</h4>
        </a>
@@ -225,7 +241,7 @@ Team
        <a href="mailto:qiz066@ucsd.edu" class="team-email">qiz066@ucsd.edu</a>
      </div>
      <div class="team-card">
-       <a href="https://www.linkedin.com/in/frederik-zumegen-428ba11b5/" class="team-link">
+       <a href="https://www.linkedin.com/in/frederik-zumegen-428ba11b5/" class="team-link" target="_blank" rel="noopener noreferrer">
          <div class="team-photo" id="photo-frederik"></div>
          <h4>Frederik Zumegen</h4>
        </a>
@@ -233,7 +249,7 @@ Team
        <a href="mailto:fzumegen@ethz.ch" class="team-email">fzumegen@ethz.ch</a>
      </div>
      <div class="team-card">
-       <a href="https://www.linkedin.com/in/qiz066/" class="team-link">
+       <a href="https://www.linkedin.com/in/qiz066/" class="team-link" target="_blank" rel="noopener noreferrer">
          <div class="team-photo" id="photo-Sesha"></div>
          <h4>Sesha Sai Rakesh</h4>
        </a>
@@ -241,7 +257,7 @@ Team
        <a href="mailto:sjonnavithula@ucsd.edu" class="team-email">sjonnavithula@ucsd.edu</a>
      </div>
      <div class="team-card">
-       <a href="https://wcsng.ucsd.edu/" class="team-link">
+       <a href="https://wcsng.ucsd.edu/" class="team-link" target="_blank" rel="noopener noreferrer">
          <div class="team-photo" id="photo-wcsng"></div>
          <h4>WCSNG</h4>
        </a>
