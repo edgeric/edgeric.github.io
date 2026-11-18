@@ -535,7 +535,7 @@ Publications & Tutorials
          <a href="https://dl.acm.org/doi/abs/10.1145/3603269.3610867" class="pub-btn pub-btn-paper" target="_blank" rel="noopener">Demo@SIGCOMM'23</a>
          <a href="index.html#demo-edgeric" class="pub-btn pub-btn-demo">Demo</a>
          <a href="https://wcsng.ucsd.edu/edgeric/" class="pub-btn pub-btn-web" target="_blank" rel="noopener">Project Website</a>
-         <a href="https://github.com/ushasigh/EdgeRIC-A-real-time-RIC.git" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
+         <a href="https://github.com/ucsdwcsng/open-ai-ran-tutorial" class="pub-btn pub-btn-code" target="_blank" rel="noopener">Code on GitHub</a>
          <a href="edgeric.html" class="pub-btn pub-btn-tutorial">Tutorial</a>
        </div>
      </div>
